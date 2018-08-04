@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MaskingLayer'
   s.version          = '0.1.0'
-  s.summary          = 'When you trace the screen with your finger, the traced part is masked.'
+  s.summary          = 'The traced part is masked.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -22,14 +22,13 @@ TODO: Add long description of the pod here.
                        DESC
 
   s.homepage         = 'https://github.com/daisukenagata/MaskingLayer'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'daisukenagata' => 'dbank0208@gmail.com' }
   s.source           = { :git => 'https://github.com/daisukenagata/MaskingLayer.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/dbank0208'
 
   s.ios.deployment_target = '10.0'
-
+  s.swift_version = '4.1'
   s.source_files = 'MaskingLayer/Classes/**/*'
   
   # s.resource_bundles = {
