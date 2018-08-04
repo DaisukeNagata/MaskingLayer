@@ -1,0 +1,6 @@
+framework module MaskingLayer {
+  umbrella header "MaskingLayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
