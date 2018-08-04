@@ -9,7 +9,9 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## Gif
+
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/Movie.gif?raw=true)
 
 ## Installation
 
