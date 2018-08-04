@@ -26,7 +26,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         view.addGestureRecognizer( CommonStructure.swipePanGesture)
         view.backgroundColor = UIColor.black
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width/2, height: view.frame.height/2)
-        imageView.image =  UIImage(named: "IMG_0002")?.mask(image: imageView.image)
+        imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
         imageView.frame = self.view.frame
         imageView.contentMode = .scaleAspectFit
     }
@@ -46,11 +46,13 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             imageView.image = maskLayer.maskImage(color: .white, size: size)
             guard let image = imageView.image else { return }
             imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
-            imageView.image =  UIImage(named: "IMG_0002")?.mask(image: imageView.image)
+            imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
+            maskLayer.clipLayer.isHidden = true
             break
         case .possible:
             break
         case .began:
+            maskLayer.clipLayer.isHidden = false
             maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
             let convertLocation = maskLayer.convertPointFromView(position, view: self.view,imageView: imageView)
             maskLayer.convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
