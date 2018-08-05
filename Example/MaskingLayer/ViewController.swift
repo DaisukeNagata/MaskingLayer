@@ -25,10 +25,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.swipePanGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.swipePanGesture)
         view.backgroundColor = UIColor.black
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width/2, height: view.frame.height/2)
-        imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
-        imageView.frame = self.view.frame
-        imageView.contentMode = .scaleAspectFit
+        imageSet()
     }
 
     override func viewDidLayoutSubviews() {
@@ -36,6 +33,12 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
+    }
+
+    func imageSet() {
+        imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
+        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.frame = self.view.frame
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
@@ -46,7 +49,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             imageView.image = maskLayer.maskImage(color: .white, size: size)
             guard let image = imageView.image else { return }
             imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
-            imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
+    
+            imageSet()
             maskLayer.clipLayer.isHidden = true
             break
         case .possible:
@@ -69,4 +73,5 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             break
         }
     }
+
 }
