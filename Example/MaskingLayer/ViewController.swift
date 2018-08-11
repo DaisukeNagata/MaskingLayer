@@ -49,7 +49,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             imageView.image = maskLayer.maskImage(color: .white, size: size)
             guard let image = imageView.image else { return }
             imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
-    
             imageSet()
             maskLayer.clipLayer.isHidden = true
             break
@@ -57,14 +56,12 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             break
         case .began:
             maskLayer.clipLayer.isHidden = false
-            maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
-            let convertLocation = maskLayer.convertPointFromView(position, view: self.view,imageView: imageView)
-            maskLayer.convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
+            maskLayer.maskPath(position: position)
+            maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:true)
             break
         case .changed:
             maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
-            let convertLocation = maskLayer.convertPointFromView(position, view: self.view,imageView: imageView)
-            maskLayer.convertPath.addLine(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
+            maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:false)
             maskLayer.clipLayer.path = maskLayer.path
             break
         case .cancelled:
