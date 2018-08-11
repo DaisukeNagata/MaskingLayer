@@ -10,7 +10,6 @@ import UIKit
 
 public class MaskLayer: NSObject {
 
-    open static var mk = MaskLayer()
     open var convertPath = CGMutablePath()
     open var path = CGMutablePath()
     open var clipLayer = CAShapeLayer()
@@ -58,6 +57,12 @@ public class MaskLayer: NSObject {
     
     public func imageSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
+        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.frame = view.frame
+    }
+    
+    public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
+        imageView.image =  UIImage(named: name)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
     }

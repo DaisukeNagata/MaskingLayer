@@ -11,6 +11,7 @@ import MaskingLayer
 
 struct CommonStructure {
     static var swipePanGesture = UIPanGestureRecognizer()
+    static var tapPanGesture = UITapGestureRecognizer()
 }
 
 class ViewController: UIViewController,UIGestureRecognizerDelegate {
@@ -24,6 +25,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.swipePanGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
         CommonStructure.swipePanGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.swipePanGesture)
+        CommonStructure.tapPanGesture = UITapGestureRecognizer(target: self, action:#selector(tapped))
+        CommonStructure.tapPanGesture.delegate = self
+        view.addGestureRecognizer( CommonStructure.tapPanGesture)
         view.backgroundColor = UIColor.black
         maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
@@ -33,6 +37,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
+    }
+    @objc func tapped(sender:UITapGestureRecognizer) {
+        maskLayer.imageReSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
