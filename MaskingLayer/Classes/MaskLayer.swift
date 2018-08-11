@@ -65,6 +65,8 @@ public class MaskLayer: NSObject {
         imageView.image =  UIImage(named: name)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
+        convertPath = CGMutablePath()
+        path = CGMutablePath()
     }
 
     private func image(color: UIColor, size: CGSize) -> UIImage {
