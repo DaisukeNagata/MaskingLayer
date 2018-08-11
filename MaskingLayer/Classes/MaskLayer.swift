@@ -61,32 +61,6 @@ public class MaskLayer: NSObject {
         imageView.frame = view.frame
     }
 
-    public func imageLoad(imageView: UIImageView, name: String) {
-        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(name)
-
-        let image = UIImage(contentsOfFile: fileURL.path)
-        if image == nil {
-            print("missing image at: \(fileURL)")
-        } else {
-            imageView.image = image
-        }
-    }
-
-    public func imageSave(views: UIViewController,image: UIImage, name: String){
-
-        let pngImageData = UIImagePNGRepresentation(image)
-        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(name)
-        do {
-            try pngImageData!.write(to: fileURL)
-            alertSave(views: views)
-            convertPath = CGMutablePath()
-            path = CGMutablePath()
-        } catch {
-        }
-    }
-
     public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
