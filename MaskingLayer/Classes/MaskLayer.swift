@@ -37,7 +37,7 @@ public class MaskLayer: NSObject {
          clipLayer.isHidden = false
          path.move(to: CGPoint(x: position.x, y: position.y))
     }
-    
+
     public func maskAddLine(position: CGPoint){
         path.addLine(to: CGPoint(x: position.x, y: position.y))
     }
@@ -54,19 +54,61 @@ public class MaskLayer: NSObject {
     public func maskImage(color:UIColor, size: CGSize)-> UIImage {
         return image(color: color, size: size)
     }
-    
+
     public func imageSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
     }
-    
+
+    public func imageLoad(imageView: UIImageView, name: String) {
+        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(name)
+
+        let image = UIImage(contentsOfFile: fileURL.path)
+        if image == nil {
+            print("missing image at: \(fileURL)")
+        } else {
+            imageView.image = image
+        }
+    }
+
+    public func imageSave(views: UIViewController,image: UIImage, name: String){
+
+        let pngImageData = UIImagePNGRepresentation(image)
+        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(name)
+        do {
+            try pngImageData!.write(to: fileURL)
+            alertSave(views: views)
+        } catch {
+        }
+    }
+
     public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
         convertPath = CGMutablePath()
         path = CGMutablePath()
+    }
+
+    private func alertSave(views:UIViewController) {
+        let alertController = UIAlertController(title: NSLocalizedString("Saved", comment: ""), message: "", preferredStyle: .alert)
+        let stringAttributes: [NSAttributedStringKey : Any] = [
+            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
+            .font : UIFont.systemFont(ofSize: 22.0)
+        ]
+        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
+        alertController.setValue(string, forKey: "attributedTitle")
+        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
+
+        let otherAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(otherAction)
+        views.present(alertController, animated: true, completion: nil)
     }
 
     private func image(color: UIColor, size: CGSize) -> UIImage {
@@ -80,7 +122,7 @@ public class MaskLayer: NSObject {
     }
 
     private func clipedMotoImage(_ img: UIImage,convertPath: CGMutablePath) -> UIImage{
-        
+
         let motoImage = img
 
         UIGraphicsBeginImageContextWithOptions((motoImage.size), false, 0)
@@ -89,14 +131,14 @@ public class MaskLayer: NSObject {
 
         motoImage.draw(in: CGRect(x: 0, y: 0, width: (motoImage.size.width), height: (motoImage.size.height)))
         context?.addPath(convertPath)
-        
+
         context?.setFillColor(UIColor.black.cgColor)
         context?.drawPath(using: CGPathDrawingMode.fill)
-        
+
         let reImage = UIGraphicsGetImageFromCurrentImageContext()
         context?.restoreGState()
         UIGraphicsEndImageContext()
-        
+
         return reImage!
     }
 
@@ -109,13 +151,13 @@ public class MaskLayer: NSObject {
         let ratioX : CGFloat = viewSize.width / imageSize!.width
         let ratioY : CGFloat = viewSize.height / imageSize!.height
         let scale : CGFloat = min(ratioX, ratioY)
-        
+
         imagePoint.x -= (viewSize.width  - imageSize!.width  * scale) / 2
         imagePoint.y -= (viewSize.height - imageSize!.height * scale) / 2
-        
+
         imagePoint.x /= scale
         imagePoint.y /= scale
-        
+
         return imagePoint
     }
 }
@@ -129,7 +171,7 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-    
+
     func mask(image: UIImage?) -> UIImage {
         if let maskRef = image?.cgImage,
             let ref = cgImage,
