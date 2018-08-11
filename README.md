@@ -9,6 +9,10 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+## Version 0.1.2
+
+Version 0.1.2 has a reset function.
+
 ## Gif
 
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/Movie.gif?raw=true)
