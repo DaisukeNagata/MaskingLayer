@@ -81,6 +81,8 @@ public class MaskLayer: NSObject {
         do {
             try pngImageData!.write(to: fileURL)
             alertSave(views: views)
+            convertPath = CGMutablePath()
+            path = CGMutablePath()
         } catch {
         }
     }
