@@ -24,6 +24,9 @@ public class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
+
+        clipLayer.path = path
+
         if bool ==  true{
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
             } else {
@@ -31,8 +34,13 @@ public class MaskLayer: NSObject {
         }
     }
 
-    public func maskPath(position: CGPoint){
+    public func maskPath(position: CGPoint) {
+         clipLayer.isHidden = false
          path.move(to: CGPoint(x: position.x, y: position.y))
+    }
+    
+    public func maskAddLine(position: CGPoint){
+        path.addLine(to: CGPoint(x: position.x, y: position.y))
     }
 
     public func convertPath(convertLocation: CGPoint){
@@ -40,11 +48,18 @@ public class MaskLayer: NSObject {
     }
 
     public func mask(image: UIImage,convertPath: CGMutablePath)-> UIImage {
+        clipLayer.isHidden = true
         return clipedMotoImage(image,convertPath:convertPath)
     }
 
     public func maskImage(color:UIColor, size: CGSize)-> UIImage {
         return image(color: color, size: size)
+    }
+    
+    public func imageSet(view:UIView, imageView: UIImageView, name: String) {
+        imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
+        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.frame = view.frame
     }
 
     private func image(color: UIColor, size: CGSize) -> UIImage {

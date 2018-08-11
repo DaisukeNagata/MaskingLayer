@@ -25,7 +25,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.swipePanGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.swipePanGesture)
         view.backgroundColor = UIColor.black
-        imageSet()
+        maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
 
     override func viewDidLayoutSubviews() {
@@ -33,12 +33,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
-    }
-
-    func imageSet() {
-        imageView.image =  UIImage(named: "IMG_4011")?.mask(image: imageView.image)
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = self.view.frame
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
@@ -49,20 +43,17 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             imageView.image = maskLayer.maskImage(color: .white, size: size)
             guard let image = imageView.image else { return }
             imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
-            imageSet()
-            maskLayer.clipLayer.isHidden = true
+            maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
             break
         case .possible:
             break
         case .began:
-            maskLayer.clipLayer.isHidden = false
             maskLayer.maskPath(position: position)
             maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:true)
             break
         case .changed:
-            maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
+            maskLayer.maskAddLine(position: position)
             maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:false)
-            maskLayer.clipLayer.path = maskLayer.path
             break
         case .cancelled:
             break
