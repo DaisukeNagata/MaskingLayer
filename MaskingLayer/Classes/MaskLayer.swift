@@ -60,19 +60,17 @@ public class MaskLayer: NSObject {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
-        imageSave(imageView: imageView, name: "IMG_4011")
     }
 
-    public func imageLoad(imageView: UIImageView, name: String) {
+    public func imageSave(imageView: UIImageView, name: String){
+
+        let pngImageData = UIImagePNGRepresentation(imageView.image!)
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
-
-        let image = UIImage(contentsOfFile: fileURL.path)
-        if image == nil {
-            print("missing image at: \(fileURL)")
-        } else {
-            imageView.image! = image!
-            path = CGMutablePath()
+        do {
+            try pngImageData!.write(to: fileURL)
+            imageLoad(imageView: imageView, name: name)
+        } catch {
         }
     }
 
@@ -84,15 +82,16 @@ public class MaskLayer: NSObject {
         path = CGMutablePath()
     }
 
-    private func imageSave(imageView: UIImageView, name: String){
-        
-        let pngImageData = UIImagePNGRepresentation(imageView.image!)
+    private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
-        do {
-            try pngImageData!.write(to: fileURL)
-            imageLoad(imageView: imageView, name: name)
-        } catch {
+
+        let image = UIImage(contentsOfFile: fileURL.path)
+        if image == nil {
+            print("missing image at: \(fileURL)")
+        } else {
+            imageView.image! = image!
+            path = CGMutablePath()
         }
     }
 

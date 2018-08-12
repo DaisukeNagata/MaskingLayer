@@ -48,8 +48,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             imageView.image = maskLayer.maskImage(color: .white, size: size)
             guard let image = imageView.image else { return }
             imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
-             maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
-
+            maskLayer.imageSave(imageView: imageView, name: "IMG_4011")
+            maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
             break
         case .possible:
             break
