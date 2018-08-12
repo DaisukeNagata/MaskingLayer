@@ -15,7 +15,11 @@ Version 0.1.2 has a reset function.
 
 ## Version 0.1.3
 
-White line only when drawing
+White line only when drawing.
+
+## Version 0.1.4
+
+By pressing and holding, you can select alert output, color.
 
 ## Gif
 
