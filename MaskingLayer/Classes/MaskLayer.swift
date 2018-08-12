@@ -22,20 +22,21 @@ public class MaskLayer: NSObject {
         clipLayer.fillColor = UIColor.clear.cgColor
         clipLayer.lineWidth = 1
     }
+
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
 
         clipLayer.path = path
 
         if bool ==  true{
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
-            } else {
+        } else {
             convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
         }
     }
 
     public func maskPath(position: CGPoint) {
-         clipLayer.isHidden = false
-         path.move(to: CGPoint(x: position.x, y: position.y))
+        clipLayer.isHidden = false
+        path.move(to: CGPoint(x: position.x, y: position.y))
     }
 
     public func maskAddLine(position: CGPoint){
@@ -59,6 +60,20 @@ public class MaskLayer: NSObject {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
+        imageSave(imageView: imageView, name: "IMG_4011")
+    }
+
+    public func imageLoad(imageView: UIImageView, name: String) {
+        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(name)
+
+        let image = UIImage(contentsOfFile: fileURL.path)
+        if image == nil {
+            print("missing image at: \(fileURL)")
+        } else {
+            imageView.image! = image!
+            path = CGMutablePath()
+        }
     }
 
     public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
@@ -67,6 +82,18 @@ public class MaskLayer: NSObject {
         imageView.frame = view.frame
         convertPath = CGMutablePath()
         path = CGMutablePath()
+    }
+
+    private func imageSave(imageView: UIImageView, name: String){
+        
+        let pngImageData = UIImagePNGRepresentation(imageView.image!)
+        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(name)
+        do {
+            try pngImageData!.write(to: fileURL)
+            imageLoad(imageView: imageView, name: name)
+        } catch {
+        }
     }
 
     private func alertSave(views:UIViewController) {
