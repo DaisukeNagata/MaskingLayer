@@ -52,14 +52,18 @@ public class MaskLayer: NSObject {
         return clipedMotoImage(image,convertPath:convertPath)
     }
 
-    public func maskImage(color:UIColor, size: CGSize)-> UIImage {
-        return image(color: color, size: size)
+    public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath)-> UIImage {
+        return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
     public func imageSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
+        guard clipLayer.strokeEnd == 0 else{
+            path = CGMutablePath()
+            return
+        }
     }
 
     public func imageSave(imageView: UIImageView, name: String){

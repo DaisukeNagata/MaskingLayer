@@ -35,7 +35,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-    
+
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
     }
@@ -45,21 +45,18 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         switch sender.state {
         case .ended:
             guard let size = imageView.image?.size else { return }
-            imageView.image = maskLayer.maskImage(color: .white, size: size)
-            guard let image = imageView.image else { return }
-            imageView.image = maskLayer.mask(image: image, convertPath: maskLayer.convertPath)
+            imageView.image = maskLayer.maskImage(color: .white, size: size, convertPath: maskLayer.convertPath)
             maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
-            maskLayer.path = CGMutablePath()
             break
         case .possible:
             break
         case .began:
             maskLayer.maskPath(position: position)
-            maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:true)
+            maskConerPath(position: position, bool: true)
             break
         case .changed:
             maskLayer.maskAddLine(position: position)
-            maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:false)
+            maskConerPath(position: position, bool: false)
             break
         case .cancelled:
             break
@@ -67,7 +64,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
             break
         }
     }
-
+    func maskConerPath(position: CGPoint, bool: Bool) { maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:bool) }
+    
     @objc func tapped(sender:UITapGestureRecognizer) {
         maskLayer.imageReSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
