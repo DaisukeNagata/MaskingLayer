@@ -135,7 +135,7 @@ public class MaskLayer: NSObject {
         context?.addPath(convertPath)
 
         context?.setFillColor(UIColor.black.cgColor)
-        context?.drawPath(using: CGPathDrawingMode.fill)
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
 
         let reImage = UIGraphicsGetImageFromCurrentImageContext()
         context?.restoreGState()

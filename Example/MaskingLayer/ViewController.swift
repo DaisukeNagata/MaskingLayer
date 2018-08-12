@@ -30,12 +30,12 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.tapGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.tapGesture)
 
-        view.backgroundColor = UIColor.black
         maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
     }
@@ -71,4 +71,5 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
     @objc func tapped(sender:UITapGestureRecognizer) {
         maskLayer.imageReSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
+
 }
