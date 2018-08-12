@@ -9,7 +9,7 @@
 import UIKit
 
 public class MaskLayer: NSObject {
-    
+
     open var convertPath = CGMutablePath()
     open var path = CGMutablePath()
     open var clipLayer = CAShapeLayer()
@@ -24,40 +24,40 @@ public class MaskLayer: NSObject {
         clipLayer.fillColor = UIColor.clear.cgColor
         clipLayer.lineWidth = 1
     }
-    
+
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
-        
+    
         clipLayer.path = path
-        
+
         if bool ==  true{
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
         } else {
             convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
         }
     }
-    
+
     public func maskPath(position: CGPoint) {
         clipLayer.isHidden = false
         path.move(to: CGPoint(x: position.x, y: position.y))
     }
-    
+
     public func maskAddLine(position: CGPoint){
         path.addLine(to: CGPoint(x: position.x, y: position.y))
     }
-    
+
     public func convertPath(convertLocation: CGPoint){
         convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
     }
-    
+
     public func mask(image: UIImage,convertPath: CGMutablePath)-> UIImage {
         clipLayer.isHidden = true
         return clipedMotoImage(image,convertPath:convertPath)
     }
-    
+
     public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath)-> UIImage {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
-    
+
     public func imageSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
@@ -67,7 +67,7 @@ public class MaskLayer: NSObject {
             return
         }
     }
-    
+
     public func imageSave(imageView: UIImageView, name: String){
         
         let pngImageData = UIImagePNGRepresentation(imageView.image!)
@@ -79,7 +79,7 @@ public class MaskLayer: NSObject {
         } catch {
         }
     }
-    
+
     public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
         imageView.image =  UIImage(named: name)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
@@ -87,7 +87,7 @@ public class MaskLayer: NSObject {
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
-    
+
     public func alertSave(views:UIViewController,imageView: UIImageView, name: String) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedStringKey : Any] = [
@@ -140,7 +140,7 @@ public class MaskLayer: NSObject {
         alertController.addAction(maskLightBlack)
         views.present(alertController, animated: true, completion: nil)
     }
-    
+
     private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
@@ -153,7 +153,7 @@ public class MaskLayer: NSObject {
             path = CGMutablePath()
         }
     }
-    
+
     private func image(color: UIColor, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()!
@@ -163,7 +163,7 @@ public class MaskLayer: NSObject {
         UIGraphicsEndImageContext()
         return image
     }
-    
+
     private func clipedMotoImage(_ img: UIImage,convertPath: CGMutablePath) -> UIImage{
         
         let motoImage = img
@@ -184,23 +184,23 @@ public class MaskLayer: NSObject {
         
         return reImage!
     }
-    
+
     private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) ->CGPoint{
-        
+
         var imagePoint : CGPoint = viewPoint
         let imageSize = imageView.image?.size
         let viewSize = view.frame.size
-        
+
         let ratioX : CGFloat = viewSize.width / imageSize!.width
         let ratioY : CGFloat = viewSize.height / imageSize!.height
         let scale : CGFloat = min(ratioX, ratioY)
-        
+
         imagePoint.x -= (viewSize.width  - imageSize!.width  * scale) / 2
         imagePoint.y -= (viewSize.height - imageSize!.height * scale) / 2
-        
+
         imagePoint.x /= scale
         imagePoint.y /= scale
-        
+
         return imagePoint
     }
 }
@@ -214,7 +214,7 @@ public extension UIColor {
 }
 
 public extension UIImage {
-    
+
     func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage!{
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height),true,0.0)
         self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
@@ -222,7 +222,7 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-    
+
     func mask(image: UIImage?) -> UIImage {
         if let maskRef = image?.cgImage,
             let ref = cgImage,
