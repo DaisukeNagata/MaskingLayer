@@ -13,6 +13,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 Version 0.1.2 has a reset function.
 
+## Version 0.1.3
+
+White line only when drawing
+
 ## Gif
 
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/Movie.gif?raw=true)
