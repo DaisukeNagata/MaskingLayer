@@ -98,6 +98,7 @@ public class MaskLayer: NSObject {
         alertController.setValue(string, forKey: "attributedTitle")
         alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
         
+        
         let maskWhite = UIAlertAction(title: NSLocalizedString("maskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
@@ -140,7 +141,6 @@ public class MaskLayer: NSObject {
         alertController.addAction(maskLightBlack)
         views.present(alertController, animated: true, completion: nil)
     }
-
     private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)

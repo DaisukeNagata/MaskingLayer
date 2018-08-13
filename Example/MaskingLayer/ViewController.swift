@@ -16,36 +16,36 @@ struct CommonStructure {
 }
 
 class ViewController: UIViewController,UIGestureRecognizerDelegate {
-    
+
     let imageView = UIImageView()
     let maskLayer = MaskLayer()
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         CommonStructure.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
         CommonStructure.panGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.panGesture)
-        
+
         CommonStructure.tapGesture = UITapGestureRecognizer(target: self, action:#selector(tapped))
         CommonStructure.tapGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.tapGesture)
-        
+
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.longGesture)
-        
+
         maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         view.addSubview(imageView)
         view.layer.addSublayer(maskLayer.clipLayer)
     }
-    
+
     @objc func panTapped(sender:UIPanGestureRecognizer) {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
@@ -72,9 +72,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
     }
 
     func maskConerPath(position: CGPoint, bool: Bool) { maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:bool) }
-    
+
     @objc func tapped(sender:UITapGestureRecognizer) { maskLayer.imageReSet(view: self.view, imageView: imageView, name: "IMG_4011") }
-    
+
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { maskLayer.alertSave(views: self, imageView: imageView, name: "IMG_4011") }
 
 }
