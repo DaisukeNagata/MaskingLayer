@@ -26,7 +26,7 @@ public class MaskLayer: NSObject {
     }
 
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
-    
+
         clipLayer.path = path
 
         if bool ==  true{
@@ -69,7 +69,7 @@ public class MaskLayer: NSObject {
     }
 
     public func imageSave(imageView: UIImageView, name: String){
-        
+
         let pngImageData = UIImagePNGRepresentation(imageView.image!)
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
@@ -97,8 +97,8 @@ public class MaskLayer: NSObject {
         let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
         alertController.setValue(string, forKey: "attributedTitle")
         alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
-        
-        
+
+
         let maskWhite = UIAlertAction(title: NSLocalizedString("maskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
@@ -144,7 +144,7 @@ public class MaskLayer: NSObject {
     private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
-        
+
         let image = UIImage(contentsOfFile: fileURL.path)
         if image == nil {
             print("missing image at: \(fileURL)")
@@ -165,23 +165,23 @@ public class MaskLayer: NSObject {
     }
 
     private func clipedMotoImage(_ img: UIImage,convertPath: CGMutablePath) -> UIImage{
-        
+
         let motoImage = img
-        
+
         UIGraphicsBeginImageContextWithOptions((motoImage.size), false, 0)
         let context = UIGraphicsGetCurrentContext()
         context?.saveGState()
-        
+
         motoImage.draw(in: CGRect(x: 0, y: 0, width: (motoImage.size.width), height: (motoImage.size.height)))
         context?.addPath(convertPath)
-        
+
         context?.setFillColor(UIColor.black.cgColor)
         context?.drawPath(using: CGPathDrawingMode.fillStroke)
-        
+
         let reImage = UIGraphicsGetImageFromCurrentImageContext()
         context?.restoreGState()
         UIGraphicsEndImageContext()
-        
+
         return reImage!
     }
 
