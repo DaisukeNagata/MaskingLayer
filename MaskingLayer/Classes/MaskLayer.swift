@@ -26,7 +26,6 @@ public class MaskLayer: NSObject {
     }
 
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
-
         clipLayer.path = path
 
         if bool ==  true{
@@ -68,8 +67,7 @@ public class MaskLayer: NSObject {
         }
     }
 
-    public func imageSave(imageView: UIImageView, name: String){
-
+    public func imageSave(imageView: UIImageView, name: String) {
         let pngImageData = UIImagePNGRepresentation(imageView.image!)
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
@@ -164,8 +162,7 @@ public class MaskLayer: NSObject {
         return image
     }
 
-    private func clipedMotoImage(_ img: UIImage,convertPath: CGMutablePath) -> UIImage{
-
+    private func clipedMotoImage(_ img: UIImage,convertPath: CGMutablePath) -> UIImage {
         let motoImage = img
 
         UIGraphicsBeginImageContextWithOptions((motoImage.size), false, 0)
@@ -185,8 +182,7 @@ public class MaskLayer: NSObject {
         return reImage!
     }
 
-    private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) ->CGPoint{
-
+    private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) ->CGPoint {
         var imagePoint : CGPoint = viewPoint
         let imageSize = imageView.image?.size
         let viewSize = view.frame.size
@@ -214,7 +210,6 @@ public extension UIColor {
 }
 
 public extension UIImage {
-
     func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage!{
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height),true,0.0)
         self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
