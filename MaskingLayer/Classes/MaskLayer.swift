@@ -57,8 +57,8 @@ public class MaskLayer: NSObject {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    public func imageSet(view:UIView, imageView: UIImageView, name: String) {
-        imageView.image =  UIImage(named: name)?.mask(image: imageView.image)
+    public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
+        imageView.image =  image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
         guard clipLayer.strokeEnd == 0 else {
@@ -78,15 +78,15 @@ public class MaskLayer: NSObject {
         }
     }
 
-    public func imageReSet(view:UIView, imageView: UIImageView, name: String) {
-        imageView.image =  UIImage(named: name)
+    public func imageReSet(view:UIView, imageView: UIImageView, image: UIImage) {
+        imageView.image =  image
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
 
-    public func alertSave(views:UIViewController,imageView: UIImageView, name: String) {
+    public func alertSave(views:UIViewController,imageView: UIImageView, image: UIImage) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedStringKey : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -102,35 +102,35 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskWhite
             imageView.image = self.mask(image: self.image(color: .maskWhite, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, name: name)
+            self.imageSet(view: views.view, imageView: imageView, image: image)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("maskLightGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskLightGray
             imageView.image = self.mask(image: self.image(color: .maskLightGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, name: name)
+            self.imageSet(view: views.view, imageView: imageView, image: image)
         }
         let maskGray = UIAlertAction(title: NSLocalizedString("maskGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskGray
             imageView.image = self.mask(image: self.image(color: .maskGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, name: name)
+            self.imageSet(view: views.view, imageView: imageView, image: image)
         }
         let maskDarkGray = UIAlertAction(title: NSLocalizedString("maskDarkGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskDarkGray
             imageView.image = self.mask(image: self.image(color: .maskDarkGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, name: name)
+            self.imageSet(view: views.view, imageView: imageView, image: image)
         }
         let maskLightBlack = UIAlertAction(title: NSLocalizedString("maskLightBlack", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskLightBlack
             imageView.image = self.mask(image: self.image(color: .maskLightBlack, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, name: name)
+            self.imageSet(view: views.view, imageView: imageView, image: image)
         }
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)

@@ -19,7 +19,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
     let imageView = UIImageView()
     let maskLayer = MaskLayer()
-
+    var image = UIImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +35,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.longGesture)
-
-        maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
+        image = UIImage(named: "IMG_4011")!
+        maskLayer.imageSet(view: self.view, imageView: imageView, image: image)
     }
 
     override func viewDidLayoutSubviews() {
@@ -52,7 +52,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         case .ended:
             guard let size = imageView.image?.size else { return }
             imageView.image = maskLayer.maskImage(color: maskLayer.maskClor, size: size, convertPath: maskLayer.convertPath)
-            maskLayer.imageSet(view: self.view, imageView: imageView, name: "IMG_4011")
+            maskLayer.imageSet(view: self.view, imageView: imageView, image: image)
             break
         case .possible:
             break
@@ -73,8 +73,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
     func maskConerPath(position: CGPoint, bool: Bool) { maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:bool) }
 
-    @objc func tapped(sender:UITapGestureRecognizer) { maskLayer.imageReSet(view: self.view, imageView: imageView, name: "IMG_4011") }
+    @objc func tapped(sender:UITapGestureRecognizer) { maskLayer.imageReSet(view: self.view, imageView: imageView, image: image) }
 
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { maskLayer.alertSave(views: self, imageView: imageView, name: "IMG_4011") }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) { maskLayer.alertSave(views: self, imageView: imageView, image: image) }
 
 }
