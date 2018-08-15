@@ -20,7 +20,11 @@ public class MaskLayer: NSObject {
         maskClor = .maskWhite
         clipLayer.backgroundColor = UIColor.clear.cgColor
         clipLayer.name = "clipLayer"
+        clipLayer.lineCap = "round"
+        clipLayer.lineJoin = "round"
         clipLayer.strokeColor = UIColor.white.cgColor
+        clipLayer.lineJoin = kCALineJoinRound
+        clipLayer.lineCap = kCALineCapRound
         clipLayer.fillColor = UIColor.clear.cgColor
         clipLayer.lineWidth = 1
     }
@@ -58,6 +62,7 @@ public class MaskLayer: NSObject {
     }
 
     public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
+        view.layer.addSublayer(clipLayer)
         imageView.image =  image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame

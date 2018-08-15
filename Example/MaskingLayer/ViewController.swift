@@ -21,6 +21,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
     let maskLayer = MaskLayer()
     var image = UIImage()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +36,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer( CommonStructure.longGesture)
+
         image = UIImage(named: "IMG_4011")!
         maskLayer.imageSet(view: self.view, imageView: imageView, image: image)
     }
@@ -43,7 +45,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         super.viewDidLayoutSubviews()
 
         view.addSubview(imageView)
-        view.layer.addSublayer(maskLayer.clipLayer)
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
