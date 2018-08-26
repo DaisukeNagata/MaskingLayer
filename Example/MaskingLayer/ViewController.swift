@@ -15,9 +15,9 @@ struct CommonStructure {
     static var longGesture = UILongPressGestureRecognizer()
 }
 
-class ViewController: UIViewController,UIGestureRecognizerDelegate {
+class ViewController: UIViewController,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
-    let imageView = UIImageView()
+    var imageView = UIImageView()
     let maskLayer = MaskLayer()
     var image = UIImage()
 
@@ -38,13 +38,13 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         view.addGestureRecognizer( CommonStructure.longGesture)
 
         image = UIImage(named: "IMG_4011")!
-        maskLayer.imageSet(view: self.view, imageView: imageView, image: image)
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
 
         view.addSubview(imageView)
+        self.maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
@@ -75,7 +75,16 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
     func maskConerPath(position: CGPoint, bool: Bool) { maskLayer.maskConvertPointFromView(viewPoint: position, view: self.view,imageView: imageView,bool:bool) }
 
     @objc func tapped(sender:UITapGestureRecognizer) { maskLayer.imageReSet(view: self.view, imageView: imageView, image: image) }
-
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { maskLayer.alertSave(views: self, imageView: imageView, image: image) }
+}
 
+extension ViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        maskLayer.imageReSet(view: self.view, imageView: imageView, image: image)
+        image = UIImage()
+        imageView = UIImageView()
+        guard let images = (info[UIImagePickerControllerOriginalImage] as? UIImage) else { return }
+        image = images
+        picker.dismiss(animated: true, completion: nil)
+    }
 }

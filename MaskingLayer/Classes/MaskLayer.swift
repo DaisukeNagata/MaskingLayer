@@ -8,13 +8,14 @@
 
 import UIKit
 
+
 public class MaskLayer: NSObject {
 
     open var convertPath = CGMutablePath()
     open var path = CGMutablePath()
     open var clipLayer = CAShapeLayer()
     open var maskClor = UIColor()
-
+    var maskImagePicker = MaskImagePicker()
 
     public override init() {
         maskClor = .maskWhite
@@ -44,11 +45,11 @@ public class MaskLayer: NSObject {
         path.move(to: CGPoint(x: position.x, y: position.y))
     }
 
-    public func maskAddLine(position: CGPoint){
+    public func maskAddLine(position: CGPoint) {
         path.addLine(to: CGPoint(x: position.x, y: position.y))
     }
 
-    public func convertPath(convertLocation: CGPoint){
+    public func convertPath(convertLocation: CGPoint) {
         convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
     }
 
@@ -60,10 +61,10 @@ public class MaskLayer: NSObject {
     public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath)-> UIImage {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
-
+    
     public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
-        imageView.image =  image.mask(image: imageView.image)
+        imageView.image = image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
         guard clipLayer.strokeEnd == 0 else {
@@ -137,17 +138,23 @@ public class MaskLayer: NSObject {
             imageView.image = self.mask(image: self.image(color: .maskLightBlack, size: views.view.frame.size), convertPath: self.convertPath)
             self.imageSet(view: views.view, imageView: imageView, image: image)
         }
+        let cameraRoll = UIAlertAction(title: NSLocalizedString("cameraRoll ", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+            self.maskImagePicker.photeSegue(vc: views)
+        }
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
         alertController.addAction(maskDarkGray)
         alertController.addAction(maskLightBlack)
+        alertController.addAction(cameraRoll)
         views.present(alertController, animated: true, completion: nil)
     }
     private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
-
+        
         let image = UIImage(contentsOfFile: fileURL.path)
         if image == nil {
             print("missing image at: \(fileURL)")
