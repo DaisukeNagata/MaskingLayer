@@ -21,9 +21,13 @@ White line only when drawing.
 
 By pressing and holding, alert can select output color.
 
+## Version 0.2.3
+
+Tap the screen so that you can select the camera roll.
+
 ## Gif
 
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/Movie.gif?raw=true)
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskMovie.gif?raw=true)
 
 ## Installation
 
