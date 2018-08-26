@@ -18,49 +18,37 @@ public class MaskLayer: NSObject {
 
     public override init() {
         maskClor = .maskWhite
-        clipLayer.backgroundColor = UIColor.clear.cgColor
-        clipLayer.name = "clipLayer"
         clipLayer.lineCap = "round"
         clipLayer.lineJoin = "round"
-        clipLayer.strokeColor = UIColor.white.cgColor
-        clipLayer.lineJoin = kCALineJoinRound
+        clipLayer.name = "clipLayer"
         clipLayer.lineCap = kCALineCapRound
+        clipLayer.lineJoin = kCALineJoinRound
         clipLayer.fillColor = UIColor.clear.cgColor
+        clipLayer.strokeColor = UIColor.white.cgColor
+        clipLayer.backgroundColor = UIColor.clear.cgColor
         clipLayer.lineWidth = 1
     }
 
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
         clipLayer.path = path
-
-        if bool ==  true{
+        
+        guard bool == false else {
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
-        } else {
-            convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
+            return
         }
+        convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
     }
 
-    public func maskPath(position: CGPoint) {
-        clipLayer.isHidden = false
-        path.move(to: CGPoint(x: position.x, y: position.y))
-    }
+    public func maskAddLine(position: CGPoint) { path.addLine(to: CGPoint(x: position.x, y: position.y)) }
 
-    public func maskAddLine(position: CGPoint) {
-        path.addLine(to: CGPoint(x: position.x, y: position.y))
-    }
+    public func maskPath(position: CGPoint) { clipLayer.isHidden = false; path.move(to: CGPoint(x: position.x, y: position.y)) }
 
-    public func convertPath(convertLocation: CGPoint) {
-        convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y))
-    }
+    public func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
 
-    public func mask(image: UIImage,convertPath: CGMutablePath)-> UIImage {
-        clipLayer.isHidden = true
-        return clipedMotoImage(image,convertPath:convertPath)
-    }
+    public func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
 
-    public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath)-> UIImage {
-        return mask(image: image(color: color, size: size), convertPath: convertPath)
-    }
-    
+    public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
+
     public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
         imageView.image = image.mask(image: imageView.image)
@@ -104,37 +92,27 @@ public class MaskLayer: NSObject {
         let maskWhite = UIAlertAction(title: NSLocalizedString("maskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskWhite
-            imageView.image = self.mask(image: self.image(color: .maskWhite, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, image: image)
+            self.maskClor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("maskLightGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskLightGray
-            imageView.image = self.mask(image: self.image(color: .maskLightGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, image: image)
+            self.maskClor = .maskLightGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
         let maskGray = UIAlertAction(title: NSLocalizedString("maskGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskGray
-            imageView.image = self.mask(image: self.image(color: .maskGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, image: image)
+            self.maskClor = .maskGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
         let maskDarkGray = UIAlertAction(title: NSLocalizedString("maskDarkGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskDarkGray
-            imageView.image = self.mask(image: self.image(color: .maskDarkGray, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, image: image)
+            self.maskClor = .maskDarkGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
         let maskLightBlack = UIAlertAction(title: NSLocalizedString("maskLightBlack", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskLightBlack
-            imageView.image = self.mask(image: self.image(color: .maskLightBlack, size: views.view.frame.size), convertPath: self.convertPath)
-            self.imageSet(view: views.view, imageView: imageView, image: image)
+            self.maskClor = .maskLightBlack; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
         let cameraRoll = UIAlertAction(title: NSLocalizedString("cameraRoll ", comment: ""), style: .default) {
             action in
@@ -149,16 +127,20 @@ public class MaskLayer: NSObject {
         alertController.addAction(cameraRoll)
         views.present(alertController, animated: true, completion: nil)
     }
+
+    private func colorSet(views: UIViewController,imageView:UIImageView,image: UIImage, color:UIColor) {
+        imageView.image = self.mask(image: self.image(color: self.maskClor, size: views.view.frame.size), convertPath: self.convertPath)
+        self.imageSet(view: views.view, imageView: imageView, image: image)
+    }
+
     private func imageLoad(imageView: UIImageView, name: String) {
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
-        
         let image = UIImage(contentsOfFile: fileURL.path)
-        if image == nil {
-            print("missing image at: \(fileURL)")
-        } else {
+        guard image == nil else {
             imageView.image! = image!
             path = CGMutablePath()
+            return
         }
     }
 
@@ -192,7 +174,7 @@ public class MaskLayer: NSObject {
         return reImage!
     }
 
-    private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) ->CGPoint {
+    private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) -> CGPoint {
         var imagePoint : CGPoint = viewPoint
         let imageSize = imageView.image?.size
         let viewSize = view.frame.size
@@ -220,7 +202,7 @@ public extension UIColor {
 }
 
 public extension UIImage {
-    func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage!{
+    func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage! {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height),true,0.0)
         self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()

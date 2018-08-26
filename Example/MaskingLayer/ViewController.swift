@@ -15,7 +15,7 @@ struct CommonStructure {
     static var longGesture = UILongPressGestureRecognizer()
 }
 
-class ViewController: UIViewController,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
     var imageView = UIImageView()
     let maskLayer = MaskLayer()
@@ -27,15 +27,15 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate,UIImagePicker
 
         CommonStructure.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
         CommonStructure.panGesture.delegate = self
-        view.addGestureRecognizer( CommonStructure.panGesture)
+        view.addGestureRecognizer(CommonStructure.panGesture)
 
         CommonStructure.tapGesture = UITapGestureRecognizer(target: self, action:#selector(tapped))
         CommonStructure.tapGesture.delegate = self
-        view.addGestureRecognizer( CommonStructure.tapGesture)
+        view.addGestureRecognizer(CommonStructure.tapGesture)
 
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
-        view.addGestureRecognizer( CommonStructure.longGesture)
+        view.addGestureRecognizer(CommonStructure.longGesture)
 
         image = UIImage(named: "IMG_4011")!
     }
@@ -78,7 +78,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate,UIImagePicker
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { maskLayer.alertSave(views: self, imageView: imageView, image: image) }
 }
 
-extension ViewController {
+extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         maskLayer.imageReSet(view: self.view, imageView: imageView, image: image)
         image = UIImage()
