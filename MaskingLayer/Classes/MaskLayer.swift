@@ -31,7 +31,7 @@ public class MaskLayer: NSObject {
 
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
         clipLayer.path = path
-        
+
         guard bool == false else {
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
             return
