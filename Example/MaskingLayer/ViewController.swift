@@ -44,7 +44,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate,UIImagePicker
         super.viewDidAppear(true)
 
         view.addSubview(imageView)
-        self.maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
+        maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {

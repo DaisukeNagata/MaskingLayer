@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public class MaskLayer: NSObject {
 
     open var convertPath = CGMutablePath()
@@ -101,7 +100,6 @@ public class MaskLayer: NSObject {
         let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
         alertController.setValue(string, forKey: "attributedTitle")
         alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
-
 
         let maskWhite = UIAlertAction(title: NSLocalizedString("maskWhite", comment: ""), style: .default) {
             action in

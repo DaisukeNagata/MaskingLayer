@@ -7,11 +7,10 @@
 
 import Foundation
 
-
 public class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
-    
+
     open var pickerImage = UIImage()
-    
+
     public func photeSegue(vc: UIViewController) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let pic = UIImagePickerController()
