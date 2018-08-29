@@ -25,6 +25,10 @@ By pressing and holding, alert can select output color.
 
 Tap the screen so that you can select the camera roll.
 
+## Version 0.3.0
+
+Implemented GIF function → Preparing to combine with Max.
+
 ## Gif
 
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskMovie.gif?raw=true)
