@@ -27,7 +27,7 @@ Tap the screen so that you can select the camera roll.
 
 ## Version 0.3.0
 
-Implemented GIF function → Preparing to combine with Max.
+Implemented GIF function → Preparing to combine with Mask.
 
 ## Gif
 
