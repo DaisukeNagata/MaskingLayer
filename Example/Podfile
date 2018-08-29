@@ -2,7 +2,7 @@ use_frameworks!
 
 target 'MaskingLayer_Example' do
   pod 'MaskingLayer', :path => '../'
-
+  pod 'SVProgressHUD'
   target 'MaskingLayer_Tests' do
     inherit! :search_paths
 

@@ -114,16 +114,23 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.maskClor = .maskLightBlack; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
         }
+        let videoRoll = UIAlertAction(title: NSLocalizedString("videoRoll ", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+            self.maskImagePicker.photeSegue(vc: views,bool: true)
+        }
+
         let cameraRoll = UIAlertAction(title: NSLocalizedString("cameraRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskImagePicker.photeSegue(vc: views)
+            self.maskImagePicker.photeSegue(vc: views,bool: false)
         }
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
         alertController.addAction(maskDarkGray)
         alertController.addAction(maskLightBlack)
+        alertController.addAction(videoRoll)
         alertController.addAction(cameraRoll)
         views.present(alertController, animated: true, completion: nil)
     }
