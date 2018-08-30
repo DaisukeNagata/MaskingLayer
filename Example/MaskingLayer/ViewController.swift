@@ -48,7 +48,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-//        self.view.addSubview( self.imageView)
+        self.view.addSubview( self.imageView)
         self.imageView.animateGIF(data: data, duration: Double(2)) {
             guard let image = UIImage(data: self.data) else { return }
             self.imageView.image = image

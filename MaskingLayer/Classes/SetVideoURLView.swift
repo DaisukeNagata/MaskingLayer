@@ -14,12 +14,13 @@ public class SetVideoURLView: UIView {
 
     var duration: Float64   = 0.0
     var videoURL  = URL(fileURLWithPath: "")
-    public var thumbnailViews = [UIImageView]()
     public let imageView = UIImageView()
     public var imageAr = Array<CGImage>()
+    public var thumbnailViews = [UIImageView]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
         self.frame = UIScreen.main.bounds
     }
 
