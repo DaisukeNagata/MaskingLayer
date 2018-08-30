@@ -77,7 +77,7 @@ public class SetVideoURLView: UIView {
                 thumbnails.append(thumbnail)
             }
         }
-        self.addImagesToView(images: thumbnails, view: view, vc: vc)
+        self.addImagesToView(images: thumbnails, view: view)
         return self.thumbnailViews
     }
 
@@ -86,7 +86,7 @@ public class SetVideoURLView: UIView {
         return CMTimeGetSeconds(source.duration)
     }
 
-    private func addImagesToView(images: [UIImage], view: UIView,vc: UIViewController){
+    private func addImagesToView(images: [UIImage], view: UIView){
 
         self.thumbnailViews.removeAll()
         var xPos: CGFloat = 0.0
