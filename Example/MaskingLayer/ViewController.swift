@@ -47,8 +47,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        self.view.addSubview( self.imageView)
 
+//        self.view.addSubview( self.imageView)
         self.imageView.animateGIF(data: data, duration: Double(2)) {
             guard let image = UIImage(data: self.data) else { return }
             self.imageView.image = image
@@ -62,7 +62,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate {
         case .ended:
             guard let size = imageView.image?.size else { return }
             imageView.image = maskLayer.maskImage(color: maskLayer.maskClor, size: size, convertPath: maskLayer.convertPath)
-            maskLayer.imageSet(view: self.view, imageView: imageView, image: image)
+            maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
             break
         case .possible:
             break
@@ -99,12 +99,13 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType == kUTTypeMovie {
             setVideoURLView.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, view: self)
-            setVideoURLView.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.width/15)
+            setVideoURLView.frame = CGRect(x:0,y:0,width: self.view.frame.width, height: self.view.frame.width/15)
+            view.addSubview(setVideoURLView.imageView)
             DispatchQueue.main.asyncAfter(deadline: .now()+2){
                 picker.dismiss(animated: true, completion: nil)
                 for _ in 0..<self.setVideoURLView.thumbnailViews.count {
                     do {
-                        self.data  = try Data(contentsOf: (self.gifObject.makeGifImageMovie(url: info[UIImagePickerControllerMediaURL] as! URL,frameY: 10.0,views: self, createBool: true, scale: 10.0, imageAr: (self.setVideoURLView.imageAr))))
+                        self.data  = try Data(contentsOf: (self.gifObject.makeGifImageMovie(url: info[UIImagePickerControllerMediaURL] as! URL,frameY: 10.0, createBool: true, scale: 10.0, imageAr: (self.setVideoURLView.imageAr))))
                         self.image = UIImage()
                     } catch {
                     }

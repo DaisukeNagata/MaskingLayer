@@ -16,7 +16,7 @@ public class GifObject: NSObject {
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    public func makeGifImageMovie(url :URL,frameY: Double, views: UIViewController, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>)->URL{
+    public func makeGifImageMovie(url :URL,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>)->URL{
         let frameRate = CMTimeMake(1,Int32(frameY))
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]
@@ -42,19 +42,17 @@ public extension UIImageView {
         self.animationDuration = animatedGIFImage.duration
         self.animationRepeatCount = Int(animationRepeatCount)
         self.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + animatedGIFImage.duration * Double(animationRepeatCount)) {
-            completion?()
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + animatedGIFImage.duration * Double(animationRepeatCount)) { completion?() }
     }
 }
 
 extension UIImage {
-     func animatedGIF(data: Data,duration: Double)  -> UIImage? {
+     func animatedGIF(data: Data,duration: Double) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         var speed = 0.0;speed = duration
         let count = CGImageSourceGetCount(source)
         var images: [UIImage] = []
-    
+
         for i in 0..<count {
 
             guard let imageRef = CGImageSourceCreateImageAtIndex(source, i, nil) else { continue }
@@ -68,9 +66,7 @@ extension UIImage {
             let renderedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            if let renderedImage = renderedImage {
-                images.append(renderedImage)
-            }
+            if let renderedImage = renderedImage { images.append(renderedImage) }
         }
         return UIImage.animatedImage(with: images, duration: speed)
     }
