@@ -17,6 +17,8 @@ public class SetVideoURLView: UIView {
     public let imageView = UIImageView()
     public var imageAr = Array<CGImage>()
     public var thumbnailViews = [UIImageView]()
+    public var data = Array<Data>()
+    public var dataArray = Array<Data>()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,9 +44,8 @@ public class SetVideoURLView: UIView {
     }
 
     private func thumbnailCount(inView: UIView) -> Int {
-        
         var num : Double = 0;
-        
+
         DispatchQueue.main.sync { num = Double(inView.frame.size.width) / Double(inView.frame.size.height) }
         return Int(ceil(num))
     }
@@ -68,7 +69,7 @@ public class SetVideoURLView: UIView {
         for view in self.thumbnailViews{
             DispatchQueue.main.sync { view.removeFromSuperview() }
         }
-        
+
         let imagesCount = self.thumbnailCount(inView: view)
         for i in 0..<imagesCount{
             DispatchQueue.main.sync {
@@ -107,12 +108,9 @@ public class SetVideoURLView: UIView {
                                          y: 0.0,
                                          width: width,
                                          height: 44)
-                self.thumbnailViews.append(imageView)
-                view.addSubview(imageView)
+                thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)
-                UIView.animate(withDuration: 0.2, animations: {() -> Void in
-                    self.imageView.alpha = 1.0
-                })
+                view.sendSubview(toBack: imageView)
                 xPos = xPos + view.frame.size.height
             }
         }

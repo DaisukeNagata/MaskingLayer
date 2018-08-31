@@ -109,6 +109,10 @@
 		B4F7D0C107C7EDE59BBDF34BC0809A4F /* MaskImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376743D491F657FD1811DCD7E383E1E3 /* MaskImagePicker.swift */; };
 		B8DD492D833CBA766556805F57433250 /* URL+FileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BF2320DDEE96B1ED7A57CCBC9B2BEA /* URL+FileName.swift */; };
 		BAAD7ED0150574321DC251BEDE423E86 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF37A701C5401255B99A8BB30C124 /* SVIndefiniteAnimatedView.m */; };
+		BB4C50712137F123003B5036 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C506E2137F122003B5036 /* CustomCell.swift */; };
+		BB4C50722137F123003B5036 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C506F2137F122003B5036 /* CollectionView.swift */; };
+		BB4C50732137F123003B5036 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C50702137F122003B5036 /* CollectionViewModel.swift */; };
+		BBB1E0B72138DA740010D7C7 /* CustomDissmissCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB1E0B62138DA740010D7C7 /* CustomDissmissCell.swift */; };
 		BC7B9761322C74FA27969BD55833BA47 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCC232023AA2388517FD43D3DABF695 /* Errors.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		BF3B7218901760A6226C7F6346BEF454 /* BeCloseTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C27F350461A79C8C069FC942CB6EA /* BeCloseTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		BF4D4372EC0CCD1CFAAFF1BE02521118 /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7491AF70F03653AD98DFFCDA30FFFDB4 /* Callsite.swift */; };
@@ -309,7 +313,11 @@
 		B94073F419F167467FA998245DAF4A59 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BABC43BF6C1F04FAA4CC4D0FA7E93AEF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB332513C49E049B3916655CAB168452 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BB4C506E2137F122003B5036 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCell.swift; path = MaskingLayer/Classes/CustomCell.swift; sourceTree = "<group>"; };
+		BB4C506F2137F122003B5036 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionView.swift; path = MaskingLayer/Classes/CollectionView.swift; sourceTree = "<group>"; };
+		BB4C50702137F122003B5036 /* CollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewModel.swift; path = MaskingLayer/Classes/CollectionViewModel.swift; sourceTree = "<group>"; };
 		BB5D541CE81F6420020CFE1E2039BB97 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
+		BBB1E0B62138DA740010D7C7 /* CustomDissmissCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDissmissCell.swift; sourceTree = "<group>"; };
 		BC0A66109D58742F86E0FE346DA1298D /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		BE8B9B6837F4AB6944503482F6FFF8CD /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
 		C02230839A986AC5E93827C74EC7F159 /* MaskingLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaskingLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -573,6 +581,10 @@
 				376743D491F657FD1811DCD7E383E1E3 /* MaskImagePicker.swift */,
 				8B24DF68D6D2E190C6E37D0D4D588A7E /* MaskLayer.swift */,
 				256A4F11ADA8650B2751C7B00C38BA95 /* SetVideoURLView.swift */,
+				BB4C506F2137F122003B5036 /* CollectionView.swift */,
+				BB4C50702137F122003B5036 /* CollectionViewModel.swift */,
+				BB4C506E2137F122003B5036 /* CustomCell.swift */,
+				BBB1E0B62138DA740010D7C7 /* CustomDissmissCell.swift */,
 				C554A797788D802A128AB3003457ADCF /* Pod */,
 				1161290B34C51FAD1469AF3B5969372F /* Support Files */,
 			);
@@ -1041,8 +1053,12 @@
 			files = (
 				649BE041976D0CCCE484338E791955DC /* GifObject.swift in Sources */,
 				B4F7D0C107C7EDE59BBDF34BC0809A4F /* MaskImagePicker.swift in Sources */,
+				BB4C50722137F123003B5036 /* CollectionView.swift in Sources */,
 				0C40D7448DBEF1BFD73EDE43EC3F1B58 /* MaskingLayer-dummy.m in Sources */,
+				BB4C50732137F123003B5036 /* CollectionViewModel.swift in Sources */,
+				BBB1E0B72138DA740010D7C7 /* CustomDissmissCell.swift in Sources */,
 				57EB78ADD4C1868761B0DDEEC0AE9EFD /* MaskLayer.swift in Sources */,
+				BB4C50712137F123003B5036 /* CustomCell.swift in Sources */,
 				D70EFEDC05CC36352D5DED61DC213D02 /* SetVideoURLView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

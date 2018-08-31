@@ -16,18 +16,25 @@ public class GifObject: NSObject {
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    public func makeGifImageMovie(url :URL,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>)->URL{
+    public func makeGifImageMovie(url :URL,vm: CollectionViewModel,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>){
         let frameRate = CMTimeMake(1,Int32(frameY))
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]
         let frameProperties = [kCGImagePropertyGIFDictionary as String:[kCGImagePropertyGIFDelayTime as String :CMTimeGetSeconds(frameRate)]]
-        guard let destination = CGImageDestinationCreateWithURL(url as CFURL,kUTTypeGIF,imageAr.count,nil) else { print("ng"); return url }
+        guard let destination = CGImageDestinationCreateWithURL(url as CFURL,kUTTypeGIF,imageAr.count,nil) else { print("ng"); return }
 
         CGImageDestinationSetProperties(destination,fileProperties as CFDictionary?)
 
         for image in imageAr{ CGImageDestinationAddImage(destination,image,frameProperties as CFDictionary?) }
-        if CGImageDestinationFinalize(destination){ print("ok"); return url }
-        return url
+        if CGImageDestinationFinalize(destination){
+            do {
+                let resizeImage: UIImage = UIImage(data: try Data(contentsOf: url))!.ResizeUIImage(width: 88, height: 88)
+                let datas: Data = UIImagePNGRepresentation(resizeImage)!
+                vm.setVideoURLView.data.append(datas)
+            }catch{
+                
+            }
+            print("ok");}
     }
 }
 
