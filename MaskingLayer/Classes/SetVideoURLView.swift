@@ -17,7 +17,6 @@ public class SetVideoURLView: UIView {
     public let imageView = UIImageView()
     public var imageAr = Array<CGImage>()
     public var thumbnailViews = [UIImageView]()
-    public var data = Array<Data>()
     public var dataArray = Array<Data>()
 
     override init(frame: CGRect) {
@@ -38,7 +37,7 @@ public class SetVideoURLView: UIView {
     }
 
     public func updateThumbnails(vc: UIViewController){
-        
+
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background, target: nil)
         backgroundQueue.async { _ = self.updateThumbnails(view: self, videoURL: self.videoURL, duration: self.duration, vc: vc) }
     }
@@ -102,12 +101,13 @@ public class SetVideoURLView: UIView {
                 }
                 imageView.image = image
                 imageView.alpha = 0
-                imageView.contentMode = UIViewContentMode.scaleAspectFill
                 imageView.clipsToBounds = true
                 imageView.frame = CGRect(x: xPos,
                                          y: 0.0,
                                          width: width,
                                          height: 44)
+                let data = UIImagePNGRepresentation((imageView.image?.ResizeUIImage(width: view.frame.width*4, height: view.frame.height*4))!)
+                dataArray.append(data!)
                 thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)
                 view.sendSubview(toBack: imageView)

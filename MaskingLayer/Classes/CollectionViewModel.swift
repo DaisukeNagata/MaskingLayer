@@ -19,7 +19,7 @@ public final class CollectionViewModel: NSObject {
 extension CollectionViewModel: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.data.count + 2 }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + 2 }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomDissmissCell", for: indexPath) as! CustomDissmissCell
         if indexPath.section < 2 {
@@ -33,7 +33,7 @@ extension CollectionViewModel: UICollectionViewDataSource {
             cell.imageSet(imageSet: image)
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
-            let dataImages = setVideoURLView.data.map { (images) -> UIImage in
+            let dataImages = setVideoURLView.dataArray.map { (images) -> UIImage in
                 let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: 88, height:88)
                 return  resizeImage
             }

@@ -16,8 +16,9 @@ public class GifObject: NSObject {
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    public func makeGifImageMovie(url :URL,vm: CollectionViewModel,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>){
+    public func makeGifImageMovie(url :URL,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>){
         let frameRate = CMTimeMake(1,Int32(frameY))
+        let urlDefo = UserDefaults.standard
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]
         let frameProperties = [kCGImagePropertyGIFDictionary as String:[kCGImagePropertyGIFDelayTime as String :CMTimeGetSeconds(frameRate)]]
@@ -27,13 +28,7 @@ public class GifObject: NSObject {
 
         for image in imageAr{ CGImageDestinationAddImage(destination,image,frameProperties as CFDictionary?) }
         if CGImageDestinationFinalize(destination){
-            do {
-                let resizeImage: UIImage = UIImage(data: try Data(contentsOf: url))!.ResizeUIImage(width: 88, height: 88)
-                let datas: Data = UIImagePNGRepresentation(resizeImage)!
-                vm.setVideoURLView.data.append(datas)
-            }catch{
-                
-            }
+            urlDefo.set(url, forKey: "url")
             print("ok");}
     }
 }

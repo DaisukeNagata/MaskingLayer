@@ -124,6 +124,7 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photeSegue(vc: views,bool: true)
         }
+        
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
@@ -232,4 +233,40 @@ public extension UIImage {
         }
         return self
     }
+}
+
+public extension CGImage {
+    func resize(_ image: CGImage) -> CGImage? {
+        var ratio: Float = 0.0
+        let imageWidth = Float(image.width)
+        let imageHeight = Float(image.height)
+        let maxWidth: Float = Float(UIScreen.main.bounds.width)
+        let maxHeight: Float = Float(UIScreen.main.bounds.height)
+        
+        // Get ratio (landscape or portrait)
+        if (imageWidth > imageHeight) {
+            ratio = maxWidth / imageWidth
+        } else {
+            ratio = maxHeight / imageHeight
+        }
+        
+        // Calculate new size based on the ratio
+        if ratio > 1 {
+            ratio = 1
+        }
+        
+        let width = imageWidth * ratio
+        let height = imageHeight * ratio
+        
+        guard let colorSpace = image.colorSpace else { return nil }
+        guard let context = CGContext(data: nil, width: Int(width*1.95), height: Int(height*1.59), bitsPerComponent: image.bitsPerComponent, bytesPerRow: image.bytesPerRow, space: colorSpace, bitmapInfo: image.alphaInfo.rawValue) else { return nil }
+        
+        // draw image to context (resizing it)
+        context.interpolationQuality = .high
+        context.draw(image, in: CGRect(x: 0, y: 0, width: Int(width*1.95), height: Int(height*1.59)))
+        
+        // extract resulting image from context
+        return context.makeImage()
+    }
+    
 }

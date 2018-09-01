@@ -28,12 +28,13 @@ public final class CollectionView: UIView {
         let scrollView = UIScrollView()
         return scrollView
     }()
-   public let imageView = UIImageView()
+   public var imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
 
         self.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
+
         addSubview(scrollView)
         scrollView.addSubview(collectionView)
     }
