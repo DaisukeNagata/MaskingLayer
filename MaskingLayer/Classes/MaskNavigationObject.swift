@@ -94,7 +94,6 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             self.gifObject.makeGifImageMovie(url: url!,frameY: 1, createBool: true, scale: 1, imageAr: (self.vm.setVideoURLView.imageAr))
         } else {
             vm.rotate = 0
-            cView.collectionView.reloadData()
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!
             imageView.image = image
             maskLayer.imageReSet(view: vc.view, imageView: imageView, image: image)
