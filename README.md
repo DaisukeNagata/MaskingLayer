@@ -31,7 +31,7 @@ Implemented GIF function → Preparing to combine with Mask.
 
 ## Gif
 
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskMovie.gif?raw=true)
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieGif.gif)
 
 ## Installation
 
