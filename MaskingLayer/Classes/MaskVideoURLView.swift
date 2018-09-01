@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 
-
 public class MaskVideoURLView: UIView {
 
     var duration: Float64   = 0.0
@@ -50,7 +49,7 @@ public class MaskVideoURLView: UIView {
         return Int(ceil(num))
     }
 
-    func thumbnailFromVideo(videoUrl: URL, time: CMTime) -> UIImage{
+    func thumbnailFromVideo(videoUrl: URL, time: CMTime) -> UIImage {
         let asset: AVAsset = AVAsset(url: videoUrl) as AVAsset
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = true
@@ -59,15 +58,15 @@ public class MaskVideoURLView: UIView {
             let uiImage = UIImage(cgImage: cgImage)
             return uiImage
         }catch{
-            
+
         }
         return UIImage()
     }
 
-    func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView]{
+    func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView] {
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
-        
+
         for view in self.thumbnailViews{
             DispatchQueue.main.sync { view.removeFromSuperview() }
         }
@@ -85,12 +84,12 @@ public class MaskVideoURLView: UIView {
         return self.thumbnailViews
     }
 
-    func videoDuration(videoURL: URL) -> Float64{
+    func videoDuration(videoURL: URL) -> Float64 {
         let source = AVURLAsset(url: videoURL)
         return CMTimeGetSeconds(source.duration)
     }
 
-    private func addImagesToView(images: [UIImage], view: UIView){
+    private func addImagesToView(images: [UIImage], view: UIView) {
 
         self.thumbnailViews.removeAll()
         var xPos: CGFloat = 0.0

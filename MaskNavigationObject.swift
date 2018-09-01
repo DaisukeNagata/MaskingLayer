@@ -9,7 +9,7 @@ import Foundation
 import MobileCoreServices
 
 public class MaskNavigationObject: NSObject {
-    
+
     public var index = Int()
     public var image = UIImage()
     public var margin: CGFloat = 10
@@ -26,8 +26,8 @@ public class MaskNavigationObject: NSObject {
         cView.backgroundColor = .clear
         return cView
     }()
-    
-    
+
+
     public func resetCView(views: UIViewController, imageView: UIImageView, image: UIImage) {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
@@ -40,7 +40,7 @@ public class MaskNavigationObject: NSObject {
             return cView
         }()
     }
-    public func maskPath(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool) {
+    public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
         maskLayer.clipLayer.isHidden = false
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
@@ -67,9 +67,14 @@ public class MaskNavigationObject: NSObject {
         vm.setVideoURLView.setURL(url: url, view: vc)
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
-    
     public func maskGif(url: URL) {
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: 1, imageAr: (vm.setVideoURLView.imageAr))
+    }
+    public func maskImage(images: UIImage) {
+        imageView = UIImageView()
+        image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
+        let data: Data? = UIImagePNGRepresentation(image)
+        image = UIImage(data: data!)!
     }
 }
 
@@ -106,11 +111,11 @@ extension MaskNavigationObject: UICollectionViewDelegate {
 
 // MARK: UICollectionViewDelegateFlowLayout
 extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
-    
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return margin
     }

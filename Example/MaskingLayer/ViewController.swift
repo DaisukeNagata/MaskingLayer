@@ -66,7 +66,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             break
         }
     }
-
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
 }
 
@@ -75,9 +74,12 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
         mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
+
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
+
         if mediaType == kUTTypeMovie {
             self.mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
+
             DispatchQueue.main.asyncAfter(deadline: .now()+2){
                 self.mO.maskGif(url: info[UIImagePickerControllerMediaURL] as! URL)
                 SVProgressHUD.dismiss()
@@ -85,9 +87,9 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
                 return
             }
         } else {
-            mO.imageView = UIImageView()
-            guard let images = (info[UIImagePickerControllerOriginalImage] as? UIImage) else { return }
-            mO.image = images
+            guard var images = (info[UIImagePickerControllerOriginalImage] as? UIImage) else { return }
+            images = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+            mO.maskImage(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
         }

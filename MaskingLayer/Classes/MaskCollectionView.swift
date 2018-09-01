@@ -13,6 +13,7 @@ public final class MaskCollectionView: UIView {
     let viewHeight: CGFloat = 100
     let collectionItemSize: CGFloat = 88
 
+
     public lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

@@ -10,10 +10,10 @@ import UIKit
 
 public class MaskLayer: NSObject {
 
-    public var convertPath = CGMutablePath()
+    public var maskColor = UIColor()
     public var path = CGMutablePath()
     public var clipLayer = CAShapeLayer()
-    public var maskColor = UIColor()
+    public var convertPath = CGMutablePath()
     public var maskImagePicker = MaskImagePicker()
     var mO = MaskCollectionViewModel()
 
@@ -31,7 +31,7 @@ public class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView,bool: Bool) {
+    public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView, bool: Bool) {
         clipLayer.path = path
 
         guard bool == false else {
@@ -45,7 +45,7 @@ public class MaskLayer: NSObject {
 
     public func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
 
-    public func maskImage(color:UIColor, size: CGSize,convertPath:CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
+    public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
     public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
@@ -69,7 +69,7 @@ public class MaskLayer: NSObject {
         }
     }
 
-    public func imageReSet(view:UIView, imageView: UIImageView, image: UIImage) {
+    public func imageReSet(view: UIView, imageView: UIImageView, image: UIImage) {
         imageView.image =  image
         imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.frame = view.frame
@@ -77,7 +77,7 @@ public class MaskLayer: NSObject {
         path = CGMutablePath()
     }
 
-    public func alertSave(views:UIViewController,imageView: UIImageView, image: UIImage) {
+    public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedStringKey : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -138,7 +138,7 @@ public class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
     }
 
-    private func colorSet(views: UIViewController,imageView:UIImageView,image: UIImage, color:UIColor) {
+    private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
         imageView.image = self.mask(image: self.image(color: self.maskColor, size: views.view.frame.size), convertPath: self.convertPath)
         self.imageSet(view: views.view, imageView: imageView, image: image)
     }
