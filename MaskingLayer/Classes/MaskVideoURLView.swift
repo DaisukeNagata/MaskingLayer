@@ -1,6 +1,6 @@
 //
-//  SetVideoURLView.swift
-//  TalkingRecord
+//  MaskVideoURLView.swift
+//  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/06/23.
 //  Copyright © 2018年 永田大祐. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 
-public class SetVideoURLView: UIView {
+public class MaskVideoURLView: UIView {
 
     var duration: Float64   = 0.0
     var videoURL  = URL(fileURLWithPath: "")
@@ -31,7 +31,7 @@ public class SetVideoURLView: UIView {
     }
 
     public func setURL(url: URL, view: UIViewController) {
-        self.duration = SetVideoURLView().videoDuration(videoURL: url)
+        self.duration = MaskVideoURLView().videoDuration(videoURL: url)
         self.videoURL = url
         self.superview?.layoutSubviews()
         self.updateThumbnails(vc: view)

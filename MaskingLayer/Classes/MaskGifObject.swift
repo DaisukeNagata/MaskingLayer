@@ -1,6 +1,6 @@
 //
 //  MaskGifObject.swift
-//  TalkingRecord
+//  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/06/26.
 //  Copyright © 2018年 永田大祐. All rights reserved.

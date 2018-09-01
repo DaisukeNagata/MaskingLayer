@@ -30,7 +30,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-        
+
         mO.image = UIImage(named: "IMG_4011")!
     }
 
@@ -40,6 +40,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         view.addSubview(mO.imageView)
         guard mO.vm.setVideoURLView.dataArray.count == 0 else {
             view.addSubview(mO.cView)
+            view.layer.addSublayer(mO.maskLayer.clipLayer)
             return
         }
         mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
@@ -72,7 +73,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         SVProgressHUD.show()
-        mO.resetCView()
+        mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType == kUTTypeMovie {
             self.mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)

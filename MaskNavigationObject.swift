@@ -9,14 +9,14 @@ import Foundation
 import MobileCoreServices
 
 public class MaskNavigationObject: NSObject {
-
+    
     public var index = Int()
     public var image = UIImage()
     public var margin: CGFloat = 10
     public var seArray = Array<Int>()
     public var vc = UIViewController()
     public var imageView = UIImageView()
-    public let maskLayer = MaskLayer()
+    public var maskLayer = MaskLayer()
     public var gifObject = MaskGifObject()
     public var vm = MaskCollectionViewModel()
     public lazy var cView: MaskCollectionView = {
@@ -26,9 +26,9 @@ public class MaskNavigationObject: NSObject {
         cView.backgroundColor = .clear
         return cView
     }()
-
-
-    public func resetCView() {
+    
+    
+    public func resetCView(views: UIViewController, imageView: UIImageView, image: UIImage) {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
         cView.removeFromSuperview()
@@ -39,29 +39,27 @@ public class MaskNavigationObject: NSObject {
             cView.backgroundColor = .clear
             return cView
         }()
-        
     }
-
     public func maskPath(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool) {
-         maskLayer.clipLayer.isHidden = false
-         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
-         maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
+        maskLayer.clipLayer.isHidden = false
+        maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
+        maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
     }
     public func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool) {
-         maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
-         maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
+        maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
+        maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
     }
     public func tappedEnd(view: UIView) {
         guard let size = imageView.image?.size else { return }
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
         guard vm.setVideoURLView.dataArray.count == 0 else {
-            vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!)!)!x
+            vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
             if !seArray.contains(index) {
                 seArray.append(index)
                 vm.checkArray.add(index)
+                cView.collectionView.reloadData()
             }
-            cView.collectionView.reloadData()
             return
         }
     }
@@ -69,7 +67,7 @@ public class MaskNavigationObject: NSObject {
         vm.setVideoURLView.setURL(url: url, view: vc)
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
-
+    
     public func maskGif(url: URL) {
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: 1, imageAr: (vm.setVideoURLView.imageAr))
     }
@@ -83,18 +81,15 @@ extension MaskNavigationObject: UICollectionViewDelegate {
         if indexPath.section == 0 {
             do {
                 let data = try Data(contentsOf: url!)
-                self.imageView.animateGIF(data: data, duration: Double(4)) {
-                }
-            }catch{
-            }
+                vm.rotate = -90
+                self.imageView.animateGIF(data: data, duration: Double(4)) { }
+            }catch{ print("error") }
         } else if indexPath.section == 1 {
+            vm.rotate = 90
             self.gifObject.makeGifImageMovie(url: url!,frameY: 1, createBool: true, scale: 1, imageAr: (self.vm.setVideoURLView.imageAr))
-            if  seArray.count == 0 {
-            } else {
-                vm.checkArray.removeAllObjects()
-            }
         } else {
-            maskLayer.imageSet(view: vc.view, imageView: self.imageView, image: self.image)
+            vm.rotate = 0
+            cView.collectionView.reloadData()
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!
             imageView.image = image
             maskLayer.imageReSet(view: vc.view, imageView: imageView, image: image)
@@ -102,20 +97,20 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             if seArray.contains(indexPath.section-2) {
                 let index = seArray.index(of: indexPath.section-2)
                 seArray.remove(at: index!)
-                vm.checkArray.remove(indexPath.section-2)
+                vm.checkArray.remove(index!)
             }
-            collectionView.reloadData()
         }
+        collectionView.reloadData()
     }
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
 extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return margin
     }

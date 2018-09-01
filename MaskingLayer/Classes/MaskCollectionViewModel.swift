@@ -8,11 +8,16 @@
 import UIKit
 
 public final class MaskCollectionViewModel: NSObject {
-    public var checkArray:NSMutableArray = []
-    public var checkLabel:UILabel!
-    let imageList = ["IMG_4011.jpg","IMG_4011.jpg"]
+
     var image = UIImage()
-    public var setVideoURLView = SetVideoURLView()
+    public var rotate: CGFloat = 0
+    let collectionLabel: CGFloat = 30
+    let checkLabelItemSize: CGFloat = 10
+    let collectionItemSize: CGFloat = 88
+    let imageList = ["IMG_4011.jpg","Reset"]
+    public var checkLabel:UILabel!
+    public var checkArray:NSMutableArray = []
+    public var setVideoURLView = MaskVideoURLView()
 }
 
 // MARK: UICollectionViewDataSource
@@ -24,25 +29,25 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
         if indexPath.section < 2 {
             image = UIImage(named: imageList[indexPath.section])!
-            let resizeImage: UIImage = image.ResizeUIImage(width:  88, height: 88)
+            let resizeImage: UIImage = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
             image = resizeImage
             var transRotate = CGAffineTransform()
-            let angle = -90 * CGFloat.pi / 180
+            let angle = rotate * CGFloat.pi / 180
             transRotate = CGAffineTransform(rotationAngle: CGFloat(angle));
             cell.transform = transRotate
             cell.imageSet(imageSet: image)
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskDismissCell", for: indexPath) as! MaskDismissCell
             let dataImages = setVideoURLView.dataArray.map { (images) -> UIImage in
-                let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: 88, height:88)
+                let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: collectionItemSize, height:collectionItemSize)
                 return  resizeImage
             }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
             checkLabel = nil
             if checkArray.contains(indexPath.section-2){
                 checkLabel = UILabel()
-                checkLabel.frame = CGRect(x:0,y:0,width:30,height:30)
-                checkLabel.layer.position = CGPoint(x: cell.layer.frame.width + 10, y: 10)
+                checkLabel.frame = CGRect(x:0,y:0,width:collectionLabel,height:collectionLabel)
+                checkLabel.layer.position = CGPoint(x: cell.layer.frame.width + checkLabelItemSize, y: checkLabelItemSize)
                 checkLabel.text = "✅"
                 cell.contentView.addSubview(checkLabel)
             }
