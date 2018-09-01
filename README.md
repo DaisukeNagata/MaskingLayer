@@ -29,8 +29,14 @@ Tap the screen so that you can select the camera roll.
 
 Implemented GIF function → Preparing to combine with Mask.
 
-## Gif
+## Version 0.4.1
 
+You can mask from the image of the terminal.
+You can mask GIF data from your device's video.
+The leftmost is played, the second update, and the third and subsequent images are selected.
+
+## Gif
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieImage.gif)
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieGif.gif)
 
 ## Installation
