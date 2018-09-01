@@ -9,7 +9,7 @@ import UIKit
 
 public final class CollectionViewModel: NSObject {
     public var checkArray:NSMutableArray = []
-    var checkLabel:UILabel!
+    public var checkLabel:UILabel!
     let imageList = ["IMG_4011.jpg","IMG_4011.jpg"]
     var image = UIImage()
     public var setVideoURLView = SetVideoURLView()
@@ -38,10 +38,11 @@ extension CollectionViewModel: UICollectionViewDataSource {
                 return  resizeImage
             }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
+            checkLabel = nil
             if checkArray.contains(indexPath.section-2){
                 checkLabel = UILabel()
                 checkLabel.frame = CGRect(x:0,y:0,width:30,height:30)
-                checkLabel.layer.position = CGPoint(x: cell.layer.frame.width - 10, y: 10)
+                checkLabel.layer.position = CGPoint(x: cell.layer.frame.width + 10, y: 10)
                 checkLabel.text = "✅"
                 cell.contentView.addSubview(checkLabel)
             }

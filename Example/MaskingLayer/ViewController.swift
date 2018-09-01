@@ -69,6 +69,14 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
             guard vm.setVideoURLView.dataArray.count == 0 else {
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!)!)!
+                if seArray.contains(self.index) {
+                    seArray.remove(at: self.index)
+                    vm.checkArray.remove(self.index)
+                } else {
+                    seArray.append(self.index)
+                    vm.checkArray.add(self.index)
+                }
+                cView.collectionView.reloadData()
             return
             }
             break
@@ -114,19 +122,17 @@ extension ViewController: UICollectionViewDelegate {
             }
         } else if indexPath.section == 2 {
         } else {
-            if seArray.contains(indexPath.section-2) {
-                let index = seArray.index(of: indexPath.section-2)
-                seArray.remove(at: index!)
-                vm.checkArray.remove(indexPath.section-2)
-            } else {
-                seArray.append(indexPath.section-2)
-                vm.checkArray.add(indexPath.section-2)
-            }
             maskLayer.imageSet(view: self.view, imageView: self.imageView, image: self.image)
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!
             imageView.image = image
             maskLayer.imageReSet(view: self.view, imageView: imageView, image: image)
             index = indexPath.section-2
+            if seArray.contains(indexPath.section-2) {
+                let index = seArray.index(of: indexPath.section-2)
+                seArray.remove(at: index!)
+                vm.checkArray.remove(indexPath.section-2)
+            }
+            collectionView.reloadData()
         }
     }
 
