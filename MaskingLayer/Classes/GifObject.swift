@@ -1,5 +1,5 @@
 //
-//  GifObject.swift
+//  MaskGifObject.swift
 //  TalkingRecord
 //
 //  Created by 永田大祐 on 2018/06/26.
@@ -11,7 +11,7 @@ import Photos
 import ImageIO
 import MobileCoreServices
 
-public class GifObject: NSObject {
+public class MaskGifObject: NSObject {
 
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
@@ -67,7 +67,7 @@ extension UIImage {
             image.draw(in: CGRect(x: 0.0, y: 0.0, width: image.size.width, height: image.size.height))
             let renderedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            
+
             if let renderedImage = renderedImage { images.append(renderedImage) }
         }
         return UIImage.animatedImage(with: images, duration: speed)

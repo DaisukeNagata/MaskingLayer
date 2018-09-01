@@ -1,5 +1,5 @@
 //
-//  CollectionView.swift
+//  MaskCollectionView.swift
 //  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/08/30.
@@ -7,20 +7,21 @@
 
 import UIKit
 
-public final class CollectionView: UIView {
+public final class MaskCollectionView: UIView {
 
-    let sampleImageSize: CGFloat = 88
-    let sampleImageView: CGFloat = 88
+    let viewOrigin: CGFloat = 120
+    let viewHeight: CGFloat = 100
+    let collectionItemSize: CGFloat = 88
 
     public lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.itemSize = CGSize(width: sampleImageSize, height: sampleImageSize)
+        layout.itemSize = CGSize(width: collectionItemSize, height: collectionItemSize)
         layout.scrollDirection = .horizontal
-        collectionView.register(CustomCell.identifier, forCellWithReuseIdentifier: "CustomCell")
-        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
-        collectionView.register(CustomDissmissCell.identifier, forCellWithReuseIdentifier: "CustomDissmissCell")
-        collectionView.register(CustomDissmissCell.self, forCellWithReuseIdentifier: "CustomDissmissCell")
+        collectionView.register(MaskCustomCell.identifier, forCellWithReuseIdentifier: "MaskCustomCell")
+        collectionView.register(MaskCustomCell.self, forCellWithReuseIdentifier: "MaskCustomCell")
+        collectionView.register(MaskDismissCell.identifier, forCellWithReuseIdentifier: "MaskDismissCell")
+        collectionView.register(MaskDismissCell.self, forCellWithReuseIdentifier: "MaskDismissCell")
         collectionView.backgroundColor = .clear
         return collectionView
     }()
@@ -28,12 +29,12 @@ public final class CollectionView: UIView {
         let scrollView = UIScrollView()
         return scrollView
     }()
-   public var imageView = UIImageView()
+    public var imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
 
-        self.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
+        self.frame.size = CGSize(width: UIScreen.main.bounds.width, height: viewHeight)
 
         addSubview(scrollView)
         scrollView.addSubview(collectionView)
@@ -49,6 +50,6 @@ public final class CollectionView: UIView {
         collectionView.frame = self.frame
         scrollView.frame = self.frame
         scrollView.contentSize.height = self.frame.height
-        self.frame.origin.y = UIScreen.main.bounds.height - 120
+        self.frame.origin.y = UIScreen.main.bounds.height - viewOrigin
     }
 }

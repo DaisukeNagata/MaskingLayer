@@ -1,5 +1,5 @@
 //
-//  CollectionViewModel.swift
+//  MaskCollectionViewModel.swift
 //  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/08/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class CollectionViewModel: NSObject {
+public final class MaskCollectionViewModel: NSObject {
     public var checkArray:NSMutableArray = []
     public var checkLabel:UILabel!
     let imageList = ["IMG_4011.jpg","IMG_4011.jpg"]
@@ -16,12 +16,12 @@ public final class CollectionViewModel: NSObject {
 }
 
 // MARK: UICollectionViewDataSource
-extension CollectionViewModel: UICollectionViewDataSource {
+extension MaskCollectionViewModel: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
     public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + 2 }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomDissmissCell", for: indexPath) as! CustomDissmissCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
         if indexPath.section < 2 {
             image = UIImage(named: imageList[indexPath.section])!
             let resizeImage: UIImage = image.ResizeUIImage(width:  88, height: 88)
@@ -32,7 +32,7 @@ extension CollectionViewModel: UICollectionViewDataSource {
             cell.transform = transRotate
             cell.imageSet(imageSet: image)
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskDismissCell", for: indexPath) as! MaskDismissCell
             let dataImages = setVideoURLView.dataArray.map { (images) -> UIImage in
                 let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: 88, height:88)
                 return  resizeImage

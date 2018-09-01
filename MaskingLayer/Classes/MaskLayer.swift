@@ -10,14 +10,14 @@ import UIKit
 
 public class MaskLayer: NSObject {
 
-    open var convertPath = CGMutablePath()
-    open var path = CGMutablePath()
-    open var clipLayer = CAShapeLayer()
-    open var maskClor = UIColor()
-    var maskImagePicker = MaskImagePicker()
+    public var convertPath = CGMutablePath()
+    public var path = CGMutablePath()
+    public var clipLayer = CAShapeLayer()
+    public var maskColor = UIColor()
+    public var maskImagePicker = MaskImagePicker()
 
     public override init() {
-        maskClor = .maskWhite
+        maskColor = .maskWhite
         clipLayer.lineCap = "round"
         clipLayer.lineJoin = "round"
         clipLayer.name = "clipLayer"
@@ -38,10 +38,6 @@ public class MaskLayer: NSObject {
         }
         convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
     }
-
-    public func maskAddLine(position: CGPoint) { path.addLine(to: CGPoint(x: position.x, y: position.y)) }
-
-    public func maskPath(position: CGPoint) { clipLayer.isHidden = false; path.move(to: CGPoint(x: position.x, y: position.y)) }
 
     public func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
 
@@ -92,27 +88,27 @@ public class MaskLayer: NSObject {
         let maskWhite = UIAlertAction(title: NSLocalizedString("maskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
+            self.maskColor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("maskLightGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskLightGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
+            self.maskColor = .maskLightGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskGray = UIAlertAction(title: NSLocalizedString("maskGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
+            self.maskColor = .maskGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskDarkGray = UIAlertAction(title: NSLocalizedString("maskDarkGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskDarkGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
+            self.maskColor = .maskDarkGray; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskLightBlack = UIAlertAction(title: NSLocalizedString("maskLightBlack", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskClor = .maskLightBlack; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskClor)
+            self.maskColor = .maskLightBlack; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let cameraRoll = UIAlertAction(title: NSLocalizedString("cameraRoll ", comment: ""), style: .default) {
             action in
@@ -124,7 +120,12 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photeSegue(vc: views,bool: true)
         }
-        
+        let reset = UIAlertAction(title: NSLocalizedString("reset ", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+            self.imageReSet(view: views.view, imageView: imageView, image: image)
+        }
+
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
@@ -132,11 +133,12 @@ public class MaskLayer: NSObject {
         alertController.addAction(maskLightBlack)
         alertController.addAction(cameraRoll)
         alertController.addAction(videoRoll)
+        alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)
     }
 
     private func colorSet(views: UIViewController,imageView:UIImageView,image: UIImage, color:UIColor) {
-        imageView.image = self.mask(image: self.image(color: self.maskClor, size: views.view.frame.size), convertPath: self.convertPath)
+        imageView.image = self.mask(image: self.image(color: self.maskColor, size: views.view.frame.size), convertPath: self.convertPath)
         self.imageSet(view: views.view, imageView: imageView, image: image)
     }
 
@@ -242,31 +244,30 @@ public extension CGImage {
         let imageHeight = Float(image.height)
         let maxWidth: Float = Float(UIScreen.main.bounds.width)
         let maxHeight: Float = Float(UIScreen.main.bounds.height)
-        
+
         // Get ratio (landscape or portrait)
         if (imageWidth > imageHeight) {
             ratio = maxWidth / imageWidth
         } else {
             ratio = maxHeight / imageHeight
         }
-        
+
         // Calculate new size based on the ratio
         if ratio > 1 {
             ratio = 1
         }
-        
+
         let width = imageWidth * ratio
         let height = imageHeight * ratio
-        
+
         guard let colorSpace = image.colorSpace else { return nil }
         guard let context = CGContext(data: nil, width: Int(width*1.95), height: Int(height*1.59), bitsPerComponent: image.bitsPerComponent, bytesPerRow: image.bytesPerRow, space: colorSpace, bitmapInfo: image.alphaInfo.rawValue) else { return nil }
-        
+
         // draw image to context (resizing it)
         context.interpolationQuality = .high
         context.draw(image, in: CGRect(x: 0, y: 0, width: Int(width*1.95), height: Int(height*1.59)))
-        
+
         // extract resulting image from context
         return context.makeImage()
     }
-    
 }

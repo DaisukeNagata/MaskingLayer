@@ -19,6 +19,7 @@ public class SetVideoURLView: UIView {
     public var thumbnailViews = [UIImageView]()
     public var dataArray = Array<Data>()
 
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -48,6 +49,7 @@ public class SetVideoURLView: UIView {
         DispatchQueue.main.sync { num = Double(inView.frame.size.width) / Double(inView.frame.size.height) }
         return Int(ceil(num))
     }
+
     func thumbnailFromVideo(videoUrl: URL, time: CMTime) -> UIImage{
         let asset: AVAsset = AVAsset(url: videoUrl) as AVAsset
         let imgGenerator = AVAssetImageGenerator(asset: asset)
@@ -61,6 +63,7 @@ public class SetVideoURLView: UIView {
         }
         return UIImage()
     }
+
     func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView]{
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
