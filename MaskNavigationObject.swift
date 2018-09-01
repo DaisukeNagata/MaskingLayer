@@ -56,8 +56,8 @@ public class MaskNavigationObject: NSObject {
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
         guard vm.setVideoURLView.dataArray.count == 0 else {
-            vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!)!)!
-            if seArray.contains(index) {
+            vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!)!)!x
+            if !seArray.contains(index) {
                 seArray.append(index)
                 vm.checkArray.add(index)
             }
@@ -93,7 +93,6 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             } else {
                 vm.checkArray.removeAllObjects()
             }
-        } else if indexPath.section == 2 {
         } else {
             maskLayer.imageSet(view: vc.view, imageView: self.imageView, image: self.image)
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!
