@@ -67,11 +67,12 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         }
     }
 
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.vm = MaskCollectionViewModel(); mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
         mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString

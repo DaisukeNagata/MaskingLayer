@@ -15,6 +15,8 @@ public class MaskLayer: NSObject {
     public var clipLayer = CAShapeLayer()
     public var maskColor = UIColor()
     public var maskImagePicker = MaskImagePicker()
+    var mO = MaskCollectionViewModel()
+
 
     public override init() {
         maskColor = .maskWhite
@@ -125,7 +127,6 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.imageReSet(view: views.view, imageView: imageView, image: image)
         }
-
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
