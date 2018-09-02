@@ -68,7 +68,7 @@ public class MaskNavigationObject: NSObject {
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
     public func maskGif(url: URL) {
-        gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: 1, imageAr: (vm.setVideoURLView.imageAr))
+        gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: UIScreen.main.scale, imageAr: (vm.setVideoURLView.imageAr))
     }
     public func maskImage(images: UIImage) {
         imageView = UIImageView()
@@ -91,7 +91,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             }catch{ print("error") }
         } else if indexPath.section == 1 {
             vm.rotate = 90
-            self.gifObject.makeGifImageMovie(url: url!,frameY: 1, createBool: true, scale: 1, imageAr: (self.vm.setVideoURLView.imageAr))
+            maskGif(url: url!)
         } else {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!

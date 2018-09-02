@@ -30,7 +30,6 @@ public final class MaskCollectionView: UIView {
         let scrollView = UIScrollView()
         return scrollView
     }()
-    public var imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: .zero)

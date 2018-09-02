@@ -240,14 +240,14 @@ public extension UIImage {
 
 public extension CGImage {
     func resize(_ image: CGImage) -> CGImage? {
-        let maxWidth: Float = Float(UIScreen.main.bounds.width)
-        let maxHeight: Float = Float(UIScreen.main.bounds.height)
+        let maxWidth: CGFloat = CGFloat(UIScreen.main.bounds.width)
+        let maxHeight: CGFloat = CGFloat(UIScreen.main.bounds.height)
 
         guard let colorSpace = image.colorSpace else { return nil }
-        guard let context = CGContext(data: nil, width: Int(maxWidth*1.95), height: Int(maxHeight*1.59), bitsPerComponent: image.bitsPerComponent, bytesPerRow: image.bytesPerRow, space: colorSpace, bitmapInfo: image.alphaInfo.rawValue) else { return nil }
+        guard let context = CGContext(data: nil, width: Int(maxWidth), height: Int(maxHeight), bitsPerComponent: image.bitsPerComponent, bytesPerRow: image.bytesPerRow, space: colorSpace, bitmapInfo: image.alphaInfo.rawValue) else { return nil }
 
         context.interpolationQuality = .high
-        context.draw(image, in: CGRect(x: 0, y: 0, width: Int(maxWidth*1.95), height: Int(maxHeight*1.59)))
+        context.draw(image, in: CGRect(x: 0, y: 0, width: Int(maxWidth), height: Int(maxHeight)))
 
         return context.makeImage()
     }
