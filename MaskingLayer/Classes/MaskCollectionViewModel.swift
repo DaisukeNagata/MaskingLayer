@@ -52,7 +52,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
                 checkLabel?.text = "✅"
                 cell.contentView.addSubview(checkLabel!)
             }
-            cell.imageSet(imageSet: dataImages[indexPath.section-2])
+            cell.imageSet(imageSet: dataImages[indexPath.section-editCount])
             return cell
         }
         return cell

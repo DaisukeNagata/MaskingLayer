@@ -13,7 +13,6 @@ public class MaskNavigationObject: NSObject {
     public var index = Int()
     public var image = UIImage()
     public var margin: CGFloat = 10
-    public var seArray = Array<Int>()
     public var vc = UIViewController()
     public var imageView = UIImageView()
     public var maskLayer = MaskLayer()
@@ -55,8 +54,7 @@ public class MaskNavigationObject: NSObject {
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
         guard vm.setVideoURLView.dataArray.count == 0 else {
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
-            if !seArray.contains(index) {
-                seArray.append(index)
+            if !vm.checkArray.contains(index) {
                 vm.checkArray.add(index)
                 cView.collectionView.reloadData()
             }
@@ -98,11 +96,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             imageView.image = image
             maskLayer.imageReSet(view: vc.view, imageView: imageView, image: image)
             index = indexPath.section-vm.editCount
-            if seArray.contains(indexPath.section-vm.editCount) {
-                let index = seArray.index(of: indexPath.section-vm.editCount)
-                seArray.remove(at: index!)
-                vm.checkArray.remove(index!)
-            }
+            if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
         }
         collectionView.reloadData()
     }
