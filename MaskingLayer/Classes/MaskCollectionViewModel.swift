@@ -11,11 +11,12 @@ public final class MaskCollectionViewModel: NSObject {
 
     var image = UIImage()
     public var rotate: CGFloat = 0
+    let editCount: Int = 2
     let collectionLabel: CGFloat = 30
     let checkLabelItemSize: CGFloat = 10
     let collectionItemSize: CGFloat = 88
     let imageList = ["IMG_4011.jpg","Reset"]
-    public var checkLabel:UILabel!
+    public var checkLabel:UILabel?
     public var checkArray:NSMutableArray = []
     public var setVideoURLView = MaskVideoURLView()
 }
@@ -24,10 +25,10 @@ public final class MaskCollectionViewModel: NSObject {
 extension MaskCollectionViewModel: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + 2 }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + editCount }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
-        if indexPath.section < 2 {
+        if indexPath.section < editCount {
             image = UIImage(named: imageList[indexPath.section])!
             let resizeImage: UIImage = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
             image = resizeImage
@@ -44,12 +45,12 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
             checkLabel = nil
-            if checkArray.contains(indexPath.section-2){
+            if checkArray.contains(indexPath.section-editCount){
                 checkLabel = UILabel()
-                checkLabel.frame = CGRect(x:0,y:0,width:collectionLabel,height:collectionLabel)
-                checkLabel.layer.position = CGPoint(x: cell.layer.frame.width + checkLabelItemSize, y: checkLabelItemSize)
-                checkLabel.text = "✅"
-                cell.contentView.addSubview(checkLabel)
+                checkLabel?.frame = CGRect(x:0,y:0,width:collectionLabel,height:collectionLabel)
+                checkLabel?.layer.position = CGPoint(x: cell.layer.frame.width + checkLabelItemSize, y: checkLabelItemSize)
+                checkLabel?.text = "✅"
+                cell.contentView.addSubview(checkLabel!)
             }
             cell.imageSet(imageSet: dataImages[indexPath.section-2])
             return cell

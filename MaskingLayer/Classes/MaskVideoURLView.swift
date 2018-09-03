@@ -96,7 +96,7 @@ public class MaskVideoURLView: UIView {
         var width: CGFloat = 0.0
         for image in images{
             DispatchQueue.main.sync {
-                if xPos + view.frame.size.height < view.frame.width{
+                if xPos + view.frame.size.height < view.frame.width {
                     width = view.frame.size.height
                 }else{
                     width = view.frame.size.width - xPos
@@ -107,8 +107,8 @@ public class MaskVideoURLView: UIView {
                 imageView.frame = CGRect(x: xPos,
                                          y: 0.0,
                                          width: width,
-                                         height: 44)
-                let data = UIImagePNGRepresentation((imageView.image?.ResizeUIImage(width: view.frame.width*4, height: view.frame.height*4))!)
+                                         height: 0.1)
+                let data = UIImagePNGRepresentation(imageView.image!)
                 dataArray.append(data!)
                 thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)

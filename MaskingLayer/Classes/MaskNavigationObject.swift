@@ -94,12 +94,12 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             maskGif(url: url!)
         } else {
             vm.rotate = 0
-            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-2])!
+            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
             imageView.image = image
             maskLayer.imageReSet(view: vc.view, imageView: imageView, image: image)
-            index = indexPath.section-2
-            if seArray.contains(indexPath.section-2) {
-                let index = seArray.index(of: indexPath.section-2)
+            index = indexPath.section-vm.editCount
+            if seArray.contains(indexPath.section-vm.editCount) {
+                let index = seArray.index(of: indexPath.section-vm.editCount)
                 seArray.remove(at: index!)
                 vm.checkArray.remove(index!)
             }
