@@ -125,8 +125,8 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.imageReSet(view: views.view, imageView: imageView, image: image)
         }
+        self.imageReSet(view: views.view, imageView: imageView, image: image)
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
