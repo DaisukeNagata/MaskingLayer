@@ -1,3 +1,5 @@
+![image](https://github.com/daisukenagata/MaskingLayer/blob/master/Mask.png?raw=true)
+
 # MaskingLayer
 
 [![CI Status](https://img.shields.io/travis/daisukenagata/MaskingLayer.svg?style=flat)](https://travis-ci.org/daisukenagata/MaskingLayer)
