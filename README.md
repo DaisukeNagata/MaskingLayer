@@ -1,4 +1,4 @@
-![image](https://github.com/daisukenagata/MaskingLayer/blob/master/Mask.png?raw=true)
+![image](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskImage.png?raw=true)
 
 # MaskingLayer
 
