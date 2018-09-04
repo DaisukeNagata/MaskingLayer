@@ -11,11 +11,11 @@ public final class MaskCollectionViewModel: NSObject {
 
     var image = UIImage()
     public var rotate: CGFloat = 0
-    let editCount: Int = 2
+    let editCount: Int = 1
     let collectionLabel: CGFloat = 30
     let checkLabelItemSize: CGFloat = 10
     let collectionItemSize: CGFloat = 88
-    let imageList = ["IMG_4011.jpg","Reset"]
+    let imageList = ["IMG_4011.jpg"]
     public var checkLabel:UILabel?
     public var checkArray:NSMutableArray = []
     public var setVideoURLView = MaskVideoURLView()

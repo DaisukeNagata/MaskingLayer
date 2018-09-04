@@ -53,6 +53,7 @@ public class MaskNavigationObject: NSObject {
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
         guard vm.setVideoURLView.dataArray.count == 0 else {
+            vm.setVideoURLView.imageAr[0] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
             if !vm.checkArray.contains(index) {
                 vm.checkArray.add(index)
@@ -83,13 +84,11 @@ extension MaskNavigationObject: UICollectionViewDelegate {
         let url = defo.url(forKey: "url")
         if indexPath.section == 0 {
             do {
+                vm.rotate = 90
+                maskGif(url: url!)
                 let data = try Data(contentsOf: url!)
-                vm.rotate = -90
                 self.imageView.animateGIF(data: data, duration: Double(4)) { }
             }catch{ print("error") }
-        } else if indexPath.section == 1 {
-            vm.rotate = 90
-            maskGif(url: url!)
         } else {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
