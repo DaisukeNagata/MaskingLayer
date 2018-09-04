@@ -8,32 +8,42 @@
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+You can select background color, camera roll, video roll with long tap.
+ 
 
-## Version 0.1.2
+Setting the layer image
+```ruby
+mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
+```
+ 
+Start of masking start point
+```ruby
+mO.maskPath(position: position, view: view, imageView: mO.imageView, bool: true)
+```
 
-Version 0.1.2 has a reset function.
+Continuation of masked lines
+```ruby
+mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
+```
 
-## Version 0.1.3
+Rebuild instance to be masked or clear data
+```ruby
+mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
+```
 
-White line only when drawing.
+Generate thumbnail image
+```ruby
+mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
+```
 
-## Version 0.2
+Generation of Gif image
+```ruby
+mO.maskGif(url: info[UIImagePickerControllerMediaURL] as! URL)
+```
 
-By pressing and holding, alert can select output color.
+## Version 0.4.2
+You can generate a GIF image by pressing the leftmost image.
 
-## Version 0.2.3
-
-Tap the screen so that you can select the camera roll.
-
-## Version 0.3.0
-
-Implemented GIF function → Preparing to combine with Mask.
-
-## Version 0.4.1
-
-You can mask from the image of the terminal.
-You can mask GIF data from your device's video.
-The leftmost is played, the second update, and the third and subsequent images are selected.
 
 ## Gif
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieImage.gif)
