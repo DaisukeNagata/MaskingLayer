@@ -1,8 +1,6 @@
 ![image](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskImage.png?raw=true)
 
 # MaskingLayer
-
-[![CI Status](https://img.shields.io/travis/daisukenagata/MaskingLayer.svg?style=flat)](https://travis-ci.org/daisukenagata/MaskingLayer)
 [![Version](https://img.shields.io/cocoapods/v/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![License](https://img.shields.io/cocoapods/l/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![Platform](https://img.shields.io/cocoapods/p/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
