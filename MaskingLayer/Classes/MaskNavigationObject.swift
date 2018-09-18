@@ -72,7 +72,7 @@ public class MaskNavigationObject: NSObject {
     public func maskImage(images: UIImage) {
         imageView = UIImageView()
         image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
-        let data: Data? = UIImagePNGRepresentation(image)
+        let data: Data? = image.pngData()
         image = UIImage(data: data!)!
     }
 }

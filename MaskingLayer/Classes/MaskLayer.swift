@@ -20,11 +20,11 @@ public class MaskLayer: NSObject {
 
     public override init() {
         maskColor = .maskWhite
-        clipLayer.lineCap = "round"
-        clipLayer.lineJoin = "round"
+        clipLayer.lineCap = convertToCAShapeLayerLineCap("round")
+        clipLayer.lineJoin = convertToCAShapeLayerLineJoin("round")
         clipLayer.name = "clipLayer"
-        clipLayer.lineCap = kCALineCapRound
-        clipLayer.lineJoin = kCALineJoinRound
+        clipLayer.lineCap = CAShapeLayerLineCap.round
+        clipLayer.lineJoin = CAShapeLayerLineJoin.round
         clipLayer.fillColor = UIColor.clear.cgColor
         clipLayer.strokeColor = UIColor.white.cgColor
         clipLayer.backgroundColor = UIColor.clear.cgColor
@@ -59,7 +59,7 @@ public class MaskLayer: NSObject {
     }
 
     public func imageSave(imageView: UIImageView, name: String) {
-        let pngImageData = UIImagePNGRepresentation(imageView.image!)
+        let pngImageData = imageView.image!.pngData()
         let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent(name)
         do {
@@ -79,7 +79,7 @@ public class MaskLayer: NSObject {
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
-        let stringAttributes: [NSAttributedStringKey : Any] = [
+        let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
             .font : UIFont.systemFont(ofSize: 22.0)
         ]
@@ -251,4 +251,14 @@ public extension CGImage {
 
         return context.makeImage()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
+	return CAShapeLayerLineCap(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAShapeLayerLineJoin(_ input: String) -> CAShapeLayerLineJoin {
+	return CAShapeLayerLineJoin(rawValue: input)
 }

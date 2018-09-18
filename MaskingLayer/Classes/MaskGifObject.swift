@@ -17,7 +17,7 @@ public class MaskGifObject: NSObject {
     var frameProperties = [String: [String: Float64]]()
 
     public func makeGifImageMovie(url: URL,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>) {
-        let frameRate = CMTimeMake(1,Int32(frameY))
+        let frameRate = CMTimeMake(value: 1,timescale: Int32(frameY))
         let urlDefo = UserDefaults.standard
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]

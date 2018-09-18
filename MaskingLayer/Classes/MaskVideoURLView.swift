@@ -75,7 +75,7 @@ public class MaskVideoURLView: UIView {
         for i in 0..<imagesCount{
             DispatchQueue.main.sync {
                 let thumbnail = thumbnailFromVideo(videoUrl: videoURL,
-                                                   time: CMTimeMake(Int64(offset), 1))
+                                                   time: CMTimeMake(value: Int64(offset), timescale: 1))
                 offset = Float64(i) * (duration / Float64(imagesCount))
                 thumbnails.append(thumbnail)
             }
@@ -108,11 +108,11 @@ public class MaskVideoURLView: UIView {
                                          y: 0.0,
                                          width: width,
                                          height: 0.1)
-                let data = UIImagePNGRepresentation(imageView.image!)
+                let data = imageView.image!.pngData()
                 dataArray.append(data!)
                 thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)
-                view.sendSubview(toBack: imageView)
+                view.sendSubviewToBack(imageView)
                 xPos = xPos + view.frame.size.height
             }
         }

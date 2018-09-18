@@ -70,24 +70,27 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
         mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
 
-        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
+        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
 
         if mediaType == kUTTypeMovie {
-            self.mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
+            self.mO.setURL(url: info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL, vc: self)
 
             DispatchQueue.main.asyncAfter(deadline: .now()+2){
-                self.mO.maskGif(url: info[UIImagePickerControllerMediaURL] as! URL)
+                self.mO.maskGif(url: info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL)
                 SVProgressHUD.dismiss()
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
         } else {
-            guard var images = (info[UIImagePickerControllerOriginalImage] as? UIImage) else { return }
+            guard var images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             images = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
             mO.maskImage(images: images)
             SVProgressHUD.dismiss()
@@ -99,4 +102,14 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         mO.imageView = UIImageView()
         picker.dismiss(animated: true, completion: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

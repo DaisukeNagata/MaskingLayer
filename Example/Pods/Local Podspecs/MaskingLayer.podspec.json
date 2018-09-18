@@ -1,6 +1,6 @@
 {
   "name": "MaskingLayer",
-  "version": "0.2.3",
+  "version": "0.4.2",
   "summary": "The traced part is masked.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/daisukenagata/MaskingLayer",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/daisukenagata/MaskingLayer.git",
-    "tag": "0.2.3"
+    "tag": "0.4.2"
   },
   "platforms": {
     "ios": "10.0"
