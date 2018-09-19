@@ -14,7 +14,26 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		777509BEC4649E9572A8F42A /* Pods_MaskingLayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72988AF295E85CE6B80CB51 /* Pods_MaskingLayer_Example.framework */; };
 		BB6F894A215178E3008986BA /* MaskingLayer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BB6F8949215178E3008986BA /* MaskingLayer.podspec */; };
+		BB6F89542152E554008986BA /* MaskingLayer_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6F89532152E554008986BA /* MaskingLayer_ExampleUITests.swift */; };
+		BB6F89622152E56A008986BA /* MaskingLayer_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6F89612152E56A008986BA /* MaskingLayer_ExampleTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BB6F89562152E554008986BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = MaskingLayer_Example;
+		};
+		BB6F89642152E56A008986BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = MaskingLayer_Example;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		185EDAAFB0512F5B65133AA7 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -32,6 +51,12 @@
 		8C3EB22E58F46940F047EDD1 /* Pods-MaskingLayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskingLayer_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaskingLayer_Example/Pods-MaskingLayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9E24F33CE01566D0C7B22AE8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BB6F8949215178E3008986BA /* MaskingLayer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MaskingLayer.podspec; sourceTree = "<group>"; };
+		BB6F89512152E554008986BA /* MaskingLayer_ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaskingLayer_ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB6F89532152E554008986BA /* MaskingLayer_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskingLayer_ExampleUITests.swift; sourceTree = "<group>"; };
+		BB6F89552152E554008986BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB6F895F2152E56A008986BA /* MaskingLayer_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaskingLayer_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB6F89612152E56A008986BA /* MaskingLayer_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskingLayer_ExampleTests.swift; sourceTree = "<group>"; };
+		BB6F89632152E56A008986BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2788196BAAF3112A92117DF /* Pods-MaskingLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskingLayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaskingLayer_Tests/Pods-MaskingLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D3D5A22610BE6E7EA650D89D /* Pods-MaskingLayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskingLayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaskingLayer_Tests/Pods-MaskingLayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D72988AF295E85CE6B80CB51 /* Pods_MaskingLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskingLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +68,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				777509BEC4649E9572A8F42A /* Pods_MaskingLayer_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB6F894E2152E554008986BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB6F895C2152E56A008986BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +114,8 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for MaskingLayer */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				BB6F89522152E554008986BA /* MaskingLayer_ExampleUITests */,
+				BB6F89602152E56A008986BA /* MaskingLayer_ExampleTests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				3789A4954AFDA1D3DE338260 /* Pods */,
 				4310DDC5ACCA6A8AAD948878 /* Frameworks */,
@@ -85,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* MaskingLayer_Example.app */,
+				BB6F89512152E554008986BA /* MaskingLayer_ExampleUITests.xctest */,
+				BB6F895F2152E56A008986BA /* MaskingLayer_ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,6 +181,24 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		BB6F89522152E554008986BA /* MaskingLayer_ExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BB6F89532152E554008986BA /* MaskingLayer_ExampleUITests.swift */,
+				BB6F89552152E554008986BA /* Info.plist */,
+			);
+			path = MaskingLayer_ExampleUITests;
+			sourceTree = "<group>";
+		};
+		BB6F89602152E56A008986BA /* MaskingLayer_ExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				BB6F89612152E56A008986BA /* MaskingLayer_ExampleTests.swift */,
+				BB6F89632152E56A008986BA /* Info.plist */,
+			);
+			path = MaskingLayer_ExampleTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -160,13 +221,49 @@
 			productReference = 607FACD01AFB9204008FA782 /* MaskingLayer_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BB6F89502152E554008986BA /* MaskingLayer_ExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB6F895A2152E554008986BA /* Build configuration list for PBXNativeTarget "MaskingLayer_ExampleUITests" */;
+			buildPhases = (
+				BB6F894D2152E554008986BA /* Sources */,
+				BB6F894E2152E554008986BA /* Frameworks */,
+				BB6F894F2152E554008986BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB6F89572152E554008986BA /* PBXTargetDependency */,
+			);
+			name = MaskingLayer_ExampleUITests;
+			productName = MaskingLayer_ExampleUITests;
+			productReference = BB6F89512152E554008986BA /* MaskingLayer_ExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		BB6F895E2152E56A008986BA /* MaskingLayer_ExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB6F89662152E56A008986BA /* Build configuration list for PBXNativeTarget "MaskingLayer_ExampleTests" */;
+			buildPhases = (
+				BB6F895B2152E56A008986BA /* Sources */,
+				BB6F895C2152E56A008986BA /* Frameworks */,
+				BB6F895D2152E56A008986BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB6F89652152E56A008986BA /* PBXTargetDependency */,
+			);
+			name = MaskingLayer_ExampleTests;
+			productName = MaskingLayer_ExampleTests;
+			productReference = BB6F895F2152E56A008986BA /* MaskingLayer_ExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -175,6 +272,18 @@
 						DevelopmentTeam = B3ZKJZUE9E;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
+					};
+					BB6F89502152E554008986BA = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = B3ZKJZUE9E;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					BB6F895E2152E56A008986BA = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = B3ZKJZUE9E;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
 			};
@@ -192,6 +301,8 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* MaskingLayer_Example */,
+				BB6F89502152E554008986BA /* MaskingLayer_ExampleUITests */,
+				BB6F895E2152E56A008986BA /* MaskingLayer_ExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,6 +316,20 @@
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				BB6F894A215178E3008986BA /* MaskingLayer.podspec in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB6F894F2152E554008986BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB6F895D2152E56A008986BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +386,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BB6F894D2152E554008986BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB6F89542152E554008986BA /* MaskingLayer_ExampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB6F895B2152E56A008986BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB6F89622152E56A008986BA /* MaskingLayer_ExampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB6F89572152E554008986BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* MaskingLayer_Example */;
+			targetProxy = BB6F89562152E554008986BA /* PBXContainerItemProxy */;
+		};
+		BB6F89652152E56A008986BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* MaskingLayer_Example */;
+			targetProxy = BB6F89642152E56A008986BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
@@ -426,6 +580,114 @@
 			};
 			name = Release;
 		};
+		BB6F89582152E554008986BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = B3ZKJZUE9E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MaskingLayer_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "RsaDbnak.MaskingLayer-ExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MaskingLayer_Example;
+			};
+			name = Debug;
+		};
+		BB6F89592152E554008986BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3ZKJZUE9E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MaskingLayer_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "RsaDbnak.MaskingLayer-ExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MaskingLayer_Example;
+			};
+			name = Release;
+		};
+		BB6F89672152E56A008986BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = B3ZKJZUE9E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MaskingLayer_ExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "RsaDbnak.MaskingLayer-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MaskingLayer_Example.app/MaskingLayer_Example";
+			};
+			name = Debug;
+		};
+		BB6F89682152E56A008986BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3ZKJZUE9E;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MaskingLayer_ExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "RsaDbnak.MaskingLayer-ExampleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MaskingLayer_Example.app/MaskingLayer_Example";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -443,6 +705,24 @@
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
 				607FACF11AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB6F895A2152E554008986BA /* Build configuration list for PBXNativeTarget "MaskingLayer_ExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB6F89582152E554008986BA /* Debug */,
+				BB6F89592152E554008986BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB6F89662152E56A008986BA /* Build configuration list for PBXNativeTarget "MaskingLayer_ExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB6F89672152E56A008986BA /* Debug */,
+				BB6F89682152E56A008986BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

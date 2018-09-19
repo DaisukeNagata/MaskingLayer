@@ -52,6 +52,26 @@
                ReferencedContainer = "container:MaskingLayer.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB6F89502152E554008986BA"
+               BuildableName = "MaskingLayer_ExampleUITests.xctest"
+               BlueprintName = "MaskingLayer_ExampleUITests"
+               ReferencedContainer = "container:MaskingLayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB6F895E2152E56A008986BA"
+               BuildableName = "MaskingLayer_ExampleTests.xctest"
+               BlueprintName = "MaskingLayer_ExampleTests"
+               ReferencedContainer = "container:MaskingLayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
