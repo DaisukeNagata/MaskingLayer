@@ -8,7 +8,17 @@
 import Foundation
 import MobileCoreServices
 
-public class MaskNavigationObject: NSObject {
+public protocol CViewProtocol {
+    func resetCView(views: UIViewController, imageView: UIImageView, image: UIImage)
+    func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool)
+    func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool)
+    func tappedEnd(view: UIView)
+    func maskGif(url: URL)
+    func maskImage(images: UIImage)
+    func setURL(url: URL,vc: UIViewController)
+}
+
+public class MaskNavigationObject: NSObject,CViewProtocol {
 
     public var index = Int()
     public var image = UIImage()

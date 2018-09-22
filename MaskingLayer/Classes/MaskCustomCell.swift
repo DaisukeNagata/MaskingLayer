@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class MaskCustomCell:UICollectionViewCell {
+public class MaskCustomCell: UICollectionViewCell {
 
     var customCell = UIImageView()
     let collectionItemSize: CGFloat = 88
