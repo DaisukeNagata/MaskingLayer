@@ -47,7 +47,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         }
         mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
         if #available(iOS 12.0, *) {
-            guard defo.set(url, forKey: "url") == nil else {
+            guard defo.object(forKey: "url") == nil else {
                 let maskPortraitMatte = MaskPortraitMatte()
                 maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
                 return 
