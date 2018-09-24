@@ -20,6 +20,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
     var mO = MaskNavigationObject()
 
+    let defo = UserDefaults.standard
+    var url: URL?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,8 +47,11 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         }
         mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
         if #available(iOS 12.0, *) {
-            let maskPortraitMatte = MaskPortraitMatte()
-            maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
+            guard defo.set(url, forKey: "url") == nil else {
+                let maskPortraitMatte = MaskPortraitMatte()
+                maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
+                return 
+            }
         }
     }
 
@@ -82,8 +87,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         if #available(iOS 12.0, *) {
-            let url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! URL
-            let defo = UserDefaults.standard
+            url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL
             defo.set(url, forKey: "url")
         }
 

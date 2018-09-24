@@ -15,10 +15,11 @@ public class MaskPortraitMatte: NSObject {
 
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")
+        guard let urlSet = url else { return }
         var mattePixelBuffer: CVPixelBuffer?
         let maskingLayer = MaskLayer()
 
-        guard let source = CGImageSourceCreateWithURL(url! as CFURL, nil) else { return }
+        guard let source = CGImageSourceCreateWithURL(urlSet as CFURL, nil) else { return }
 
         var matteData: [String : AnyObject]? {
             return CGImageSourceCopyAuxiliaryDataInfoAtIndex(source, 0, kCGImageAuxiliaryDataTypePortraitEffectsMatte) as? [String : AnyObject]
