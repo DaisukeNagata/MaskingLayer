@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import SVProgressHUD
 import MaskingLayer
+import SVProgressHUD
 import MobileCoreServices
 
 struct CommonStructure {
@@ -44,10 +44,14 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             return
         }
         mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
+        if #available(iOS 12.0, *) {
+            let maskPortraitMatte = MaskPortraitMatte()
+            maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
+        }
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
-        let position: CGPoint = sender.location(in: mO.imageView)
+        let position: CGPoint = sender.location(in: view)
         switch sender.state {
         case .ended:
             mO.tappedEnd(view: view)
@@ -77,6 +81,12 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
+        if #available(iOS 12.0, *) {
+            let url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! URL
+            let defo = UserDefaults.standard
+            defo.set(url, forKey: "url")
+        }
+
         mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
         mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
@@ -98,16 +108,6 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             mO.maskImage(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
-            // ios 12 PortraitMatte
-//            if #available(iOS 12.0, *) {
-//            let url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! URL
-//            let defo = UserDefaults.standard
-//            defo.set(url, forKey: "url")
-//            DispatchQueue.main.asyncAfter(wallDeadline: .now()+1){
-//                let d = MaskPortraitMatte()
-//                d.portraitMatte(imageV: self.mO.imageView, vc: self)
-//                }
-//            }
         }
     }
 

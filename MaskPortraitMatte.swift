@@ -46,6 +46,7 @@ public class MaskPortraitMatte: NSObject {
 
             guard let outputImage = filter?.outputImage else { return }
             imageV.image = UIImage(ciImage: outputImage)
+            imageV.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         } catch {
             print(error)
         }

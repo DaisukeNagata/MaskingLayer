@@ -110,6 +110,7 @@
 		B7A3523DEB32D348EE1053E54D7F7593 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 50912F5EB9645AE738188DAC79AA9D30 /* NMBExceptionCapture.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		BA802B8CA7F94DD2D166A96648530075 /* Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = FEBEEF82B881D5162AC70DD3032A3F95 /* Quick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB624F252157474B009FC9AE /* MaskPortraitMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB624F242157474B009FC9AE /* MaskPortraitMatte.swift */; };
+		BBE1B71D2158E9B900AC918D /* MaskAcpectMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1B71C2158E9B900AC918D /* MaskAcpectMargin.swift */; };
 		C2BB2E6E12641E69AE79FEC3B02CC166 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB747CF3E2ABBCD42D409E3E0231809 /* Match.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C2CCC74898E577E370DF68A65D59CA5F /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F2BB14E2878DDD4244F0E433FD5B2 /* ExampleHooks.swift */; };
 		C394777CF14CEED282E0A7FBCFCE9F07 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A267E423FDBA7EC09764C529F3CCC /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -312,6 +313,7 @@
 		B9EFB5EBDCE5D56D4C6D218821F4B65F /* Pods-MaskingLayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MaskingLayer_Example-frameworks.sh"; sourceTree = "<group>"; };
 		BB5D541CE81F6420020CFE1E2039BB97 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		BB624F242157474B009FC9AE /* MaskPortraitMatte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskPortraitMatte.swift; sourceTree = "<group>"; };
+		BBE1B71C2158E9B900AC918D /* MaskAcpectMargin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskAcpectMargin.swift; sourceTree = "<group>"; };
 		BC3AE3F374FCF4248962E702B6F5B8AC /* Pods-MaskingLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MaskingLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BCB8A2C8EFAE797B385AB12B0D894CEA /* MaskingLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MaskingLayer-umbrella.h"; sourceTree = "<group>"; };
 		BE8B9B6837F4AB6944503482F6FFF8CD /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				8845DDDAE75AC2E870EDF1A22E2A70F0 /* MaskNavigationObject.swift */,
 				BB624F242157474B009FC9AE /* MaskPortraitMatte.swift */,
 				6D882A36C78324F550578EB9319641D2 /* MaskVideoURLView.swift */,
+				BBE1B71C2158E9B900AC918D /* MaskAcpectMargin.swift */,
 				107DE6D99CCA9F38C9DA071E7179A42A /* Pod */,
 				EF1848094E3FC4F70238123641793C59 /* Support Files */,
 			);
@@ -1161,6 +1164,7 @@
 				1D4A2AB1723745A94C2D2BA04698DA79 /* MaskGifObject.swift in Sources */,
 				84932A11EC39C9045CCF9DF874BF1E02 /* MaskImagePicker.swift in Sources */,
 				0A5DA5846041C2EE6072850D1C393228 /* MaskingLayer-dummy.m in Sources */,
+				BBE1B71D2158E9B900AC918D /* MaskAcpectMargin.swift in Sources */,
 				E3CFF2E9B90E74F0C48389FAB19D89AD /* MaskLayer.swift in Sources */,
 				7FF5763BFFB44B32242428CD1DDF44CF /* MaskNavigationObject.swift in Sources */,
 				BB624F252157474B009FC9AE /* MaskPortraitMatte.swift in Sources */,
