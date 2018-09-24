@@ -27,7 +27,7 @@ public class MaskPortraitMatte: NSObject {
 
         do {
             guard let matte = matteData else {
-                let image = UIImage(contentsOfFile: url!.path) 
+                let image = UIImage(contentsOfFile: url!.path)
                 imageV.image = image
                 maskingLayer.alertPortrait(views: vc)
                 return

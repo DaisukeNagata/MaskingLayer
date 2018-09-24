@@ -50,14 +50,15 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             guard defo.object(forKey: "url") == nil else {
                 let maskPortraitMatte = MaskPortraitMatte()
                 maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
+                mO.imageView.image! = mO.imageView.image!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
                 mO.image = mO.imageView.image!
-                return 
+                return
             }
         }
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
-        let position: CGPoint = sender.location(in: view)
+        let position: CGPoint = sender.location(in: mO.imageView)
         switch sender.state {
         case .ended:
             mO.tappedEnd(view: view)
