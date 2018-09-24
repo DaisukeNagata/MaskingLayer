@@ -15,7 +15,6 @@ public class MaskLayer: NSObject {
     public var clipLayer = CAShapeLayer()
     public var convertPath = CGMutablePath()
     public var maskImagePicker = MaskImagePicker()
-    var mO = MaskCollectionViewModel()
 
 
     public override init() {
@@ -134,6 +133,7 @@ public class MaskLayer: NSObject {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photeSegue(vc: views,bool: false)
+            imageView.removeFromSuperview()
         }
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in

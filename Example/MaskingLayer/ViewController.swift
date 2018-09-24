@@ -50,6 +50,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             guard defo.object(forKey: "url") == nil else {
                 let maskPortraitMatte = MaskPortraitMatte()
                 maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
+                mO.image = mO.imageView.image!
                 return 
             }
         }
@@ -75,9 +76,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             break
         }
     }
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) {
-        mO.image = UIImage()
-        mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {

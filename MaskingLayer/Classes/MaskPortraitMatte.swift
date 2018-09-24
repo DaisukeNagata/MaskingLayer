@@ -27,13 +27,15 @@ public class MaskPortraitMatte: NSObject {
 
         do {
             guard let matte = matteData else {
+                let image = UIImage(contentsOfFile: url!.path) 
+                imageV.image = image
                 maskingLayer.alertPortrait(views: vc)
                 return
             }
             mattePixelBuffer = try AVPortraitEffectsMatte(fromDictionaryRepresentation: matte).mattingImage
             guard let pixelBuffer = mattePixelBuffer else { return }
-            guard let image2 = UIImage(contentsOfFile: url!.path) else { return }
-            guard let cgOriginalImage = image2.cgImage else { return }
+            guard let image = UIImage(contentsOfFile: url!.path) else { return }
+            guard let cgOriginalImage = image.cgImage else { return }
 
             let orgImage = CIImage(cgImage: cgOriginalImage)
             let transform = CGAffineTransform (scaleX: orgImage.extent.width / CIImage(cvPixelBuffer: pixelBuffer).extent.size.width, y: orgImage.extent.height / CIImage(cvPixelBuffer: pixelBuffer).extent.size.height)
