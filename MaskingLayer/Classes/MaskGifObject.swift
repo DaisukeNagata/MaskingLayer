@@ -49,7 +49,7 @@ public extension UIImageView {
 }
 
 extension UIImage {
-     func animatedGIF(data: Data,duration: Double) -> UIImage? {
+    func animatedGIF(data: Data,duration: Double) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         var speed = 0.0;speed = duration
         let count = CGImageSourceGetCount(source)

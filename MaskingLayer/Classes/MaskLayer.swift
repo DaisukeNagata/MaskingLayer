@@ -76,6 +76,24 @@ public class MaskLayer: NSObject {
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
+    
+    public func alertPortrait(views: UIViewController) {
+        let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
+        let stringAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
+            .font : UIFont.systemFont(ofSize: 22.0)
+        ]
+        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
+        alertController.setValue(string, forKey: "attributedTitle")
+        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
+        
+        let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(reset)
+        views.present(alertController, animated: true, completion: nil)
+    }
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)

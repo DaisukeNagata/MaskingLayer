@@ -66,7 +66,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             break
         }
     }
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) {
+        mO.image = UIImage()
+        mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -96,6 +98,16 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             mO.maskImage(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
+            // ios 12 PortraitMatte
+//            if #available(iOS 12.0, *) {
+//            let url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as! URL
+//            let defo = UserDefaults.standard
+//            defo.set(url, forKey: "url")
+//            DispatchQueue.main.asyncAfter(wallDeadline: .now()+1){
+//                let d = MaskPortraitMatte()
+//                d.portraitMatte(imageV: self.mO.imageView, vc: self)
+//                }
+//            }
         }
     }
 
