@@ -74,4 +74,4 @@ daisukenagata, dbank0208@gmail.com
 
 MaskingLayer is available under the MIT license. See the LICENSE file for more info.
 
-```ruby
+
