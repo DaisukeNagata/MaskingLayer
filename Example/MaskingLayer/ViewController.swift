@@ -107,8 +107,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
                 return
             }
         } else {
-            guard var images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            images = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+            guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             mO.maskImage(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
