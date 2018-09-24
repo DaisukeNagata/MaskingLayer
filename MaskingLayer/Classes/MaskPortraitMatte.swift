@@ -7,7 +7,6 @@
 
 import ImageIO
 import AVFoundation
-import UIKit
 
 @available(iOS 12.0, *)
 public class MaskPortraitMatte: NSObject {
