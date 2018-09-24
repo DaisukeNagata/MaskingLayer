@@ -7,7 +7,6 @@
 
 import ImageIO
 import AVFoundation
-import Photos
 import UIKit
 
 @available(iOS 12.0, *)
