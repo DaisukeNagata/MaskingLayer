@@ -93,7 +93,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
 
         mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
-        mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
+        mO.resetCView()
 
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
 

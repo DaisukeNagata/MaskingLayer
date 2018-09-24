@@ -9,7 +9,7 @@ import Foundation
 import MobileCoreServices
 
 public protocol CViewProtocol {
-    func resetCView(views: UIViewController, imageView: UIImageView, image: UIImage)
+    func resetCView()
     func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool)
     func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool)
     func tappedEnd(view: UIView)
@@ -37,7 +37,7 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
     }()
 
 
-    public func resetCView(views: UIViewController, imageView: UIImageView, image: UIImage) {
+    public func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
         cView.removeFromSuperview()

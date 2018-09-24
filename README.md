@@ -28,7 +28,7 @@ mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: fa
 
 Rebuild instance to be masked or clear data
 ```ruby
-mO.resetCView(views: self, imageView: mO.imageView, image: mO.image)
+mO.resetCView()
 ```
 
 Generate thumbnail image
