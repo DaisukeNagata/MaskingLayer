@@ -66,7 +66,10 @@ daisukenagata, dbank0208@gmail.com
 
 MaskingLayer is available under the MIT license. See the LICENSE file for more info.
 
-## Version 0.5
+## Version 0.5  Version 0.5.1
 Os12 portrait camera with iphoneX or higher, masking images where people are reflections
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieMatte.gif?raw=true)
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/IMG_0073.TRIM.gif?raw=true)
 
+
+```ruby
