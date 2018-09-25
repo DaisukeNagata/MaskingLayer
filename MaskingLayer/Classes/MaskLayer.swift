@@ -13,7 +13,7 @@ public class MaskLayer: NSObject {
     public var maskColor = UIColor()
     public var path = CGMutablePath()
     public var clipLayer = CAShapeLayer()
-    public var convertPath = CGMutablePath()
+    var convertPath = CGMutablePath()
     public var maskImagePicker = MaskImagePicker()
 
 
@@ -32,7 +32,6 @@ public class MaskLayer: NSObject {
 
     public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView, bool: Bool) {
         clipLayer.path = path
-
         guard bool == false else {
             convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
             return
@@ -45,17 +44,6 @@ public class MaskLayer: NSObject {
     public func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
 
     public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
-
-    public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
-        view.layer.addSublayer(clipLayer)
-        imageView.image = image.mask(image: imageView.image)
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = view.frame
-        guard clipLayer.strokeEnd == 0 else {
-            path = CGMutablePath()
-            return
-        }
-    }
 
     public func imageSave(imageView: UIImageView, name: String) {
         let pngImageData = imageView.image!.pngData()
@@ -154,6 +142,16 @@ public class MaskLayer: NSObject {
         alertController.addAction(videoRoll)
         alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)
+    }
+    func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
+        view.layer.addSublayer(clipLayer)
+        imageView.image = image.mask(image: imageView.image)
+        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.frame = view.frame
+        guard clipLayer.strokeEnd == 0 else {
+            path = CGMutablePath()
+            return
+        }
     }
 
     private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {

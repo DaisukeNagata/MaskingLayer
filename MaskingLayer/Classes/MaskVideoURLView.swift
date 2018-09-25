@@ -49,7 +49,7 @@ public class MaskVideoURLView: UIView {
         return Int(ceil(num))
     }
 
-    func thumbnailFromVideo(videoUrl: URL, time: CMTime) -> UIImage {
+    private func thumbnailFromVideo(videoUrl: URL, time: CMTime) -> UIImage {
         let asset: AVAsset = AVAsset(url: videoUrl) as AVAsset
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = true
@@ -63,7 +63,7 @@ public class MaskVideoURLView: UIView {
         return UIImage()
     }
 
-    func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView] {
+    private func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView] {
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
 
@@ -84,7 +84,7 @@ public class MaskVideoURLView: UIView {
         return self.thumbnailViews
     }
 
-    func videoDuration(videoURL: URL) -> Float64 {
+    private func videoDuration(videoURL: URL) -> Float64 {
         let source = AVURLAsset(url: videoURL)
         return CMTimeGetSeconds(source.duration)
     }

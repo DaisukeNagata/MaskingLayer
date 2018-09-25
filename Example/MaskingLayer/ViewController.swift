@@ -33,19 +33,21 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
 
-        mO.image = UIImage(named: "IMG_4011")!
+        mO.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        mO.imageView.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        mO.imageView.frame = view.frame
+        view.addSubview(mO.imageView)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
         view.addSubview(mO.imageView)
+        view.layer.addSublayer(mO.maskLayer.clipLayer)
         guard mO.vm.setVideoURLView.dataArray.count == 0 else {
             view.addSubview(mO.cView)
-            view.layer.addSublayer(mO.maskLayer.clipLayer)
             return
         }
-        mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
         if #available(iOS 12.0, *) {
             guard defo.object(forKey: "url") == nil else {
                 let maskPortraitMatte = MaskPortraitMatte()
@@ -90,25 +92,21 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL
             defo.set(url, forKey: "url")
         }
-
-        mO.vm = MaskCollectionViewModel()
         SVProgressHUD.show()
-        mO.resetCView()
 
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
-
         if mediaType == kUTTypeMovie {
             self.mO.setURL(url: info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL, vc: self)
 
             DispatchQueue.main.asyncAfter(deadline: .now()+2){
-                self.mO.maskGif(url: info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL)
+                self.mO.maskGif()
                 SVProgressHUD.dismiss()
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            mO.maskImage(images: images)
+            mO.image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
         }

@@ -13,7 +13,7 @@ You can select background color, camera roll, video roll with long tap.
 
 Setting the layer image
 ```ruby
-mO.maskLayer.imageSet(view: view, imageView: mO.imageView, image: mO.image)
+mO.maskLayer.imageSet()
 ```
  
 Start of masking start point
@@ -26,11 +26,6 @@ Continuation of masked lines
 mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
 ```
 
-Rebuild instance to be masked or clear data
-```ruby
-mO.resetCView()
-```
-
 Generate thumbnail image
 ```ruby
 mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
@@ -38,7 +33,7 @@ mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
 
 Generation of Gif image
 ```ruby
-mO.maskGif(url: info[UIImagePickerControllerMediaURL] as! URL)
+mO.maskGif()
 ```
 
 ## Version 0.4.2

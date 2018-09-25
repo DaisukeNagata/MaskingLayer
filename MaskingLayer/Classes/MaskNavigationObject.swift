@@ -9,12 +9,10 @@ import Foundation
 import MobileCoreServices
 
 public protocol CViewProtocol {
-    func resetCView()
     func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool)
     func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool)
     func tappedEnd(view: UIView)
-    func maskGif(url: URL)
-    func maskImage(images: UIImage)
+    func maskGif()
     func setURL(url: URL,vc: UIViewController)
 }
 
@@ -37,18 +35,6 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
     }()
 
 
-    public func resetCView() {
-        vm.setVideoURLView.thumbnailViews.removeAll()
-        vm.setVideoURLView.dataArray.removeAll()
-        cView.removeFromSuperview()
-        cView = {
-            let cView = MaskCollectionView()
-            cView.collectionView.delegate = self
-            cView.collectionView.dataSource = self.vm
-            cView.backgroundColor = .clear
-            return cView
-        }()
-    }
     public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
         maskLayer.clipLayer.isHidden = false
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
@@ -76,14 +62,10 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
         vm.setVideoURLView.setURL(url: url, view: vc)
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
-    public func maskGif(url: URL) {
+    public func maskGif() {
+        let defo = UserDefaults.standard
+        guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: UIScreen.main.scale, imageAr: (vm.setVideoURLView.imageAr))
-    }
-    public func maskImage(images: UIImage) {
-        imageView = UIImageView()
-        image = image.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
-        let data: Data? = image.pngData()
-        image = UIImage(data: data!)!
     }
 }
 
@@ -95,7 +77,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
         if indexPath.section == 0 {
             do {
                 vm.rotate = 90
-                maskGif(url: url!)
+                maskGif()
                 let data = try Data(contentsOf: url!)
                 self.imageView.animateGIF(data: data, duration: Double(4)) { }
             }catch{ print("error") }

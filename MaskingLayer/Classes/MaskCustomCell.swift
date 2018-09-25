@@ -22,5 +22,5 @@ public class MaskCustomCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     static let identifier: UINib = UINib(nibName: "MaskCustomCell", bundle: nil)
-    public func imageSet(imageSet: UIImage){ customCell.image = imageSet }
+    func imageSet(imageSet: UIImage){ customCell.image = imageSet }
 }
