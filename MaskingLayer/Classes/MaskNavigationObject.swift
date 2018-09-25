@@ -34,6 +34,7 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
         return cView
     }()
 
+
     public func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
@@ -45,6 +46,12 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
             cView.backgroundColor = .clear
             return cView
         }()
+    }
+    public func maskPortraitMatte() {
+        if #available(iOS 12.0, *) {
+            let maskPortraitMatte = MaskPortraitMatte()
+            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
+        }
     }
     public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
         maskLayer.clipLayer.isHidden = false

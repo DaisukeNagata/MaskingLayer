@@ -6,8 +6,9 @@
 //
 
 import Foundation
+
 struct Margin {
-    
+
     let iPhoneSmall : CGFloat = 568.0
     let iPhone : CGFloat = 667.0
     let iPhonePlus : CGFloat = 736.0
@@ -18,23 +19,23 @@ struct Margin {
 
     static var current: MarginProtocol.Type {
         let deviceType = UIScreen.main.bounds.height
-        
+
         switch deviceType {
         case Margin().iPhoneSmall:
             return iPhoneMargin.self
-            
+
         case Margin().iPhone:
             return iPhoneMargin.self
-            
+
         case Margin().iPhonePlus:
             return iPhonePlusMargin.self
-            
+
         case Margin().iPhoneX:
             return iPhonePlusMargin.self
-        
+
         case Margin().iPhoneXR:
             return iPhonePlusMargin.self
-    
+
         case Margin().iPhoneXSMAX:
             return iPhonePlusMargin.self
         

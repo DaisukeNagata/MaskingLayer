@@ -9,9 +9,9 @@ import ImageIO
 import AVFoundation
 
 @available(iOS 12.0, *)
-public class MaskPortraitMatte: NSObject {
+class MaskPortraitMatte: NSObject {
 
-    public func portraitMatte(imageV: UIImageView,vc: UIViewController) {
+    func portraitMatte(imageV: UIImageView,vc: UIViewController) {
 
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")

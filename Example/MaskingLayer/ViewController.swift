@@ -46,16 +46,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             view.addSubview(mO.cView)
             return
         }
-        if #available(iOS 12.0, *) {
-            let defo = UserDefaults.standard
-            guard defo.object(forKey: "url") == nil else {
-                let maskPortraitMatte = MaskPortraitMatte()
-                maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
-                mO.imageView.image! = mO.imageView.image!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-                mO.image = mO.imageView.image!
-                return
-            }
-        }
+        mO.maskPortraitMatte()
+        mO.imageView.image! = mO.imageView.image!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        mO.image = mO.imageView.image!
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
