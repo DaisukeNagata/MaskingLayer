@@ -44,6 +44,14 @@ You can generate a GIF image by pressing the leftmost image.
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieImage.gif)
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieGif.gif)
 
+
+
+## Version 0.5  Version 0.5.1
+Os12 portrait camera with iphoneX or higher, masking images where people are reflections
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieMatte.gif?raw=true)
+![](https://github.com/daisukenagata/MaskingLayer/blob/master/IMG_0073.TRIM.gif?raw=true)
+
+
 ## Installation
 
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
@@ -61,10 +69,4 @@ daisukenagata, dbank0208@gmail.com
 
 MaskingLayer is available under the MIT license. See the LICENSE file for more info.
 
-## Version 0.5  Version 0.5.1
-Os12 portrait camera with iphoneX or higher, masking images where people are reflections
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieMatte.gif?raw=true)
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/IMG_0073.TRIM.gif?raw=true)
 
-
-```ruby
