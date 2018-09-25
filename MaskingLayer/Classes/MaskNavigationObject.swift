@@ -34,6 +34,11 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
         return cView
     }()
 
+    public func imageResize(images: UIImage){
+        image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
+        imageView.image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
+        imageView.frame = vc.view.frame
+    }
 
     public func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()

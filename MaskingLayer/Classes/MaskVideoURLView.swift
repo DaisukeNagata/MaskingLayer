@@ -114,9 +114,7 @@ public class MaskVideoURLView: UIView {
                 dataArray.append(data!)
                 thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)
-                for i in 0..<imageAr.count {
-                imageAr[i] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
-                }
+                imageAr[thumbnailViews.count-1] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
                 view.sendSubviewToBack(imageView)
                 xPos = xPos + view.frame.size.height
             }

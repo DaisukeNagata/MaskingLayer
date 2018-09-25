@@ -31,9 +31,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
 
-        mO.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        mO.imageView.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        mO.imageView.frame = view.frame
+        mO.imageResize(images: UIImage(named: "IMG_4011")!)
         view.addSubview(mO.imageView)
     }
 
@@ -51,8 +49,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             mO.maskPortraitMatte()
             return
         }
-        mO.imageView.image! = mO.imageView.image!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        mO.image = mO.imageView.image!
+         mO.imageResize(images: mO.image)
     }
 
     @objc func panTapped(sender:UIPanGestureRecognizer) {
@@ -101,7 +98,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             }
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            mO.image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+            mO.imageResize(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
         }
