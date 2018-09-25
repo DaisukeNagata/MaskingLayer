@@ -31,8 +31,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
 
-        mO.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        mO.imageView.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        mO.image = UIImage(named: "IMG_4011")!
+        mO.imageView.image = UIImage(named: "IMG_4011")
         mO.imageView.frame = view.frame
         view.addSubview(mO.imageView)
     }
@@ -46,7 +46,11 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             view.addSubview(mO.cView)
             return
         }
-        mO.maskPortraitMatte()
+        let defo = UserDefaults.standard
+        guard defo.object(forKey: "url") == nil else {
+            mO.maskPortraitMatte()
+            return
+        }
         mO.imageView.image! = mO.imageView.image!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         mO.image = mO.imageView.image!
     }
