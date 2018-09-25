@@ -72,7 +72,10 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             break
         }
     }
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image) }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) {
+        mO.resetCView()
+        mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image)
+    }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
