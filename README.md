@@ -11,11 +11,6 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 You can select background color, camera roll, video roll with long tap.
  
 
-Setting the layer image
-```ruby
-mO.maskLayer.imageSet()
-```
- 
 Start of masking start point
 ```ruby
 mO.maskPath(position: position, view: view, imageView: mO.imageView, bool: true)
@@ -24,6 +19,11 @@ mO.maskPath(position: position, view: view, imageView: mO.imageView, bool: true)
 Continuation of masked lines
 ```ruby
 mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
+```
+
+Determine the mask area
+```ruby
+mO.tappedEnd(view: view)
 ```
 
 Generate thumbnail image
