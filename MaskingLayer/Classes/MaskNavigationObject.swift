@@ -43,6 +43,7 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
     public func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
+        vm.checkArray.removeAllObjects()
         cView.removeFromSuperview()
         cView = {
             let cView = MaskCollectionView()

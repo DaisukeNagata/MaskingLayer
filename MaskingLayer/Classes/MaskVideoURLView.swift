@@ -93,7 +93,9 @@ public class MaskVideoURLView: UIView {
 
     private func addImagesToView(images: [UIImage], view: UIView) {
 
-        self.thumbnailViews.removeAll()
+        thumbnailViews.removeAll()
+        dataArray.removeAll()
+        imageAr.removeAll()
         var xPos: CGFloat = 0.0
         var width: CGFloat = 0.0
         for image in images{
