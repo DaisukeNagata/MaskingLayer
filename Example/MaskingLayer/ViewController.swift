@@ -20,8 +20,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
     var mO = MaskNavigationObject()
 
-    let defo = UserDefaults.standard
-    var url: URL?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +47,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             return
         }
         if #available(iOS 12.0, *) {
+            let defo = UserDefaults.standard
             guard defo.object(forKey: "url") == nil else {
                 let maskPortraitMatte = MaskPortraitMatte()
                 maskPortraitMatte.portraitMatte(imageV: mO.imageView, vc: self)
@@ -87,16 +86,15 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
 
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        if #available(iOS 12.0, *) {
-            url = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL
-            defo.set(url, forKey: "url")
-        }
+        let defo = UserDefaults.standard
+        defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
         SVProgressHUD.show()
+        mO.resetCView()
 
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
         if mediaType == kUTTypeMovie {
-            self.mO.setURL(url: info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL, vc: self)
+            defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
+            self.mO.setURL()
 
             DispatchQueue.main.asyncAfter(deadline: .now()+2){
                 self.mO.maskGif()

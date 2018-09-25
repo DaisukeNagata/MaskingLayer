@@ -29,17 +29,19 @@ public class MaskVideoURLView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func setURL(url: URL, view: UIViewController) {
+    public func setURL() {
+        let defo = UserDefaults.standard
+        guard let url =  defo.url(forKey: "url") else { return }
         self.duration = MaskVideoURLView().videoDuration(videoURL: url)
         self.videoURL = url
         self.superview?.layoutSubviews()
-        self.updateThumbnails(vc: view)
+        self.updateThumbnails()
     }
 
-    public func updateThumbnails(vc: UIViewController){
+    public func updateThumbnails(){
 
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background, target: nil)
-        backgroundQueue.async { _ = self.updateThumbnails(view: self, videoURL: self.videoURL, duration: self.duration, vc: vc) }
+        backgroundQueue.async { _ = self.updateThumbnails(view: self, videoURL: self.videoURL, duration: self.duration) }
     }
 
     private func thumbnailCount(inView: UIView) -> Int {
@@ -63,7 +65,7 @@ public class MaskVideoURLView: UIView {
         return UIImage()
     }
 
-    private func updateThumbnails(view: UIView, videoURL: URL, duration: Float64, vc: UIViewController) -> [UIImageView] {
+    private func updateThumbnails(view: UIView, videoURL: URL, duration: Float64) -> [UIImageView] {
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
 

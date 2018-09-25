@@ -13,7 +13,7 @@ public protocol CViewProtocol {
     func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool)
     func tappedEnd(view: UIView)
     func maskGif()
-    func setURL(url: URL,vc: UIViewController)
+    func setURL()
 }
 
 public class MaskNavigationObject: NSObject,CViewProtocol {
@@ -34,7 +34,18 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
         return cView
     }()
 
-
+    public func resetCView() {
+        vm.setVideoURLView.thumbnailViews.removeAll()
+        vm.setVideoURLView.dataArray.removeAll()
+        cView.removeFromSuperview()
+        cView = {
+            let cView = MaskCollectionView()
+            cView.collectionView.delegate = self
+            cView.collectionView.dataSource = self.vm
+            cView.backgroundColor = .clear
+            return cView
+        }()
+    }
     public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
         maskLayer.clipLayer.isHidden = false
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
@@ -58,8 +69,8 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
             return
         }
     }
-    public func setURL(url: URL,vc: UIViewController) {
-        vm.setVideoURLView.setURL(url: url, view: vc)
+    public func setURL() {
+        vm.setVideoURLView.setURL()
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
     public func maskGif() {

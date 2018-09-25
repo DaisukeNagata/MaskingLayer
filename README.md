@@ -28,7 +28,7 @@ mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: fa
 
 Generate thumbnail image
 ```ruby
-mO.setURL(url: info[UIImagePickerControllerMediaURL] as! URL, vc: self)
+mO.setURL()
 ```
 
 Generation of Gif image
