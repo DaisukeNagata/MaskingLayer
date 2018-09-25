@@ -31,8 +31,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
 
-        mO.image = UIImage(named: "IMG_4011")!
-        mO.imageView.image = UIImage(named: "IMG_4011")
+        mO.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        mO.imageView.image = UIImage(named: "IMG_4011")!.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         mO.imageView.frame = view.frame
         view.addSubview(mO.imageView)
     }
