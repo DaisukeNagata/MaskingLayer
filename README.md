@@ -21,6 +21,11 @@ Continuation of masked lines
 mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
 ```
 
+Determine the mask area
+```ruby
+mO.tappedEnd(view: view)
+```
+
 Generate thumbnail image
 ```ruby
 mO.setURL()
