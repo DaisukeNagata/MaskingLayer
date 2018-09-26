@@ -29,7 +29,7 @@ public class MaskVideoURLView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func setURL() {
+    func setURL() {
         let defo = UserDefaults.standard
         guard let url =  defo.url(forKey: "url") else { return }
         self.duration = MaskVideoURLView().videoDuration(videoURL: url)
@@ -38,7 +38,7 @@ public class MaskVideoURLView: UIView {
         self.updateThumbnails()
     }
 
-    public func updateThumbnails(){
+    func updateThumbnails(){
 
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background, target: nil)
         backgroundQueue.async { _ = self.updateThumbnails(view: self, videoURL: self.videoURL, duration: self.duration) }

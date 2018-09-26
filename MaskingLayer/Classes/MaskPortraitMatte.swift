@@ -40,7 +40,7 @@ class MaskPortraitMatte: NSObject {
             let orgImage = CIImage(cgImage: cgOriginalImage)
             let transform = CGAffineTransform (scaleX: orgImage.extent.width / CIImage(cvPixelBuffer: pixelBuffer).extent.size.width, y: orgImage.extent.height / CIImage(cvPixelBuffer: pixelBuffer).extent.size.height)
             let maskImage = CIImage(cvPixelBuffer: pixelBuffer).transformed(by: transform)
-            
+
             let filter = CIFilter(name: "CIBlendWithMask")
             filter?.setValue(orgImage, forKey: kCIInputImageKey)
             filter?.setValue(maskImage, forKey: kCIInputMaskImageKey)

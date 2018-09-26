@@ -33,7 +33,7 @@ public class MaskGifObject: NSObject {
     }
 }
 
-public extension UIImageView {
+extension UIImageView {
     func animateGIF(data: Data, duration: Double,
                     animationRepeatCount: UInt = 1,
                     completion: (() -> Void)? = nil) {
