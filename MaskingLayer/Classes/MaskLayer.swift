@@ -31,6 +31,7 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
+        var mO = MaskNavigationObject()
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -69,11 +70,13 @@ public class MaskLayer: NSObject {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photeSegue(vc: views,bool: false)
+            mO.resetCView()
             imageView.removeFromSuperview()
         }
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            mO.resetCView()
             self.maskImagePicker.photeSegue(vc: views,bool: true)
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {

@@ -18,15 +18,15 @@ public protocol CViewProtocol {
 
 public class MaskNavigationObject: NSObject,CViewProtocol {
 
-    public var index = Int()
-    public var image = UIImage()
-    public var margin: CGFloat = 10
-    public var vc = UIViewController()
-    public var imageView = UIImageView()
-    public var maskLayer = MaskLayer()
-    public var gifObject = MaskGifObject()
-    public var vm = MaskCollectionViewModel()
-    public lazy var cView: MaskCollectionView = {
+    open var index = Int()
+    open var image = UIImage()
+    var vc = UIViewController()
+    open var margin: CGFloat = 10
+    open var imageView = UIImageView()
+    open var maskLayer = MaskLayer()
+    open var gifObject = MaskGifObject()
+    open var vm = MaskCollectionViewModel()
+    open lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
         cView.collectionView.dataSource = self.vm
@@ -55,26 +55,22 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
             return cView
         }()
     }
-
     public func maskPortraitMatte() {
         if #available(iOS 12.0, *) {
             let maskPortraitMatte = MaskPortraitMatte()
             maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
         }
     }
-
     public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
         maskLayer.clipLayer.isHidden = false
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
     }
-
     public func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool) {
         maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
     }
-
     public func tappedEnd(view: UIView) {
         guard let size = imageView.image?.size else { return }
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
@@ -89,12 +85,10 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
             return
         }
     }
-
     public func setURL() {
         vm.setVideoURLView.setURL()
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
-
     public func maskGif() {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
