@@ -30,58 +30,6 @@ public class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView, bool: Bool) {
-        clipLayer.path = path
-        guard bool == false else {
-            convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
-            return
-        }
-        convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
-    }
-
-    public func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
-
-    public func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
-
-    public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
-
-    public func imageSave(imageView: UIImageView, name: String) {
-        let pngImageData = imageView.image!.pngData()
-        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(name)
-        do {
-            try pngImageData!.write(to: fileURL)
-            imageLoad(imageView: imageView, name: name)
-        } catch {
-        }
-    }
-
-    public func imageReSet(view: UIView, imageView: UIImageView, image: UIImage) {
-        imageView.image =  image
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = view.frame
-        convertPath = CGMutablePath()
-        path = CGMutablePath()
-    }
-    
-    public func alertPortrait(views: UIViewController) {
-        let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
-        let stringAttributes: [NSAttributedString.Key : Any] = [
-            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
-            .font : UIFont.systemFont(ofSize: 22.0)
-        ]
-        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
-        alertController.setValue(string, forKey: "attributedTitle")
-        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
-        
-        let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        alertController.addAction(reset)
-        views.present(alertController, animated: true, completion: nil)
-    }
-
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
@@ -143,6 +91,59 @@ public class MaskLayer: NSObject {
         alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)
     }
+
+    func alertPortrait(views: UIViewController) {
+        let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
+        let stringAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
+            .font : UIFont.systemFont(ofSize: 22.0)
+        ]
+        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
+        alertController.setValue(string, forKey: "attributedTitle")
+        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
+        
+        let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(reset)
+        views.present(alertController, animated: true, completion: nil)
+    }
+
+    func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView, bool: Bool) {
+        clipLayer.path = path
+        guard bool == false else {
+            convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
+            return
+        }
+        convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
+    }
+
+    func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
+
+    func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
+
+    func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
+
+    func imageSave(imageView: UIImageView, name: String) {
+        let pngImageData = imageView.image!.pngData()
+        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(name)
+        do {
+            try pngImageData!.write(to: fileURL)
+            imageLoad(imageView: imageView, name: name)
+        } catch {
+        }
+    }
+
+    func imageReSet(view: UIView, imageView: UIImageView, image: UIImage) {
+        imageView.image =  image
+        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.frame = view.frame
+        convertPath = CGMutablePath()
+        path = CGMutablePath()
+    }
+
     func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
         imageView.image = image.mask(image: imageView.image)
