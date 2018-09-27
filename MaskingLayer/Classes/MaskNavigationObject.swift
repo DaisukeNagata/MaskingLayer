@@ -9,8 +9,8 @@ import Foundation
 import MobileCoreServices
 
 public protocol CViewProtocol {
-    func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool)
-    func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool)
+    func maskPath(position: CGPoint, imageView:UIImageView)
+    func maskAddLine(position: CGPoint, imageView:UIImageView)
     func tappedEnd(view: UIView)
     func maskGif()
     func setURL()
@@ -35,9 +35,10 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
     }()
 
     public func imageResize(images: UIImage){
-        image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
-        imageView.image = images.ResizeUIImage(width: vc.view.frame.width, height: vc.view.frame.height)
-        imageView.frame = vc.view.frame
+        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = image
+        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        imageView.image  = image.mask(image: imageView.image)
     }
 
     public func resetCView() {
@@ -61,16 +62,16 @@ public class MaskNavigationObject: NSObject,CViewProtocol {
             maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
         }
     }
-    public func maskPath(position: CGPoint, view: UIView, imageView:UIImageView, bool: Bool) {
+    public func maskPath(position: CGPoint, imageView:UIImageView) {
         maskLayer.clipLayer.isHidden = false
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = view.frame
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
+        maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:true)
     }
-    public func maskAddLine(position: CGPoint,view: UIView,imageView:UIImageView,bool: Bool) {
+    public func maskAddLine(position: CGPoint,imageView:UIImageView) {
         maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position, view: view,imageView: imageView,bool:bool)
+        maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:false)
     }
     public func tappedEnd(view: UIView) {
         guard let size = imageView.image?.size else { return }
@@ -113,7 +114,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
             imageView.image = image
-            maskLayer.imageReSet(view: vc.view, imageView: imageView, image: image)
+            maskLayer.imageReSet(view: vc.view, imageView: imageView)
             index = indexPath.section-vm.editCount
             if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
         }

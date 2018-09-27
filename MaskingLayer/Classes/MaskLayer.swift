@@ -15,7 +15,7 @@ public class MaskLayer: NSObject {
     public var clipLayer = CAShapeLayer()
     var convertPath = CGMutablePath()
     public var maskImagePicker = MaskImagePicker()
-
+ 
 
     public override init() {
         maskColor = .maskWhite
@@ -43,7 +43,7 @@ public class MaskLayer: NSObject {
         let maskWhite = UIAlertAction(title: NSLocalizedString("MaskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
+            self.maskColor = .maskWhite;self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("MaskLightGray", comment: ""), style: .default) {
             action in
@@ -80,7 +80,7 @@ public class MaskLayer: NSObject {
             action in
             alertController.dismiss(animated: true, completion: nil)
         }
-        self.imageReSet(view: views.view, imageView: imageView, image: image)
+        self.imageReSet(view: views.view, imageView: imageView)
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
@@ -110,13 +110,13 @@ public class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
     }
 
-    func maskConvertPointFromView(viewPoint: CGPoint,view: UIView, imageView: UIImageView, bool: Bool) {
+    func maskConvertPointFromView(viewPoint: CGPoint, imageView: UIImageView, bool: Bool) {
         clipLayer.path = path
         guard bool == false else {
-            convertPath.move(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
+            convertPath.move(to: viewPoint)
             return
         }
-        convertPath.addLine(to: CGPoint(x: convertPointFromView(viewPoint, view: view, imageView: imageView).x, y: convertPointFromView(viewPoint, view: view, imageView: imageView).y))
+        convertPath.addLine(to: viewPoint)
     }
 
     func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
@@ -136,19 +136,18 @@ public class MaskLayer: NSObject {
         }
     }
 
-    func imageReSet(view: UIView, imageView: UIImageView, image: UIImage) {
-        imageView.image =  image
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = view.frame
+    func imageReSet(view: UIView, imageView: UIImageView) {
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
 
     func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image.mask(image: imageView.image)
-        imageView.image = imageView.image?.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.frame = view.frame
+        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         guard clipLayer.strokeEnd == 0 else {
             path = CGMutablePath()
             return
@@ -156,8 +155,8 @@ public class MaskLayer: NSObject {
     }
 
     private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
-        imageView.image = self.mask(image: self.image(color: self.maskColor, size: views.view.frame.size), convertPath: self.convertPath)
-        self.imageSet(view: views.view, imageView: imageView, image: image)
+        imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
+        self.imageReSet(view: views.view, imageView: imageView)
     }
 
     private func imageLoad(imageView: UIImageView, name: String) {
@@ -199,24 +198,6 @@ public class MaskLayer: NSObject {
         UIGraphicsEndImageContext()
 
         return reImage!
-    }
-
-    private func convertPointFromView(_ viewPoint: CGPoint,view: UIView, imageView: UIImageView) -> CGPoint {
-        var imagePoint : CGPoint = viewPoint
-        let imageSize = imageView.image?.size
-        let viewSize = view.frame.size
-
-        let ratioX : CGFloat = viewSize.width / imageSize!.width
-        let ratioY : CGFloat = viewSize.height / imageSize!.height
-        let scale : CGFloat = min(ratioX, ratioY)
-
-        imagePoint.x -= (viewSize.width  - imageSize!.width  * scale) / 2
-        imagePoint.y -= (viewSize.height - imageSize!.height * scale) / 2
-
-        imagePoint.x /= scale
-        imagePoint.y /= scale
-
-        return imagePoint
     }
 }
 

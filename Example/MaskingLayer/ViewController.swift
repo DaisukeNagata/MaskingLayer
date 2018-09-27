@@ -30,9 +30,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-
+        
         mO.imageResize(images: UIImage(named: "IMG_4011")!)
-        view.addSubview(mO.imageView)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +39,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
+        maskChange()
         guard mO.vm.setVideoURLView.dataArray.count == 0 else {
             view.addSubview(mO.cView)
             return
@@ -49,22 +49,22 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             mO.maskPortraitMatte()
             return
         }
-         mO.imageResize(images: mO.image)
+        mO.imageResize(images: mO.image)
     }
 
-    @objc func panTapped(sender:UIPanGestureRecognizer) {
+    @objc func panTapped(sender: UIPanGestureRecognizer) {
         let position: CGPoint = sender.location(in: mO.imageView)
         switch sender.state {
         case .ended:
-            mO.tappedEnd(view: view)
+            mO.tappedEnd(view: mO.imageView)
             break
         case .possible:
             break
         case .began:
-            mO.maskPath(position: position, view: view, imageView: mO.imageView, bool: true)
+            mO.maskPath(position: position, imageView:  mO.imageView)
             break
         case .changed:
-            mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
+            mO.maskAddLine(position: position, imageView: mO.imageView)
             break
         case .cancelled:
             break
@@ -72,7 +72,13 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
             break
         }
     }
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image)}
+
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) {
+        mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image)
+    }
+    
+    func maskChange() {
+        mO.tappedEnd(view: mO.imageView) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -90,7 +96,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
             self.mO.setURL()
 
-            DispatchQueue.main.asyncAfter(deadline: .now()+2){
+            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                 self.mO.maskGif()
                 SVProgressHUD.dismiss()
                 picker.dismiss(animated: true, completion: nil)

@@ -13,12 +13,12 @@ You can select background color, camera roll, video roll with long tap.
 
 Start of masking start point
 ```ruby
-mO.maskPath(position: position, view: view, imageView: mO.imageView, bool: true)
+mO.maskPath(position: position, imageView:  mO.imageView)
 ```
 
 Continuation of masked lines
 ```ruby
-mO.maskAddLine(position: position, view: view, imageView: mO.imageView, bool: false)
+mO.maskAddLine(position: position, imageView: mO.imageView)
 ```
 
 Determine the mask area
