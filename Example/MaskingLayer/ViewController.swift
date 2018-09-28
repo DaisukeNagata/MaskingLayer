@@ -30,7 +30,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-        
+
         mO.imageResize(images: UIImage(named: "IMG_4011")!)
     }
 
