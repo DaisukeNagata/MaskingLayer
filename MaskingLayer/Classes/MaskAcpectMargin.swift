@@ -38,7 +38,7 @@ struct Margin {
 
         case Margin().iPhoneXSMAX:
             return iPhonePlusMargin.self
-        
+
         default:
             break
         }
