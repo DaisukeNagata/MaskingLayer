@@ -16,7 +16,7 @@ public protocol CViewProtocol {
     func setURL()
 }
 
-public class MaskNavigationObject: NSObject,CViewProtocol {
+public class MaskNavigationObject: NSObject, CViewProtocol {
 
     open var index = Int()
     open var image = UIImage()

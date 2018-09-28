@@ -45,7 +45,7 @@ public class MaskVideoURLView: UIView {
     }
 
     private func thumbnailCount(inView: UIView) -> Int {
-        var num : Double = 0;
+        var num :Double = 0
 
         DispatchQueue.main.sync { num = Double(inView.frame.size.width) / Double(inView.frame.size.height) }
         return Int(ceil(num))
