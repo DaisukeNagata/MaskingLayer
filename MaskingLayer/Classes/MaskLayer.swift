@@ -31,6 +31,7 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
+        self.imageReSet(view: views.view, imageView: imageView)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -43,7 +44,7 @@ public class MaskLayer: NSObject {
         let maskWhite = UIAlertAction(title: NSLocalizedString("MaskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskWhite;self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
+            self.maskColor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: image, color: self.maskColor)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("MaskLightGray", comment: ""), style: .default) {
             action in
@@ -80,7 +81,6 @@ public class MaskLayer: NSObject {
             action in
             alertController.dismiss(animated: true, completion: nil)
         }
-        self.imageReSet(view: views.view, imageView: imageView)
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
@@ -125,17 +125,6 @@ public class MaskLayer: NSObject {
 
     func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
-    func imageSave(imageView: UIImageView, name: String) {
-        let pngImageData = imageView.image!.pngData()
-        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(name)
-        do {
-            try pngImageData!.write(to: fileURL)
-            imageLoad(imageView: imageView, name: name)
-        } catch {
-        }
-    }
-
     func imageReSet(view: UIView, imageView: UIImageView) {
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
@@ -156,18 +145,6 @@ public class MaskLayer: NSObject {
 
     private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
         imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
-        self.imageReSet(view: views.view, imageView: imageView)
-    }
-
-    private func imageLoad(imageView: UIImageView, name: String) {
-        let documentsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(name)
-        let image = UIImage(contentsOfFile: fileURL.path)
-        guard image == nil else {
-            imageView.image! = image!
-            path = CGMutablePath()
-            return
-        }
     }
 
     private func image(color: UIColor, size: CGSize) -> UIImage {

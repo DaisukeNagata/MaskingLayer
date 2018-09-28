@@ -39,7 +39,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
-        maskChange()
+        mO.tappedEnd(view: mO.imageView)
         guard mO.vm.setVideoURLView.dataArray.count == 0 else {
             view.addSubview(mO.cView)
             return
@@ -76,9 +76,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
     @objc func longTapeed(sender:UILongPressGestureRecognizer) {
         mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image)
     }
-    
-    func maskChange() {
-        mO.tappedEnd(view: mO.imageView) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
