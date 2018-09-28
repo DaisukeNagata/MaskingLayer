@@ -61,7 +61,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         case .possible:
             break
         case .began:
-            mO.maskPath(position: position, imageView:  mO.imageView)
+            mO.maskPath(position: position, imageView: mO.imageView)
             break
         case .changed:
             mO.maskAddLine(position: position, imageView: mO.imageView)
