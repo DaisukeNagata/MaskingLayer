@@ -31,13 +31,13 @@ struct Margin {
             return iPhonePlusMargin.self
 
         case Margin().iPhoneX:
-            return iPhonePlusMargin.self
+            return iPhoneXMargin.self
 
         case Margin().iPhoneXR:
-            return iPhonePlusMargin.self
+            return iPhoneXMargin.self
 
         case Margin().iPhoneXSMAX:
-            return iPhonePlusMargin.self
+            return iPhoneXMargin.self
 
         default:
             break
@@ -70,15 +70,9 @@ struct iPhonePlusMargin: MarginProtocol {
     static var width:   CGFloat  { return UIScreen.main.bounds.width - yOrigin }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.777 - yOrigin }
 }
-struct iPhoneXR: MarginProtocol {
+struct iPhoneXMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
     static var yOrigin: CGFloat { return 40 }
     static var width:   CGFloat  { return UIScreen.main.bounds.width - yOrigin }
-    static var height:  CGFloat { return UIScreen.main.bounds.width*2 - yOrigin }
-}
-struct iPhoneXSMAX: MarginProtocol {
-    static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 40 }
-    static var width:   CGFloat { return UIScreen.main.bounds.width - yOrigin }
     static var height:  CGFloat { return UIScreen.main.bounds.width*2 - yOrigin }
 }

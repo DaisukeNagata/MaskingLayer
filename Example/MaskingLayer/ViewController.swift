@@ -30,7 +30,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-
+        
         mO.imageResize(images: UIImage(named: "IMG_4011")!)
     }
 
@@ -39,9 +39,9 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
-
+    
         mO.tappedEnd(view: mO.imageView)
-
+    
         guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
 
         let defo = UserDefaults.standard
