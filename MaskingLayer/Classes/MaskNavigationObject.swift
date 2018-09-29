@@ -66,7 +66,6 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     public func maskPath(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:true)
     }
