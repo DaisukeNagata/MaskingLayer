@@ -38,7 +38,6 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
-        imageView.image = image.mask(image: imageView.image)
     }
 
     public func resetCView() {
@@ -56,12 +55,14 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
             return cView
         }()
     }
+
     public func maskPortraitMatte() {
         if #available(iOS 12.0, *) {
             let maskPortraitMatte = MaskPortraitMatte()
             maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
         }
     }
+
     public func maskPath(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
@@ -69,10 +70,12 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:true)
     }
+
     public func maskAddLine(position: CGPoint,imageView: UIImageView) {
         maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:false)
     }
+
     public func tappedEnd(view: UIView) {
         guard let size = imageView.image?.size else { return }
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
@@ -87,10 +90,12 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
             return
         }
     }
+
     public func setURL() {
         vm.setVideoURLView.setURL()
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
+
     public func maskGif() {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
