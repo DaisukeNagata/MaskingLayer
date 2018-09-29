@@ -42,10 +42,8 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         mO.tappedEnd(view: mO.imageView)
 
-        guard mO.vm.setVideoURLView.dataArray.count == 0 else {
-            view.addSubview(mO.cView)
-            return
-        }
+        guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
+
         let defo = UserDefaults.standard
         guard defo.object(forKey: "url") == nil else { mO.maskPortraitMatte(); return }
 
