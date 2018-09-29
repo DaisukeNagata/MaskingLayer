@@ -59,9 +59,8 @@ public class MaskVideoURLView: UIView {
             let cgImage = try imgGenerator.copyCGImage(at: time, actualTime: nil)
             let uiImage = UIImage(cgImage: cgImage)
             return uiImage
-        }catch{
+        } catch { print("error") }
 
-        }
         return UIImage()
     }
 

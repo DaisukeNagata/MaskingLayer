@@ -77,11 +77,14 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public func tappedEnd(view: UIView) {
         guard let size = imageView.image?.size else { return }
+
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view,imageView: imageView, image: image)
+
         guard vm.setVideoURLView.dataArray.count == 0 else {
             vm.setVideoURLView.imageAr[0] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
+
             if !vm.checkArray.contains(index) {
                 vm.checkArray.add(index)
                 cView.collectionView.reloadData()
@@ -107,18 +110,24 @@ extension MaskNavigationObject: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")
+
         if indexPath.section == 0 {
             do {
                 vm.rotate = 90
                 maskGif()
+
                 let data = try Data(contentsOf: url!)
                 self.imageView.animateGIF(data: data, duration: Double(4)) { }
-            }catch{ print("error") }
+
+            } catch { print("error") }
+
         } else {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
             imageView.image = image
+    
             maskLayer.imageReSet(view: vc.view, imageView: imageView)
+
             index = indexPath.section-vm.editCount
             if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
         }

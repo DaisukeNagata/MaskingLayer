@@ -25,12 +25,16 @@ public final class MaskCollectionViewModel: NSObject {
 extension MaskCollectionViewModel: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
+
     public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + editCount }
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
+
         if indexPath.section < editCount {
             image = UIImage(named: imageList[indexPath.section])!
             image = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
+
             var transRotate = CGAffineTransform()
             let angle = rotate * CGFloat.pi / 180
             transRotate = CGAffineTransform(rotationAngle: CGFloat(angle))
@@ -38,11 +42,13 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             cell.imageSet(imageSet: image)
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskDismissCell", for: indexPath) as! MaskDismissCell
+
             let dataImages = setVideoURLView.dataArray.map { (images) -> UIImage in
                 let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: collectionItemSize, height:collectionItemSize)
                 return  resizeImage
             }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
+    
             checkLabel = nil
             if checkArray.contains(indexPath.section-editCount){
                 checkLabel = UILabel()

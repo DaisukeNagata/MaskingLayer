@@ -65,6 +65,7 @@ extension UIImage {
             let image = UIImage(cgImage: imageRef, scale: UIScreen.main.scale, orientation: .up)
             UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
             image.draw(in: CGRect(x: 0.0, y: 0.0, width: image.size.width, height: image.size.height))
+
             let renderedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
 

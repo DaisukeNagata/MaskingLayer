@@ -98,6 +98,7 @@ public class MaskLayer: NSObject {
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
             .font : UIFont.systemFont(ofSize: 22.0)
         ]
+
         let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
         alertController.setValue(string, forKey: "attributedTitle")
         alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
@@ -128,15 +129,18 @@ public class MaskLayer: NSObject {
     func imageReSet(view: UIView, imageView: UIImageView) {
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
 
     func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
+
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image.mask(image: imageView.image)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+
         guard clipLayer.strokeEnd == 0 else {
             path = CGMutablePath()
             return
@@ -149,11 +153,14 @@ public class MaskLayer: NSObject {
 
     private func image(color: UIColor, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
         let context = UIGraphicsGetCurrentContext()!
         context.setFillColor(color.cgColor)
         context.fill(CGRect(origin: .zero, size: size))
+
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+
         return image
     }
 
@@ -181,9 +188,12 @@ public class MaskLayer: NSObject {
 public extension UIImage {
     func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage! {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height),true,0.0)
+
         self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+
         return newImage
     }
 
