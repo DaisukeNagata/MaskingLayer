@@ -10,6 +10,10 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 You can select background color, camera roll, video roll with long tap.
  
+PortraitEffectsMattek from os12
+```ruby
+mO.maskPortraitMatte()
+```
 
 Start of masking start point
 ```ruby
