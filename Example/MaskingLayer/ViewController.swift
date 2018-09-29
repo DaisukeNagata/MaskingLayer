@@ -39,16 +39,16 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
+
         mO.tappedEnd(view: mO.imageView)
+
         guard mO.vm.setVideoURLView.dataArray.count == 0 else {
             view.addSubview(mO.cView)
             return
         }
         let defo = UserDefaults.standard
-        guard defo.object(forKey: "url") == nil else {
-            mO.maskPortraitMatte()
-            return
-        }
+        guard defo.object(forKey: "url") == nil else { mO.maskPortraitMatte(); return }
+
         mO.imageResize(images: mO.image)
     }
 
@@ -85,6 +85,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let defo = UserDefaults.standard
         defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
+
         SVProgressHUD.show()
         mO.resetCView()
 
