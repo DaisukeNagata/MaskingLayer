@@ -18,7 +18,6 @@ class MaskPortraitMatte: NSObject {
         guard let urlSet = url else { return }
         var mattePixelBuffer: CVPixelBuffer?
         let maskingLayer = MaskLayer()
-
         guard let source = CGImageSourceCreateWithURL(urlSet as CFURL, nil) else { return }
 
         var matteData: [String : AnyObject]? {

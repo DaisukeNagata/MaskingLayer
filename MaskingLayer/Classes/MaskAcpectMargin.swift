@@ -12,7 +12,7 @@ struct Margin {
     let iPhoneSmall : CGFloat = 568.0
     let iPhone : CGFloat = 667.0
     let iPhonePlus : CGFloat = 736.0
-    let iPhoneX : CGFloat = 832.0
+    let iPhoneX : CGFloat = 812.0
     let iPhoneXR : CGFloat = 896.0
     let iPhoneXSMAX : CGFloat = 896.0
 
@@ -54,25 +54,25 @@ protocol MarginProtocol {
 }
 struct iPhoneSmallMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 40 }
-    static var width:   CGFloat { return UIScreen.main.bounds.width - yOrigin }
-    static var height:  CGFloat { return UIScreen.main.bounds.width*1.777 - yOrigin }
+    static var yOrigin: CGFloat { return 80 }
+    static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
+    static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 40 }
-    static var width:   CGFloat  { return UIScreen.main.bounds.width - yOrigin }
-    static var height:  CGFloat { return UIScreen.main.bounds.width*1.777 - yOrigin }
+    static var yOrigin: CGFloat { return 80 }
+    static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
+    static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhonePlusMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 40 }
-    static var width:   CGFloat  { return UIScreen.main.bounds.width - yOrigin }
-    static var height:  CGFloat { return UIScreen.main.bounds.width*1.777 - yOrigin }
+    static var yOrigin: CGFloat { return 80 }
+    static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
+    static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneXMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 40 }
-    static var width:   CGFloat  { return UIScreen.main.bounds.width - yOrigin }
-    static var height:  CGFloat { return UIScreen.main.bounds.width*2 - yOrigin }
+    static var yOrigin: CGFloat { return 120 }
+    static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
+    static var height:  CGFloat { return UIScreen.main.bounds.width*1.7 - yOrigin }
 }
