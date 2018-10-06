@@ -9,8 +9,8 @@ import Foundation
 import MobileCoreServices
 
 public protocol CViewProtocol {
-    func maskPath(position: CGPoint, imageView:UIImageView)
-    func maskAddLine(position: CGPoint, imageView:UIImageView)
+    func maskPath(position: CGPoint, imageView: UIImageView)
+    func maskAddLine(position: CGPoint, imageView: UIImageView)
     func tappedEnd(view: UIView)
     func maskGif()
     func setURL()
@@ -65,14 +65,14 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public func maskPath(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
-        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = imageView.image!.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:true)
+        maskLayer.maskConvertPointFromView(viewPoint: position, bool:true)
     }
 
     public func maskAddLine(position: CGPoint,imageView: UIImageView) {
         maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position,imageView: imageView,bool:false)
+        maskLayer.maskConvertPointFromView(viewPoint: position, bool:false)
     }
 
     public func tappedEnd(view: UIView) {
@@ -125,8 +125,8 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
             imageView.image = image
-    
-            maskLayer.imageReSet(view: vc.view, imageView: imageView)
+
+            maskLayer.imageReSet(imageView: imageView)
 
             index = indexPath.section-vm.editCount
             if vm.checkArray.contains(index) { vm.checkArray.remove(index) }

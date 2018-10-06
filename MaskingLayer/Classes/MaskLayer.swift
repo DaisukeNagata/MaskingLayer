@@ -31,7 +31,7 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
-        self.imageReSet(view: views.view, imageView: imageView)
+        self.imageReSet(imageView: imageView)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -111,7 +111,7 @@ public class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
     }
 
-    func maskConvertPointFromView(viewPoint: CGPoint, imageView: UIImageView, bool: Bool) {
+    func maskConvertPointFromView(viewPoint: CGPoint, bool: Bool) {
         clipLayer.path = path
         guard bool == false else {
             convertPath.move(to: viewPoint)
@@ -126,7 +126,7 @@ public class MaskLayer: NSObject {
 
     func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
-    func imageReSet(view: UIView, imageView: UIImageView) {
+    func imageReSet(imageView: UIImageView) {
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
 
