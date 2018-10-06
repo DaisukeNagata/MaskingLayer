@@ -31,7 +31,6 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,imageView: UIImageView, image: UIImage) {
-        self.imageReSet(imageView: imageView)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -80,6 +79,7 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            self.imageReSet(imageView: imageView)
         }
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
@@ -129,6 +129,7 @@ public class MaskLayer: NSObject {
     func imageReSet(imageView: UIImageView) {
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        imageView.image = UIImage()
 
         convertPath = CGMutablePath()
         path = CGMutablePath()
