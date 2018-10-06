@@ -137,8 +137,8 @@ public class MaskLayer: NSObject {
     func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
 
-        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image.mask(image: imageView.image)
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
 
         guard clipLayer.strokeEnd == 0 else {
