@@ -81,6 +81,7 @@ public class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.imageReSet(imageView: imageView)
         }
+        self.imageReSet(imageView: imageView)
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
