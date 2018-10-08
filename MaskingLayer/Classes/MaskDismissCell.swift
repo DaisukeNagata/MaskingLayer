@@ -7,18 +7,18 @@
 
 import UIKit
 
-public class MaskDismissCell :UICollectionViewCell {
+class MaskDismissCell :UICollectionViewCell {
 
     var customCell = UIImageView()
     let collectionItemSize: CGFloat = 88
 
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
 
         customCell.frame.size = CGSize(width: collectionItemSize, height: collectionItemSize)
         self.addSubview(customCell)
     }
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     static let identifier: UINib = UINib(nibName: "MaskDismissCell", bundle: nil)

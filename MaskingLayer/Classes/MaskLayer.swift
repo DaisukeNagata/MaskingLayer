@@ -121,10 +121,6 @@ public class MaskLayer: NSObject {
         convertPath.addLine(to: viewPoint)
     }
 
-    func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
-
-    func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
-
     func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
     func imageReSet(imageView: UIImageView) {
@@ -148,6 +144,10 @@ public class MaskLayer: NSObject {
             return
         }
     }
+
+    private func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
+
+    private func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
 
     private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
         imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
@@ -199,7 +199,7 @@ public extension UIImage {
         return newImage
     }
 
-    func mask(image: UIImage?) -> UIImage {
+public func mask(image: UIImage?) -> UIImage {
         if let maskRef = image?.cgImage,
             let ref = cgImage,
             let mask = CGImage(maskWidth: maskRef.width,
