@@ -23,14 +23,14 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        CommonStructure.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
         CommonStructure.panGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.panGesture)
+        CommonStructure.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
 
-        CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-        
+        CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
+
         mO.imageResize(images: UIImage(named: "IMG_4011")!)
     }
 
