@@ -27,7 +27,7 @@ mO.maskAddLine(position: position, imageView: mO.imageView)
 
 Determine the mask area
 ```ruby
-mO.tappedEnd(view: view)
+mO.tapped(view: view)
 ```
 
 Generate thumbnail image
