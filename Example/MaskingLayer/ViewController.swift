@@ -40,25 +40,23 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
     
-        mO.tappedEnd(view: mO.imageView)
     
         guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
 
         let defo = UserDefaults.standard
         guard defo.object(forKey: "url") == nil else { mO.maskPortraitMatte(); return }
-
-        mO.imageResize(images: mO.image)
     }
 
     @objc func panTapped(sender: UIPanGestureRecognizer) {
         let position: CGPoint = sender.location(in: mO.imageView)
         switch sender.state {
         case .ended:
-            mO.tappedEnd(view: mO.imageView)
+            mO.tapped(view: mO.imageView)
             break
         case .possible:
             break
         case .began:
+            mO.tapped(view: mO.imageView)
             mO.maskPath(position: position, imageView: mO.imageView)
             break
         case .changed:

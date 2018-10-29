@@ -11,7 +11,7 @@ import MobileCoreServices
 public protocol CViewProtocol {
     func maskPath(position: CGPoint, imageView: UIImageView)
     func maskAddLine(position: CGPoint, imageView: UIImageView)
-    func tappedEnd(view: UIView)
+    func tapped(view: UIView)
     func maskGif()
     func setURL()
 }
@@ -75,7 +75,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         maskLayer.maskConvertPointFromView(viewPoint: position, bool:false)
     }
 
-    public func tappedEnd(view: UIView) {
+    public func tapped(view: UIView) {
         guard let size = imageView.image?.size else { return }
 
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
