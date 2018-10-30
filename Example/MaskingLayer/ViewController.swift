@@ -39,7 +39,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
 
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
-    
+        mO.tapped(view: mO.imageView)
     
         guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
 
@@ -56,7 +56,6 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         case .possible:
             break
         case .began:
-            mO.tapped(view: mO.imageView)
             mO.maskPath(position: position, imageView: mO.imageView)
             break
         case .changed:
