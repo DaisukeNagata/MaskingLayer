@@ -48,7 +48,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
                 return  resizeImage
             }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
-    
+
             checkLabel = nil
             if checkArray.contains(indexPath.section-editCount){
                 checkLabel = UILabel()
