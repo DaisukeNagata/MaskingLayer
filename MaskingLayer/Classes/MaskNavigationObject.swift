@@ -126,7 +126,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
             imageView.image = image
 
-            maskLayer.imageReSet(imageView: imageView)
+            maskLayer.mutablePathSet()
 
             index = indexPath.section-vm.editCount
             if vm.checkArray.contains(index) { vm.checkArray.remove(index) }

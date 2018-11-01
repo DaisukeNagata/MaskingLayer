@@ -79,10 +79,10 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.imageReSet(imageView: imageView)
+            self.mutablePathSet()
         }
         views.view.backgroundColor = self.maskColor
-        self.imageReSet(imageView: imageView)
+        self.mutablePathSet()
         alertController.addAction(maskWhite)
         alertController.addAction(maskLightGray)
         alertController.addAction(maskGray)
@@ -124,10 +124,7 @@ public class MaskLayer: NSObject {
 
     func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
-    func imageReSet(imageView: UIImageView) {
-        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
-        imageView.image = UIImage()
+    func mutablePathSet() {
 
         convertPath = CGMutablePath()
         path = CGMutablePath()
