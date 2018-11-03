@@ -55,9 +55,10 @@ Os12 portrait camera with iphoneX or higher, masking images where people are ref
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/MovieMatte.gif?raw=true)
 ![](https://github.com/daisukenagata/MaskingLayer/blob/master/IMG_0073.TRIM.gif?raw=true)
 
-## Version 0.6.1
-Added MaskingLayer background color and compositing function.
-After long-press to output alert, you can select color and synthesize portrait camera image and background color.
+## Version 0.6.4
+Press BackImage with a long tap and decide the background, then select portrait camera image
+<img src= "https://github.com/daisukenagata/MaskingLayer/blob/master/5453.jpg?raw=true" width="330" height="500">
+
 
 
 ## Installation
