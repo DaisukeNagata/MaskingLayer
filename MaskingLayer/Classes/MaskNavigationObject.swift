@@ -23,6 +23,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     var vc = UIViewController()
     open var margin: CGFloat = 10
     open var imageView = UIImageView()
+    open var imageBackView = UIImageView()
     open var maskLayer = MaskLayer()
     open var gifObject = MaskGifObject()
     open var vm = MaskCollectionViewModel()
@@ -38,6 +39,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        imageBackView.frame = imageView.frame
     }
 
     public func resetCView() {
@@ -56,7 +58,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         }()
     }
 
-    public func maskPortraitMatte() {
+    public func maskPortraitMatte( ) {
         if #available(iOS 12.0, *) {
             let maskPortraitMatte = MaskPortraitMatte()
             maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)

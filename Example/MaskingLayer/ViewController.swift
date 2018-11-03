@@ -30,17 +30,17 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
-        
         mO.imageResize(images: UIImage(named: "IMG_4011")!)
+
+        view.addSubview(mO.imageBackView)
+        view.addSubview(mO.imageView)
+        view.layer.addSublayer(mO.maskLayer.clipLayer)
+        mO.tapped(view: mO.imageView)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 
-        view.addSubview(mO.imageView)
-        view.layer.addSublayer(mO.maskLayer.clipLayer)
-        mO.tapped(view: mO.imageView)
-    
         guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
 
         let defo = UserDefaults.standard
@@ -69,7 +69,7 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
     }
 
     @objc func longTapeed(sender:UILongPressGestureRecognizer) {
-        mO.maskLayer.alertSave(views: self, imageView: mO.imageView, image: mO.image)
+        mO.maskLayer.alertSave(views: self,mo: mO)
     }
 }
 
