@@ -59,8 +59,8 @@ Os12 portrait camera with iphoneX or higher, masking images where people are ref
 Press BackImage with a long tap and decide the background, then select portrait camera image
 <img src= "https://github.com/daisukenagata/MaskingLayer/blob/master/5453.jpg?raw=true" width="330" height="500">
 
-
-
+## Version 0.6.5
+Added a compositing function that can be saved to the terminal.
 ## Installation
 
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
