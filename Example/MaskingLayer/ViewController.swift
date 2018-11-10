@@ -35,7 +35,10 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         view.addSubview(mO.imageBackView)
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
+
+        mO.maskLayer.maskColor = .clear
         mO.tapped(view: mO.imageView)
+        mO.maskLayer.maskColor = .white
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +47,12 @@ class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollView
         guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
 
         let defo = UserDefaults.standard
-        guard defo.object(forKey: "url") == nil else { mO.maskPortraitMatte(); return }
+        guard defo.object(forKey: "url") == nil else {
+            
+            mO.maskPortraitMatte()
+            if mO.imageBackView.image != nil { mO.gousei() }
+            return
+        }
     }
 
     @objc func panTapped(sender: UIPanGestureRecognizer) {
@@ -97,9 +105,9 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
             }
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            mO.imageResize(images: images)
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
+            mO.imageResize(images: images)
         }
     }
 

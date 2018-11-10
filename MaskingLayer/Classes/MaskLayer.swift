@@ -115,6 +115,7 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("Ok ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            self.maskImagePicker.photeSegue(vc: views,bool: false)
         }
         alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)

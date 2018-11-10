@@ -105,6 +105,20 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: UIScreen.main.scale, imageAr: (vm.setVideoURLView.imageAr))
     }
+    
+    public func gousei(){
+        let top :UIImage = imageView.image!
+        let bottom :UIImage = imageBackView.image!
+        let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
+        UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
+        bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
+        top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
+        let nImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        imageView.image = nImage
+        imageView.setNeedsLayout()
+    }
 }
 
 // MARK: UICollectionViewDelegate
