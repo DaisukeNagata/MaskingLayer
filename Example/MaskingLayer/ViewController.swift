@@ -16,7 +16,7 @@ struct CommonStructure {
     static var longGesture = UILongPressGestureRecognizer()
 }
 
-class ViewController: UIViewController,UIGestureRecognizerDelegate, UIScrollViewDelegate {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
     var mO = MaskNavigationObject()
 
@@ -112,7 +112,6 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        mO.imageView = UIImageView()
         picker.dismiss(animated: true, completion: nil)
     }
 }
