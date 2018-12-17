@@ -73,7 +73,7 @@ public class MaskLayer: NSObject {
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskImagePicker.photeSegue(vc: views,bool: false)
+            self.maskImagePicker.photoSegue(vc: views,bool: false)
         }
         let backImage = UIAlertAction(title: NSLocalizedString("BackImage ", comment: ""), style: .default) {
             action in
@@ -86,7 +86,7 @@ public class MaskLayer: NSObject {
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskImagePicker.photeSegue(vc: views,bool: true)
+            self.maskImagePicker.photoSegue(vc: views,bool: true)
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
@@ -120,7 +120,7 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("Ok ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.maskImagePicker.photeSegue(vc: views,bool: false)
+            self.maskImagePicker.photoSegue(vc: views,bool: false)
         }
         alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)

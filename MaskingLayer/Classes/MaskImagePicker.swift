@@ -12,7 +12,7 @@ public class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate 
 
     open var pickerImage = UIImage()
 
-    public func photeSegue(vc: UIViewController,bool: Bool) {
+    public func photoSegue(vc: UIViewController,bool: Bool) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let pic = UIImagePickerController()
             if bool == true { pic.mediaTypes = [kUTTypeMovie as String] }
