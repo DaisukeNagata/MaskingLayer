@@ -210,7 +210,7 @@ public extension UIImage {
         return newImage
     }
 
-public func mask(image: UIImage?) -> UIImage {
+    func mask(image: UIImage?) -> UIImage {
         if let maskRef = image?.cgImage,
             let ref = cgImage,
             let mask = CGImage(maskWidth: maskRef.width,

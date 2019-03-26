@@ -73,6 +73,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
             break
         case .failed:
             break
+        @unknown default:
+            <#fatalError()#>
         }
     }
 
