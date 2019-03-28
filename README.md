@@ -1,6 +1,6 @@
 ![image](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskImage.png?raw=true)
 
-# MaskingLayer Xcode10 Swift4.2
+# MaskingLayer Xcode10.2 Swift5
 [![Version](https://img.shields.io/cocoapods/v/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![License](https://img.shields.io/cocoapods/l/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![Platform](https://img.shields.io/cocoapods/p/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
