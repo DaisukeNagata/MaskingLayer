@@ -91,7 +91,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
-        guard index == 0 else {
+        guard vm.setVideoURLView.imageAr.isEmpty else {
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
 
             if !vm.checkArray.contains(index) {
@@ -141,12 +141,12 @@ extension MaskNavigationObject: UICollectionViewDelegate {
 
         } else {
             vm.rotate = 0
-            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section-vm.editCount])!
+            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section])!
             imageView.image = image
 
             maskLayer.mutablePathSet()
 
-            index = indexPath.section-vm.editCount
+            index = indexPath.section
             if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
         }
         collectionView.reloadData()
