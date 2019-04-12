@@ -9,16 +9,18 @@ import UIKit
 
 public final class MaskCollectionViewModel: NSObject {
 
-    var image = UIImage()
     public var rotate: CGFloat = 0
+    public var checkLabel:UILabel?
+    public var checkArray:NSMutableArray = []
+    public var setVideoURLView = MaskVideoURLView()
+
+    var image = UIImage()
+
     let editCount: Int = 1
     let collectionLabel: CGFloat = 30
     let checkLabelItemSize: CGFloat = 10
     let collectionItemSize: CGFloat = 88
     let imageList = ["IMG_4011.jpg"]
-    public var checkLabel:UILabel?
-    public var checkArray:NSMutableArray = []
-    public var setVideoURLView = MaskVideoURLView()
 }
 
 // MARK: UICollectionViewDataSource
@@ -26,7 +28,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
 
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count + editCount }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
@@ -50,14 +52,14 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
 
             checkLabel = nil
-            if checkArray.contains(indexPath.section-editCount) {
+            if checkArray.contains(indexPath.section) {
                 checkLabel = UILabel()
                 checkLabel?.frame = CGRect(x:0,y:0,width:collectionLabel,height:collectionLabel)
                 checkLabel?.layer.position = CGPoint(x: cell.layer.frame.width + checkLabelItemSize, y: checkLabelItemSize)
                 checkLabel?.text = "✅"
                 cell.contentView.addSubview(checkLabel!)
             }
-            cell.imageSet(imageSet: dataImages[indexPath.section-editCount])
+            cell.imageSet(imageSet: dataImages[indexPath.section])
             return cell
         }
         return cell

@@ -13,9 +13,9 @@ public class MaskLayer: NSObject {
     public var maskColor = UIColor()
     public var path = CGMutablePath()
     public var clipLayer = CAShapeLayer()
-    var convertPath = CGMutablePath()
     public var maskImagePicker = MaskImagePicker()
 
+    var convertPath = CGMutablePath()
 
     public override init() {
         maskColor = .maskWhite
