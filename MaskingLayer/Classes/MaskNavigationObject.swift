@@ -8,7 +8,7 @@
 import Foundation
 import MobileCoreServices
 
-public protocol CViewProtocol {
+protocol CViewProtocol {
     func maskPath(position: CGPoint, imageView: UIImageView)
     func maskAddLine(position: CGPoint, imageView: UIImageView)
     func tapped(view: UIView)
@@ -18,22 +18,37 @@ public protocol CViewProtocol {
 
 public class MaskNavigationObject: NSObject, CViewProtocol {
 
-    open var index = Int()
-    open var image = UIImage()
-    var vc = UIViewController()
-    open var margin: CGFloat = 10
-    open var imageView = UIImageView()
-    open var imageBackView = UIImageView()
-    open var maskLayer = MaskLayer()
-    open var gifObject = MaskGifObject()
-    open var vm = MaskCollectionViewModel()
-    open lazy var cView: MaskCollectionView = {
+    public var maskLayer = MaskLayer()
+    public var imageView = UIImageView()
+    public var imageBackView = UIImageView()
+    public var vm = MaskCollectionViewModel()
+    public lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
         cView.collectionView.dataSource = self.vm
         cView.backgroundColor = .clear
         return cView
     }()
+
+    var image = UIImage()
+
+    private var index = Int()
+    private var margin: CGFloat = 10
+    private var vc = UIViewController()
+    private var gifObject = MaskGifObject()
+
+
+    public func maskPortraitMatte( ) {
+        if #available(iOS 12.0, *) {
+            let maskPortraitMatte = MaskPortraitMatte()
+            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
+        }
+    }
+
+    public func setURL() {
+        vm.setVideoURLView.setURL()
+        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
+    }
 
     public func imageResize(images: UIImage){
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
@@ -56,13 +71,6 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
             cView.backgroundColor = .clear
             return cView
         }()
-    }
-
-    public func maskPortraitMatte( ) {
-        if #available(iOS 12.0, *) {
-            let maskPortraitMatte = MaskPortraitMatte()
-            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
-        }
     }
 
     public func maskPath(position: CGPoint, imageView: UIImageView) {
@@ -94,25 +102,20 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         }
     }
 
-    public func setURL() {
-        vm.setVideoURLView.setURL()
-        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
-    }
-
     public func maskGif() {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: UIScreen.main.scale, imageAr: (vm.setVideoURLView.imageAr))
     }
     
-    public func gousei(){
-        let top :UIImage = imageView.image!
-        let bottom :UIImage = imageBackView.image!
+    public func gousei() {
+        let top: UIImage = imageView.image!
+        let bottom: UIImage = imageBackView.image!
         let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
         UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
         bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
         top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
-        let nImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
         imageView.image = nImage
