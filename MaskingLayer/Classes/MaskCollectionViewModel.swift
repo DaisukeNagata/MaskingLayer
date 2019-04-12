@@ -50,7 +50,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
 
             checkLabel = nil
-            if checkArray.contains(indexPath.section-editCount){
+            if checkArray.contains(indexPath.section-editCount) {
                 checkLabel = UILabel()
                 checkLabel?.frame = CGRect(x:0,y:0,width:collectionLabel,height:collectionLabel)
                 checkLabel?.layer.position = CGPoint(x: cell.layer.frame.width + checkLabelItemSize, y: checkLabelItemSize)
