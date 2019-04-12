@@ -83,7 +83,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
         maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
-        guard vm.setVideoURLView.dataArray.count == 0 else {
+        guard index == 0 else {
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
 
             if !vm.checkArray.contains(index) {
