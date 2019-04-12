@@ -29,8 +29,7 @@ public class MaskVideoURLView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setURL(view: UIImageView) {
-//        self.imageView = view
+    func setURL() {
         let defo = UserDefaults.standard
         guard let url =  defo.url(forKey: "url") else { return }
         self.duration = MaskVideoURLView().videoDuration(videoURL: url)

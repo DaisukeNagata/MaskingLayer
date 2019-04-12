@@ -55,7 +55,7 @@ protocol MarginProtocol {
 struct iPhoneSmallMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 20 }
     static var yOrigin: CGFloat { return 80 }
-    static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
+    static var width:   CGFloat { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneMargin: MarginProtocol {

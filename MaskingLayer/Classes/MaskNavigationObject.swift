@@ -84,7 +84,6 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
         guard vm.setVideoURLView.dataArray.count == 0 else {
-            vm.setVideoURLView.imageAr[0] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
             vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
 
             if !vm.checkArray.contains(index) {
@@ -96,8 +95,8 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     }
 
     public func setURL() {
-        vm.setVideoURLView.setURL(view: imageView)
-        vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
+        vm.setVideoURLView.setURL()
+        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
 
     public func maskGif() {
