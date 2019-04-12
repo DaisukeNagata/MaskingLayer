@@ -81,7 +81,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         guard let size = imageView.image?.size else { return }
 
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
-        maskLayer.imageSet(view: view,imageView: imageView, image: image)
+        maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
         guard vm.setVideoURLView.dataArray.count == 0 else {
             vm.setVideoURLView.imageAr[0] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
@@ -96,7 +96,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     }
 
     public func setURL() {
-        vm.setVideoURLView.setURL()
+        vm.setVideoURLView.setURL(view: imageView)
         vm.setVideoURLView.frame = CGRect(x:0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
 
@@ -115,7 +115,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
         let nImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
+
         imageView.image = nImage
         imageView.setNeedsLayout()
     }

@@ -51,7 +51,7 @@ extension UIImageView {
 extension UIImage {
     func animatedGIF(data: Data,duration: Double) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
-        var speed = 0.0;speed = duration
+        var speed = 0.0; speed = duration
         let count = CGImageSourceGetCount(source)
         var images: [UIImage] = []
 
@@ -63,7 +63,7 @@ extension UIImage {
             guard (gifDictionary[kCGImagePropertyGIFDelayTime as String] as? Double) != nil else { continue }
 
             let image = UIImage(cgImage: imageRef, scale: UIScreen.main.scale, orientation: .up)
-            UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(image.size, false, UIScreen.main.scale)
             image.draw(in: CGRect(x: 0.0, y: 0.0, width: image.size.width, height: image.size.height))
 
             let renderedImage = UIGraphicsGetImageFromCurrentImageContext()

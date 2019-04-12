@@ -13,7 +13,7 @@ public class MaskVideoURLView: UIView {
 
     var duration: Float64   = 0.0
     var videoURL  = URL(fileURLWithPath: "")
-    public let imageView = UIImageView()
+    public var imageView = UIImageView()
     public var imageAr = Array<CGImage>()
     public var thumbnailViews = [UIImageView]()
     public var dataArray = Array<Data>()
@@ -29,7 +29,8 @@ public class MaskVideoURLView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setURL() {
+    func setURL(view: UIImageView) {
+//        self.imageView = view
         let defo = UserDefaults.standard
         guard let url =  defo.url(forKey: "url") else { return }
         self.duration = MaskVideoURLView().videoDuration(videoURL: url)
@@ -115,8 +116,7 @@ public class MaskVideoURLView: UIView {
                 dataArray.append(data!)
                 thumbnailViews.append(imageView)
                 imageAr.append((imageView.image?.cgImage)!)
-                imageAr[thumbnailViews.count-1] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
-                view.sendSubviewToBack(imageView)
+                view.addSubview(imageView)
                 xPos = xPos + view.frame.size.height
             }
         }
