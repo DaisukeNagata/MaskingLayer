@@ -97,6 +97,7 @@ public class MaskVideoURLView: UIView {
         imageAr.removeAll()
         var xPos: CGFloat = 0.0
         var width: CGFloat = 0.0
+        var index = 0
         for image in images{
             DispatchQueue.main.sync {
                 if xPos + view.frame.size.height < view.frame.width {
@@ -111,11 +112,12 @@ public class MaskVideoURLView: UIView {
                                          y: 0.0,
                                          width: width,
                                          height: 0.1)
+                imageAr.append((imageView.image?.cgImage)!)
+                imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
                 let data = imageView.image!.pngData()
                 dataArray.append(data!)
-                thumbnailViews.append(imageView)
-                imageAr.append((imageView.image?.cgImage)!)
                 view.addSubview(imageView)
+                index += 1
                 xPos = xPos + view.frame.size.height
             }
         }
