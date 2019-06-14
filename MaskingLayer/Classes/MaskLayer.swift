@@ -117,7 +117,7 @@ public class MaskLayer: NSObject {
         alertController.setValue(string, forKey: "attributedTitle")
         alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
 
-        let reset = UIAlertAction(title: NSLocalizedString("Ok ", comment: ""), style: .default) {
+        let reset = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photoSegue(vc: views,bool: false)

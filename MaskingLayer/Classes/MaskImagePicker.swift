@@ -10,8 +10,6 @@ import MobileCoreServices
 
 public class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
 
-    open var pickerImage = UIImage()
-
     public func photoSegue(vc: UIViewController,bool: Bool) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let pic = UIImagePickerController()

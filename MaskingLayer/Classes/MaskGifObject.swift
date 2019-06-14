@@ -21,7 +21,7 @@ public class MaskGifObject: NSObject {
         let urlDefo = UserDefaults.standard
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]
-        let frameProperties = [kCGImagePropertyGIFDictionary as String:[kCGImagePropertyGIFDelayTime as String :CMTimeGetSeconds(frameRate)]]
+        let frameProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String :CMTimeGetSeconds(frameRate)]]
         guard let destination = CGImageDestinationCreateWithURL(url as CFURL,kUTTypeGIF,imageAr.count,nil) else { print("ng"); return }
 
         CGImageDestinationSetProperties(destination,fileProperties as CFDictionary?)

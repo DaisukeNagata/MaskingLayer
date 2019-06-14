@@ -75,7 +75,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public func maskPath(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
-        imageView.image = imageView.image!.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
         maskLayer.maskConvertPointFromView(viewPoint: position, bool:true)
     }
@@ -109,8 +109,8 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     }
     
     public func gousei() {
-        let top: UIImage = imageView.image!
-        let bottom: UIImage = imageBackView.image!
+        let top: UIImage = imageView.image ?? UIImage()
+        let bottom: UIImage = imageBackView.image ?? UIImage()
         let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
         UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
         bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))

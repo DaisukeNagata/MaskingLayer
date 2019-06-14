@@ -45,7 +45,7 @@ public class MaskVideoURLView: UIView {
     }
 
     private func thumbnailCount(inView: UIView) -> Int {
-        var num :Double = 0
+        var num: Double = 0
 
         DispatchQueue.main.sync { num = Double(inView.frame.size.width) / Double(inView.frame.size.height) }
         return Int(ceil(num))
@@ -68,7 +68,7 @@ public class MaskVideoURLView: UIView {
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
 
-        for view in self.thumbnailViews{
+        for view in self.thumbnailViews {
             DispatchQueue.main.sync { view.removeFromSuperview() }
         }
 
@@ -114,8 +114,8 @@ public class MaskVideoURLView: UIView {
                                          height: 0.1)
                 imageAr.append((imageView.image?.cgImage)!)
                 imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
-                let data = imageView.image!.pngData()
-                dataArray.append(data!)
+                let data = imageView.image?.pngData()
+                dataArray.append(data ?? Data())
                 view.addSubview(imageView)
                 index += 1
                 xPos = xPos + view.frame.size.height
