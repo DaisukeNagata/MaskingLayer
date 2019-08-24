@@ -101,7 +101,7 @@ public class MaskLayer: NSObject {
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
+            self.mutablePathSet(mO: mo)
         }
         mo.imageView.setNeedsLayout()
         alertController.addAction(maskWhite)
@@ -140,8 +140,9 @@ public class MaskLayer: NSObject {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    func mutablePathSet() {
+    func mutablePathSet(mO: MaskNavigationObject? = nil) {
 
+        mO?.imageResize(images: mO?.imageView.image ?? UIImage())
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
