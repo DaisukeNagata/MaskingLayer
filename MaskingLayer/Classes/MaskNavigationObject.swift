@@ -46,7 +46,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
 
-    public func imageResize(){
+    public func imageResize() {
         imageView.image = defaltImageView.image
     }
 
@@ -54,11 +54,12 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        defaltImageView.image = imageView.image
+        defaltImageView.frame = imageView.frame
     }
 
     public func selfResize(images: UIImage, view: UIView) {
-        image = images.ResizeUIImage(width: view.frame.width
-            , height: view.frame.height)
+        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.image = image
         imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
     }
@@ -84,6 +85,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         if let path = maskLayer.start(position) {
              maskLayer.clipLayer.path = path
         }
+        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
     }
 
     public func maskAddLine(position: CGPoint,imageView: UIImageView) {
