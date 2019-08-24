@@ -11,13 +11,13 @@ import AVFoundation
 @available(iOS 12.0, *)
 class MaskPortraitMatte: NSObject {
 
-    func portraitMatte(imageV: UIImageView,vc: UIViewController) {
+    func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat) {
 
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")
         guard let urlSet = url else { return }
         var mattePixelBuffer: CVPixelBuffer?
-        let maskingLayer = MaskLayer(minSegment: 15.0)
+        let maskingLayer = MaskLayer(minSegment: minSegment)
         guard let source = CGImageSourceCreateWithURL(urlSet as CFURL, nil) else { return }
 
         var matteData: [String : AnyObject]? {
