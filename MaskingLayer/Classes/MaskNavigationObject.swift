@@ -10,7 +10,7 @@ import MobileCoreServices
 
 public class MaskNavigationObject: NSObject, CViewProtocol {
 
-    public var maskLayer = MaskLayer(minSegment: 15.0)
+    public var maskLayer: MaskLayer
     public var imageView = UIImageView()
     public var imageBackView = UIImageView()
     public var vm = MaskCollectionViewModel()
@@ -29,11 +29,14 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     private var vc = UIViewController()
     private var gifObject = MaskGifObject()
 
+    public init(minSegment: CGFloat) {
+        maskLayer = MaskLayer(minSegment: minSegment)
+    }
 
-    public func maskPortraitMatte( ) {
+    public func maskPortraitMatte(minSegment: CGFloat) {
         if #available(iOS 12.0, *) {
             let maskPortraitMatte = MaskPortraitMatte()
-            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc)
+            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc, minSegment: minSegment)
         }
     }
 
