@@ -15,18 +15,28 @@ public class MaskLayer: NSObject {
     public var clipLayer = CAShapeLayer()
     public var maskImagePicker = MaskImagePicker()
 
+    public var minSegment: CGFloat
+    var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
+    var length = 0 as CGFloat
+    var anchor = CGPoint.zero // last anchor point
+    var last = CGPoint.zero // last touch point
+    var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
+    var fEdge = true //either the begging or the turning point
 
-    public override init() {
+    
+    public init(minSegment: CGFloat) {
+        self.elements = [MaskPathElement]()
+        self.minSegment = minSegment
+        
         maskColor = .maskWhite
-        clipLayer.lineCap = convertToCAShapeLayerLineCap("round")
-        clipLayer.lineJoin = convertToCAShapeLayerLineJoin("round")
         clipLayer.name = "clipLayer"
         clipLayer.lineCap = CAShapeLayerLineCap.round
         clipLayer.lineJoin = CAShapeLayerLineJoin.round
         clipLayer.fillColor = UIColor.clear.cgColor
         clipLayer.strokeColor = UIColor.white.cgColor
         clipLayer.backgroundColor = UIColor.clear.cgColor
+        clipLayer.contentsScale = UIScreen.main.scale
         clipLayer.lineWidth = 1
     }
 
@@ -126,16 +136,9 @@ public class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
     }
 
-    func maskConvertPointFromView(viewPoint: CGPoint, bool: Bool) {
-        clipLayer.path = path
-        guard bool == false else {
-            convertPath.move(to: viewPoint)
-            return
-        }
-        convertPath.addLine(to: viewPoint)
+    public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage {
+        return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
-
-    public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage { return mask(image: image(color: color, size: size), convertPath: convertPath) }
 
     func mutablePathSet() {
 
@@ -156,9 +159,58 @@ public class MaskLayer: NSObject {
         }
     }
 
+    public func start(_ pt:CGPoint) -> CGPath? {
+        path = CGMutablePath()
+        path.move(to: pt)
+        elements = [MaskMove(x: pt.x, y: pt.y)]
+        anchor = pt
+        last = pt
+        fEdge = true
+        length = 0.0
+        return path
+    }
+    
+    public func move(_ pt:CGPoint) -> CGPath? {
+        var pathToReturn:CGPath?
+        let d = pt.delta(last)
+        length += sqrt(d.dotProduct(d))
+        if length > minSegment {
+            // Detected enough movement. Add a quad segment, if we are not at the edge.
+            if !fEdge {
+                let ptMid = anchor.middle(pt)
+                path.addQuadCurve(to: pt, control: anchor)
+                elements.append(MaskQuadCurve(cpx: anchor.x, cpy: anchor.y, x: ptMid.x, y: ptMid.y))
+                pathToReturn = path
+            }
+            delta = pt.delta(anchor)
+            anchor = pt
+            fEdge = false
+            length = 0.0
+        } else if !fEdge && delta.dotProduct(d) < 0 {
+            pathToReturn = path
+            anchor = last // matter for delta in "Neither" case (does not matter for QuadCurve, see above)
+            fEdge = true
+            length = 0.0
+        } else {
+            // Neigher. Return the path with a line to the current point as a transient path.
+            if let pathTemp = path.mutableCopy() {
+                pathTemp.addLine(to: pt)
+                pathToReturn = pathTemp
+                delta = pt.delta(anchor)
+            } else {
+                assertionFailure("SNPathBuilder: CGPathCreateMutableCopy should not fail.")
+            }
+        }
+        last = pt
+        return pathToReturn
+    }
+
     private func convertPath(convertLocation: CGPoint) { convertPath.move(to: CGPoint(x: convertLocation.x, y: convertLocation.y)) }
 
-    private func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage { clipLayer.isHidden = true; return clipedMotoImage(image,convertPath:convertPath) }
+    private func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage {
+        clipLayer.isHidden = true
+        return clipedMotoImage(image,convertPath:convertPath)
+    }
 
     private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
         imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
@@ -195,59 +247,6 @@ public class MaskLayer: NSObject {
         UIGraphicsEndImageContext()
 
         return reImage!
-    }
-}
-
-public extension UIImage {
-    func ResizeUIImage(width : CGFloat, height : CGFloat)-> UIImage! {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height),true,0.0)
-
-        self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return newImage
-    }
-
-    func mask(image: UIImage?) -> UIImage {
-        if let maskRef = image?.cgImage,
-            let ref = cgImage,
-            let mask = CGImage(maskWidth: maskRef.width,
-                               height: maskRef.height,
-                               bitsPerComponent: maskRef.bitsPerComponent,
-                               bitsPerPixel: maskRef.bitsPerPixel,
-                               bytesPerRow: maskRef.bytesPerRow,
-                               provider: maskRef.dataProvider!,
-                               decode: nil,
-                               shouldInterpolate: false),
-            let output = ref.masking(mask) {
-            return UIImage(cgImage: output)
-        }
-        return self
-    }
-}
-
-extension UIColor {
-    class var maskWhite: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }
-    class var maskLightGray: UIColor { return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) }
-    class var maskGray: UIColor { return #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) }
-    class var maskDarkGray: UIColor { return #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1) }
-    class var maskLightBlack: UIColor { return #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1) }
-}
-
-extension CGImage {
-    func resize(_ image: CGImage) -> CGImage? {
-        let maxWidth: CGFloat = CGFloat(UIScreen.main.bounds.width)
-        let maxHeight: CGFloat = CGFloat(UIScreen.main.bounds.height)
-
-        guard let colorSpace = image.colorSpace else { return nil }
-        guard let context = CGContext(data: nil, width: Int(maxWidth), height: Int(maxHeight), bitsPerComponent: image.bitsPerComponent, bytesPerRow: image.bytesPerRow, space: colorSpace, bitmapInfo: image.alphaInfo.rawValue) else { return nil }
-
-        context.interpolationQuality = .high
-        context.draw(image, in: CGRect(x: 0, y: 0, width: Int(maxWidth), height: Int(maxHeight)))
-
-        return context.makeImage()
     }
 }
 
