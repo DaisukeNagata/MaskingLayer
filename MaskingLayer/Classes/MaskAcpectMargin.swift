@@ -53,26 +53,26 @@ protocol MarginProtocol {
     static var height:  CGFloat { get }
 }
 struct iPhoneSmallMargin: MarginProtocol {
-    static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 80 }
+    static var xOrigin: CGFloat { return 5 }
+    static var yOrigin: CGFloat { return 60 }
     static var width:   CGFloat { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneMargin: MarginProtocol {
-    static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 80 }
+    static var xOrigin: CGFloat { return 5 }
+    static var yOrigin: CGFloat { return 60 }
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhonePlusMargin: MarginProtocol {
-    static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 80 }
+    static var xOrigin: CGFloat { return 5 }
+    static var yOrigin: CGFloat { return 60 }
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneXMargin: MarginProtocol {
-    static var xOrigin: CGFloat { return 20 }
-    static var yOrigin: CGFloat { return 120 }
+    static var xOrigin: CGFloat { return 5 }
+    static var yOrigin: CGFloat { return 100 }
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.7 - yOrigin }
 }
