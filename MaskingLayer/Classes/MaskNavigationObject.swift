@@ -48,6 +48,11 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
     public func imageResize(images: UIImage){
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image
+    }
+
+    public func frameResize(images: UIImage) {
+        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = image
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
     }
 
