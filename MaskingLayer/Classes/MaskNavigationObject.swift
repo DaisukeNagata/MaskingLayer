@@ -56,6 +56,13 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
     }
 
+    public func selfResize(images: UIImage, view: UIView) {
+        image = images.ResizeUIImage(width: view.frame.width
+            , height: view.frame.height)
+        imageView.image = image
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    }
+
     public func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
