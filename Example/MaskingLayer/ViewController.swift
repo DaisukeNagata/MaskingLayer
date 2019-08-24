@@ -37,8 +37,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         view.layer.addSublayer(mO.maskLayer.clipLayer)
 
         mO.maskLayer.maskColor = .clear
-        mO.tapped(view: mO.imageView)
+        mO.maskPathEnded(position: CGPoint(), view: mO.imageView)
         mO.maskLayer.maskColor = .white
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -59,12 +60,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         let position: CGPoint = sender.location(in: mO.imageView)
         switch sender.state {
         case .ended:
-            mO.tapped(view: mO.imageView)
+            mO.maskPathEnded(position: position, view: mO.imageView)
             break
         case .possible:
             break
         case .began:
-            mO.maskPath(position: position, imageView: mO.imageView)
+            mO.maskPathBegan(position: position, imageView: mO.imageView)
             break
         case .changed:
             mO.maskAddLine(position: position, imageView: mO.imageView)
