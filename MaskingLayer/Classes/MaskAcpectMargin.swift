@@ -54,25 +54,25 @@ protocol MarginProtocol {
 }
 struct iPhoneSmallMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 5 }
-    static var yOrigin: CGFloat { return 60 }
+    static var yOrigin: CGFloat { return UIApplication.shared.statusBarFrame.height + UINavigationController.init().navigationBar.frame.height }
     static var width:   CGFloat { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 5 }
-    static var yOrigin: CGFloat { return 60 }
+    static var yOrigin: CGFloat { return UIApplication.shared.statusBarFrame.height + UINavigationController.init().navigationBar.frame.height}
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhonePlusMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 5 }
-    static var yOrigin: CGFloat { return 60 }
+    static var yOrigin: CGFloat { return UIApplication.shared.statusBarFrame.height + UINavigationController.init().navigationBar.frame.height}
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.5 - yOrigin }
 }
 struct iPhoneXMargin: MarginProtocol {
     static var xOrigin: CGFloat { return 5 }
-    static var yOrigin: CGFloat { return 100 }
+    static var yOrigin: CGFloat { return UIApplication.shared.statusBarFrame.height + UINavigationController.init().navigationBar.frame.height}
     static var width:   CGFloat  { return UIScreen.main.bounds.width - xOrigin*2 }
     static var height:  CGFloat { return UIScreen.main.bounds.width*1.7 - yOrigin }
 }
