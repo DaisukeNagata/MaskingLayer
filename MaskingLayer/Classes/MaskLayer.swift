@@ -142,7 +142,7 @@ public class MaskLayer: NSObject {
 
     func mutablePathSet(mO: MaskNavigationObject? = nil) {
 
-        mO?.imageResize(images: mO?.imageView.image ?? UIImage())
+        mO?.imageResize(images: mO?.imageBackView.image ?? UIImage())
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
