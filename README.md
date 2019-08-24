@@ -12,7 +12,7 @@ You can select background color, camera roll, video roll with long tap.
  
 PortraitEffectsMattek from os12
 ```ruby
-mO.maskPortraitMatte()
+mO.maskPortraitMatte(minSegment: CGFloat)
 ```
 
 Start of masking start point
