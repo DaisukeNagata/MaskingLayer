@@ -48,6 +48,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public func imageResize() {
         imageView.image = defaltImageView.image
+        imageBackView.image = nil
     }
 
     public func frameResize(images: UIImage) {
