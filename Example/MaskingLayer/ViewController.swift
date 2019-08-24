@@ -31,8 +31,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         CommonStructure.longGesture.delegate = self
         view.addGestureRecognizer(CommonStructure.longGesture)
         mO.frameResize(images: UIImage(named: "IMG_4011")!)
-        mO.imageBackView.image = mO.imageView.image
-        view.addSubview(mO.imageBackView)
+        mO.defaltImageView.image = mO.imageView.image
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
 
@@ -106,10 +105,9 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
                 return
             }
         } else {
-            guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             SVProgressHUD.dismiss()
             picker.dismiss(animated: true, completion: nil)
-            mO.imageResize(images: images)
+            mO.imageResize()
         }
     }
 
