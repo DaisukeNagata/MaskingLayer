@@ -8,7 +8,6 @@
 import Foundation
 import MobileCoreServices
 
-
 public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public var maskLayer = MaskLayer(minSegment: 15.0)
