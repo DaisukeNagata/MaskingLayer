@@ -8,17 +8,10 @@
 import Foundation
 import MobileCoreServices
 
-protocol CViewProtocol {
-    func maskPath(position: CGPoint, imageView: UIImageView)
-    func maskAddLine(position: CGPoint, imageView: UIImageView)
-    func tapped(view: UIView)
-    func maskGif()
-    func setURL()
-}
 
 public class MaskNavigationObject: NSObject, CViewProtocol {
 
-    public var maskLayer = MaskLayer()
+    public var maskLayer = MaskLayer(minSegment: 15.0)
     public var imageView = UIImageView()
     public var imageBackView = UIImageView()
     public var vm = MaskCollectionViewModel()
@@ -73,22 +66,29 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         }()
     }
 
-    public func maskPath(position: CGPoint, imageView: UIImageView) {
+    public func maskPathBegan(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
+        if let path = maskLayer.start(position) {
+             maskLayer.clipLayer.path = path
+        }
         imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        maskLayer.path.move(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position, bool:true)
     }
 
     public func maskAddLine(position: CGPoint,imageView: UIImageView) {
-        maskLayer.path.addLine(to: CGPoint(x: position.x, y: position.y))
-        maskLayer.maskConvertPointFromView(viewPoint: position, bool:false)
+        if let path = maskLayer.move(position) {
+            maskLayer.clipLayer.path = path
+        }
     }
 
-    public func tapped(view: UIView) {
+    public func maskPathEnded(position: CGPoint,view: UIView) {
+
+        var elements = maskLayer.elements
+        elements.insert(MaskMove(x: position.x, y: position.y), at: 0)
+        elements.append(MaskLine(x: position.x, y: position.y))
+        maskLayer.clipLayer.path = MaskPath.path(from: elements, path: maskLayer.convertPath)
         guard let size = imageView.image?.size else { return }
 
-        imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath: maskLayer.convertPath)
+        imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
         maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
         guard vm.setVideoURLView.imageAr.isEmpty else {
