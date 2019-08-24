@@ -65,6 +65,11 @@ Added a compositing function that can be saved to the terminal.
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+## Version 0.8 ~
+
+The left is the latest version. Perform a smooth crop.
+![](https://user-images.githubusercontent.com/16457165/63633553-2ed26080-c685-11e9-8c91-17e3eb36dc3f.gif)
+
 ```ruby
 pod 'MaskingLayer'
 ```
