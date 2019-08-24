@@ -18,7 +18,7 @@ struct CommonStructure {
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
-    var mO = MaskNavigationObject()
+    var mO = MaskNavigationObject(minSegment: 15)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         let defo = UserDefaults.standard
         guard defo.object(forKey: "url") == nil else {
             
-            mO.maskPortraitMatte()
+            mO.maskPortraitMatte(minSegment: 15)
             if mO.imageBackView.image != nil { mO.gousei() }
             return
         }
