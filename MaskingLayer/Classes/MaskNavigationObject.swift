@@ -12,6 +12,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public var maskLayer: MaskLayer
     public var imageView = UIImageView()
+    public var defaltImageView = UIImageView()
     public var imageBackView = UIImageView()
     public var vm = MaskCollectionViewModel()
     public lazy var cView: MaskCollectionView = {
@@ -45,9 +46,8 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
     }
 
-    public func imageResize(images: UIImage){
-        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        imageView.image = image
+    public func imageResize(){
+        imageView.image = defaltImageView.image
     }
 
     public func frameResize(images: UIImage) {
