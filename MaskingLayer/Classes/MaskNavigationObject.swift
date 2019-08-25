@@ -86,7 +86,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         if let path = maskLayer.start(position) {
              maskLayer.clipLayer.path = path
         }
-        imageView.image = imageView.image?.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
     }
 
     public func maskAddLine(position: CGPoint,imageView: UIImageView) {
