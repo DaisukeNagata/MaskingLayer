@@ -41,7 +41,7 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,mo: MaskNavigationObject) {
-        self.mutablePathSet(mO: mo)
+        self.mutablePathSet()
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -54,31 +54,26 @@ public class MaskLayer: NSObject {
         let maskWhite = UIAlertAction(title: NSLocalizedString("MaskWhite", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
             self.maskColor = .maskWhite; self.colorSet(views: views, imageView: mo.imageView, image: mo.image, color: self.maskColor)
         }
         let maskLightGray = UIAlertAction(title: NSLocalizedString("MaskLightGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
             self.maskColor = .maskLightGray; self.colorSet(views: views, imageView: mo.imageView, image: mo.image, color: self.maskColor)
         }
         let maskGray = UIAlertAction(title: NSLocalizedString("MaskGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
             self.maskColor = .maskGray; self.colorSet(views: views, imageView: mo.imageView, image: mo.image, color: self.maskColor)
         }
         let maskDarkGray = UIAlertAction(title: NSLocalizedString("MaskDarkGray", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
             self.maskColor = .maskDarkGray; self.colorSet(views: views, imageView: mo.imageView, image: mo.image, color: self.maskColor)
         }
         let maskLightBlack = UIAlertAction(title: NSLocalizedString("MaskLightBlack", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet()
             self.maskColor = .maskLightBlack; self.colorSet(views: views, imageView: mo.imageView, image: mo.image, color: self.maskColor)
         }
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
