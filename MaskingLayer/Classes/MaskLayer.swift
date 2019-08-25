@@ -41,7 +41,7 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,mo: MaskNavigationObject) {
-        self.mutablePathSet()
+        self.mutablePathSet(mo: mo)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -135,9 +135,9 @@ public class MaskLayer: NSObject {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    func mutablePathSet(mO: MaskNavigationObject? = nil) {
+    public func mutablePathSet(mo: MaskNavigationObject? = nil) {
 
-        mO?.imageResize()
+        mo?.imageResize()
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
