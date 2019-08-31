@@ -63,6 +63,8 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.image = image
         imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        defaltImageView.image = imageView.image
+        defaltImageView.frame = imageView.frame
     }
 
     public func resetCView() {
