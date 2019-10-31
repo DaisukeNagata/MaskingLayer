@@ -181,3 +181,30 @@ extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
         return margin
     }
 }
+
+
+extension MaskNavigationObject {
+    @objc public func panTapped(sender: UIPanGestureRecognizer) {
+        let position: CGPoint = sender.location(in: imageView)
+        switch sender.state {
+        case .ended:
+            maskPathEnded(position: position, view: imageView)
+            break
+        case .possible:
+            break
+        case .began:
+            maskPathBegan(position: position, imageView: imageView)
+            break
+        case .changed:
+            maskAddLine(position: position, imageView: imageView)
+            break
+        case .cancelled:
+            break
+        case .failed:
+            break
+        @unknown default: break
+        }
+    }
+    
+    @objc public func longTapeed(bind:()->(),sender:UILongPressGestureRecognizer) { bind() }
+}

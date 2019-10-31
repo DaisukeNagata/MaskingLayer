@@ -34,7 +34,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
 
         if indexPath.section < editCount {
-            image = UIImage(named: imageList[indexPath.section])!
+            image = UIImage(named: imageList[indexPath.section]) ?? UIImage()
             image = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
 
             var transRotate = CGAffineTransform()

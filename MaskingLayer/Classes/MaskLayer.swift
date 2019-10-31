@@ -240,16 +240,6 @@ public class MaskLayer: NSObject {
         context?.restoreGState()
         UIGraphicsEndImageContext()
 
-        return reImage!
+        return reImage ?? UIImage ()
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
-	return CAShapeLayerLineCap(rawValue: input)
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCAShapeLayerLineJoin(_ input: String) -> CAShapeLayerLineJoin {
-	return CAShapeLayerLineJoin(rawValue: input)
 }

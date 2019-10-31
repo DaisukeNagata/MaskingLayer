@@ -37,7 +37,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         mO.maskLayer.maskColor = .clear
         mO.maskPathEnded(position: CGPoint(), view: mO.imageView)
         mO.maskLayer.maskColor = .white
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -54,31 +53,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         }
     }
 
-    @objc func panTapped(sender: UIPanGestureRecognizer) {
-        let position: CGPoint = sender.location(in: mO.imageView)
-        switch sender.state {
-        case .ended:
-            mO.maskPathEnded(position: position, view: mO.imageView)
-            break
-        case .possible:
-            break
-        case .began:
-            mO.maskPathBegan(position: position, imageView: mO.imageView)
-            break
-        case .changed:
-            mO.maskAddLine(position: position, imageView: mO.imageView)
-            break
-        case .cancelled:
-            break
-        case .failed:
-            break
-        @unknown default: break
-        }
-    }
+    @objc func panTapped(sender: UIPanGestureRecognizer) { mO.panTapped(sender: sender) }
 
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) {
-        mO.maskLayer.alertSave(views: self,mo: mO)
-    }
+    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.longTapeed(bind: binding, sender: sender) }
+    
+    func binding() { mO.maskLayer.alertSave(views: self,mo: mO) }
 }
 
 extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
