@@ -184,7 +184,7 @@ extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
 
 
 extension MaskNavigationObject {
-    @objc public func panTapped(sender: UIPanGestureRecognizer) {
+    public func panTapped(sender: UIPanGestureRecognizer) {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
@@ -206,5 +206,5 @@ extension MaskNavigationObject {
         }
     }
     
-    @objc public func longTapeed(bind:()->(),sender:UILongPressGestureRecognizer) { bind() }
+    public func longTapeed(bind:()->(),sender:UILongPressGestureRecognizer) { bind() }
 }
