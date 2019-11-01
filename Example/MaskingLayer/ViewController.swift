@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
 
-        mO.masPathSet()
+        mO.maskPathSet()
 
         maskGestureView.observe(self, mO: mO)
     }

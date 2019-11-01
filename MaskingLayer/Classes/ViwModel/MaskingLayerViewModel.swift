@@ -56,7 +56,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         defaltImageView.frame = imageView.frame
     }
     
-    public func masPathSet() {
+    public func maskPathSet() {
         maskLayer.maskColor = .clear
         maskPathEnded(position: CGPoint(), view: imageView)
         maskLayer.maskColor = .white
