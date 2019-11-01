@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MaskingLayer'
-  s.version          = '0.9.8.4'
+  s.version          = '0.9.9'
   s.summary          = 'The traced part is masked.'
 
 # This description is used to generate tags and improve search results.
