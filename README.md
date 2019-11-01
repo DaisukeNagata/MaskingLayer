@@ -15,7 +15,7 @@ Example ViewController
 import UIKit
 import MaskingLayer
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
+class ViewController: UIViewController {
 
     var mO = MaskingLayerViewModel(minSegment: 15)
 
