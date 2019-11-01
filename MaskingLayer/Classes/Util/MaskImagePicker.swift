@@ -10,12 +10,12 @@ import MobileCoreServices
 
 public class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
 
-    public func photoSegue(vc: UIViewController,bool: Bool) {
+    public func photoSegue(vc: UIViewController, mo: MaskingLayerViewModel,bool: Bool) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let pic = UIImagePickerController()
             if bool == true { pic.mediaTypes = [kUTTypeMovie as String] }
             pic.allowsEditing = true
-            pic.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            pic.delegate = mo 
             vc.present(pic, animated: true)
         }
     }

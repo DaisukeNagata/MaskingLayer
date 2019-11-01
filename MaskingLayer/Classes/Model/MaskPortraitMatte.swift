@@ -11,7 +11,7 @@ import AVFoundation
 @available(iOS 12.0, *)
 class MaskPortraitMatteModel: NSObject {
 
-    func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat) {
+    func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat, mo: MaskingLayerViewModel) {
 
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")
@@ -28,7 +28,7 @@ class MaskPortraitMatteModel: NSObject {
             guard let matte = matteData else {
                 let image = UIImage(contentsOfFile: url?.path ?? "")
                 imageV.image = image
-                maskingLayer.alertPortrait(views: vc)
+                maskingLayer.alertPortrait(views: vc, mo: mo)
                 return
             }
             mattePixelBuffer = try AVPortraitEffectsMatte(fromDictionaryRepresentation: matte).mattingImage

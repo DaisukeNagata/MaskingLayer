@@ -8,7 +8,6 @@
 
 import UIKit
 import MaskingLayer
-import SVProgressHUD
 import MobileCoreServices
 
 struct CommonStructure {
@@ -19,7 +18,7 @@ struct CommonStructure {
 class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
     var mO = MaskingLayerViewModel(minSegment: 15)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,19 +36,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
         mO.maskLayer.maskColor = .clear
         mO.maskPathEnded(position: CGPoint(), view: mO.imageView)
         mO.maskLayer.maskColor = .white
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        mO.observe(for: mO.maskCount) { _ in
+            guard self.mO.vm.setVideoURLView.dataArray.count == 0 else {  self.view.addSubview( self.mO.cView); return }
 
-        guard mO.vm.setVideoURLView.dataArray.count == 0 else { view.addSubview(mO.cView); return }
+            let defo = UserDefaults.standard
+            guard defo.object(forKey: "url") == nil else {
 
-        let defo = UserDefaults.standard
-        guard defo.object(forKey: "url") == nil else {
-            
-            mO.maskPortraitMatte(minSegment: 15)
-            if mO.imageBackView.image != nil { mO.gousei() }
-            return
+                self.mO.maskPortraitMatte(minSegment: 15)
+                if self.mO.imageBackView.image != nil {  self.mO.gousei() }
+                return
+            }
         }
     }
 
@@ -58,50 +55,4 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.longTapeed(bind: binding, sender: sender) }
     
     func binding() { mO.maskLayer.alertSave(views: self,mo: mO) }
-}
-
-extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
-        // Local variable inserted by Swift 4.2 migrator.
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-        let defo = UserDefaults.standard
-        defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
-
-        SVProgressHUD.show()
-        mO.resetCView()
-
-        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
-        if mediaType == kUTTypeMovie {
-            defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
-            self.mO.setURL()
-
-            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                self.mO.maskGif()
-                SVProgressHUD.dismiss()
-                picker.dismiss(animated: true, completion: nil)
-                return
-            }
-        } else {
-            guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            SVProgressHUD.dismiss()
-            picker.dismiss(animated: true, completion: nil)
-            mO.frameResize(images: images)
-            mO.maskPathBegan(position: CGPoint(), imageView: mO.imageView)
-        }
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }

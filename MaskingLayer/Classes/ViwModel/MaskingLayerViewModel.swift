@@ -15,6 +15,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     public var defaltImageView = UIImageView()
     public var imageBackView = UIImageView()
     public var vm = MaskCollectionViewModel()
+    public var maskCount = MaskObservable<Int>()
     public lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
@@ -37,7 +38,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     public func maskPortraitMatte(minSegment: CGFloat) {
         if #available(iOS 12.0, *) {
             let maskPortraitMatte = MaskPortraitMatteModel()
-            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc, minSegment: minSegment)
+            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc, minSegment: minSegment, mo: self)
         }
     }
 
@@ -207,4 +208,45 @@ extension MaskingLayerViewModel {
     }
     
     public func longTapeed(bind:()->(),sender:UILongPressGestureRecognizer) { bind() }
+    
+}
+
+extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationControllerDelegate, Observer {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        let defo = UserDefaults.standard
+        defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
+        
+        resetCView()
+        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
+        if mediaType == kUTTypeMovie {
+            defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
+            setURL()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+                self.maskGif()
+                self.maskCount.value = 0
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+        } else {
+            guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
+            picker.dismiss(animated: true, completion: nil)
+            frameResize(images: images)
+            maskPathBegan(position: CGPoint(), imageView: imageView)
+        }
+    }
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    public func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    }
+
+    public func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+        return input.rawValue
+    }
+    
+    public func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void) { observable.bind(observer: with) }
 }
