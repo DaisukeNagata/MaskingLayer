@@ -38,7 +38,7 @@ public class MaskVideoURLView: UIView {
         self.updateThumbnails()
     }
 
-    private func updateThumbnails(){
+    func updateThumbnails(){
 
         let backgroundQueue = DispatchQueue(label: "com.app.queue", qos: .background, target: nil)
         backgroundQueue.async { _ = self.updateThumbnails(view: self, videoURL: self.videoURL, duration: self.duration) }

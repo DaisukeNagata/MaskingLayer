@@ -43,16 +43,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
     }
 
-    public func setURL() {
-        vm.setVideoURLView.setURL()
-        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
-    }
-
-    public func imageResize() {
-        imageView.image = defaltImageView.image
-        imageBackView.image = nil
-    }
-
     public func frameResize(images: UIImage) {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView.image = image
@@ -67,7 +57,31 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         maskLayer.maskColor = .white
     }
 
-    public func selfResize(images: UIImage, view: UIView) {
+    public func gousei() {
+        let top: UIImage = imageView.image ?? UIImage()
+        let bottom: UIImage = imageBackView.image ?? UIImage()
+        let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
+        UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
+        bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
+        top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
+        let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        imageView.image = nImage
+        imageView.setNeedsLayout()
+    }
+
+    func setURL() {
+        vm.setVideoURLView.setURL()
+        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
+    }
+
+    func imageResize() {
+        imageView.image = defaltImageView.image
+        imageBackView.image = nil
+    }
+
+    func selfResize(images: UIImage, view: UIView) {
         image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
         imageView.image = image
         imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -75,7 +89,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         defaltImageView.frame = imageView.frame
     }
 
-    public func resetCView() {
+    func resetCView() {
         vm.setVideoURLView.thumbnailViews.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
         vm.checkLabel = UILabel()
@@ -91,7 +105,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }()
     }
 
-    public func maskPathBegan(position: CGPoint, imageView: UIImageView) {
+    func maskPathBegan(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
         if let path = maskLayer.start(position) {
              maskLayer.clipLayer.path = path
@@ -99,13 +113,13 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
     }
 
-    public func maskAddLine(position: CGPoint,imageView: UIImageView) {
+    func maskAddLine(position: CGPoint,imageView: UIImageView) {
         if let path = maskLayer.move(position) {
             maskLayer.clipLayer.path = path
         }
     }
 
-    public func maskPathEnded(position: CGPoint,view: UIView) {
+    func maskPathEnded(position: CGPoint,view: UIView) {
 
         var elements = maskLayer.elements
         elements.insert(MaskMove(x: position.x, y: position.y), at: 0)
@@ -127,24 +141,10 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
     }
 
-    public func maskGif() {
+    func maskGif() {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, createBool: true, scale: UIScreen.main.scale, imageAr: (vm.setVideoURLView.imageAr))
-    }
-    
-    public func gousei() {
-        let top: UIImage = imageView.image ?? UIImage()
-        let bottom: UIImage = imageBackView.image ?? UIImage()
-        let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
-        UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
-        bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
-        top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
-        let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        imageView.image = nImage
-        imageView.setNeedsLayout()
     }
 }
 
