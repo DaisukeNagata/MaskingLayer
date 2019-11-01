@@ -117,6 +117,7 @@
 		BB64E061236BBFB300ADEB39 /* MaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E052236BBFB300ADEB39 /* MaskProtocol.swift */; };
 		BB64E062236BBFB300ADEB39 /* MaskCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E054236BBFB300ADEB39 /* MaskCustomCell.swift */; };
 		BB64E063236BBFB300ADEB39 /* MaskDismissCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */; };
+		BB64E065236BD08E00ADEB39 /* MaskObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E064236BD08E00ADEB39 /* MaskObservable.swift */; };
 		C2BB2E6E12641E69AE79FEC3B02CC166 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB747CF3E2ABBCD42D409E3E0231809 /* Match.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C2CCC74898E577E370DF68A65D59CA5F /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F2BB14E2878DDD4244F0E433FD5B2 /* ExampleHooks.swift */; };
 		C394777CF14CEED282E0A7FBCFCE9F07 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A267E423FDBA7EC09764C529F3CCC /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -323,6 +324,7 @@
 		BB64E052236BBFB300ADEB39 /* MaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskProtocol.swift; sourceTree = "<group>"; };
 		BB64E054236BBFB300ADEB39 /* MaskCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskCustomCell.swift; sourceTree = "<group>"; };
 		BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskDismissCell.swift; sourceTree = "<group>"; };
+		BB64E064236BD08E00ADEB39 /* MaskObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskObservable.swift; sourceTree = "<group>"; };
 		BC3AE3F374FCF4248962E702B6F5B8AC /* Pods-MaskingLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MaskingLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BCB8A2C8EFAE797B385AB12B0D894CEA /* MaskingLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MaskingLayer-umbrella.h"; sourceTree = "<group>"; };
 		BE8B9B6837F4AB6944503482F6FFF8CD /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */,
 				BB64E04F236BBFB300ADEB39 /* MaskGifObject.swift */,
 				BB64E050236BBFB300ADEB39 /* MaskPortraitMatte.swift */,
+				BB64E064236BD08E00ADEB39 /* MaskObservable.swift */,
 			);
 			name = Model;
 			path = MaskingLayer/Classes/Model;
@@ -1239,6 +1242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB64E065236BD08E00ADEB39 /* MaskObservable.swift in Sources */,
 				BB64E062236BBFB300ADEB39 /* MaskCustomCell.swift in Sources */,
 				BB64E059236BBFB300ADEB39 /* MaskVideoURLView.swift in Sources */,
 				BB64E057236BBFB300ADEB39 /* MaskImagePicker.swift in Sources */,
@@ -1546,7 +1550,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MaskingLayer/MaskingLayer-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MaskingLayer/MaskingLayer-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MaskingLayer/MaskingLayer.modulemap";
 				PRODUCT_MODULE_NAME = MaskingLayer;
@@ -1681,7 +1685,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MaskingLayer/MaskingLayer-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MaskingLayer/MaskingLayer-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MaskingLayer/MaskingLayer.modulemap";
 				PRODUCT_MODULE_NAME = MaskingLayer;
