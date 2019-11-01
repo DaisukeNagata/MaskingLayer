@@ -16,13 +16,16 @@ public class MaskGifObject: NSObject {
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    public func makeGifImageMovie(url: URL,frameY: Double, createBool: Bool,scale: CGFloat,imageAr: Array<CGImage>) {
-        let frameRate = CMTimeMake(value: 1,timescale: Int32(frameY))
+    public func makeGifImageMovie(url: URL,frameY: Double, imageAr: Array<CGImage>) {
+        let frameRate = CMTimeMake(value: Int64(frameY), timescale: Int32(frameY))
         let urlDefo = UserDefaults.standard
+
+        let component = url.pathComponents
+        guard let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(component[7]).gif") else { print("ng"); return }
+        guard let destination = CGImageDestinationCreateWithURL(url as CFURL, kUTTypeGIF, imageAr.count, nil) else { print("ng"); return }
 
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 1]]
         let frameProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String :CMTimeGetSeconds(frameRate)]]
-        guard let destination = CGImageDestinationCreateWithURL(url as CFURL, kUTTypeGIF, imageAr.count, nil) else { print("ng"); return }
 
         CGImageDestinationSetProperties(destination,fileProperties as CFDictionary?)
 
