@@ -229,19 +229,17 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let defo = UserDefaults.standard
         defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
-        maskCount.value = 0
         backImageCount.value = 0
         resetCView()
 
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
         if mediaType == kUTTypeMovie {
             defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
-            setURL()
-            
+            self.setURL()
             DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                 self.maskGif()
                 picker.dismiss(animated: true, completion: nil)
-                return
+                self.maskCount.value = 0
             }
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
