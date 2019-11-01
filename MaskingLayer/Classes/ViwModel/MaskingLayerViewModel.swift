@@ -38,8 +38,12 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     public func maskPortraitMatte(minSegment: CGFloat) {
         if #available(iOS 12.0, *) {
-            let maskPortraitMatte = MaskPortraitMatteModel()
-            maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc, minSegment: minSegment, mo: self)
+            DispatchQueue.main.async {
+                let maskPortraitMatte = MaskPortraitMatteModel()
+                maskPortraitMatte.portraitMatte(imageV    : self.imageView,
+                                                vc        : self.vc,
+                                                minSegment: minSegment, mo: self)
+            }
         }
     }
 
@@ -58,17 +62,19 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     public func gousei() {
-        let top: UIImage = imageView.image ?? UIImage()
-        let bottom: UIImage = imageBackView.image ?? UIImage()
-        let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
-        UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
-        bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
-        top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
-        let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        imageView.image = nImage
-        imageView.setNeedsLayout()
+        DispatchQueue.main.async {
+            let top: UIImage = self.imageView.image ?? UIImage()
+            let bottom: UIImage = self.imageBackView.image ?? UIImage()
+            let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
+            UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
+            bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
+            top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
+            let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            
+            self.imageView.image = nImage
+            self.imageView.setNeedsLayout()
+        }
     }
 
     func setURL() {
@@ -222,8 +228,9 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let defo = UserDefaults.standard
         defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
-        
+        maskCount.value = 0
         resetCView()
+
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
         if mediaType == kUTTypeMovie {
             defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
@@ -231,7 +238,6 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
             
             DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                 self.maskGif()
-                self.maskCount.value = 0
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
