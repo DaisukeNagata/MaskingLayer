@@ -237,7 +237,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
             DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                 self.maskGif()
                 picker.dismiss(animated: true, completion: nil)
-                maskCount.value = 0
+                self.maskCount.value = 0
             }
         } else {
             maskCount.value = 0
