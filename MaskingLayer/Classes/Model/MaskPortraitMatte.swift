@@ -28,7 +28,7 @@ class MaskPortraitMatteModel: NSObject {
             guard let matte = matteData else {
                 let image = UIImage(contentsOfFile: url?.path ?? "")
                 imageV.image = image
-                maskingLayer.alertPortrait(views: vc, mo: mo)
+                maskingLayer.alertPortrait(views: vc, mO: mo)
                 return
             }
             mattePixelBuffer = try AVPortraitEffectsMatte(fromDictionaryRepresentation: matte).mattingImage

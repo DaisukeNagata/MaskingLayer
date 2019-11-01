@@ -667,6 +667,7 @@
 		BB64E048236BBFB300ADEB39 /* ViwModel */ = {
 			isa = PBXGroup;
 			children = (
+				BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */,
 				BB64E049236BBFB300ADEB39 /* MaskingLayerViewModel.swift */,
 				BB64E04A236BBFB300ADEB39 /* MaskCollectionViewModel.swift */,
 			);
@@ -686,7 +687,6 @@
 		BB64E04D236BBFB300ADEB39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */,
 				BB64E04F236BBFB300ADEB39 /* MaskGifObject.swift */,
 				BB64E050236BBFB300ADEB39 /* MaskPortraitMatte.swift */,
 				BB64E064236BD08E00ADEB39 /* MaskObservable.swift */,
