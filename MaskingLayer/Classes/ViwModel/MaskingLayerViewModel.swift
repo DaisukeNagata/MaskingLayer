@@ -17,6 +17,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     public var vm = MaskCollectionViewModel()
     public var maskCount = MaskObservable<Int>()
     public var longTappedCount = MaskObservable<Int>()
+    public var backImageCount = MaskObservable<Int>()
     public lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
@@ -229,6 +230,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         let defo = UserDefaults.standard
         defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
         maskCount.value = 0
+        backImageCount.value = 0
         resetCView()
 
         let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString

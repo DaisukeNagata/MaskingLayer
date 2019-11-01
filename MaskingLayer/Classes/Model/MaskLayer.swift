@@ -41,7 +41,6 @@ public class MaskLayer: NSObject {
     }
 
     public func alertSave(views: UIViewController,mo: MaskingLayerViewModel) {
-        self.mutablePathSet(mo: mo)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -84,9 +83,6 @@ public class MaskLayer: NSObject {
         let backImage = UIAlertAction(title: NSLocalizedString("BackImage ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            mo.imageBackView.image = mo.imageView.image
-            mo.imageBackView.frame = mo.imageView.frame
-            mo.imageBackView.setNeedsLayout()
             self.alertPortrait(views: views, mo: mo)
         }
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
@@ -96,6 +92,7 @@ public class MaskLayer: NSObject {
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
+            self.mutablePathSet(mo: mo)
             alertController.dismiss(animated: true, completion: nil)
         }
         mo.imageView.setNeedsLayout()
