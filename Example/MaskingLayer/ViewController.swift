@@ -8,7 +8,6 @@
 
 import UIKit
 import MaskingLayer
-import MobileCoreServices
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
