@@ -10,34 +10,25 @@ import UIKit
 import MaskingLayer
 import MobileCoreServices
 
-struct CommonStructure {
-    static var panGesture = UIPanGestureRecognizer()
-    static var longGesture = UILongPressGestureRecognizer()
-}
-
 class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
     var mO = MaskingLayerViewModel(minSegment: 15)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        CommonStructure.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
-        CommonStructure.panGesture.delegate = self
-        view.addGestureRecognizer(CommonStructure.panGesture)
-        
-        CommonStructure.longGesture = UILongPressGestureRecognizer(target: self, action:#selector(longTapeed))
-        CommonStructure.longGesture.delegate = self
-        view.addGestureRecognizer(CommonStructure.longGesture)
+        let maskGestureView = MaskGestureView(mO: mO)
+        maskGestureView.frame = view.frame
         mO.frameResize(images: UIImage(named: "IMG_4011")!)
+
+        view.addSubview(maskGestureView)
         view.addSubview(mO.imageView)
         view.layer.addSublayer(mO.maskLayer.clipLayer)
 
-        mO.maskLayer.maskColor = .clear
-        mO.maskPathEnded(position: CGPoint(), view: mO.imageView)
-        mO.maskLayer.maskColor = .white
+        mO.masPathSet()
 
         mO.observe(for: mO.maskCount) { _ in
+            self.mO.maskCount.initValue()
             guard self.mO.vm.setVideoURLView.dataArray.count == 0 else {  self.view.addSubview( self.mO.cView); return }
 
             let defo = UserDefaults.standard
@@ -48,11 +39,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollVie
                 return
             }
         }
+
+        mO.observe(for: mO.longTappedCount) { _ in
+            self.mO.longTappedCount.initValue()
+            self.mO.maskLayer.alertSave(views: self,mo: self.mO)
+        }
     }
-
-    @objc func panTapped(sender: UIPanGestureRecognizer) { mO.panTapped(sender: sender) }
-
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mO.longTapeed(bind: binding, sender: sender) }
-    
-    func binding() { mO.maskLayer.alertSave(views: self,mo: mO) }
 }

@@ -16,6 +16,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     public var imageBackView = UIImageView()
     public var vm = MaskCollectionViewModel()
     public var maskCount = MaskObservable<Int>()
+    public var longTappedCount = MaskObservable<Int>()
     public lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
@@ -58,6 +59,12 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         defaltImageView.image = imageView.image
         defaltImageView.frame = imageView.frame
+    }
+    
+    public func masPathSet() {
+        maskLayer.maskColor = .clear
+        maskPathEnded(position: CGPoint(), view: imageView)
+        maskLayer.maskColor = .white
     }
 
     public func selfResize(images: UIImage, view: UIView) {
@@ -206,9 +213,8 @@ extension MaskingLayerViewModel {
         @unknown default: break
         }
     }
-    
-    public func longTapeed(bind:()->(),sender:UILongPressGestureRecognizer) { bind() }
-    
+
+    public func longTapeed(sender:UILongPressGestureRecognizer) { longTappedCount.value = 0 }
 }
 
 extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationControllerDelegate, Observer {

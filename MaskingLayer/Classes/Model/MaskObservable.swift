@@ -19,6 +19,8 @@ public class MaskObservable<ObservedType> {
             }
         }
     }
+    
+    public func initValue() { value = nil }
 
     private var observers: [Observer] = []
 
