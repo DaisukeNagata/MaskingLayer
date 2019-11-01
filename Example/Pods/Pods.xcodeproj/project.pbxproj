@@ -21,13 +21,11 @@
 		14FD1C2B7A89AF2B56D0AADA31DA893A /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D31AAA15157EDF9043B31589969238 /* BeNil.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		189A499D539C4A0421FF16CBDDE55DFC /* BeCloseTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C27F350461A79C8C069FC942CB6EA /* BeCloseTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		1A246F7B8314EE699F13602C09709810 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = D174ED1DD0C19E5C6317B9243AAF2050 /* CwlBadInstructionException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		1D4A2AB1723745A94C2D2BA04698DA79 /* MaskGifObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BFD2C874E769D7842A721B96998F6E /* MaskGifObject.swift */; };
 		20E37FA1094C854F7029A36E285B64E9 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F859BD55771AB6B2C6DCB7E16E0F91 /* EndWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		21326EBA7A81AC3DEAE6CCEB4D665090 /* SVProgressAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F0BB730DDDC4FF2F21C60BC11FABDE8 /* SVProgressAnimatedView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		276CF42DCC5CE2F38FDFA5983AE6D584 /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B5B192C7D61F6F0FA47D0DC678E19A6 /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CFA351DD99BDAEB0A7A49F21880AB6F /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA96F6D1606B5535C53173BA1487D2AD /* BeGreaterThanOrEqualTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		2E4FFB1124F266D95FF3D8595BD6990A /* BeAKindOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E004AE74F520B2F3353E0CDDB09579A /* BeAKindOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		301C7891E40F5C521AAE59D7598469F6 /* MaskVideoURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D882A36C78324F550578EB9319641D2 /* MaskVideoURLView.swift */; };
 		33C92AF5C220916472D5964F35A5CA70 /* NMBStringify.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C2F0DA57A4D13DD198548922A08931 /* NMBStringify.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		345A86307522DEEFE7A5C22DC351AC3E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D246721FB5CA4D1CE225BDF56964FF /* QuartzCore.framework */; };
 		3A187F0E923C67738096763C2A3EC428 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB05B8C7FB686C5D88976425855395A /* MatcherProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -81,11 +79,9 @@
 		7DCBBAE609A57D56251AE52572D0EDEC /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304065ACE2AD17B283BD447586C44ACC /* FailureMessage.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		7F708BDE8861F9F01B55AFB10C91150B /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB61925DD0A8640B7ACA786FDE69AA1B /* AdapterProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		7FB4EEC1801EA022B9EA040523BFC7B7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C01F857D1CF4A9C2BA90F0E958D68D /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7FF5763BFFB44B32242428CD1DDF44CF /* MaskNavigationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845DDDAE75AC2E870EDF1A22E2A70F0 /* MaskNavigationObject.swift */; };
 		80A80092775395DA557F286921864C4A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D79768051B873400102BC3996667B /* Filter.swift */; };
 		825367ADE76B818561AC1742B43BE1AD /* HooksPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940993B563830A68FEA022DD03AAF22 /* HooksPhase.swift */; };
 		837C8D9522B6F248B3DA6DF83888740A /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7491AF70F03653AD98DFFCDA30FFFDB4 /* Callsite.swift */; };
-		84932A11EC39C9045CCF9DF874BF1E02 /* MaskImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2763CA270C2E28EF1DE550C47C44A830 /* MaskImagePicker.swift */; };
 		854871CEAE8CB0018BBCA0B3CC4E00C9 /* ContainElementSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D69B1155F6128CD5429849010474916 /* ContainElementSatisfying.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		87A8127D27DE0DF3EDA8EC06027D7E2D /* SVProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F1337F0C6382F7CC8A0044788637474E /* SVProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8FA6D8030B0FB83427EC88BFDB439D7D /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC446E307D5978846AC33784E055E25 /* AsyncMatcherWrapper.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -95,7 +91,6 @@
 		9062A0B7909BE241D09BD1EE65DBC835 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A73B6B61DA3B5A47F36B5A0C618FA8D7 /* SVProgressHUD.bundle */; };
 		92960264FF1BBE8819D4E2A6E81B6477 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE172A044277B096773005BB5A0D8C27 /* BeLessThanOrEqual.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		9630C174C9012FC493D869942D574DCA /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D92F82DE7932A427C6272BA3041D19D /* World.swift */; };
-		992C62D85EEEAB72AA54F84F3BCD8291 /* MaskDismissCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BEAF0FDCE571A4648F8D8F99FDA52A /* MaskDismissCell.swift */; };
 		997F619D81C3C5B6D56417285630846C /* CurrentTestCaseTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 03FB0F6841D1060876EE41FC048711AF /* CurrentTestCaseTracker.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A0EE1076327EB880E90D8804AB0E8FF1 /* SVProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C05C208C0232F7C1665559F01D8D07 /* SVProgressHUD-dummy.m */; };
 		A6D8CBAF604721D35DEDC81D67AB26CB /* CwlPreconditionTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = B494EA56C9E334DD191840A1BDBCEF7A /* CwlPreconditionTesting.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -104,16 +99,24 @@
 		AA75D64B34FF68C5AF7B7D7C6D77D673 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F526530B77317F63AB24C2F65527945 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		AB195E59DD7620FD9C10980A13281164 /* QuickSelectedTestSuiteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B0D381E0DBCE9C03870E722E7BF1CA /* QuickSelectedTestSuiteBuilder.swift */; };
 		AD797D43592F92B50232D4B56F9D335F /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A5B4FE0BA624DFDA17A83704448572 /* Expression.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		B0574B4CF3DE0E45974F108A889F83B3 /* MaskCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A7772EBEAD35D03FB34A6583AB0D5 /* MaskCustomCell.swift */; };
 		B235E5C765F7712EC6434979D55A13FD /* NMBObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EEF49DCA3D6F42ED308D80B1D827AC /* NMBObjCMatcher.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		B57BA79400DAE08F129C27F8307274CF /* Quick-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4E63794E66DA56EB8652783891627 /* Quick-dummy.m */; };
 		B7A3523DEB32D348EE1053E54D7F7593 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 50912F5EB9645AE738188DAC79AA9D30 /* NMBExceptionCapture.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		BA802B8CA7F94DD2D166A96648530075 /* Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = FEBEEF82B881D5162AC70DD3032A3F95 /* Quick.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB0C1B3A23110750007D0D00 /* MaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C1B3923110750007D0D00 /* MaskExtension.swift */; };
-		BB0C1B3C2311075C007D0D00 /* MaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C1B3B2311075C007D0D00 /* MaskProtocol.swift */; };
-		BB0C1B3E23110768007D0D00 /* PathStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C1B3D23110768007D0D00 /* PathStruct.swift */; };
-		BBE1B71F21590F7F00AC918D /* MaskPortraitMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1B71E21590F7F00AC918D /* MaskPortraitMatte.swift */; };
-		BBE1B72121590FA500AC918D /* MaskAcpectMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1B72021590FA500AC918D /* MaskAcpectMargin.swift */; };
+		BB64E056236BBFB300ADEB39 /* PathStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E041236BBFB300ADEB39 /* PathStruct.swift */; };
+		BB64E057236BBFB300ADEB39 /* MaskImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E043236BBFB300ADEB39 /* MaskImagePicker.swift */; };
+		BB64E058236BBFB300ADEB39 /* MaskAcpectMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E044236BBFB300ADEB39 /* MaskAcpectMargin.swift */; };
+		BB64E059236BBFB300ADEB39 /* MaskVideoURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E046236BBFB300ADEB39 /* MaskVideoURLView.swift */; };
+		BB64E05A236BBFB300ADEB39 /* MaskCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E047236BBFB300ADEB39 /* MaskCollectionView.swift */; };
+		BB64E05B236BBFB300ADEB39 /* MaskingLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E049236BBFB300ADEB39 /* MaskingLayerViewModel.swift */; };
+		BB64E05C236BBFB300ADEB39 /* MaskCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E04A236BBFB300ADEB39 /* MaskCollectionViewModel.swift */; };
+		BB64E05D236BBFB300ADEB39 /* MaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E04C236BBFB300ADEB39 /* MaskExtension.swift */; };
+		BB64E05E236BBFB300ADEB39 /* MaskLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */; };
+		BB64E05F236BBFB300ADEB39 /* MaskGifObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E04F236BBFB300ADEB39 /* MaskGifObject.swift */; };
+		BB64E060236BBFB300ADEB39 /* MaskPortraitMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E050236BBFB300ADEB39 /* MaskPortraitMatte.swift */; };
+		BB64E061236BBFB300ADEB39 /* MaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E052236BBFB300ADEB39 /* MaskProtocol.swift */; };
+		BB64E062236BBFB300ADEB39 /* MaskCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E054236BBFB300ADEB39 /* MaskCustomCell.swift */; };
+		BB64E063236BBFB300ADEB39 /* MaskDismissCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */; };
 		C2BB2E6E12641E69AE79FEC3B02CC166 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB747CF3E2ABBCD42D409E3E0231809 /* Match.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C2CCC74898E577E370DF68A65D59CA5F /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F2BB14E2878DDD4244F0E433FD5B2 /* ExampleHooks.swift */; };
 		C394777CF14CEED282E0A7FBCFCE9F07 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A267E423FDBA7EC09764C529F3CCC /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -133,14 +136,11 @@
 		DBBBAB509EC431DE262182D9716ACA32 /* URL+FileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BF2320DDEE96B1ED7A57CCBC9B2BEA /* URL+FileName.swift */; };
 		DC6ED00DB4FF15514EF8FA7F26EA90A1 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6DE0E118BB5AF05C476975F92DB460 /* RaisesException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		DD18538D18351378514457291C1E71E1 /* Pods-MaskingLayer_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1FC35C2EF549105343D2367A0B33E2 /* Pods-MaskingLayer_Tests-dummy.m */; };
-		DD9CA66924A298CFA3EC28A738715CCA /* MaskCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1596BCBC898F69D98E3DA0CFD8E25F /* MaskCollectionView.swift */; };
 		DDD2C08D56A30B9C62A31D5FD0DBE241 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8BACA6AB02FA9073CCF179DEF74834 /* Foundation.framework */; };
 		DFF07B850D222723C7164CFE00E2B8FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8BACA6AB02FA9073CCF179DEF74834 /* Foundation.framework */; };
 		E1BACCE774395C7371CA9C2B0C0A2DC4 /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 45A9B95BF45B18DBE86DF08E94E2321E /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3CFF2E9B90E74F0C48389FAB19D89AD /* MaskLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C06A61A86B602BE411605F265DD2E2 /* MaskLayer.swift */; };
 		E43B087D765EB4BE973062B5BFD1C9AF /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1746D0100F7D3846B96C125E50A06E0 /* AssertionRecorder.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		E683739FA3078BC4B8080EB244528E89 /* NimbleXCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB67F43DF46280AFA1425353C0751EB0 /* NimbleXCTestHandler.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		E77495ADF0393D903521EB585AF53FA0 /* MaskCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C3D1720673B111956DF3BAF39801B7 /* MaskCollectionViewModel.swift */; };
 		E98CA65C87610E174B6C62D4A47140D7 /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3011F82DA0B4F574B642051EA4358 /* Contain.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		EBA266C8241039F86DB3815705AEED61 /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2E19768209FD8DD49E3DB9A47F537 /* BeIdenticalTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		EC504D06B4057B8AC43195C7D8BBF7F6 /* BeVoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3E1BB4849FB41DA5F8476E924EC88 /* BeVoid.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -216,11 +216,9 @@
 		21B0D381E0DBCE9C03870E722E7BF1CA /* QuickSelectedTestSuiteBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickSelectedTestSuiteBuilder.swift; path = Sources/Quick/QuickSelectedTestSuiteBuilder.swift; sourceTree = "<group>"; };
 		2335AAA4B4009C868720D2755DE6D5F0 /* Nimble.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nimble.xcconfig; sourceTree = "<group>"; };
 		236802D3211DCD1514A88B85B853C3B7 /* Nimble-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Nimble-Info.plist"; sourceTree = "<group>"; };
-		2763CA270C2E28EF1DE550C47C44A830 /* MaskImagePicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskImagePicker.swift; path = MaskingLayer/Classes/MaskImagePicker.swift; sourceTree = "<group>"; };
 		278DB898F3273E014F5E307865520996 /* Pods-MaskingLayer_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MaskingLayer_Example-umbrella.h"; sourceTree = "<group>"; };
 		28FA91603FEF45F264F476CBA9A76E44 /* MaskingLayer.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = MaskingLayer.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		293DA513D6793EDA01E3B41C20DF998B /* NMBExpectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NMBExpectation.swift; path = Sources/Nimble/Adapters/NMBExpectation.swift; sourceTree = "<group>"; };
-		29C06A61A86B602BE411605F265DD2E2 /* MaskLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskLayer.swift; path = MaskingLayer/Classes/MaskLayer.swift; sourceTree = "<group>"; };
 		2A96C919D4059A094E74E723B8A3B0A7 /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
 		2AB747CF3E2ABBCD42D409E3E0231809 /* Match.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Match.swift; path = Sources/Nimble/Matchers/Match.swift; sourceTree = "<group>"; };
 		2AC58D27CC70FB8E37844D20E724BAC6 /* ThrowError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThrowError.swift; path = Sources/Nimble/Matchers/ThrowError.swift; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 		2EA47EF025324E7BC48F95B53CE1E899 /* Async.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Async.swift; path = Sources/Nimble/Utils/Async.swift; sourceTree = "<group>"; };
 		304065ACE2AD17B283BD447586C44ACC /* FailureMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FailureMessage.swift; path = Sources/Nimble/FailureMessage.swift; sourceTree = "<group>"; };
 		304EA6673B617C5E6456AE4FD666F624 /* CwlCatchException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlCatchException.swift; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift; sourceTree = "<group>"; };
-		30BFD2C874E769D7842A721B96998F6E /* MaskGifObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskGifObject.swift; path = MaskingLayer/Classes/MaskGifObject.swift; sourceTree = "<group>"; };
 		3598C3741B6BF15FF53AAC919261CA14 /* Pods-MaskingLayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MaskingLayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3AE9041F31B3BD17522FC9025E4C0E87 /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
 		3B6AB430862AF8C2ACABF5437DEF2CCE /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Sources/Nimble/DSL.swift; sourceTree = "<group>"; };
@@ -259,7 +256,6 @@
 		6A4C3F1B0F4FBD4F6C377C88C14D8DAF /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
 		6BA0D483C2D41AE0FDA540DB3969F2BF /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		6D69B1155F6128CD5429849010474916 /* ContainElementSatisfying.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContainElementSatisfying.swift; path = Sources/Nimble/Matchers/ContainElementSatisfying.swift; sourceTree = "<group>"; };
-		6D882A36C78324F550578EB9319641D2 /* MaskVideoURLView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskVideoURLView.swift; path = MaskingLayer/Classes/MaskVideoURLView.swift; sourceTree = "<group>"; };
 		6D8C27F350461A79C8C069FC942CB6EA /* BeCloseTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeCloseTo.swift; path = Sources/Nimble/Matchers/BeCloseTo.swift; sourceTree = "<group>"; };
 		6DF43E47CE32BB137EA02BD133148F9E /* SVProgressHUD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SVProgressHUD-Info.plist"; sourceTree = "<group>"; };
 		70C3011F82DA0B4F574B642051EA4358 /* Contain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Contain.swift; path = Sources/Nimble/Matchers/Contain.swift; sourceTree = "<group>"; };
@@ -280,7 +276,6 @@
 		84DCBDDF1DB27CD97F22AF709BBBB7A0 /* mach_excServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mach_excServer.h; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/mach_excServer.h; sourceTree = "<group>"; };
 		870478A8D0BF82F0FC249CC1C9F7A9B2 /* Nimble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nimble.modulemap; sourceTree = "<group>"; };
 		87AEFAD782DFC8B51D0B36C69A7DED15 /* Pods-MaskingLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MaskingLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		8845DDDAE75AC2E870EDF1A22E2A70F0 /* MaskNavigationObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskNavigationObject.swift; path = MaskingLayer/Classes/MaskNavigationObject.swift; sourceTree = "<group>"; };
 		89A6BC8BBF46D76698282CF110EFC88C /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestObservationCenter+Register.m"; path = "Sources/NimbleObjectiveC/XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
 		89C021672725134E4EDDFA32F94DF0AE /* MaskingLayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MaskingLayer-dummy.m"; sourceTree = "<group>"; };
 		8A1FC35C2EF549105343D2367A0B33E2 /* Pods-MaskingLayer_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MaskingLayer_Tests-dummy.m"; sourceTree = "<group>"; };
@@ -299,7 +294,6 @@
 		9953FB17F205F7F8C3B5F371AC79AD63 /* CwlDarwinDefinitions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlDarwinDefinitions.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift; sourceTree = "<group>"; };
 		99A5B4FE0BA624DFDA17A83704448572 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Sources/Nimble/Expression.swift; sourceTree = "<group>"; };
 		9B70977171822F5100FC669C715ED620 /* MaskingLayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MaskingLayer.xcconfig; sourceTree = "<group>"; };
-		9D0A7772EBEAD35D03FB34A6583AB0D5 /* MaskCustomCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskCustomCell.swift; path = MaskingLayer/Classes/MaskCustomCell.swift; sourceTree = "<group>"; };
 		9DCC232023AA2388517FD43D3DABF695 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Nimble/Utils/Errors.swift; sourceTree = "<group>"; };
 		9E004AE74F520B2F3353E0CDDB09579A /* BeAKindOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeAKindOf.swift; path = Sources/Nimble/Matchers/BeAKindOf.swift; sourceTree = "<group>"; };
 		9EE2E19768209FD8DD49E3DB9A47F537 /* BeIdenticalTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeIdenticalTo.swift; path = Sources/Nimble/Matchers/BeIdenticalTo.swift; sourceTree = "<group>"; };
@@ -314,12 +308,21 @@
 		B494EA56C9E334DD191840A1BDBCEF7A /* CwlPreconditionTesting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CwlPreconditionTesting.h; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h; sourceTree = "<group>"; };
 		B895F8448D26F61B62648757439BEACE /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Sources/Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
 		B9EFB5EBDCE5D56D4C6D218821F4B65F /* Pods-MaskingLayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MaskingLayer_Example-frameworks.sh"; sourceTree = "<group>"; };
-		BB0C1B3923110750007D0D00 /* MaskExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskExtension.swift; path = ../MaskingLayer/Classes/DefalutExtension/MaskExtension.swift; sourceTree = "<group>"; };
-		BB0C1B3B2311075C007D0D00 /* MaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskProtocol.swift; path = ../MaskingLayer/Classes/MaskProtocol/MaskProtocol.swift; sourceTree = "<group>"; };
-		BB0C1B3D23110768007D0D00 /* PathStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PathStruct.swift; path = ../MaskingLayer/Classes/PathStruct/PathStruct.swift; sourceTree = "<group>"; };
 		BB5D541CE81F6420020CFE1E2039BB97 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
-		BBE1B71E21590F7F00AC918D /* MaskPortraitMatte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskPortraitMatte.swift; path = MaskingLayer/Classes/MaskPortraitMatte.swift; sourceTree = "<group>"; };
-		BBE1B72021590FA500AC918D /* MaskAcpectMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskAcpectMargin.swift; path = MaskingLayer/Classes/MaskAcpectMargin.swift; sourceTree = "<group>"; };
+		BB64E041236BBFB300ADEB39 /* PathStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathStruct.swift; sourceTree = "<group>"; };
+		BB64E043236BBFB300ADEB39 /* MaskImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskImagePicker.swift; sourceTree = "<group>"; };
+		BB64E044236BBFB300ADEB39 /* MaskAcpectMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskAcpectMargin.swift; sourceTree = "<group>"; };
+		BB64E046236BBFB300ADEB39 /* MaskVideoURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskVideoURLView.swift; sourceTree = "<group>"; };
+		BB64E047236BBFB300ADEB39 /* MaskCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskCollectionView.swift; sourceTree = "<group>"; };
+		BB64E049236BBFB300ADEB39 /* MaskingLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskingLayerViewModel.swift; sourceTree = "<group>"; };
+		BB64E04A236BBFB300ADEB39 /* MaskCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskCollectionViewModel.swift; sourceTree = "<group>"; };
+		BB64E04C236BBFB300ADEB39 /* MaskExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskExtension.swift; sourceTree = "<group>"; };
+		BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskLayer.swift; sourceTree = "<group>"; };
+		BB64E04F236BBFB300ADEB39 /* MaskGifObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskGifObject.swift; sourceTree = "<group>"; };
+		BB64E050236BBFB300ADEB39 /* MaskPortraitMatte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskPortraitMatte.swift; sourceTree = "<group>"; };
+		BB64E052236BBFB300ADEB39 /* MaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskProtocol.swift; sourceTree = "<group>"; };
+		BB64E054236BBFB300ADEB39 /* MaskCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskCustomCell.swift; sourceTree = "<group>"; };
+		BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskDismissCell.swift; sourceTree = "<group>"; };
 		BC3AE3F374FCF4248962E702B6F5B8AC /* Pods-MaskingLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MaskingLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BCB8A2C8EFAE797B385AB12B0D894CEA /* MaskingLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MaskingLayer-umbrella.h"; sourceTree = "<group>"; };
 		BE8B9B6837F4AB6944503482F6FFF8CD /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
@@ -333,7 +336,6 @@
 		C940993B563830A68FEA022DD03AAF22 /* HooksPhase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HooksPhase.swift; path = Sources/Quick/Hooks/HooksPhase.swift; sourceTree = "<group>"; };
 		C9D31AAA15157EDF9043B31589969238 /* BeNil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeNil.swift; path = Sources/Nimble/Matchers/BeNil.swift; sourceTree = "<group>"; };
 		CBE7B4024D40498FBD5A1A4EB5923676 /* QuickConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickConfiguration.m; path = Sources/QuickObjectiveC/Configuration/QuickConfiguration.m; sourceTree = "<group>"; };
-		D0BEAF0FDCE571A4648F8D8F99FDA52A /* MaskDismissCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskDismissCell.swift; path = MaskingLayer/Classes/MaskDismissCell.swift; sourceTree = "<group>"; };
 		D174ED1DD0C19E5C6317B9243AAF2050 /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlBadInstructionException.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift; sourceTree = "<group>"; };
 		D480E54F0C3AEFD1ED78DE38AB719148 /* Nimble-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nimble-dummy.m"; sourceTree = "<group>"; };
 		D71845B98EF3B466FD3851A1A5F79D75 /* BeLessThan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLessThan.swift; path = Sources/Nimble/Matchers/BeLessThan.swift; sourceTree = "<group>"; };
@@ -346,7 +348,6 @@
 		E00E45B1EF335C886C3896960F1D2D57 /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Sources/Quick/DSL/DSL.swift; sourceTree = "<group>"; };
 		E0B2D97033720AC859B76A593B3945A1 /* MatcherFunc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherFunc.swift; path = Sources/Nimble/Matchers/MatcherFunc.swift; sourceTree = "<group>"; };
 		E0BF2320DDEE96B1ED7A57CCBC9B2BEA /* URL+FileName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+FileName.swift"; path = "Sources/Quick/URL+FileName.swift"; sourceTree = "<group>"; };
-		E0C3D1720673B111956DF3BAF39801B7 /* MaskCollectionViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskCollectionViewModel.swift; path = MaskingLayer/Classes/MaskCollectionViewModel.swift; sourceTree = "<group>"; };
 		E230D17825D02E72B71667F2DFF7A038 /* Pods-MaskingLayer_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MaskingLayer_Example.modulemap"; sourceTree = "<group>"; };
 		E2D00ABF0F9EEA9AFE8749B219F557D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E50D8AF26A165DEA2233921F3A2C3261 /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
@@ -368,7 +369,6 @@
 		F8C2F0DA57A4D13DD198548922A08931 /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
 		F95547DE7CB1AA7F9812BDF7C4389B9A /* Stringers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stringers.swift; path = Sources/Nimble/Utils/Stringers.swift; sourceTree = "<group>"; };
 		FB46550C5F0D92E6B7DFF0B96277F223 /* ExpectationMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpectationMessage.swift; path = Sources/Nimble/ExpectationMessage.swift; sourceTree = "<group>"; };
-		FD1596BCBC898F69D98E3DA0CFD8E25F /* MaskCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MaskCollectionView.swift; path = MaskingLayer/Classes/MaskCollectionView.swift; sourceTree = "<group>"; };
 		FEBEEF82B881D5162AC70DD3032A3F95 /* Quick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Quick.h; path = Sources/QuickObjectiveC/Quick.h; sourceTree = "<group>"; };
 		FED759F2E097BB4904D03ECE8E57FA62 /* World+DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "World+DSL.swift"; path = "Sources/Quick/DSL/World+DSL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -627,47 +627,95 @@
 			);
 			sourceTree = "<group>";
 		};
-		BB0C1B3023110323007D0D00 /* DefalutExtension */ = {
+		BB64E040236BBFB300ADEB39 /* PathStruct */ = {
 			isa = PBXGroup;
 			children = (
-				BB0C1B3923110750007D0D00 /* MaskExtension.swift */,
+				BB64E041236BBFB300ADEB39 /* PathStruct.swift */,
 			);
-			path = DefalutExtension;
+			name = PathStruct;
+			path = MaskingLayer/Classes/PathStruct;
 			sourceTree = "<group>";
 		};
-		BB0C1B3323110520007D0D00 /* MaskProtocol */ = {
+		BB64E042236BBFB300ADEB39 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				BB0C1B3B2311075C007D0D00 /* MaskProtocol.swift */,
+				BB64E043236BBFB300ADEB39 /* MaskImagePicker.swift */,
+				BB64E044236BBFB300ADEB39 /* MaskAcpectMargin.swift */,
 			);
-			path = MaskProtocol;
+			name = Util;
+			path = MaskingLayer/Classes/Util;
 			sourceTree = "<group>";
 		};
-		BB0C1B36231106A6007D0D00 /* PathStruct */ = {
+		BB64E045236BBFB300ADEB39 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BB0C1B3D23110768007D0D00 /* PathStruct.swift */,
+				BB64E046236BBFB300ADEB39 /* MaskVideoURLView.swift */,
+				BB64E047236BBFB300ADEB39 /* MaskCollectionView.swift */,
 			);
-			path = PathStruct;
+			name = View;
+			path = MaskingLayer/Classes/View;
+			sourceTree = "<group>";
+		};
+		BB64E048236BBFB300ADEB39 /* ViwModel */ = {
+			isa = PBXGroup;
+			children = (
+				BB64E049236BBFB300ADEB39 /* MaskingLayerViewModel.swift */,
+				BB64E04A236BBFB300ADEB39 /* MaskCollectionViewModel.swift */,
+			);
+			name = ViwModel;
+			path = MaskingLayer/Classes/ViwModel;
+			sourceTree = "<group>";
+		};
+		BB64E04B236BBFB300ADEB39 /* DefalutExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BB64E04C236BBFB300ADEB39 /* MaskExtension.swift */,
+			);
+			name = DefalutExtension;
+			path = MaskingLayer/Classes/DefalutExtension;
+			sourceTree = "<group>";
+		};
+		BB64E04D236BBFB300ADEB39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */,
+				BB64E04F236BBFB300ADEB39 /* MaskGifObject.swift */,
+				BB64E050236BBFB300ADEB39 /* MaskPortraitMatte.swift */,
+			);
+			name = Model;
+			path = MaskingLayer/Classes/Model;
+			sourceTree = "<group>";
+		};
+		BB64E051236BBFB300ADEB39 /* MaskProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				BB64E052236BBFB300ADEB39 /* MaskProtocol.swift */,
+			);
+			name = MaskProtocol;
+			path = MaskingLayer/Classes/MaskProtocol;
+			sourceTree = "<group>";
+		};
+		BB64E053236BBFB300ADEB39 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BB64E054236BBFB300ADEB39 /* MaskCustomCell.swift */,
+				BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */,
+			);
+			name = Cell;
+			path = MaskingLayer/Classes/Cell;
 			sourceTree = "<group>";
 		};
 		C0EFF1BD2E8FCF38575E81E86A1E7450 /* MaskingLayer */ = {
 			isa = PBXGroup;
 			children = (
-				BB0C1B36231106A6007D0D00 /* PathStruct */,
-				BB0C1B3323110520007D0D00 /* MaskProtocol */,
-				BB0C1B3023110323007D0D00 /* DefalutExtension */,
-				BBE1B72021590FA500AC918D /* MaskAcpectMargin.swift */,
-				BBE1B71E21590F7F00AC918D /* MaskPortraitMatte.swift */,
-				FD1596BCBC898F69D98E3DA0CFD8E25F /* MaskCollectionView.swift */,
-				E0C3D1720673B111956DF3BAF39801B7 /* MaskCollectionViewModel.swift */,
-				9D0A7772EBEAD35D03FB34A6583AB0D5 /* MaskCustomCell.swift */,
-				D0BEAF0FDCE571A4648F8D8F99FDA52A /* MaskDismissCell.swift */,
-				30BFD2C874E769D7842A721B96998F6E /* MaskGifObject.swift */,
-				2763CA270C2E28EF1DE550C47C44A830 /* MaskImagePicker.swift */,
-				29C06A61A86B602BE411605F265DD2E2 /* MaskLayer.swift */,
-				8845DDDAE75AC2E870EDF1A22E2A70F0 /* MaskNavigationObject.swift */,
-				6D882A36C78324F550578EB9319641D2 /* MaskVideoURLView.swift */,
+				BB64E053236BBFB300ADEB39 /* Cell */,
+				BB64E04B236BBFB300ADEB39 /* DefalutExtension */,
+				BB64E051236BBFB300ADEB39 /* MaskProtocol */,
+				BB64E04D236BBFB300ADEB39 /* Model */,
+				BB64E040236BBFB300ADEB39 /* PathStruct */,
+				BB64E042236BBFB300ADEB39 /* Util */,
+				BB64E045236BBFB300ADEB39 /* View */,
+				BB64E048236BBFB300ADEB39 /* ViwModel */,
 				107DE6D99CCA9F38C9DA071E7179A42A /* Pod */,
 				EF1848094E3FC4F70238123641793C59 /* Support Files */,
 			);
@@ -1191,21 +1239,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD9CA66924A298CFA3EC28A738715CCA /* MaskCollectionView.swift in Sources */,
-				E77495ADF0393D903521EB585AF53FA0 /* MaskCollectionViewModel.swift in Sources */,
-				BBE1B71F21590F7F00AC918D /* MaskPortraitMatte.swift in Sources */,
-				B0574B4CF3DE0E45974F108A889F83B3 /* MaskCustomCell.swift in Sources */,
-				BBE1B72121590FA500AC918D /* MaskAcpectMargin.swift in Sources */,
-				992C62D85EEEAB72AA54F84F3BCD8291 /* MaskDismissCell.swift in Sources */,
-				BB0C1B3A23110750007D0D00 /* MaskExtension.swift in Sources */,
-				1D4A2AB1723745A94C2D2BA04698DA79 /* MaskGifObject.swift in Sources */,
-				84932A11EC39C9045CCF9DF874BF1E02 /* MaskImagePicker.swift in Sources */,
+				BB64E062236BBFB300ADEB39 /* MaskCustomCell.swift in Sources */,
+				BB64E059236BBFB300ADEB39 /* MaskVideoURLView.swift in Sources */,
+				BB64E057236BBFB300ADEB39 /* MaskImagePicker.swift in Sources */,
+				BB64E060236BBFB300ADEB39 /* MaskPortraitMatte.swift in Sources */,
+				BB64E061236BBFB300ADEB39 /* MaskProtocol.swift in Sources */,
+				BB64E05B236BBFB300ADEB39 /* MaskingLayerViewModel.swift in Sources */,
 				0A5DA5846041C2EE6072850D1C393228 /* MaskingLayer-dummy.m in Sources */,
-				E3CFF2E9B90E74F0C48389FAB19D89AD /* MaskLayer.swift in Sources */,
-				7FF5763BFFB44B32242428CD1DDF44CF /* MaskNavigationObject.swift in Sources */,
-				301C7891E40F5C521AAE59D7598469F6 /* MaskVideoURLView.swift in Sources */,
-				BB0C1B3C2311075C007D0D00 /* MaskProtocol.swift in Sources */,
-				BB0C1B3E23110768007D0D00 /* PathStruct.swift in Sources */,
+				BB64E05F236BBFB300ADEB39 /* MaskGifObject.swift in Sources */,
+				BB64E05C236BBFB300ADEB39 /* MaskCollectionViewModel.swift in Sources */,
+				BB64E056236BBFB300ADEB39 /* PathStruct.swift in Sources */,
+				BB64E063236BBFB300ADEB39 /* MaskDismissCell.swift in Sources */,
+				BB64E05A236BBFB300ADEB39 /* MaskCollectionView.swift in Sources */,
+				BB64E05E236BBFB300ADEB39 /* MaskLayer.swift in Sources */,
+				BB64E05D236BBFB300ADEB39 /* MaskExtension.swift in Sources */,
+				BB64E058236BBFB300ADEB39 /* MaskAcpectMargin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

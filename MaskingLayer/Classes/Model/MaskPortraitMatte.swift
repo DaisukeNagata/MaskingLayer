@@ -1,5 +1,5 @@
 //
-//  MaskDepthDataMap.swift
+//  MaskPortraitMatteModel.swift
 //  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/09/23.
@@ -9,7 +9,7 @@ import ImageIO
 import AVFoundation
 
 @available(iOS 12.0, *)
-class MaskPortraitMatte: NSObject {
+class MaskPortraitMatteModel: NSObject {
 
     func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat) {
 

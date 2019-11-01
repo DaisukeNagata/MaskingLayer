@@ -18,7 +18,7 @@ struct CommonStructure {
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate {
 
-    var mO = MaskNavigationObject(minSegment: 15)
+    var mO = MaskingLayerViewModel(minSegment: 15)
 
     override func viewDidLoad() {
         super.viewDidLoad()

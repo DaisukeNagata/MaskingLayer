@@ -1,5 +1,5 @@
 //
-//  MaskNavigationObject.swift
+//  MaskingLayerViewModel.swift
 //  MaskingLayer
 //
 //  Created by 永田大祐 on 2018/09/01.
@@ -8,7 +8,7 @@
 import Foundation
 import MobileCoreServices
 
-public class MaskNavigationObject: NSObject, CViewProtocol {
+public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     public var maskLayer: MaskLayer
     public var imageView = UIImageView()
@@ -36,7 +36,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 
     public func maskPortraitMatte(minSegment: CGFloat) {
         if #available(iOS 12.0, *) {
-            let maskPortraitMatte = MaskPortraitMatte()
+            let maskPortraitMatte = MaskPortraitMatteModel()
             maskPortraitMatte.portraitMatte(imageV: imageView, vc: vc, minSegment: minSegment)
         }
     }
@@ -141,7 +141,7 @@ public class MaskNavigationObject: NSObject, CViewProtocol {
 }
 
 // MARK: UICollectionViewDelegate
-extension MaskNavigationObject: UICollectionViewDelegate {
+extension MaskingLayerViewModel: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")
@@ -171,7 +171,7 @@ extension MaskNavigationObject: UICollectionViewDelegate {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
+extension MaskingLayerViewModel: UICollectionViewDelegateFlowLayout {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
@@ -183,7 +183,7 @@ extension MaskNavigationObject: UICollectionViewDelegateFlowLayout {
 }
 
 
-extension MaskNavigationObject {
+extension MaskingLayerViewModel {
     public func panTapped(sender: UIPanGestureRecognizer) {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {

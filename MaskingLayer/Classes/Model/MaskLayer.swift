@@ -40,7 +40,7 @@ public class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func alertSave(views: UIViewController,mo: MaskNavigationObject) {
+    public func alertSave(views: UIViewController,mo: MaskingLayerViewModel) {
         self.mutablePathSet(mo: mo)
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
@@ -135,7 +135,7 @@ public class MaskLayer: NSObject {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    public func mutablePathSet(mo: MaskNavigationObject? = nil) {
+    public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
 
         mo?.imageResize()
         convertPath = CGMutablePath()
