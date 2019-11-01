@@ -20,6 +20,6 @@ protocol MaskPathElement {
     func addAsPolygon(to path:CGMutablePath) -> CGMutablePath
 }
 
-public protocol Observer {
+protocol Observer {
     func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void)
 }

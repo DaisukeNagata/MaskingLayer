@@ -152,6 +152,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, imageAr: (vm.setVideoURLView.imageAr))
+        maskCount.value = 0
     }
 }
 
@@ -224,6 +225,7 @@ extension MaskingLayerViewModel {
     public func longTapeed(sender:UILongPressGestureRecognizer) { longTappedCount.value = 0 }
 }
 
+// MARK: UIImagePickerControllerDelegate & UINavigationControllerDelegate
 extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationControllerDelegate, Observer {
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
@@ -231,24 +233,23 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         if #available(iOS 11.0, *) { defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url") }
 
         resetCView()
-        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
+
+        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as? NSString
         if mediaType == kUTTypeMovie {
             defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
-            self.setURL()
-            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                self.maskGif()
-                picker.dismiss(animated: true, completion: nil)
-                self.maskCount.value = 0
-            }
+            setURL()
+            picker.dismiss(animated: true, completion: { self.maskGif() })
+
         } else {
             maskCount.value = 0
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
-            picker.dismiss(animated: true, completion: nil)
-            frameResize(images: images)
-            maskPathBegan(position: CGPoint(), imageView: imageView)
+            picker.dismiss(animated: true, completion: {
+                self.frameResize(images: images)
+                self.maskPathBegan(position: CGPoint(), imageView: self.imageView)
+            })
         }
     }
-    
+
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
@@ -259,6 +260,6 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
     public func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
         return input.rawValue
     }
-    
-    public func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void) { observable.bind(observer: with) }
+
+    func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void) { observable.bind(observer: with) }
 }
