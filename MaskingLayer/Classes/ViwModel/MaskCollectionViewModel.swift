@@ -10,8 +10,8 @@ import UIKit
 final class MaskCollectionViewModel: NSObject {
 
     var rotate: CGFloat = 0
-    var checkLabel:UILabel?
-    var checkArray:NSMutableArray = []
+    var checkLabel: UILabel?
+    var checkArray: NSMutableArray = []
     var setVideoURLView = MaskVideoURLView()
 
     var image = UIImage()
@@ -21,11 +21,12 @@ final class MaskCollectionViewModel: NSObject {
     let checkLabelItemSize: CGFloat = 10
     let collectionItemSize: CGFloat = 88
     let imageList = ["IMG_4011.jpg"]
+    
+    private var transRotate = CGAffineTransform()
 }
 
 // MARK: UICollectionViewDataSource
 extension MaskCollectionViewModel: UICollectionViewDataSource {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count }
@@ -37,7 +38,6 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             image = UIImage(named: imageList[indexPath.section]) ?? UIImage()
             image = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
 
-            var transRotate = CGAffineTransform()
             let angle = rotate * CGFloat.pi / 180
             transRotate = CGAffineTransform(rotationAngle: CGFloat(angle))
             cell.transform = transRotate

@@ -10,9 +10,9 @@ import MobileCoreServices
 
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
-    public var imageView = UIImageView()
-    public var defaltImageView = UIImageView()
-    public var imageBackView = UIImageView()
+    var imageView: UIImageView?
+    var defaltImageView: UIImageView?
+    var imageBackView: UIImageView?
 
     var vm = MaskCollectionViewModel()
     lazy var cView: MaskCollectionView = {
@@ -28,22 +28,28 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
-
+    
+    private var url: URL?
+    private var defo = UserDefaults.standard
     private var index = Int()
     private var margin: CGFloat = 10
     private var vc = UIViewController()
     private var gifObject = MaskGifObject()
 
     public init(minSegment: CGFloat) {
+        imageView = UIImageView()
+        defaltImageView = UIImageView()
+        imageBackView = UIImageView()
+
         maskLayer = MaskLayer(minSegment: minSegment)
     }
 
     public func frameResize(images: UIImage) {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        imageView.image = image
-        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
-        defaltImageView.image = imageView.image
-        defaltImageView.frame = imageView.frame
+        imageView?.image = image
+        imageView?.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        defaltImageView?.image = imageView?.image
+        defaltImageView?.frame = imageView?.frame ?? CGRect()
         maskPathSet()
     }
 
@@ -51,7 +57,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         if #available(iOS 12.0, *) {
             DispatchQueue.main.async {
                 let maskPortraitMatte = MaskPortraitMatteModel()
-                maskPortraitMatte.portraitMatte(imageV    : self.imageView,
+                maskPortraitMatte.portraitMatte(imageV    : self.imageView ?? UIImageView(),
                                                 vc        : self.vc,
                                                 minSegment: minSegment, mo: self)
             }
@@ -60,8 +66,8 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     func gousei() {
         DispatchQueue.main.async {
-            let top: UIImage = self.imageView.image ?? UIImage()
-            let bottom: UIImage = self.imageBackView.image ?? UIImage()
+            let top: UIImage = self.imageView?.image ?? UIImage()
+            let bottom: UIImage = self.imageBackView?.image ?? UIImage()
             let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
             UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
             bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
@@ -69,19 +75,19 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
             let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
             
-            self.imageView.image = nImage
-            self.imageView.setNeedsLayout()
+            self.imageView?.image = nImage
+            self.imageView?.setNeedsLayout()
         }
     }
 
     func setURL() {
-        vm.setVideoURLView.setURL()
-        vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: vc.view.frame.width, height: vc.view.frame.width/15)
+        vm.setVideoURLView.setURL { self.call() }
+        self.vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: self.vc.view.frame.width, height: self.vc.view.frame.width/15)
     }
 
     func imageResize() {
-        imageView.image = defaltImageView.image
-        imageBackView.image = nil
+        imageView?.image = defaltImageView?.image
+        imageBackView?.image = nil
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
@@ -104,13 +110,13 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         elements.insert(MaskMove(x: position.x, y: position.y), at: 0)
         elements.append(MaskLine(x: position.x, y: position.y))
         maskLayer.clipLayer.path = MaskPath.path(from: elements, path: maskLayer.convertPath)
-        guard let size = imageView.image?.size else { return }
+        guard let size = imageView?.image?.size else { return }
 
-        imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
-        maskLayer.imageSet(view: view, imageView: imageView, image: image)
+        imageView?.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
+        maskLayer.imageSet(view: view, imageView: imageView ?? UIImageView(), image: image)
 
         guard vm.setVideoURLView.imageAr?.isEmpty ?? false else {
-            vm.setVideoURLView.imageAr?[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
+            vm.setVideoURLView.imageAr?[index] = ((imageView?.image?.cgImage?.resize((imageView?.image?.cgImage)!))!)
 
             if !vm.checkArray.contains(index) {
                 vm.checkArray.add(index)
@@ -121,18 +127,17 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func maskGif() {
-        let defo = UserDefaults.standard
+        defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
-        gifObject.makeGifImageMovie(url: url,frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
-        maskCount.value = 0
+        gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
     }
 
     private func selfResize(images: UIImage, view: UIView) {
         image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.image = image
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        defaltImageView.image = imageView.image
-        defaltImageView.frame = imageView.frame
+        imageView?.image = image
+        imageView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        defaltImageView?.image = imageView?.image
+        defaltImageView?.frame = imageView?.frame ?? CGRect()
     }
 
     private func resetCView() {
@@ -153,31 +158,27 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     private func maskPathSet() {
         maskLayer.maskColor = .clear
-        maskPathEnded(position: CGPoint(), view: imageView)
+        maskPathEnded(position: CGPoint(), view: imageView ?? UIImageView())
         maskLayer.maskColor = .white
+    }
+    
+    private func call() {
+        DispatchQueue.main.async {
+            self.maskCount.value = 0
+        }
     }
 }
 
 // MARK: UICollectionViewDelegate
 extension MaskingLayerViewModel: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let defo = UserDefaults.standard
-        let url = defo.url(forKey: "url")
-
         if indexPath.section == 0 {
-            do {
-                vm.rotate = 90
-                maskGif()
-
-                let data = try Data(contentsOf: url!)
-                self.imageView.animateGIF(data: data, duration: Double(4)) { }
-
-            } catch { print("error") }
-
+            vm.rotate = 90
+            maskGif()
         } else {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section])!
-            imageView.image = image
+            imageView?.image = image
 
             maskLayer.mutablePathSet()
 
@@ -206,15 +207,15 @@ extension MaskingLayerViewModel {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
-            maskPathEnded(position: position, view: imageView)
+            maskPathEnded(position: position, view: imageView ?? UIImageView())
             break
         case .possible:
             break
         case .began:
-            maskPathBegan(position: position, imageView: imageView)
+            maskPathBegan(position: position, imageView: imageView ?? UIImageView())
             break
         case .changed:
-            maskAddLine(position: position, imageView: imageView)
+            maskAddLine(position: position, imageView: imageView ?? UIImageView())
             break
         case .cancelled:
             break
@@ -240,13 +241,13 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         if mediaType == kUTTypeMovie {
             defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as? URL, forKey: "url")
             setURL()
-            picker.dismiss(animated: true, completion: { self.maskGif() })
+            picker.dismiss(animated: true, completion: nil)
 
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             picker.dismiss(animated: true, completion: {
                 self.frameResize(images: images)
-                self.maskPathBegan(position: CGPoint(), imageView: self.imageView)
+                self.maskPathBegan(position: CGPoint(), imageView: self.imageView ?? UIImageView())
                 self.maskCount.value = 0
             })
         }

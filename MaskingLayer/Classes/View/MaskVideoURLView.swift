@@ -17,7 +17,7 @@ public class MaskVideoURLView: UIView {
     var imageAr: Array<CGImage>?
     var thumbnailViews: [UIImageView]?
     var dataArray = Array<Data>()
-
+    var callBack = { () -> Void in }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,13 +32,14 @@ public class MaskVideoURLView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setURL() {
+    func setURL(_ bind: @escaping () -> Void) {
         let defo = UserDefaults.standard
         guard let url =  defo.url(forKey: "url") else { return }
         self.duration = MaskVideoURLView().videoDuration(videoURL: url)
         self.videoURL = url
         self.superview?.layoutSubviews()
         self.updateThumbnails()
+        callBack = bind
     }
 
     func updateThumbnails(){
@@ -124,5 +125,6 @@ public class MaskVideoURLView: UIView {
                 xPos = xPos + view.frame.size.height
             }
         }
+        callBack()
     }
 }

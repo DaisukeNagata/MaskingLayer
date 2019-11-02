@@ -16,7 +16,7 @@ final class MaskGifObject: NSObject {
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    func makeGifImageMovie(url: URL,frameY: Double, imageAr: Array<CGImage>) {
+    func makeGifImageMovie(_ imageView: UIImageView,url: URL,frameY: Double, imageAr: Array<CGImage>) {
         let frameRate = CMTimeMake(value: Int64(frameY), timescale: Int32(frameY))
         let urlDefo = UserDefaults.standard
 
@@ -32,6 +32,11 @@ final class MaskGifObject: NSObject {
         for image in imageAr{ CGImageDestinationAddImage(destination,image,frameProperties as CFDictionary?) }
         if CGImageDestinationFinalize(destination){
             urlDefo.set(url, forKey: "url")
-            print("ok");}
+            do {
+                let data = try Data(contentsOf: url)
+                imageView.animateGIF(data: data, duration: Double(4))
+            } catch {}
+            print("ok")
+        }
     }
 }
