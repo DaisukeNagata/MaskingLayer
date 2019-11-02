@@ -1,5 +1,5 @@
 //
-//  MaskGestureView.swift
+//  MaskGestureViewModel.swift
 //  MaskingLayer
 //
 //  Created by 永田大祐 on 2019/11/01.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class MaskGestureView: NSObject, UIGestureRecognizerDelegate {
+public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
 
     public var maskGestureView: UIView?
     private var mLViewModel: MaskingLayerViewModel?

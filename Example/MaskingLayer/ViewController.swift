@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let mO = MaskingLayerViewModel(minSegment: 15)
-        let MV = MaskGestureView(mO: mO, vc: self)
+        let MV = MaskGestureViewModel(mO: mO, vc: self)
         MV.maskGestureView?.frame = view.frame
         view.addSubview(MV.maskGestureView ?? UIView())
 

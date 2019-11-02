@@ -119,7 +119,7 @@
 		BB64E063236BBFB300ADEB39 /* MaskDismissCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */; };
 		BB64E065236BD08E00ADEB39 /* MaskObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E064236BD08E00ADEB39 /* MaskObservable.swift */; };
 		BB64E067236BD73400ADEB39 /* MaskGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E066236BD73400ADEB39 /* MaskGesture.swift */; };
-		BB64E069236BD7A600ADEB39 /* MaskGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E068236BD7A600ADEB39 /* MaskGestureView.swift */; };
+		BB64E069236BD7A600ADEB39 /* MaskGestureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB64E068236BD7A600ADEB39 /* MaskGestureViewModel.swift */; };
 		C2BB2E6E12641E69AE79FEC3B02CC166 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB747CF3E2ABBCD42D409E3E0231809 /* Match.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C2CCC74898E577E370DF68A65D59CA5F /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66F2BB14E2878DDD4244F0E433FD5B2 /* ExampleHooks.swift */; };
 		C394777CF14CEED282E0A7FBCFCE9F07 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A267E423FDBA7EC09764C529F3CCC /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -328,7 +328,7 @@
 		BB64E055236BBFB300ADEB39 /* MaskDismissCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskDismissCell.swift; sourceTree = "<group>"; };
 		BB64E064236BD08E00ADEB39 /* MaskObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskObservable.swift; sourceTree = "<group>"; };
 		BB64E066236BD73400ADEB39 /* MaskGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskGesture.swift; sourceTree = "<group>"; };
-		BB64E068236BD7A600ADEB39 /* MaskGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskGestureView.swift; sourceTree = "<group>"; };
+		BB64E068236BD7A600ADEB39 /* MaskGestureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskGestureViewModel.swift; sourceTree = "<group>"; };
 		BC3AE3F374FCF4248962E702B6F5B8AC /* Pods-MaskingLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MaskingLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BCB8A2C8EFAE797B385AB12B0D894CEA /* MaskingLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MaskingLayer-umbrella.h"; sourceTree = "<group>"; };
 		BE8B9B6837F4AB6944503482F6FFF8CD /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
@@ -658,7 +658,6 @@
 			children = (
 				BB64E046236BBFB300ADEB39 /* MaskVideoURLView.swift */,
 				BB64E047236BBFB300ADEB39 /* MaskCollectionView.swift */,
-				BB64E068236BD7A600ADEB39 /* MaskGestureView.swift */,
 			);
 			name = View;
 			path = MaskingLayer/Classes/View;
@@ -668,6 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				BB64E04E236BBFB300ADEB39 /* MaskLayer.swift */,
+				BB64E068236BD7A600ADEB39 /* MaskGestureViewModel.swift */,
 				BB64E049236BBFB300ADEB39 /* MaskingLayerViewModel.swift */,
 				BB64E04A236BBFB300ADEB39 /* MaskCollectionViewModel.swift */,
 			);
@@ -1248,7 +1248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB64E069236BD7A600ADEB39 /* MaskGestureView.swift in Sources */,
+				BB64E069236BD7A600ADEB39 /* MaskGestureViewModel.swift in Sources */,
 				BB64E065236BD08E00ADEB39 /* MaskObservable.swift in Sources */,
 				BB64E062236BBFB300ADEB39 /* MaskCustomCell.swift in Sources */,
 				BB64E059236BBFB300ADEB39 /* MaskVideoURLView.swift in Sources */,
