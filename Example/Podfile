@@ -1,11 +1,5 @@
 use_frameworks!
 
 target 'MaskingLayer_Example' do
-  pod 'MaskingLayer', :path => '../'
-  target 'MaskingLayer_Tests' do
-    inherit! :search_paths
-
-    pod 'Quick', '~> 1.2.0'
-    pod 'Nimble', '~> 7.0.2'
-  end
+   pod 'MaskingLayer'
 end

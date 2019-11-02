@@ -1,31 +1,16 @@
 PODS:
-  - MaskingLayer (0.4.2)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
-  - SVProgressHUD (2.2.5)
+  - MaskingLayer (0.9.9.6)
 
 DEPENDENCIES:
-  - MaskingLayer (from `../`)
-  - Nimble (~> 7.0.2)
-  - Quick (~> 1.2.0)
-  - SVProgressHUD
+  - MaskingLayer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Nimble
-    - Quick
-    - SVProgressHUD
-
-EXTERNAL SOURCES:
-  MaskingLayer:
-    :path: "../"
+    - MaskingLayer
 
 SPEC CHECKSUMS:
-  MaskingLayer: c910e3c065413686bc4d7e1850f8483a433a46f7
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  MaskingLayer: 8b3c9d91b4661bdf234e907c16a2aa71d2b892ba
 
-PODFILE CHECKSUM: 1b9c09ab0f4964eba3523415e79286654af7be73
+PODFILE CHECKSUM: 2172508f29a76d37de9409b2838cf6ae9cdd0d66
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.7.4
