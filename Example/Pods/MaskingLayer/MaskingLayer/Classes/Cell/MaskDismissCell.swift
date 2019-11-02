@@ -22,5 +22,5 @@ class MaskDismissCell :UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     static let identifier: UINib = UINib(nibName: "MaskDismissCell", bundle: nil)
-    func imageSet(imageSet: UIImage){ customCell.image = imageSet }
+    func imageSet(imageSet: Data){ customCell.image = UIImage(data: imageSet) }
 }

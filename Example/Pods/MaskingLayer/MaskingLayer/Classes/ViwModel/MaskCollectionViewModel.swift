@@ -44,11 +44,6 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
             cell.imageSet(imageSet: image)
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskDismissCell", for: indexPath) as! MaskDismissCell
-
-            let dataImages = setVideoURLView.dataArray.map { (images) -> UIImage in
-                let resizeImage: UIImage = UIImage(data: images)!.ResizeUIImage(width: collectionItemSize, height:collectionItemSize)
-                return  resizeImage
-            }
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
 
             checkLabel = nil
@@ -59,7 +54,7 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
                 checkLabel?.text = "✅"
                 cell.contentView.addSubview(checkLabel!)
             }
-            cell.imageSet(imageSet: dataImages[indexPath.section])
+            cell.imageSet(imageSet: setVideoURLView.dataArray[indexPath.section])
             return cell
         }
         return cell
