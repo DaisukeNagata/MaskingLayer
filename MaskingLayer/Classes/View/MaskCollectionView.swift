@@ -49,6 +49,6 @@ final class MaskCollectionView: UIView {
         collectionView.frame = self.frame
         scrollView.frame = self.frame
         scrollView.contentSize.height = self.frame.height
-        self.frame.origin.y = UIScreen.main.bounds.height - viewOrigin
+        self.frame.origin.y = UIScreen.main.bounds.height - (self.frame.height/2 + viewOrigin)
     }
 }
