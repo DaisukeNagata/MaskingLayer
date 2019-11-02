@@ -13,16 +13,19 @@ public class MaskVideoURLView: UIView {
 
     var duration: Float64   = 0.0
     var videoURL  = URL(fileURLWithPath: "")
-    public var imageView = UIImageView()
-    public var imageAr = Array<CGImage>()
-    public var thumbnailViews = [UIImageView]()
-    public var dataArray = Array<Data>()
+    var imageView: UIImageView?
+    var imageAr: Array<CGImage>?
+    var thumbnailViews: [UIImageView]?
+    var dataArray = Array<Data>()
 
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         self.frame = UIScreen.main.bounds
+        imageView = UIImageView()
+        imageAr = Array<CGImage>()
+        thumbnailViews = [UIImageView]()
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -68,7 +71,7 @@ public class MaskVideoURLView: UIView {
         var thumbnails = [UIImage]()
         var offset: Float64 = 0
 
-        for view in self.thumbnailViews {
+        for view in self.thumbnailViews ?? [UIImageView]() {
             DispatchQueue.main.sync { view.removeFromSuperview() }
         }
 
@@ -82,7 +85,7 @@ public class MaskVideoURLView: UIView {
             }
         }
         self.addImagesToView(images: thumbnails, view: view)
-        return self.thumbnailViews
+        return self.thumbnailViews ?? [UIImageView]()
     }
 
     private func videoDuration(videoURL: URL) -> Float64 {
@@ -92,9 +95,9 @@ public class MaskVideoURLView: UIView {
 
     private func addImagesToView(images: [UIImage], view: UIView) {
 
-        thumbnailViews.removeAll()
+        thumbnailViews?.removeAll()
         dataArray.removeAll()
-        imageAr.removeAll()
+        imageAr?.removeAll()
         var xPos: CGFloat = 0.0
         var width: CGFloat = 0.0
         var index = 0
@@ -105,18 +108,18 @@ public class MaskVideoURLView: UIView {
                 }else{
                     width = view.frame.size.width - xPos
                 }
-                imageView.image = image
-                imageView.alpha = 0
-                imageView.clipsToBounds = true
-                imageView.frame = CGRect(x: xPos,
+                imageView?.image = image
+                imageView?.alpha = 0
+                imageView?.clipsToBounds = true
+                imageView?.frame = CGRect(x: xPos,
                                          y: 0.0,
                                          width: width,
                                          height: 0.1)
-                imageAr.append((imageView.image?.cgImage)!)
-                imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
-                let data = imageView.image?.pngData()
+                imageAr?.append((imageView?.image?.cgImage)!)
+                imageAr?[index] = ((imageView?.image?.cgImage?.resize((imageView?.image!.cgImage)!))!)
+                let data = imageView?.image?.pngData()
                 dataArray.append(data ?? Data())
-                view.addSubview(imageView)
+                view.addSubview(imageView ?? UIImageView())
                 index += 1
                 xPos = xPos + view.frame.size.height
             }

@@ -109,8 +109,8 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
         maskLayer.imageSet(view: view, imageView: imageView, image: image)
 
-        guard vm.setVideoURLView.imageAr.isEmpty else {
-            vm.setVideoURLView.imageAr[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
+        guard vm.setVideoURLView.imageAr?.isEmpty ?? false else {
+            vm.setVideoURLView.imageAr?[index] = (imageView.image?.cgImage?.resize(imageView.image!.cgImage!))!
 
             if !vm.checkArray.contains(index) {
                 vm.checkArray.add(index)
@@ -123,7 +123,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     func maskGif() {
         let defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
-        gifObject.makeGifImageMovie(url: url,frameY: 1, imageAr: (vm.setVideoURLView.imageAr))
+        gifObject.makeGifImageMovie(url: url,frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
         maskCount.value = 0
     }
 
@@ -136,7 +136,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     private func resetCView() {
-        vm.setVideoURLView.thumbnailViews.removeAll()
+        vm.setVideoURLView.thumbnailViews?.removeAll()
         vm.setVideoURLView.dataArray.removeAll()
         vm.checkLabel = UILabel()
         vm.checkArray.removeAllObjects()

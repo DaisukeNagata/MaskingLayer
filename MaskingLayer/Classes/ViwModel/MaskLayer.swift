@@ -136,6 +136,8 @@ final class MaskLayer: NSObject {
     func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
 
         mo?.imageResize()
+        mo?.vm.setVideoURLView.removeFromSuperview()
+        mo?.cView.removeFromSuperview()
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }

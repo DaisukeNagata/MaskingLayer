@@ -9,10 +9,10 @@ import UIKit
 
 final class MaskCollectionViewModel: NSObject {
 
-    public var rotate: CGFloat = 0
-    public var checkLabel:UILabel?
-    public var checkArray:NSMutableArray = []
-    public var setVideoURLView = MaskVideoURLView()
+    var rotate: CGFloat = 0
+    var checkLabel:UILabel?
+    var checkArray:NSMutableArray = []
+    var setVideoURLView = MaskVideoURLView()
 
     var image = UIImage()
 
