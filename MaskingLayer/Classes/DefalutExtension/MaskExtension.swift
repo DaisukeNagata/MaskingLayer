@@ -116,7 +116,7 @@ extension CGPoint {
 
 
 extension MaskPathElement {
-    public func addAsPolygon(to path:CGMutablePath) -> CGMutablePath {
+    func addAsPolygon(to path:CGMutablePath) -> CGMutablePath {
         return add(to: path)
     }
 }

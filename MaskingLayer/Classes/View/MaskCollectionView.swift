@@ -7,14 +7,13 @@
 
 import UIKit
 
-public final class MaskCollectionView: UIView {
+final class MaskCollectionView: UIView {
 
     let viewOrigin: CGFloat = 120
     let viewHeight: CGFloat = 100
     let collectionItemSize: CGFloat = 88
 
-
-    public lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.itemSize = CGSize(width: collectionItemSize, height: collectionItemSize)
@@ -44,7 +43,7 @@ public final class MaskCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         collectionView.frame = self.frame

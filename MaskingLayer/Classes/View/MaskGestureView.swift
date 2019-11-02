@@ -8,7 +8,7 @@
 import UIKit
 
 public class MaskGestureView: UIView, UIGestureRecognizerDelegate {
-    
+
     private var mLViewModel: MaskingLayerViewModel?
 
     public init(mO: MaskingLayerViewModel) {
@@ -20,9 +20,12 @@ public class MaskGestureView: UIView, UIGestureRecognizerDelegate {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     private func desgin(mO: MaskingLayerViewModel) {
         mLViewModel = mO
+        self.addSubview(mO.imageView)
+        self.layer.addSublayer(mO.maskLayer.clipLayer)
+
         MaskGesture.panGesture = UIPanGestureRecognizer(target: self, action:#selector(panTapped))
         MaskGesture.panGesture.delegate = self
         self.addGestureRecognizer(MaskGesture.panGesture)
@@ -58,7 +61,7 @@ public class MaskGestureView: UIView, UIGestureRecognizerDelegate {
             self.mLViewModel?.imageBackView.setNeedsLayout()
         }
     }
-    
+
     @objc func panTapped(sender: UIPanGestureRecognizer) { mLViewModel?.panTapped(sender: sender) }
 
     @objc func longTapeed(sender:UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }

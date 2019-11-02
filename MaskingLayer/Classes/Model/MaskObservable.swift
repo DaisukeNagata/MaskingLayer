@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class MaskObservable<ObservedType> {
+final class MaskObservable<ObservedType> {
 
     typealias Observer = (_ observable: ObservedType) -> ()
 
@@ -19,12 +19,12 @@ public class MaskObservable<ObservedType> {
             }
         }
     }
-    
-    public func initValue() { value = nil }
 
-    private var observers: [Observer] = []
+    func initValue() { value = nil }
 
     func bind(observer: @escaping Observer) { self.observers.append(observer) }
+
+    private var observers: [Observer] = []
 
     private func notifyObservers(_ value: ObservedType) { self.observers.forEach { observer in observer(value) }
 

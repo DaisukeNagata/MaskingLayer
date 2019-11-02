@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class MaskCollectionViewModel: NSObject {
+final class MaskCollectionViewModel: NSObject {
 
     public var rotate: CGFloat = 0
     public var checkLabel:UILabel?
@@ -26,11 +26,11 @@ public final class MaskCollectionViewModel: NSObject {
 // MARK: UICollectionViewDataSource
 extension MaskCollectionViewModel: UICollectionViewDataSource {
 
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return 1 }
 
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count }
+    func numberOfSections(in collectionView: UICollectionView) -> Int { return setVideoURLView.dataArray.count }
 
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskCustomCell", for: indexPath) as! MaskCustomCell
 
         if indexPath.section < editCount {

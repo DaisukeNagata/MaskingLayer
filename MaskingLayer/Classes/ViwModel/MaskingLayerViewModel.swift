@@ -10,15 +10,12 @@ import MobileCoreServices
 
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
-    public var maskLayer: MaskLayer
     public var imageView = UIImageView()
     public var defaltImageView = UIImageView()
     public var imageBackView = UIImageView()
-    public var vm = MaskCollectionViewModel()
-    public var maskCount = MaskObservable<Int>()
-    public var longTappedCount = MaskObservable<Int>()
-    public var backImageCount = MaskObservable<Int>()
-    public lazy var cView: MaskCollectionView = {
+
+    var vm = MaskCollectionViewModel()
+    lazy var cView: MaskCollectionView = {
         let cView = MaskCollectionView()
         cView.collectionView.delegate = self
         cView.collectionView.dataSource = self.vm
@@ -27,6 +24,10 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }()
 
     var image = UIImage()
+    var maskLayer: MaskLayer
+    var maskCount = MaskObservable<Int>()
+    var longTappedCount = MaskObservable<Int>()
+    var backImageCount = MaskObservable<Int>()
 
     private var index = Int()
     private var margin: CGFloat = 10
@@ -37,7 +38,16 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         maskLayer = MaskLayer(minSegment: minSegment)
     }
 
-    public func maskPortraitMatte(minSegment: CGFloat) {
+    public func frameResize(images: UIImage) {
+        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+        imageView.image = image
+        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+        defaltImageView.image = imageView.image
+        defaltImageView.frame = imageView.frame
+        maskPathSet()
+    }
+
+    func maskPortraitMatte(minSegment: CGFloat) {
         if #available(iOS 12.0, *) {
             DispatchQueue.main.async {
                 let maskPortraitMatte = MaskPortraitMatteModel()
@@ -48,21 +58,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
     }
 
-    public func frameResize(images: UIImage) {
-        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
-        imageView.image = image
-        imageView.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
-        defaltImageView.image = imageView.image
-        defaltImageView.frame = imageView.frame
-    }
-    
-    public func maskPathSet() {
-        maskLayer.maskColor = .clear
-        maskPathEnded(position: CGPoint(), view: imageView)
-        maskLayer.maskColor = .white
-    }
-
-    public func gousei() {
+    func gousei() {
         DispatchQueue.main.async {
             let top: UIImage = self.imageView.image ?? UIImage()
             let bottom: UIImage = self.imageBackView.image ?? UIImage()
@@ -86,30 +82,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     func imageResize() {
         imageView.image = defaltImageView.image
         imageBackView.image = nil
-    }
-
-    func selfResize(images: UIImage, view: UIView) {
-        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView.image = image
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        defaltImageView.image = imageView.image
-        defaltImageView.frame = imageView.frame
-    }
-
-    func resetCView() {
-        vm.setVideoURLView.thumbnailViews.removeAll()
-        vm.setVideoURLView.dataArray.removeAll()
-        vm.checkLabel = UILabel()
-        vm.checkArray.removeAllObjects()
-        vm.rotate = 0
-        cView.removeFromSuperview()
-        cView = {
-            let cView = MaskCollectionView()
-            cView.collectionView.delegate = self
-            cView.collectionView.dataSource = self.vm
-            cView.backgroundColor = .clear
-            return cView
-        }()
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
@@ -153,6 +125,36 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(url: url,frameY: 1, imageAr: (vm.setVideoURLView.imageAr))
         maskCount.value = 0
+    }
+
+    private func selfResize(images: UIImage, view: UIView) {
+        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView.image = image
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        defaltImageView.image = imageView.image
+        defaltImageView.frame = imageView.frame
+    }
+
+    private func resetCView() {
+        vm.setVideoURLView.thumbnailViews.removeAll()
+        vm.setVideoURLView.dataArray.removeAll()
+        vm.checkLabel = UILabel()
+        vm.checkArray.removeAllObjects()
+        vm.rotate = 0
+        cView.removeFromSuperview()
+        cView = {
+            let cView = MaskCollectionView()
+            cView.collectionView.delegate = self
+            cView.collectionView.dataSource = self.vm
+            cView.backgroundColor = .clear
+            return cView
+        }()
+    }
+
+    private func maskPathSet() {
+        maskLayer.maskColor = .clear
+        maskPathEnded(position: CGPoint(), view: imageView)
+        maskLayer.maskColor = .white
     }
 }
 

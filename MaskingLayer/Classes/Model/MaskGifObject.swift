@@ -11,12 +11,12 @@ import Photos
 import ImageIO
 import MobileCoreServices
 
-public class MaskGifObject: NSObject {
+final class MaskGifObject: NSObject {
 
     var fileProperties = [String: [String: Int]]()
     var frameProperties = [String: [String: Float64]]()
 
-    public func makeGifImageMovie(url: URL,frameY: Double, imageAr: Array<CGImage>) {
+    func makeGifImageMovie(url: URL,frameY: Double, imageAr: Array<CGImage>) {
         let frameRate = CMTimeMake(value: Int64(frameY), timescale: Int32(frameY))
         let urlDefo = UserDefaults.standard
 

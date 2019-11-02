@@ -8,9 +8,9 @@
 import Foundation
 import MobileCoreServices
 
-public class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
+class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
 
-    public func photoSegue(vc: UIViewController, mo: MaskingLayerViewModel,bool: Bool) {
+    func photoSegue(vc: UIViewController, mo: MaskingLayerViewModel,bool: Bool) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let pic = UIImagePickerController()
             if bool == true { pic.mediaTypes = [kUTTypeMovie as String] }

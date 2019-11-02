@@ -21,10 +21,6 @@ class ViewController: UIViewController {
         mO.frameResize(images: UIImage(named: "IMG_4011")!)
 
         view.addSubview(maskGestureView)
-        view.addSubview(mO.imageView)
-        view.layer.addSublayer(mO.maskLayer.clipLayer)
-
-        mO.maskPathSet()
 
         maskGestureView.observe(self, mO: mO)
     }

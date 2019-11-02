@@ -8,14 +8,13 @@
 
 import UIKit
 
-public class MaskLayer: NSObject {
+final class MaskLayer: NSObject {
 
     public var maskColor = UIColor()
     public var path = CGMutablePath()
     public var clipLayer = CAShapeLayer()
-    public var maskImagePicker = MaskImagePicker()
-
     public var minSegment: CGFloat
+
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
     var length = 0 as CGFloat
@@ -23,9 +22,10 @@ public class MaskLayer: NSObject {
     var last = CGPoint.zero // last touch point
     var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
     var fEdge = true //either the begging or the turning point
+    var maskImagePicker = MaskImagePicker()
 
     
-    public init(minSegment: CGFloat) {
+    init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
         
@@ -40,7 +40,7 @@ public class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func alertSave(views: UIViewController, mo: MaskingLayerViewModel) {
+    func alertSave(views: UIViewController, mo: MaskingLayerViewModel) {
         let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -129,18 +129,18 @@ public class MaskLayer: NSObject {
         mO.backImageCount.value = 0
     }
 
-    public func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage {
+    func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
+    func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
 
         mo?.imageResize()
         convertPath = CGMutablePath()
         path = CGMutablePath()
     }
 
-    public func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
+    func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
         view.layer.addSublayer(clipLayer)
         imageView.image = image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
@@ -151,7 +151,7 @@ public class MaskLayer: NSObject {
         }
     }
 
-    public func start(_ pt:CGPoint) -> CGPath? {
+    func start(_ pt:CGPoint) -> CGPath? {
         path = CGMutablePath()
         path.move(to: pt)
         elements = [MaskMove(x: pt.x, y: pt.y)]
@@ -162,7 +162,7 @@ public class MaskLayer: NSObject {
         return path
     }
     
-    public func move(_ pt:CGPoint) -> CGPath? {
+    func move(_ pt:CGPoint) -> CGPath? {
         var pathToReturn:CGPath?
         let d = pt.delta(last)
         length += sqrt(d.dotProduct(d))

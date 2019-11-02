@@ -58,7 +58,7 @@ struct MaskQuadCurve: MaskPathElement {
         self.pt = pt
     }
 
-    public func add(to path:CGMutablePath) -> CGMutablePath {
+    func add(to path:CGMutablePath) -> CGMutablePath {
         path.addQuadCurve(to: pt, control: cp)
         return path
     }
