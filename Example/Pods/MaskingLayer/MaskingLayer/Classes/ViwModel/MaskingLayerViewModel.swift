@@ -49,7 +49,9 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView?.image = image
         imageView?.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
-
+        imageView?.contentMode = .scaleAspectFit
+        let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
+        imageView?.frame.size = imageSize
         defaltImageView?.image = imageView?.image
         defaltImageView?.frame = imageView?.frame ?? CGRect()
         maskPathSet()
