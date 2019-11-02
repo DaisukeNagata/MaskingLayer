@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 import MobileCoreServices
 
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
@@ -48,6 +49,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
         imageView?.image = image
         imageView?.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
+
         defaltImageView?.image = imageView?.image
         defaltImageView?.frame = imageView?.frame ?? CGRect()
         maskPathSet()
@@ -88,6 +90,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     func imageResize() {
         imageView?.image = defaltImageView?.image
         imageBackView?.image = nil
+        frameResize(images: imageView?.image ?? UIImage())
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
@@ -95,7 +98,12 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         if let path = maskLayer.start(position) {
              maskLayer.clipLayer.path = path
         }
+
+        imageView.contentMode = .scaleAspectFit
+        let imageSize = AVMakeRect(aspectRatio: imageView.image?.size ?? CGSize(), insideRect: imageView.bounds).size
+        imageView.frame.size = imageSize
         imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
+        imageView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - UINavigationController.init().navigationBar.frame.height)
     }
 
     func maskAddLine(position: CGPoint,imageView: UIImageView) {
@@ -110,7 +118,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         elements.insert(MaskMove(x: position.x, y: position.y), at: 0)
         elements.append(MaskLine(x: position.x, y: position.y))
         maskLayer.clipLayer.path = MaskPath.path(from: elements, path: maskLayer.convertPath)
-        guard let size = imageView?.image?.size else { return }
+        guard let size = imageView?.frame.size else { return }
 
         imageView?.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
         maskLayer.imageSet(view: view, imageView: imageView ?? UIImageView(), image: image)
