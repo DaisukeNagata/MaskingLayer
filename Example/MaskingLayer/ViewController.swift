@@ -11,16 +11,14 @@ import MaskingLayer
 
 class ViewController: UIViewController {
 
-    var mO = MaskingLayerViewModel(minSegment: 15)
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let mO = MaskingLayerViewModel(minSegment: 15)
         let MV = MaskGestureView(mO: mO, vc: self)
         MV.maskGestureView?.frame = view.frame
-        mO.frameResize(images: UIImage(named: "IMG_4011")!)
-
         view.addSubview(MV.maskGestureView ?? UIView())
 
+        mO.frameResize(images: UIImage(named: "IMG_4011")!)
     }
 }
