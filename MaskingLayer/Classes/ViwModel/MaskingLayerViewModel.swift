@@ -243,11 +243,11 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
             picker.dismiss(animated: true, completion: { self.maskGif() })
 
         } else {
-            maskCount.value = 0
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             picker.dismiss(animated: true, completion: {
                 self.frameResize(images: images)
                 self.maskPathBegan(position: CGPoint(), imageView: self.imageView)
+                self.maskCount.value = 0
             })
         }
     }
