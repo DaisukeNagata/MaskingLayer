@@ -16,12 +16,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let maskGestureView = MaskGestureView(mO: mO)
-        maskGestureView.frame = view.frame
+        let MV = MaskGestureView(mO: mO, vc: self)
+        MV.maskGestureView?.frame = view.frame
         mO.frameResize(images: UIImage(named: "IMG_4011")!)
 
-        view.addSubview(maskGestureView)
+        view.addSubview(MV.maskGestureView ?? UIView())
 
-        maskGestureView.observe(self, mO: mO)
     }
 }
