@@ -17,22 +17,15 @@ import MaskingLayer
 
 class ViewController: UIViewController {
 
-    var mO = MaskingLayerViewModel(minSegment: 15)
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let maskGestureView = MaskGestureView(mO: mO)
-        maskGestureView.frame = view.frame
+        let mO = MaskingLayerViewModel(minSegment: 15)
+        let MV = MaskGestureView(mO: mO, vc: self)
+        MV.maskGestureView?.frame = view.frame
+        view.addSubview(MV.maskGestureView ?? UIView())
+
         mO.frameResize(images: UIImage(named: "IMG_4011")!)
-
-        view.addSubview(maskGestureView)
-        view.addSubview(mO.imageView)
-        view.layer.addSublayer(mO.maskLayer.clipLayer)
-
-        mO.maskPathSet()
-
-        maskGestureView.observe(self, mO: mO)
     }
 }
 
