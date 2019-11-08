@@ -84,6 +84,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         call = callBack
     }
 
+    // Free memory
     func cameraReset() {
         based = nil
         photos = nil
@@ -92,13 +93,9 @@ final class MaskFilterBuiltinsMatte: NSObject {
         currentDevice = nil
 
         captureSession?.stopRunning()
-        // Free memory
-        for output in (self.captureSession?.outputs)! {
-            self.captureSession?.removeOutput(output as AVCaptureOutput)
-        }
-        for input in (self.captureSession?.inputs)! {
-            self.captureSession?.removeInput(input as AVCaptureInput)
-        }
+
+        for output in (self.captureSession?.outputs)! { self.captureSession?.removeOutput(output as AVCaptureOutput) }
+        for input in (self.captureSession?.inputs)! { self.captureSession?.removeInput(input as AVCaptureInput) }
 
         context.clearCaches()
         xibView?.removeFromSuperview()
