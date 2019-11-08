@@ -64,22 +64,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         maskPathSet()
     }
 
-    // cmareraPreView
-    public func cmareraPreView(_ view: UIView) {
-        self.maskPortraitMatte = MaskFilterBuiltinsMatte()
-        self.maskPortraitMatte?.setMaskFilter(view: view)
-    }
-
-    public func btAction() { maskPortraitMatte?.btAction(view: vc?.view ?? UIView(), tabHeight:  vc?.tabBarController?.tabBar.frame.height ?? 0.0) }
-
-    public func cameraAction() { maskPortraitMatte?.uIImageWriteToSavedPhotosAlbum() }
-    
-    public func cameraReset() {
-        vc?.removeFromParent()
-        imageView?.removeFromSuperview()
-        maskPortraitMatte?.cameraReset()
-    }
-
     func maskPortraitMatte(minSegment: CGFloat) {
         DispatchQueue.main.async {
             let maskPortraitMatte = MaskPortraitMatteModel()
@@ -115,6 +99,103 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageBackView?.image = nil
         frameResize(images: imageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
     }
+
+    func maskGif() {
+        defo = UserDefaults.standard
+        guard let url  = defo.url(forKey: "url") else { return }
+        gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
+    }
+
+
+    private func selfResize(images: UIImage, view: UIView) {
+        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
+        imageView?.image = image
+        imageView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        defaltImageView?.image = imageView?.image
+        defaltImageView?.frame = imageView?.frame ?? CGRect()
+    }
+
+    private func resetCView() {
+        vm.setVideoURLView.thumbnailViews?.removeAll()
+        vm.setVideoURLView.dataArray.removeAll()
+        vm.checkLabel = UILabel()
+        vm.checkArray.removeAllObjects()
+        vm.rotate = 0
+        cView.removeFromSuperview()
+        cView = {
+            let cView = MaskCollectionView()
+            cView.collectionView.delegate = self
+            cView.collectionView.dataSource = self.vm
+            cView.backgroundColor = .clear
+            return cView
+        }()
+    }
+
+    private func maskPathSet() {
+        maskLayer.maskColor = .clear
+        maskPathEnded(position: CGPoint(), view: imageView ?? UIImageView())
+        maskLayer.maskColor = .white
+    }
+}
+
+// MARK: UICollectionViewDelegate
+extension MaskingLayerViewModel: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            vm.rotate = 90
+            maskGif()
+        } else {
+            vm.rotate = 0
+            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section])!
+            imageView?.image = image
+
+            maskLayer.mutablePathSet()
+
+            index = indexPath.section
+            if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
+        }
+        collectionView.reloadData()
+    }
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+extension MaskingLayerViewModel: UICollectionViewDelegateFlowLayout {
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return margin
+    }
+}
+
+// MARK: UIPanGestureRecognizer
+extension MaskingLayerViewModel {
+
+    public func panTapped(sender: UIPanGestureRecognizer) {
+        let position: CGPoint = sender.location(in: imageView)
+        switch sender.state {
+        case .ended:
+            maskPathEnded(position: position, view: imageView ?? UIImageView())
+            break
+        case .possible:
+            break
+        case .began:
+            maskPathBegan(position: position, imageView: imageView ?? UIImageView())
+            break
+        case .changed:
+            maskAddLine(position: position, imageView: imageView ?? UIImageView())
+            break
+        case .cancelled:
+            break
+        case .failed:
+            break
+        @unknown default: break
+        }
+    }
+
+    func longTapeed(sender:UILongPressGestureRecognizer) { longTappedCount.value = 0 }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.isHidden = false
@@ -154,111 +235,10 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
             return
         }
     }
-
-    func maskGif() {
-        defo = UserDefaults.standard
-        guard let url  = defo.url(forKey: "url") else { return }
-        gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
-    }
-
-    private func selfResize(images: UIImage, view: UIView) {
-        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView?.image = image
-        imageView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        defaltImageView?.image = imageView?.image
-        defaltImageView?.frame = imageView?.frame ?? CGRect()
-    }
-
-    private func resetCView() {
-        vm.setVideoURLView.thumbnailViews?.removeAll()
-        vm.setVideoURLView.dataArray.removeAll()
-        vm.checkLabel = UILabel()
-        vm.checkArray.removeAllObjects()
-        vm.rotate = 0
-        cView.removeFromSuperview()
-        cView = {
-            let cView = MaskCollectionView()
-            cView.collectionView.delegate = self
-            cView.collectionView.dataSource = self.vm
-            cView.backgroundColor = .clear
-            return cView
-        }()
-    }
-
-    private func maskPathSet() {
-        maskLayer.maskColor = .clear
-        maskPathEnded(position: CGPoint(), view: imageView ?? UIImageView())
-        maskLayer.maskColor = .white
-    }
-
-    private func call() {
-        DispatchQueue.main.async {
-            self.maskCount.value = 0
-        }
-    }
-}
-
-// MARK: UICollectionViewDelegate
-extension MaskingLayerViewModel: UICollectionViewDelegate {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            vm.rotate = 90
-            maskGif()
-        } else {
-            vm.rotate = 0
-            image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section])!
-            imageView?.image = image
-
-            maskLayer.mutablePathSet()
-
-            index = indexPath.section
-            if vm.checkArray.contains(index) { vm.checkArray.remove(index) }
-        }
-        collectionView.reloadData()
-    }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension MaskingLayerViewModel: UICollectionViewDelegateFlowLayout {
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return margin
-    }
-}
-
-
-extension MaskingLayerViewModel {
-    public func panTapped(sender: UIPanGestureRecognizer) {
-        let position: CGPoint = sender.location(in: imageView)
-        switch sender.state {
-        case .ended:
-            maskPathEnded(position: position, view: imageView ?? UIImageView())
-            break
-        case .possible:
-            break
-        case .began:
-            maskPathBegan(position: position, imageView: imageView ?? UIImageView())
-            break
-        case .changed:
-            maskAddLine(position: position, imageView: imageView ?? UIImageView())
-            break
-        case .cancelled:
-            break
-        case .failed:
-            break
-        @unknown default: break
-        }
-    }
-
-    public func longTapeed(sender:UILongPressGestureRecognizer) { longTappedCount.value = 0 }
 }
 
 // MARK: UIImagePickerControllerDelegate & UINavigationControllerDelegate
-extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationControllerDelegate, Observer {
+extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let defo = UserDefaults.standard
@@ -292,6 +272,35 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
     public func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
         return input.rawValue
     }
+}
+
+// MARK: Observer
+extension MaskingLayerViewModel: Observer {
 
     func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void) { observable.bind(observer: with) }
+
+    private func call() {
+        DispatchQueue.main.async {
+            self.maskCount.value = 0
+        }
+    }
+}
+
+// MARK: cmareraLogic
+extension MaskingLayerViewModel {
+    // cmareraPreView
+    public func cmareraPreView(_ view: UIView) {
+        self.maskPortraitMatte = MaskFilterBuiltinsMatte()
+        self.maskPortraitMatte?.setMaskFilter(view: view)
+    }
+
+    public func btAction() { maskPortraitMatte?.btAction(view: vc?.view ?? UIView(), tabHeight:  vc?.tabBarController?.tabBar.frame.height ?? 0.0) }
+
+    public func cameraAction() { maskPortraitMatte?.uIImageWriteToSavedPhotosAlbum() }
+    
+    public func cameraReset() {
+        vc?.removeFromParent()
+        imageView?.removeFromSuperview()
+        maskPortraitMatte?.cameraReset()
+    }
 }
