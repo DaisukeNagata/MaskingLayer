@@ -22,6 +22,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>PLEASE USE CAMERA</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>PLEASE USE MiICROFONE</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>PLEASE  USE PHOTO LIBRARY</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>必要です。</string>
 	<key>UILaunchStoryboardName</key>

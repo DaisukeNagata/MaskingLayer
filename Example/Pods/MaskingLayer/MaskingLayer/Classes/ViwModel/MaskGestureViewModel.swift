@@ -36,7 +36,7 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         maskGestureView?.addGestureRecognizer(MaskGesture.longGesture)
     }
 
-   public func observe(_ mO: MaskingLayerViewModel) {
+   private func observe(_ mO: MaskingLayerViewModel) {
         mLViewModel?.observe(for: mLViewModel?.maskCount ?? MaskObservable()) { _ in
             self.mLViewModel?.maskCount.initValue()
             guard self.mLViewModel?.vm.setVideoURLView.dataArray.count == 0 else {
@@ -63,6 +63,14 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
             self.mLViewModel?.imageBackView?.image = self.mLViewModel?.imageView?.image
             self.mLViewModel?.imageBackView?.frame = self.mLViewModel?.imageView?.frame ?? CGRect()
             self.mLViewModel?.imageBackView?.setNeedsLayout()
+        }
+    
+    }
+    
+    public func cameraObserve(_ bind: @escaping () -> Void) {
+        mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
+            self.mLViewModel?.cameraCount.initValue()
+            bind()
         }
     }
 

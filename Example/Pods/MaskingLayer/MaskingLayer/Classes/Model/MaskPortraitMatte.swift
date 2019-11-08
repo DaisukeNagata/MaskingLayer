@@ -8,7 +8,6 @@
 import ImageIO
 import AVFoundation
 
-@available(iOS 12.0, *)
 final class MaskPortraitMatteModel: NSObject {
 
     func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat, mo: MaskingLayerViewModel) {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 final class MaskLayer: NSObject {
 
     public var maskColor = UIColor()
@@ -24,7 +25,7 @@ final class MaskLayer: NSObject {
     var fEdge = true //either the begging or the turning point
     var maskImagePicker = MaskImagePicker()
 
-    
+
     init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
@@ -91,6 +92,11 @@ final class MaskLayer: NSObject {
             alertController.dismiss(animated: true, completion: nil)
             self.maskImagePicker.photoSegue(vc: views, mo: mo, bool: true)
         }
+        let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
+            action in
+            alertController.dismiss(animated: true, completion: nil)
+            mo.cameraCount.value = 0
+        }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
             self.mutablePathSet(mo: mo)
@@ -105,9 +111,11 @@ final class MaskLayer: NSObject {
         alertController.addAction(cameraRoll)
         alertController.addAction(backImage)
         alertController.addAction(videoRoll)
+        alertController.addAction(dyeHair)
         alertController.addAction(reset)
         views.present(alertController, animated: true, completion: nil)
     }
+
 
     func alertPortrait(views: UIViewController, mO: MaskingLayerViewModel) {
         let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)

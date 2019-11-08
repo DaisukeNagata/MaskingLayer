@@ -8,6 +8,7 @@
 import Foundation
 import MobileCoreServices
 
+
 class MaskImagePicker: NSObject, UIDocumentInteractionControllerDelegate {
 
     func photoSegue(vc: UIViewController, mo: MaskingLayerViewModel,bool: Bool) {

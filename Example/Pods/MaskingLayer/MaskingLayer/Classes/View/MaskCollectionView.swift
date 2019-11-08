@@ -9,9 +9,9 @@ import UIKit
 
 final class MaskCollectionView: UIView {
 
-    let viewOrigin: CGFloat = 120
-    let viewHeight: CGFloat = 100
-    let collectionItemSize: CGFloat = 88
+    private let viewOrigin: CGFloat = 188
+    private let viewHeight: CGFloat = 100
+    private let collectionItemSize: CGFloat = 88
 
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

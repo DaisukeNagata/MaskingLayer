@@ -9,6 +9,7 @@ import Foundation
 import AVFoundation
 import MobileCoreServices
 
+
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     var imageView: UIImageView?
@@ -29,42 +30,56 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
+    var cameraCount = MaskObservable<Int>()
     
     private var url: URL?
     private var defo = UserDefaults.standard
     private var index = Int()
     private var margin: CGFloat = 10
-    private var vc = UIViewController()
+    private var vc:  UIViewController?
     private var gifObject = MaskGifObject()
+    
+    // DyeHair Camera Setting
+    private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil
 
-    public init(minSegment: CGFloat) {
+    public init(vc: UIViewController? = nil, minSegment: CGFloat? = nil) {
         imageView = UIImageView()
         defaltImageView = UIImageView()
         imageBackView = UIImageView()
 
-        maskLayer = MaskLayer(minSegment: minSegment)
+        self.vc = vc ?? UIViewController()
+        maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
 
-    public func frameResize(images: UIImage) {
-        image = images.ResizeUIImage(width: Margin.current.width, height: Margin.current.height)
+    public func frameResize(images: UIImage, rect: CGRect) {
+        imageView?.frame = rect
+        image = images.ResizeUIImage(width: imageView?.frame.width ?? 0.0, height: imageView?.frame.height ?? 0.0)
         imageView?.image = image
-        imageView?.frame = CGRect(x: Margin.current.xOrigin, y: Margin.current.yOrigin, width: Margin.current.width, height: Margin.current.height)
         imageView?.contentMode = .scaleAspectFit
         let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.frame.size = imageSize
+        imageView?.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
         defaltImageView?.image = imageView?.image
         defaltImageView?.frame = imageView?.frame ?? CGRect()
         maskPathSet()
     }
 
+    // cmareraPreView
+    public func cmareraPreView(_ view: UIView) {
+        self.maskPortraitMatte = MaskFilterBuiltinsMatte()
+        self.maskPortraitMatte?.setMaskFilter(view: view)
+    }
+
+    public func btAction() { maskPortraitMatte?.btAction(view: vc!.view, tabHeight:  vc?.tabBarController?.tabBar.frame.height ?? 0.0) }
+
+    public func cameraAction() { maskPortraitMatte?.uIImageWriteToSavedPhotosAlbum() }
+
     func maskPortraitMatte(minSegment: CGFloat) {
-        if #available(iOS 12.0, *) {
-            DispatchQueue.main.async {
-                let maskPortraitMatte = MaskPortraitMatteModel()
-                maskPortraitMatte.portraitMatte(imageV    : self.imageView ?? UIImageView(),
-                                                vc        : self.vc,
-                                                minSegment: minSegment, mo: self)
-            }
+        DispatchQueue.main.async {
+            let maskPortraitMatte = MaskPortraitMatteModel()
+            maskPortraitMatte.portraitMatte(imageV    : self.imageView ?? UIImageView(),
+                                            vc        : self.vc ?? UIViewController(),
+                                            minSegment: minSegment, mo: self)
         }
     }
 
@@ -86,13 +101,13 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     func setURL() {
         vm.setVideoURLView.setURL { self.call() }
-        self.vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: self.vc.view.frame.width, height: self.vc.view.frame.width/15)
+        self.vm.setVideoURLView.frame = CGRect(x: 0,y:0,width: self.vc?.view.frame.width ?? 0.0, height: (self.vc?.view.frame.width ?? 0.0)/15)
     }
 
     func imageResize() {
         imageView?.image = defaltImageView?.image
         imageBackView?.image = nil
-        frameResize(images: imageView?.image ?? UIImage())
+        frameResize(images: imageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
@@ -101,11 +116,9 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
              maskLayer.clipLayer.path = path
         }
 
-        imageView.contentMode = .scaleAspectFit
         let imageSize = AVMakeRect(aspectRatio: imageView.image?.size ?? CGSize(), insideRect: imageView.bounds).size
         imageView.frame.size = imageSize
-        imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
-        imageView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - UINavigationController.init().navigationBar.frame.height)
+        imageView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: imageView.frame.origin.y + imageView.frame.height/2)
     }
 
     func maskAddLine(position: CGPoint,imageView: UIImageView) {
@@ -171,7 +184,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         maskPathEnded(position: CGPoint(), view: imageView ?? UIImageView())
         maskLayer.maskColor = .white
     }
-    
+
     private func call() {
         DispatchQueue.main.async {
             self.maskCount.value = 0
@@ -243,7 +256,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let defo = UserDefaults.standard
-        if #available(iOS 11.0, *) { defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url") }
+        defo.set(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.imageURL)] as? URL, forKey: "url")
 
         resetCView()
 
@@ -256,7 +269,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
         } else {
             guard let images = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) else { return }
             picker.dismiss(animated: true, completion: {
-                self.frameResize(images: images)
+                self.frameResize(images: images, rect: self.imageView?.frame ?? CGRect())
                 self.maskPathBegan(position: CGPoint(), imageView: self.imageView ?? UIImageView())
                 self.maskCount.value = 0
             })
