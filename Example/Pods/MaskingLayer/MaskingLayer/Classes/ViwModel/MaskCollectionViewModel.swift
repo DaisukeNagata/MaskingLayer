@@ -14,12 +14,12 @@ final class MaskCollectionViewModel: NSObject {
     var checkArray: NSMutableArray = []
     var setVideoURLView = MaskVideoURLView()
 
-    var image = UIImage()
+    private var image: UIImage?
 
-    let editCount: Int = 1
-    let collectionLabel: CGFloat = 30
-    let checkLabelItemSize: CGFloat = 10
-    let collectionItemSize: CGFloat = 88
+    private let editCount: Int = 1
+    private let collectionLabel: CGFloat = 30
+    private let checkLabelItemSize: CGFloat = 10
+    private let collectionItemSize: CGFloat = 88
     let imageList = ["IMG_4011.jpg"]
     
     private var transRotate = CGAffineTransform()
@@ -36,12 +36,12 @@ extension MaskCollectionViewModel: UICollectionViewDataSource {
 
         if indexPath.section < editCount {
             image = UIImage(named: imageList[indexPath.section]) ?? UIImage()
-            image = image.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
+            image = image?.ResizeUIImage(width:  collectionItemSize, height: collectionItemSize)
 
             let angle = rotate * CGFloat.pi / 180
             transRotate = CGAffineTransform(rotationAngle: CGFloat(angle))
             cell.transform = transRotate
-            cell.imageSet(imageSet: image)
+            cell.imageSet(imageSet: image ?? UIImage())
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MaskDismissCell", for: indexPath) as! MaskDismissCell
             for subview in cell.contentView.subviews{ subview.removeFromSuperview() }
