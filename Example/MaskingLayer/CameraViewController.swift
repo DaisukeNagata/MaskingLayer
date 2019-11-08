@@ -22,7 +22,13 @@ class CameraViewController: UIViewController {
 
     private var mO               : MaskingLayerViewModel? = nil
     private var mBObject         : MaskButtonView? = nil
+    private var d: UIView?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        d = UIView(frame: CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 188))
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
@@ -38,9 +44,8 @@ class CameraViewController: UIViewController {
         mBObject?.cameraMatte.addTarget(self, action: #selector(btAction), for: .touchUpInside)
         mBObject?.cameraRecord.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
 
-        let d = UIView(frame: CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 188))
-        view.addSubview(d)
-        mO?.cmareraPreView(d)
+        view.addSubview(d ?? UIView())
+        mO?.cmareraPreView(d ?? UIView())
 
     }
     
@@ -49,6 +54,7 @@ class CameraViewController: UIViewController {
         
         mBObject?.cameraMatte.isHidden = true
         mBObject?.cameraRecord.isHidden = true
+        d?.removeFromSuperview()
         mO?.cameraReset()
         mO = nil
     }

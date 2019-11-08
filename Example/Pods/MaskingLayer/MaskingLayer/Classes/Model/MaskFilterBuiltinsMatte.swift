@@ -14,26 +14,29 @@ final class MaskFilterBuiltinsMatte: NSObject {
 
     lazy var context = CIContext()
 
+    var xibView                 : SliiderObjects? = nil
     var photos                  : AVCapturePhoto?
     var semanticSegmentationType: AVSemanticSegmentationMatte.MatteType?
 
     private var videoDeviceInput        : AVCaptureDeviceInput!
     private var call                    = { (_ image: UIImage?) -> Void in }
-    private var captureSession          = AVCaptureSession()
+    private var captureSession          : AVCaptureSession?
     private var based                   = CIImage()
-    private var xibView                 : SliiderObjects? = nil
     private var currentDevice           : AVCaptureDevice?
     private var photoOutput             : AVCapturePhotoOutput?
     private var cameraPreviewLayer      : AVCaptureVideoPreviewLayer?
+    private var settings                : AVCapturePhotoSettings?
     private var photoQualityPrioritizationMode: AVCapturePhotoOutput.QualityPrioritization = .balanced
     private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
                                                                                   mediaType: .video, position: .unspecified)
 
     func setMaskFilter(view: UIView) {
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        captureSession = AVCaptureSession()
+        captureSession?.sessionPreset = AVCaptureSession.Preset.photo
         setupInputOutput()
         setupPreviewLayer(view)
-        captureSession.startRunning()
+        captureSession?.startRunning()
+        self.xibView?.removeFromSuperview()
     }
 
     func returnAnimation(height: CGFloat) {
@@ -46,7 +49,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
                 self.xibView = SliiderObjects(frameHight: 100)
                 self.xibView?.frame = view.frame
                 self.xibView?.sliderImageView.contentMode = .scaleAspectFit
-                self.xibView?.sliderImageView.image = image?.ResizeUIImage(width: self.xibView?.sliderImageView.frame.width ?? 0.0 , height:  self.xibView?.sliderImageView.frame.height ?? 0.0 )
+                self.xibView?.sliderImageView.image = image
                 view.addSubview(self.xibView ?? SliiderObjects(frameHight: tabHeight))
             }
         } else {
@@ -61,29 +64,31 @@ final class MaskFilterBuiltinsMatte: NSObject {
     }
 
     func cameraAction(_ callBack: @escaping (_ image: UIImage?) -> Void){
-        var settings = AVCapturePhotoSettings()
-        settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
-        settings.flashMode = .auto
-        settings.isHighResolutionPhotoEnabled = true
-        settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: settings.__availablePreviewPhotoPixelFormatTypes.first!]
-        settings.isDepthDataDeliveryEnabled = true
-        settings.isDepthDataDeliveryEnabled = true
-        settings.isPortraitEffectsMatteDeliveryEnabled = true
+        settings = AVCapturePhotoSettings()
+        settings? = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+        settings?.flashMode = .auto
+        settings?.isHighResolutionPhotoEnabled = true
+        settings?.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: settings?.__availablePreviewPhotoPixelFormatTypes.first ?? NSNumber()]
+        settings?.isDepthDataDeliveryEnabled = true
+        settings?.isDepthDataDeliveryEnabled = true
+        settings?.isPortraitEffectsMatteDeliveryEnabled = true
         if !(self.photoOutput?.enabledSemanticSegmentationMatteTypes.isEmpty)! {
-            settings.enabledSemanticSegmentationMatteTypes = self.photoOutput?.enabledSemanticSegmentationMatteTypes ?? [AVSemanticSegmentationMatte.MatteType]()
+            settings?.enabledSemanticSegmentationMatteTypes = self.photoOutput?.enabledSemanticSegmentationMatteTypes ?? [AVSemanticSegmentationMatte.MatteType]()
         }
 
-        settings.photoQualityPrioritization = self.photoQualityPrioritizationMode
-        photoOutput?.capturePhoto(with: settings, delegate: self)
+        settings?.photoQualityPrioritization = self.photoQualityPrioritizationMode
+        photoOutput?.capturePhoto(with: settings ?? AVCapturePhotoSettings(), delegate: self)
 
         call = callBack
     }
 
     func cameraReset() {
         photos = nil
+        settings = nil
         photoOutput = nil
         currentDevice = nil
-        captureSession.stopRunning()
+        captureSession = nil
+        context.clearCaches()
         xibView?.removeFromSuperview()
         cameraPreviewLayer?.removeFromSuperlayer()
     }
@@ -200,7 +205,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
     }
 
     private func setupPreviewLayer(_ view: UIView) {
-        self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession ?? AVCaptureSession())
         self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
         self.cameraPreviewLayer?.frame = view.frame
@@ -209,6 +214,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
 
     private func setupInputOutput() {
         photoOutput = AVCapturePhotoOutput()
+        guard let captureSession = captureSession  else { return }
         guard let photoOutput = photoOutput else { return }
         do {
             captureSession.beginConfiguration()
