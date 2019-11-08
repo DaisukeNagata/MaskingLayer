@@ -23,7 +23,7 @@ struct MaskMove: MaskPathElement {
     init(pt:CGPoint) {
         self.pt = pt
     }
-    
+
     public func add(to path:CGMutablePath) -> CGMutablePath {
         path.move(to: pt)
         return path
@@ -38,7 +38,7 @@ struct MaskLine: MaskPathElement {
     init(pt:CGPoint) {
         self.pt = pt
     }
-    
+
     public func add(to path:CGMutablePath) -> CGMutablePath {
         path.addLine(to: pt)
         return path
