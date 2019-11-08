@@ -76,9 +76,9 @@ Screen operation
 2. Long tap is Hide slider bar
 ```
 ## Operation link
-```ruby
-https://twitter.com/dbank0208/status/1192846922563739649?s=20
-```
+
+### [link](https://twitter.com/dbank0208/status/1192846922563739649?s=20)
+
 
 ## Example Code
 ```ruby
