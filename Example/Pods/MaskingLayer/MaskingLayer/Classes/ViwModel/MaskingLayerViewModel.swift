@@ -76,6 +76,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     
     public func cameraReset() {
         vc?.removeFromParent()
+        imageView?.removeFromSuperview()
         maskPortraitMatte?.cameraReset()
     }
 

@@ -18,14 +18,16 @@ final class MaskFilterBuiltinsMatte: NSObject {
     var photos                  : AVCapturePhoto?
     var semanticSegmentationType: AVSemanticSegmentationMatte.MatteType?
 
-    private var videoDeviceInput        : AVCaptureDeviceInput!
     private var call                    = { (_ image: UIImage?) -> Void in }
-    private var captureSession          : AVCaptureSession?
-    private var based                   = CIImage()
+
+    private var videoDeviceInput        : AVCaptureDeviceInput!
+    private var captureDeviceInput      : AVCaptureDeviceInput!
+    private var based                   : CIImage?
     private var currentDevice           : AVCaptureDevice?
+    private var captureSession          : AVCaptureSession?
     private var photoOutput             : AVCapturePhotoOutput?
-    private var cameraPreviewLayer      : AVCaptureVideoPreviewLayer?
     private var settings                : AVCapturePhotoSettings?
+    private var cameraPreviewLayer      : AVCaptureVideoPreviewLayer?
     private var photoQualityPrioritizationMode: AVCapturePhotoOutput.QualityPrioritization = .balanced
     private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
                                                                                   mediaType: .video, position: .unspecified)
@@ -83,14 +85,26 @@ final class MaskFilterBuiltinsMatte: NSObject {
     }
 
     func cameraReset() {
+        based = nil
         photos = nil
         settings = nil
         photoOutput = nil
         currentDevice = nil
-        captureSession = nil
+
+        captureSession?.stopRunning()
+        // メモリ解放
+        for output in (self.captureSession?.outputs)! {
+            self.captureSession?.removeOutput(output as AVCaptureOutput)
+        }
+        for input in (self.captureSession?.inputs)! {
+            self.captureSession?.removeInput(input as AVCaptureInput)
+        }
+
         context.clearCaches()
         xibView?.removeFromSuperview()
+        xibView?.sliderView.removeFromSuperview()
         cameraPreviewLayer?.removeFromSuperlayer()
+        xibView?.sliderImageView.removeFromSuperview()
     }
 
     func uIImageWriteToSavedPhotosAlbum() { UIImageWriteToSavedPhotosAlbum(xibView?.sliderImageView.image ?? UIImage(), nil,nil,nil) }
@@ -185,7 +199,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
             segmentationMatte = segmentationMatte.applyingExifOrientation(exifOrientation)
         }
         let base = based
-        let imagedata = matteSetting(value: value, value2: value2, value3: value3, value4: value4, base: base, ssm: segmentationMatte)
+        let imagedata = matteSetting(value: value, value2: value2, value3: value3, value4: value4, base: base ?? CIImage(), ssm: segmentationMatte)
         imageView.image = UIImage(data: imagedata)
     }
 
@@ -228,7 +242,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
             if captureSession.canAddInput(videoDeviceInput) { captureSession.addInput(videoDeviceInput) }
 
             currentDevice = AVCaptureDevice.default(for: .audio)
-            let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
+            captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
 
             if captureSession.canAddInput(captureDeviceInput) {
                 captureSession.addInput(captureDeviceInput)

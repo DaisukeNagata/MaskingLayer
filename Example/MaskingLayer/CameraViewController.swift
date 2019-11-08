@@ -49,7 +49,7 @@ class CameraViewController: UIViewController {
 
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         mBObject?.cameraMatte.isHidden = true
