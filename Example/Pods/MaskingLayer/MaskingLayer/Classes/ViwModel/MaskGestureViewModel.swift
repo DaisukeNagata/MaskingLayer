@@ -66,7 +66,7 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         }
     
     }
-    
+
     public func cameraObserve(_ bind: @escaping () -> Void) {
         mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
             self.mLViewModel?.cameraCount.initValue()
