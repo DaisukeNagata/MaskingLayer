@@ -70,9 +70,14 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         self.maskPortraitMatte?.setMaskFilter(view: view)
     }
 
-    public func btAction() { maskPortraitMatte?.btAction(view: vc!.view, tabHeight:  vc?.tabBarController?.tabBar.frame.height ?? 0.0) }
+    public func btAction() { maskPortraitMatte?.btAction(view: vc?.view ?? UIView(), tabHeight:  vc?.tabBarController?.tabBar.frame.height ?? 0.0) }
 
     public func cameraAction() { maskPortraitMatte?.uIImageWriteToSavedPhotosAlbum() }
+    
+    public func cameraReset() {
+        vc?.removeFromParent()
+        maskPortraitMatte?.cameraReset()
+    }
 
     func maskPortraitMatte(minSegment: CGFloat) {
         DispatchQueue.main.async {

@@ -49,6 +49,8 @@ class CameraViewController: UIViewController {
         
         mBObject?.cameraMatte.isHidden = true
         mBObject?.cameraRecord.isHidden = true
+        mO?.cameraReset()
+        mO = nil
     }
 
     // DyeHair Set

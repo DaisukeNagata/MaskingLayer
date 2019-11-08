@@ -46,7 +46,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
                 self.xibView = SliiderObjects(frameHight: 100)
                 self.xibView?.frame = view.frame
                 self.xibView?.sliderImageView.contentMode = .scaleAspectFit
-                self.xibView?.sliderImageView.image = image
+                self.xibView?.sliderImageView.image = image?.ResizeUIImage(width: self.xibView?.sliderImageView.frame.width ?? 0.0 , height:  self.xibView?.sliderImageView.frame.height ?? 0.0 )
                 view.addSubview(self.xibView ?? SliiderObjects(frameHight: tabHeight))
             }
         } else {
@@ -77,6 +77,15 @@ final class MaskFilterBuiltinsMatte: NSObject {
         photoOutput?.capturePhoto(with: settings, delegate: self)
 
         call = callBack
+    }
+
+    func cameraReset() {
+        photos = nil
+        photoOutput = nil
+        currentDevice = nil
+        captureSession.stopRunning()
+        xibView?.removeFromSuperview()
+        cameraPreviewLayer?.removeFromSuperlayer()
     }
 
     func uIImageWriteToSavedPhotosAlbum() { UIImageWriteToSavedPhotosAlbum(xibView?.sliderImageView.image ?? UIImage(), nil,nil,nil) }
@@ -232,7 +241,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
             photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
             photoOutput.isPortraitEffectsMatteDeliveryEnabled = photoOutput.isPortraitEffectsMatteDeliverySupported
             photoOutput.enabledSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
-            photoOutput.maxPhotoQualityPrioritization = .quality
+            photoOutput.maxPhotoQualityPrioritization = .balanced
             captureSession.commitConfiguration()
         }
     }
