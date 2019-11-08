@@ -39,7 +39,7 @@ class SliiderObjects: UIView, UIGestureRecognizerDelegate {
     private var longTapGesture = UILongPressGestureRecognizer()
 
     private var height: CGFloat = 50
-    
+
     private var flg: Bool = false
 
     init(frameHight: CGFloat) {
@@ -49,11 +49,11 @@ class SliiderObjects: UIView, UIGestureRecognizerDelegate {
         pGesture()
         height = frameHight
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func loadNib() {
         let bundle = Bundle(for: SliiderObjects.self)
         let view = bundle.loadNibNamed("SliiderObjects", owner: self, options: nil)?.first as? UIView

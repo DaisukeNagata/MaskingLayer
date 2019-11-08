@@ -25,11 +25,10 @@ final class MaskLayer: NSObject {
     var fEdge = true //either the begging or the turning point
     var maskImagePicker = MaskImagePicker()
 
-
     init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
-        
+    
         maskColor = .maskWhite
         clipLayer.name = "clipLayer"
         clipLayer.lineCap = CAShapeLayerLineCap.round
@@ -116,7 +115,6 @@ final class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
     }
 
-
     func alertPortrait(views: UIViewController, mO: MaskingLayerViewModel) {
         let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
@@ -155,7 +153,7 @@ final class MaskLayer: NSObject {
         view.layer.addSublayer(clipLayer)
         imageView.image = image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
-    
+
         guard clipLayer.strokeEnd == 0 else {
             path = CGMutablePath()
             return
@@ -172,7 +170,7 @@ final class MaskLayer: NSObject {
         length = 0.0
         return path
     }
-    
+
     func move(_ pt:CGPoint) -> CGPath? {
         var pathToReturn:CGPath?
         let d = pt.delta(last)
