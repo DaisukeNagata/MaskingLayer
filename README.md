@@ -62,7 +62,7 @@ Added a compositing function that can be saved to the terminal.
 The left is the latest version. Perform a smooth crop.
 ![](https://user-images.githubusercontent.com/16457165/63633553-2ed26080-c685-11e9-8c91-17e3eb36dc3f.gif)
 
-## Example Version 1.0.0 ~
+## Version 1.0.0 ~
 
 ```ruby
 1. Select hair dyeing with a long tap
@@ -75,7 +75,12 @@ Screen operation
 1. Up swipe is Display of slider bar
 2. Long tap is Hide slider bar
 ```
+## Operation link
+```ruby
+https://twitter.com/dbank0208/status/1192846922563739649?s=20
+```
 
+## Example Code
 ```ruby
 import UIKit
 import MaskingLayer
