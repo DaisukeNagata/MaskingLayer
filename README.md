@@ -62,7 +62,83 @@ Added a compositing function that can be saved to the terminal.
 The left is the latest version. Perform a smooth crop.
 ![](https://user-images.githubusercontent.com/16457165/63633553-2ed26080-c685-11e9-8c91-17e3eb36dc3f.gif)
 
+## Example Version 1.0.0 ~
 
+```ruby
+1. Select hair dyeing with a long tap
+
+2. Selfie with red button
+
+3. Save the photo with the blue button
+
+Screen operation
+1. Up swipe is Display of slider bar
+2. Long tap is Hide slider bar
+```
+
+```ruby
+import UIKit
+import MaskingLayer
+
+class CameraViewController: UIViewController {
+
+    static func identifier() -> String { return String(describing: ViewController.self) }
+
+    static func viewController() -> ViewController {
+
+        let sb = UIStoryboard(name: "Camera", bundle: nil)
+        let vc = sb.instantiateInitialViewController() as! ViewController
+        return vc
+    }
+
+    private var mVM              : MaskingLayerViewModel? = nil
+    private var mBObject         : MaskButtonView? = nil
+    private var d: UIView?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        d = UIView(frame: CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 188))
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+        mBObject?.cameraMatte.isHidden = false
+        mBObject?.cameraRecord.isHidden = false
+        
+        mVM = MaskingLayerViewModel(vc: self)
+        mBObject = MaskButtonView(frame: self.tabBarController?.tabBar.frame ?? CGRect())
+
+        self.tabBarController?.tabBar.addSubview(mBObject?.cameraMatte ?? UIButton())
+        self.tabBarController?.tabBar.addSubview(mBObject?.cameraRecord ?? UIButton())
+
+        mBObject?.cameraMatte.addTarget(self, action: #selector(btAction), for: .touchUpInside)
+        mBObject?.cameraRecord.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
+
+        view.addSubview(d ?? UIView())
+        mVM?.cmareraPreView(d ?? UIView())
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+
+        mBObject?.cameraMatte.isHidden = true
+        mBObject?.cameraRecord.isHidden = true
+        d?.removeFromSuperview()
+        mVM?.cameraReset()
+        mVM = nil
+    }
+
+    // DyeHair Set
+    @objc func btAction() { mVM?.btAction() }
+
+    // Save photosAlbum
+    @objc func cameraAction() { mVM?.cameraAction() }
+
+}
+
+```
 ## Installation
 
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
