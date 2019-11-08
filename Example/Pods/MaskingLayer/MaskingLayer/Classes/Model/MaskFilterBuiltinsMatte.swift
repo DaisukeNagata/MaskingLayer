@@ -74,7 +74,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         settings?.isDepthDataDeliveryEnabled = true
         settings?.isDepthDataDeliveryEnabled = true
         settings?.isPortraitEffectsMatteDeliveryEnabled = true
-        if !(self.photoOutput?.enabledSemanticSegmentationMatteTypes.isEmpty)! {
+        if self.photoOutput?.enabledSemanticSegmentationMatteTypes.isEmpty == true {
             settings?.enabledSemanticSegmentationMatteTypes = self.photoOutput?.enabledSemanticSegmentationMatteTypes ?? [AVSemanticSegmentationMatte.MatteType]()
         }
 
@@ -92,7 +92,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         currentDevice = nil
 
         captureSession?.stopRunning()
-        // メモリ解放
+        // Free memory
         for output in (self.captureSession?.outputs)! {
             self.captureSession?.removeOutput(output as AVCaptureOutput)
         }
@@ -252,7 +252,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         } catch {
             print(error)
         }
-        
+
         if captureSession.canAddOutput(photoOutput) {
             captureSession.addOutput(photoOutput)
 
