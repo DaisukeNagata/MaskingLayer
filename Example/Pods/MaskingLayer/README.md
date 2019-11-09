@@ -1,6 +1,8 @@
-![image](https://github.com/daisukenagata/MaskingLayer/blob/master/MaskImage.png?raw=true)
+# MaskingLayer
 
-# MaskingLayer Xcode11 Swift5
+![image](https://user-images.githubusercontent.com/16457165/68517602-9a62bc00-02cb-11ea-9571-518f19ea8277.png)
+
+
 [![Version](https://img.shields.io/cocoapods/v/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![License](https://img.shields.io/cocoapods/l/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![Platform](https://img.shields.io/cocoapods/p/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
