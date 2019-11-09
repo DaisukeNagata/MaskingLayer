@@ -39,8 +39,8 @@ You can generate a GIF image by pressing the leftmost image.
 
 
 ## Gif
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/gif%20or%20image/MovieImage.gif?raw=true)
-![](https://github.com/daisukenagata/MaskingLayer/blob/master/gif%20or%20image/MovieGif.gif?raw=true)
+![](https://user-images.githubusercontent.com/16457165/68522335-96e02c80-02ed-11ea-876a-bffcd7158b5e.gif)
+![](https://user-images.githubusercontent.com/16457165/68522372-e45c9980-02ed-11ea-9f6c-3b5d91a0a8b5.gif)
 
 
 
