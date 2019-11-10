@@ -32,7 +32,8 @@ class ViewController: UIViewController {
         
         // this is navi+tab - view.frame
         var rect = view.frame
-        rect.size.height -= 174
+        rect.origin.y = 84
+        rect.size.height -= 184
         
         mO.frameResize(images: UIImage(named: "IMG_4011")!, rect: rect)
         

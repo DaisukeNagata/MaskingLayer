@@ -58,7 +58,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView?.contentMode = .scaleAspectFit
         let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.frame.size = imageSize
-        imageView?.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        imageView?.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
 
         if defaltImageView?.image == nil {
             defaltImageView?.frame = imageView?.frame ?? CGRect()
@@ -99,7 +99,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func imageResize() {
-        frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
+        frameResize(images: defaltImageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
         imageBackView?.image = nil
     }
 
