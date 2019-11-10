@@ -27,9 +27,9 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/daisukenagata/MaskingLayer.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/dbank0208'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'
-  s.source_files = 'MaskingLayer/Classes/**/*'
+  s.source_files = 'Pods/MaskingLayer/MaskingLayer/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MaskingLayer' => ['MaskingLayer/Assets/*.png']
