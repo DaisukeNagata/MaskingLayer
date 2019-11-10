@@ -29,7 +29,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'
-  s.source_files = 'MaskingLayer/Classes/**/*'
+  s.source_files = 'Example/Pods/MaskingLayer/MaskingLayer/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MaskingLayer' => ['MaskingLayer/Assets/*.png']
