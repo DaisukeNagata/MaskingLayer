@@ -44,7 +44,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     public init(vc: UIViewController? = nil, minSegment: CGFloat? = nil) {
         imageView = UIImageView()
-        imageView?.contentMode = .scaleAspectFit
         defaltImageView = UIImageView()
         imageBackView = UIImageView()
 
@@ -56,6 +55,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView?.frame = rect
         image = images.ResizeUIImage(width: imageView?.frame.width ?? 0.0, height: imageView?.frame.height ?? 0.0)
         imageView?.image = image
+        imageView?.contentMode = .scaleAspectFit
         let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.frame.size = imageSize
         imageView?.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
@@ -101,7 +101,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     func imageResize() {
         frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
         imageBackView?.image = nil
-        frameResize(images: imageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
     }
 
     func maskGif() {
@@ -109,7 +108,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         guard let url  = defo.url(forKey: "url") else { return }
         gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
     }
-
 
     private func resetCView() {
         vm.setVideoURLView.thumbnailViews?.removeAll()
@@ -144,7 +142,7 @@ extension MaskingLayerViewModel: UICollectionViewDelegate {
             vm.rotate = 0
             image = UIImage(data: vm.setVideoURLView.dataArray[indexPath.section])!
             imageView?.image = image
-
+            
             maskLayer.mutablePathSet()
 
             index = indexPath.section

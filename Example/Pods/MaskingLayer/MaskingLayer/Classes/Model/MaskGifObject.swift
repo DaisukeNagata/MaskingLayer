@@ -6,7 +6,7 @@
 //  Copyright © 2018年 永田大祐. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Photos
 import ImageIO
 import MobileCoreServices

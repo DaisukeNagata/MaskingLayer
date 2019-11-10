@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         let mO = MaskingLayerViewModel(minSegment: 15)
         let MV = MaskGestureViewModel(mO: mO, vc: self)
         MV.maskGestureView?.frame = view.frame
@@ -31,8 +32,7 @@ class ViewController: UIViewController {
         
         // this is navi+tab - view.frame
         var rect = view.frame
-        rect.origin.y = 84
-        rect.size.height -= 184
+        rect.size.height -= 174
         
         mO.frameResize(images: UIImage(named: "IMG_4011")!, rect: rect)
         
