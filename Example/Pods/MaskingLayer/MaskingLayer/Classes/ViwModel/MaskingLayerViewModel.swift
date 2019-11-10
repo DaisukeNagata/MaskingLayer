@@ -44,6 +44,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     public init(vc: UIViewController? = nil, minSegment: CGFloat? = nil) {
         imageView = UIImageView()
+        imageView?.contentMode = .scaleAspectFit
         defaltImageView = UIImageView()
         imageBackView = UIImageView()
 
@@ -55,13 +56,16 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView?.frame = rect
         image = images.ResizeUIImage(width: imageView?.frame.width ?? 0.0, height: imageView?.frame.height ?? 0.0)
         imageView?.image = image
-        imageView?.contentMode = .scaleAspectFit
         let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.frame.size = imageSize
-        imageView?.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
+        imageView?.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+
+        if defaltImageView?.image == nil {
+            defaltImageView?.frame = imageView?.frame ?? CGRect()
+            maskPathSet()
+        }
+
         defaltImageView?.image = imageView?.image
-        defaltImageView?.frame = imageView?.frame ?? CGRect()
-        maskPathSet()
     }
 
     func maskPortraitMatte(minSegment: CGFloat) {
@@ -95,7 +99,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func imageResize() {
-        imageView?.image = defaltImageView?.image
+        frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
         imageBackView?.image = nil
         frameResize(images: imageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
     }
@@ -106,14 +110,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
     }
 
-
-    private func selfResize(images: UIImage, view: UIView) {
-        image = images.ResizeUIImage(width: view.frame.width, height: view.frame.height)
-        imageView?.image = image
-        imageView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        defaltImageView?.image = imageView?.image
-        defaltImageView?.frame = imageView?.frame ?? CGRect()
-    }
 
     private func resetCView() {
         vm.setVideoURLView.thumbnailViews?.removeAll()
@@ -205,7 +201,7 @@ extension MaskingLayerViewModel {
 
         let imageSize = AVMakeRect(aspectRatio: imageView.image?.size ?? CGSize(), insideRect: imageView.bounds).size
         imageView.frame.size = imageSize
-        imageView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: imageView.frame.origin.y + imageView.frame.height/2)
+        imageView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
     }
 
     func maskAddLine(position: CGPoint,imageView: UIImageView) {

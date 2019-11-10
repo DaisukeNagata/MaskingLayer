@@ -79,6 +79,7 @@ final class MaskLayer: NSObject {
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            self.mutablePathSet(mo: mo)
             self.maskImagePicker.photoSegue(vc: views, mo: mo,bool: false)
         }
         let backImage = UIAlertAction(title: NSLocalizedString("BackImage ", comment: ""), style: .default) {
@@ -89,11 +90,13 @@ final class MaskLayer: NSObject {
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            self.mutablePathSet(mo: mo)
             self.maskImagePicker.photoSegue(vc: views, mo: mo, bool: true)
         }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
+            self.mutablePathSet(mo: mo)
             mo.cameraCount.value = 0
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
