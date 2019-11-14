@@ -81,7 +81,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         DispatchQueue.main.async {
             let top: UIImage = self.imageView?.image ?? UIImage()
             let bottom: UIImage = self.imageBackView?.image ?? UIImage()
-            let nSize = CGSize(width:bottom.size.width, height:bottom.size.height)
+            let nSize = CGSize(width:top.size.width, height:top.size.height)
             UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
             bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
             top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
