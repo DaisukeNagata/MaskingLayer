@@ -46,7 +46,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView = UIImageView()
         defaltImageView = UIImageView()
         imageBackView = UIImageView()
-
+        imageBackView?.contentMode = .scaleAspectFit
         self.vc = vc ?? UIViewController()
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
@@ -100,7 +100,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     func imageResize() {
         frameResize(images: defaltImageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
-        imageBackView?.image = nil
     }
 
     func maskGif() {
