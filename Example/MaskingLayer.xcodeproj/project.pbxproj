@@ -21,6 +21,7 @@
 		BB6F894A215178E3008986BA /* MaskingLayer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BB6F8949215178E3008986BA /* MaskingLayer.podspec */; };
 		BB6F89542152E554008986BA /* MaskingLayer_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6F89532152E554008986BA /* MaskingLayer_ExampleUITests.swift */; };
 		BB6F89622152E56A008986BA /* MaskingLayer_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6F89612152E56A008986BA /* MaskingLayer_ExampleTests.swift */; };
+		BBC88249237ECB33007C3F17 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC88248237ECB33007C3F17 /* ViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		BB6F895F2152E56A008986BA /* MaskingLayer_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaskingLayer_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB6F89612152E56A008986BA /* MaskingLayer_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskingLayer_ExampleTests.swift; sourceTree = "<group>"; };
 		BB6F89632152E56A008986BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBC88248237ECB33007C3F17 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		C2788196BAAF3112A92117DF /* Pods-MaskingLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskingLayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaskingLayer_Tests/Pods-MaskingLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D3D5A22610BE6E7EA650D89D /* Pods-MaskingLayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaskingLayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaskingLayer_Tests/Pods-MaskingLayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D72988AF295E85CE6B80CB51 /* Pods_MaskingLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaskingLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				BB4207F1237578F1005EE595 /* SceneDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				BBC88248237ECB33007C3F17 /* ViewController+Extension.swift */,
 				BB4207F723758570005EE595 /* CameraViewController.swift */,
 				BB4207ED23757175005EE595 /* TabBarController.swift */,
 				BB4207F3237584E0005EE595 /* MaskButtonView.swift */,
@@ -399,6 +402,7 @@
 				BB4207EE23757175005EE595 /* TabBarController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				BB4207F823758570005EE595 /* CameraViewController.swift in Sources */,
+				BBC88249237ECB33007C3F17 /* ViewController+Extension.swift in Sources */,
 				BB4207F4237584E0005EE595 /* MaskButtonView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				BB4207F2237578F1005EE595 /* SceneDelegate.swift in Sources */,
