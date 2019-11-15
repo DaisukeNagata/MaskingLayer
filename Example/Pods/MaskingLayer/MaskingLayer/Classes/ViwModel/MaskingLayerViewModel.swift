@@ -49,6 +49,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         defaltImageView?.contentMode = .scaleAspectFit
 
         imageView = UIImageView()
+        imageView?.contentMode = .scaleAspectFit
 
         imageBackView = UIImageView()
         imageBackView?.contentMode = .scaleAspectFit
@@ -57,7 +58,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     public func frameResize(images: UIImage, rect: CGRect) {
-        imageView?.contentMode = .scaleAspectFit
         imageView?.frame = rect
         image = images.ResizeUIImage(width: imageView?.frame.width ?? 0.0, height: imageView?.frame.height ?? 0.0)
 
@@ -107,7 +107,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func imageResize() {
-        frameResize(images: defaltImageView?.image ?? UIImage(), rect: imageView?.frame ?? CGRect())
+        frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
     }
 
     func maskGif() {
