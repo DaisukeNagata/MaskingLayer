@@ -39,5 +39,9 @@ class ViewController: UIViewController {
             let next: UIViewController = storyboard.instantiateInitialViewController() as! CameraViewController
             self.navigationController?.pushViewController(next, animated: true)
         }
+
+        MV.longTappedCount { maskLayer in
+            self.alertSave(maskLayer, mo: mO)
+        }
     }
 }
