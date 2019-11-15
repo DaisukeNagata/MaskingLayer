@@ -20,23 +20,20 @@ class ViewController: UIViewController {
         let vc = sb.instantiateInitialViewController() as! ViewController
         return vc
     }
+    
+    private var mO: MaskingLayerViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        let mO = MaskingLayerViewModel(minSegment: 15)
+        mO = MaskingLayerViewModel(minSegment: 15)
+        guard let mO = mO else { return }
         let MV = MaskGestureViewModel(mO: mO, vc: self)
         MV.maskGestureView?.frame = view.frame
         view.addSubview(MV.maskGestureView ?? UIView())
-        
-        // this is navi+tab - view.frame
-        var rect = view.frame
-        rect.origin.y = 84
-        rect.size.height -= 184
-        
-        mO.frameResize(images: UIImage(named: "IMG_4011")!, rect: rect)
-        
+
+        mO.frameResize(images: UIImage(named: "IMG_4011")!, rect: view.frame)
+
         MV.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
             let next: UIViewController = storyboard.instantiateInitialViewController() as! CameraViewController

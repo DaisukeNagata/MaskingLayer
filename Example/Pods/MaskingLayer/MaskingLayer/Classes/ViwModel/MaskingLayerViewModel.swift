@@ -43,21 +43,28 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil
 
     public init(vc: UIViewController? = nil, minSegment: CGFloat? = nil) {
-        imageView = UIImageView()
+        self.vc = vc ?? UIViewController()
+
         defaltImageView = UIImageView()
+        defaltImageView?.contentMode = .scaleAspectFit
+
+        imageView = UIImageView()
+
         imageBackView = UIImageView()
         imageBackView?.contentMode = .scaleAspectFit
-        self.vc = vc ?? UIViewController()
+    
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
 
     public func frameResize(images: UIImage, rect: CGRect) {
+        imageView?.contentMode = .scaleAspectFit
         imageView?.frame = rect
         image = images.ResizeUIImage(width: imageView?.frame.width ?? 0.0, height: imageView?.frame.height ?? 0.0)
+
+        let imageSize = AVMakeRect(aspectRatio: images.size, insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.image = image
-        imageView?.contentMode = .scaleAspectFit
-        let imageSize = AVMakeRect(aspectRatio: imageView?.image?.size ?? CGSize(), insideRect: imageView?.bounds ?? CGRect()).size
         imageView?.frame.size = imageSize
+
         imageView?.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
 
         if defaltImageView?.image == nil {
@@ -66,6 +73,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
 
         defaltImageView?.image = imageView?.image
+
     }
 
     func maskPortraitMatte(minSegment: CGFloat) {
