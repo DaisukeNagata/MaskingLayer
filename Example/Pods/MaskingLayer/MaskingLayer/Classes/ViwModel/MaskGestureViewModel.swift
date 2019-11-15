@@ -22,6 +22,20 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         desgin(mO: mO)
     }
 
+    public func longTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
+        mLViewModel?.observe(for: mLViewModel?.longTappedCount ?? MaskObservable()) { _ in
+            self.mLViewModel?.longTappedCount.initValue()
+            bind((self.mLViewModel?.maskLayer.longtappedSelect(mo: self.mLViewModel ?? MaskingLayerViewModel())) ?? MaskLayer(minSegment: 0.0) )
+        }
+    }
+
+    public func cameraObserve(_ bind: @escaping () -> Void) {
+        mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
+            self.mLViewModel?.cameraCount.initValue()
+            bind()
+        }
+    }
+
     private func desgin(mO: MaskingLayerViewModel) {
         mLViewModel = mO
         maskGestureView?.addSubview(mO.imageView ?? UIImageView())
@@ -53,11 +67,6 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
             }
         }
 
-        mLViewModel?.observe(for: mLViewModel?.longTappedCount ?? MaskObservable()) { _ in
-            self.mLViewModel?.longTappedCount.initValue()
-            self.mLViewModel?.maskLayer.alertSave(views: self.vController ?? UIViewController(), mo: mO)
-        }
-
         mLViewModel?.observe(for: mLViewModel?.backImageCount ?? MaskObservable()) { _ in
             self.mLViewModel?.backImageCount.initValue()
             self.mLViewModel?.imageBackView?.image = self.mLViewModel?.imageView?.image
@@ -65,13 +74,6 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
             self.mLViewModel?.imageBackView?.setNeedsLayout()
         }
     
-    }
-
-    public func cameraObserve(_ bind: @escaping () -> Void) {
-        mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
-            self.mLViewModel?.cameraCount.initValue()
-            bind()
-        }
     }
 
     @objc func panTapped(sender: UIPanGestureRecognizer) { mLViewModel?.panTapped(sender: sender) }
