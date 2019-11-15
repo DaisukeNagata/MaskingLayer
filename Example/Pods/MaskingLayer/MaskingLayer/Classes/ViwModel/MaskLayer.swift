@@ -9,12 +9,13 @@
 import UIKit
 
 @available(iOS 13.0, *)
-final class MaskLayer: NSObject {
+public final class MaskLayer: NSObject {
 
     public var maskColor = UIColor()
     public var path = CGMutablePath()
     public var clipLayer = CAShapeLayer()
     public var minSegment: CGFloat
+    public var maskImagePicker = MaskImagePicker()
 
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
@@ -23,7 +24,6 @@ final class MaskLayer: NSObject {
     var last = CGPoint.zero // last touch point
     var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
     var fEdge = true //either the begging or the turning point
-    var maskImagePicker = MaskImagePicker()
 
     init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
@@ -40,85 +40,11 @@ final class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    func alertSave(views: UIViewController, mo: MaskingLayerViewModel) {
-        guard let imageView = mo.imageView else { return }
-        let alertController = UIAlertController(title: NSLocalizedString("BackGround Color", comment: ""), message: "", preferredStyle: .alert)
-        let stringAttributes: [NSAttributedString.Key : Any] = [
-            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
-            .font : UIFont.systemFont(ofSize: 22.0)
-        ]
-        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
-        alertController.setValue(string, forKey: "attributedTitle")
-        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
-
-        let maskWhite = UIAlertAction(title: NSLocalizedString("MaskWhite", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskWhite; self.colorSet(views: views, imageView: imageView, image: mo.image, color: self.maskColor)
-        }
-        let maskLightGray = UIAlertAction(title: NSLocalizedString("MaskLightGray", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskLightGray; self.colorSet(views: views, imageView: imageView, image: mo.image, color: self.maskColor)
-        }
-        let maskGray = UIAlertAction(title: NSLocalizedString("MaskGray", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskGray; self.colorSet(views: views, imageView: imageView, image: mo.image, color: self.maskColor)
-        }
-        let maskDarkGray = UIAlertAction(title: NSLocalizedString("MaskDarkGray", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskDarkGray; self.colorSet(views: views, imageView: imageView, image: mo.image, color: self.maskColor)
-        }
-        let maskLightBlack = UIAlertAction(title: NSLocalizedString("MaskLightBlack", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskColor = .maskLightBlack; self.colorSet(views: views, imageView: imageView, image: mo.image, color: self.maskColor)
-        }
-        let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet(mo: mo)
-            self.maskImagePicker.photoSegue(vc: views, mo: mo,bool: false)
-        }
-        let backImage = UIAlertAction(title: NSLocalizedString("BackImage ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.alertPortrait(views: views, mO: mo)
-        }
-        let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet(mo: mo)
-            self.maskImagePicker.photoSegue(vc: views, mo: mo, bool: true)
-        }
-        let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.mutablePathSet(mo: mo)
-            mo.cameraCount.value = 0
-        }
-        let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
-            action in
-            self.mutablePathSet(mo: mo)
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        mo.imageView?.setNeedsLayout()
-        alertController.addAction(maskWhite)
-        alertController.addAction(maskLightGray)
-        alertController.addAction(maskGray)
-        alertController.addAction(maskDarkGray)
-        alertController.addAction(maskLightBlack)
-        alertController.addAction(cameraRoll)
-        alertController.addAction(backImage)
-        alertController.addAction(videoRoll)
-        alertController.addAction(dyeHair)
-        alertController.addAction(reset)
-        views.present(alertController, animated: true, completion: nil)
+    public func colorSet(imageView: UIImageView,image: UIImage, color: UIColor) {
+        imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
     }
 
-    func alertPortrait(views: UIViewController, mO: MaskingLayerViewModel) {
+    public func alertPortrait(views: UIViewController, mO: MaskingLayerViewModel) {
         let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
         let stringAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
@@ -138,18 +64,26 @@ final class MaskLayer: NSObject {
         views.present(alertController, animated: true, completion: nil)
         mO.backImageCount.value = 0
     }
-
-    func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage {
-        return mask(image: image(color: color, size: size), convertPath: convertPath)
-    }
-
-    func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
+    
+    public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
 
         mo?.imageResize()
         mo?.vm.setVideoURLView.removeFromSuperview()
         mo?.cView.removeFromSuperview()
         convertPath = CGMutablePath()
         path = CGMutablePath()
+    }
+    
+    public func cameraSelect(mo: MaskingLayerViewModel? = nil) {
+         mo?.cameraCount.value = 0
+    }
+    
+    // Tapped Logic
+    func longtappedSelect(mo: MaskingLayerViewModel) -> MaskLayer { return self }
+
+
+    func maskImage(color: UIColor, size: CGSize,convertPath: CGMutablePath) -> UIImage {
+        return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
     func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
@@ -214,10 +148,6 @@ final class MaskLayer: NSObject {
     private func mask(image: UIImage,convertPath: CGMutablePath) -> UIImage {
         clipLayer.isHidden = true
         return clipedMotoImage(image,convertPath:convertPath)
-    }
-
-    private func colorSet(views: UIViewController,imageView: UIImageView,image: UIImage, color: UIColor) {
-        imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
     }
 
     private func image(color: UIColor, size: CGSize) -> UIImage {
