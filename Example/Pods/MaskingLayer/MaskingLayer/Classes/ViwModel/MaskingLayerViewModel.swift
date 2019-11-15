@@ -12,7 +12,9 @@ import MobileCoreServices
 
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
-    var imageView: UIImageView?
+    public var imageView: UIImageView?
+    public var image = UIImage()
+
     var defaltImageView: UIImageView?
     var imageBackView: UIImageView?
 
@@ -25,7 +27,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         return cView
     }()
 
-    var image = UIImage()
     var maskLayer: MaskLayer
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
