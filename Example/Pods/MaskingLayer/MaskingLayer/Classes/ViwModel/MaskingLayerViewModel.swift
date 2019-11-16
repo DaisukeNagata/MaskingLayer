@@ -30,6 +30,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var maskLayer: MaskLayer
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
+    var collectionTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
     
@@ -57,6 +58,8 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
+
+    public func collectionTapped(index: Int) { collectionTappedCount.value = 0 }
 
     public func frameResize(images: UIImage, rect: CGRect) {
         imageView?.frame = rect
