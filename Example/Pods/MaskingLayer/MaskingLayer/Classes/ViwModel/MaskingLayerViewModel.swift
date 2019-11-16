@@ -59,7 +59,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
 
-    public func collectionTapped(index: Int) { collectionTappedCount.value = 0 }
+    public func collectionTapped() { collectionTappedCount.value = 0 }
 
     public func frameResize(images: UIImage, rect: CGRect) {
         imageView?.frame = rect
