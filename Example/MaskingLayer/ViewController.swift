@@ -53,27 +53,31 @@ class ViewController: UIViewController {
 
         cView.collectionView.delegate = self
         view.addSubview(cView)
-        self.cView.isHidden = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "色", style: .done, target: self, action: #selector(addTapped))
     }
 
-    @objc func addTapped() { self.cView.isHidden = false }
+    @objc func addTapped() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.cView.animation()
+    }
 }
 
 // MARK: UICollectionViewDelegate
 extension ViewController: UICollectionViewDelegate {
 
-    func ovserve(index: Int) {
+    func observe(index: Int) {
         mv?.collectionTappedCount { maskLayer in
-            self.cView.isHidden = true
             maskLayer.colorSet(imageView: self.mo?.imageView ?? UIImageView(),
                                color    : self.cView.vm.imagesRows[index].imageSet)
+            self.cView.transform = .identity
+            self.cView.collectionView.transform = .identity
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        ovserve(index: indexPath.row)
+        observe(index: indexPath.row)
         mv?.mLViewModel?.collectionTapped(index: indexPath.row)
+        self.navigationController?.navigationBar.isHidden = false
     }
 }

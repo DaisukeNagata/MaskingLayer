@@ -15,10 +15,9 @@ final class ColorPaletteView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 88, height: 88)
 
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
         collectionView.register(ColorPaletteCell().identifier, forCellWithReuseIdentifier: "ColorPaletteCell")
         collectionView.register(ColorPaletteCell.self, forCellWithReuseIdentifier: "ColorPaletteCell")
-        collectionView.frame = UIScreen.main.bounds
         return collectionView
     }()
 
@@ -27,10 +26,19 @@ final class ColorPaletteView: UIView {
 
         collectionView.dataSource = vm
         self.frame = UIScreen.main.bounds
+        self.frame.origin.y = UIScreen.main.bounds.height
+        self.collectionView.frame = self.frame
         self.addSubview(collectionView)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    func animation() {
+        UIView.animate(withDuration: 1.0) {
+            self.transform = self.transform.translatedBy(x: 0, y: -UIScreen.main.bounds.height*0.75)
+            self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -UIScreen.main.bounds.height*0.75)
+        }
     }
 }
