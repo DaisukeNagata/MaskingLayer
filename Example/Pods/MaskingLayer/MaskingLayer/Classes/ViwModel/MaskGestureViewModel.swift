@@ -10,7 +10,8 @@ import UIKit
 public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
 
     public var maskGestureView: UIView?
-    private var mLViewModel: MaskingLayerViewModel?
+    public var mLViewModel: MaskingLayerViewModel?
+
     private var vController: UIViewController?
 
     public init(mO: MaskingLayerViewModel, vc: UIViewController) {
@@ -20,6 +21,13 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         vController = vc
         observe(mO)
         desgin(mO: mO)
+    }
+    
+    public func collectionTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
+        mLViewModel?.observe(for: mLViewModel?.collectionTappedCount ?? MaskObservable()) { _ in
+            self.mLViewModel?.collectionTappedCount.initValue()
+            bind((self.mLViewModel?.maskLayer.longtappedSelect(mo: self.mLViewModel ?? MaskingLayerViewModel())) ?? MaskLayer(minSegment: 0.0) )
+        }
     }
 
     public func longTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
