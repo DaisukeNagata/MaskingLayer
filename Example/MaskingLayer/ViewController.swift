@@ -36,6 +36,7 @@ class ViewController: UIViewController {
         guard let mo = mo else { return }
         mv = MaskGestureViewModel(mO: mo, vc: self)
         guard let mv = mv else { return }
+
         mv.maskGestureView?.frame = view.frame
         view.addSubview(mv.maskGestureView ?? UIView())
 
@@ -77,7 +78,7 @@ extension ViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         observe(index: indexPath.row)
-        mv?.mLViewModel?.collectionTapped(index: indexPath.row)
+        mv?.mLViewModel?.collectionTapped()
         self.navigationController?.navigationBar.isHidden = false
     }
 }
