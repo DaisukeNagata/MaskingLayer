@@ -117,6 +117,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     func maskGif() {
         defo = UserDefaults.standard
         guard let url  = defo.url(forKey: "url") else { return }
+        imageView?.contentMode = .scaleToFill
         gifObject.makeGifImageMovie(imageView ?? UIImageView(), url: url, frameY: 1, imageAr: (vm.setVideoURLView.imageAr ?? Array<CGImage>()))
     }
 
