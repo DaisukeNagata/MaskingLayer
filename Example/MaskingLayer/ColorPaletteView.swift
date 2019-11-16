@@ -18,6 +18,7 @@ final class ColorPaletteView: UIView {
         let collectionView = UICollectionView(frame:.zero, collectionViewLayout: layout)
         collectionView.register(ColorPaletteCell().identifier, forCellWithReuseIdentifier: "ColorPaletteCell")
         collectionView.register(ColorPaletteCell.self, forCellWithReuseIdentifier: "ColorPaletteCell")
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
