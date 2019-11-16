@@ -21,27 +21,59 @@ class ViewController: UIViewController {
         return vc
     }
     
-    private var mO: MaskingLayerViewModel?
+    private lazy var cView: ColorPaletteView = {
+        let cView = ColorPaletteView()
+        return cView
+    }()
+
+    private var mo: MaskingLayerViewModel?
+    private var mv: MaskGestureViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mO = MaskingLayerViewModel(minSegment: 15)
-        guard let mO = mO else { return }
-        let MV = MaskGestureViewModel(mO: mO, vc: self)
-        MV.maskGestureView?.frame = view.frame
-        view.addSubview(MV.maskGestureView ?? UIView())
+        mo = MaskingLayerViewModel(minSegment: 15)
+        guard let mo = mo else { return }
+        mv = MaskGestureViewModel(mO: mo, vc: self)
+        guard let mv = mv else { return }
+        mv.maskGestureView?.frame = view.frame
+        view.addSubview(mv.maskGestureView ?? UIView())
 
-        mO.frameResize(images: UIImage(named: "IMG_4011")!, rect: view.frame)
+        mo.frameResize(images: UIImage(named: "IMG_4011")!, rect: view.frame)
 
-        MV.cameraObserve {
+        mv.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
             let next: UIViewController = storyboard.instantiateInitialViewController() as! CameraViewController
             self.navigationController?.pushViewController(next, animated: true)
         }
 
-        MV.longTappedCount { maskLayer in
-            self.alertSave(maskLayer, mo: mO)
+        mv.longTappedCount { maskLayer in
+            self.alertSave(maskLayer, mo: self.mo!)
         }
+
+        cView.collectionView.delegate = self
+        view.addSubview(cView)
+        self.cView.isHidden = true
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "色", style: .done, target: self, action: #selector(addTapped))
+    }
+
+    @objc func addTapped() { self.cView.isHidden = false }
+}
+
+// MARK: UICollectionViewDelegate
+extension ViewController: UICollectionViewDelegate {
+
+    func ovserve(index: Int) {
+        mv?.collectionTappedCount { maskLayer in
+            self.cView.isHidden = true
+            maskLayer.colorSet(imageView: self.mo?.imageView ?? UIImageView(),
+                               color    : self.cView.vm.imagesRows[index].imageSet)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        ovserve(index: indexPath.row)
+        mv?.mLViewModel?.collectionTapped(index: indexPath.row)
     }
 }
