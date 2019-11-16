@@ -29,7 +29,7 @@ public final class MaskLayer: NSObject {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
     
-        maskColor = .maskWhite
+        maskColor = .white
         clipLayer.name = "clipLayer"
         clipLayer.lineCap = CAShapeLayerLineCap.round
         clipLayer.lineJoin = CAShapeLayerLineJoin.round
@@ -40,7 +40,8 @@ public final class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func colorSet(imageView: UIImageView,image: UIImage, color: UIColor) {
+    public func colorSet(imageView: UIImageView, color: UIColor) {
+        maskColor = color
         imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
     }
 
