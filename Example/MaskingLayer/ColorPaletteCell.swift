@@ -17,6 +17,11 @@ final class ColorPaletteCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.contentView.layer.masksToBounds = true
+        self.contentView.layer.cornerRadius = 44
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 44
+
         paletteLabel.frame.size = CGSize(width: 88, height: 88)
         self.addSubview(paletteLabel)
     }
