@@ -155,12 +155,9 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				BB4207F1237578F1005EE595 /* SceneDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				BBC88248237ECB33007C3F17 /* ViewController+Extension.swift */,
+				BBA589612380C6B2007012BE /* VC */,
 				BBC88252237FDF60007C3F17 /* Collection */,
-				BB4207F723758570005EE595 /* CameraViewController.swift */,
-				BB4207ED23757175005EE595 /* TabBarController.swift */,
-				BB4207F3237584E0005EE595 /* MaskButtonView.swift */,
+				BBA589602380C69E007012BE /* UI */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				BB4207F523758552005EE595 /* Camera.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -222,6 +219,25 @@
 				BB6F89632152E56A008986BA /* Info.plist */,
 			);
 			path = MaskingLayer_ExampleTests;
+			sourceTree = "<group>";
+		};
+		BBA589602380C69E007012BE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BB4207F3237584E0005EE595 /* MaskButtonView.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		BBA589612380C6B2007012BE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				BBC88248237ECB33007C3F17 /* ViewController+Extension.swift */,
+				BB4207ED23757175005EE595 /* TabBarController.swift */,
+				BB4207F723758570005EE595 /* CameraViewController.swift */,
+			);
+			name = VC;
 			sourceTree = "<group>";
 		};
 		BBC88252237FDF60007C3F17 /* Collection */ = {
