@@ -31,7 +31,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
     var collectionTappedCount = MaskObservable<Int>()
-    var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
     
     private var url: URL?

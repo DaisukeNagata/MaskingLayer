@@ -73,15 +73,7 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
                 if self.mLViewModel?.imageBackView?.image != nil { self.mLViewModel?.gousei() }
                 return
             }
-        }
-
-        mLViewModel?.observe(for: mLViewModel?.backImageCount ?? MaskObservable()) { _ in
-            self.mLViewModel?.backImageCount.initValue()
-            self.mLViewModel?.imageBackView?.image = self.mLViewModel?.imageView?.image
-            self.mLViewModel?.imageBackView?.frame = self.mLViewModel?.imageView?.frame ?? CGRect()
-            self.mLViewModel?.imageBackView?.setNeedsLayout()
-        }
-    
+        }    
     }
 
     @objc func panTapped(sender: UIPanGestureRecognizer) { mLViewModel?.panTapped(sender: sender) }
