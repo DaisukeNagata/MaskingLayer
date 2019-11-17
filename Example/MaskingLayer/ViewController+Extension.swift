@@ -15,19 +15,15 @@ extension ViewController {
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            maskLayer.mutablePathSet(mo: mo)
             maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo,bool: false)
         }
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            maskLayer.mutablePathSet(mo: mo)
             maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo, bool: true)
         }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
-            action in
-            maskLayer.mutablePathSet(mo: mo)
-            
+            action in            
             alertController.dismiss(animated: true, completion: { maskLayer.cameraSelect(mo: mo) })
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {

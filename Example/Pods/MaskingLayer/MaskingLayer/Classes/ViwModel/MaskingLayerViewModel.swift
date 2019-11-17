@@ -31,6 +31,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var maskCount = MaskObservable<Int>()
     var longTappedCount = MaskObservable<Int>()
     var collectionTappedCount = MaskObservable<Int>()
+    var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
     
     private var url: URL?
@@ -101,6 +102,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
             
             self.imageView?.image = nImage
             self.imageView?.setNeedsLayout()
+            self.imageBackView?.image = nImage
         }
     }
 
@@ -110,6 +112,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func imageResize() {
+        self.imageBackView = nil
         frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
     }
 
