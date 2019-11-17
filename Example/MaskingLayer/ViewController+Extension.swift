@@ -18,11 +18,6 @@ extension ViewController {
             maskLayer.mutablePathSet(mo: mo)
             maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo,bool: false)
         }
-        let backImage = UIAlertAction(title: NSLocalizedString("BackImage ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            maskLayer.alertPortrait(views: self, mO: mo)
-        }
         let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
@@ -42,7 +37,6 @@ extension ViewController {
         }
         mo.imageView?.setNeedsLayout()
         alertController.addAction(cameraRoll)
-        alertController.addAction(backImage)
         alertController.addAction(videoRoll)
         alertController.addAction(dyeHair)
         alertController.addAction(reset)
