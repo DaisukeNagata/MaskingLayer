@@ -40,32 +40,8 @@ public final class MaskLayer: NSObject {
         clipLayer.lineWidth = 1
     }
 
-    public func colorSet(imageView: UIImageView, color: UIColor) {
-        maskColor = color
-        imageView.image = self.mask(image: self.image(color: color, size: imageView.frame.size), convertPath: convertPath)
-    }
+    public func colorSet(imageView: UIImageView, color: UIColor) { maskColor = color }
 
-    public func alertPortrait(views: UIViewController, mO: MaskingLayerViewModel) {
-        let alertController = UIAlertController(title: NSLocalizedString("Prease Portrait Library", comment: ""), message: "", preferredStyle: .alert)
-        let stringAttributes: [NSAttributedString.Key : Any] = [
-            .foregroundColor : UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0),
-            .font : UIFont.systemFont(ofSize: 22.0)
-        ]
-
-        let string = NSAttributedString(string: alertController.title!, attributes:stringAttributes)
-        alertController.setValue(string, forKey: "attributedTitle")
-        alertController.view.tintColor = UIColor(red: 0/255, green: 136/255, blue: 83/255, alpha: 1.0)
-
-        let reset = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            self.maskImagePicker.photoSegue(vc: views, mo: mO, bool: false)
-        }
-        alertController.addAction(reset)
-        views.present(alertController, animated: true, completion: nil)
-        mO.backImageCount.value = 0
-    }
-    
     public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
 
         mo?.imageResize()
@@ -75,9 +51,7 @@ public final class MaskLayer: NSObject {
         path = CGMutablePath()
     }
     
-    public func cameraSelect(mo: MaskingLayerViewModel? = nil) {
-         mo?.cameraCount.value = 0
-    }
+    public func cameraSelect(mo: MaskingLayerViewModel? = nil) { mo?.cameraCount.value = 0 }
     
     // Tapped Logic
     func longtappedSelect(mo: MaskingLayerViewModel) -> MaskLayer { return self }
