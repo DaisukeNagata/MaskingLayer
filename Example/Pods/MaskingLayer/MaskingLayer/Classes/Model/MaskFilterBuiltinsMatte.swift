@@ -14,7 +14,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
 
     lazy var context = CIContext()
 
-    var xibView                 : SliiderObjects? = nil
+    var xibView                 : SliiderObjectsView? = nil
     var photos                  : AVCapturePhoto?
     var semanticSegmentationType: AVSemanticSegmentationMatte.MatteType?
 
@@ -38,7 +38,6 @@ final class MaskFilterBuiltinsMatte: NSObject {
         setupInputOutput()
         setupPreviewLayer(view)
         captureSession?.startRunning()
-        self.xibView?.removeFromSuperview()
     }
 
     func returnAnimation(height: CGFloat) {
@@ -48,11 +47,11 @@ final class MaskFilterBuiltinsMatte: NSObject {
     func btAction(view: UIView, tabHeight: CGFloat) {
         if self.xibView?.sliderImageView.image == nil {
             cameraAction { image in
-                self.xibView = SliiderObjects(frameHight: 100)
+                self.xibView = SliiderObjectsView(frameHight: 100)
                 self.xibView?.frame = view.frame
                 self.xibView?.sliderImageView.contentMode = .scaleAspectFit
                 self.xibView?.sliderImageView.image = image
-                view.addSubview(self.xibView ?? SliiderObjects(frameHight: tabHeight))
+                view.addSubview(self.xibView ?? SliiderObjectsView(frameHight: tabHeight))
             }
         } else {
             maskFilterBuiltinsChanges(value    : xibView?.sliderInputRVector.value,

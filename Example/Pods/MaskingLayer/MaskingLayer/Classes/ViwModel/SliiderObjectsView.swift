@@ -1,5 +1,5 @@
 //
-//  SliiderObjects.swift
+//  SliiderObjectsView.swift
 //  MaskMatte
 //
 //  Created by 永田大祐 on 2019/11/05.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SliiderObjects: UIView, UIGestureRecognizerDelegate {
+class SliiderObjectsView: UIView, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var sliderImageView: UIImageView!
 
@@ -55,8 +55,8 @@ class SliiderObjects: UIView, UIGestureRecognizerDelegate {
     }
 
     func loadNib() {
-        let bundle = Bundle(for: SliiderObjects.self)
-        let view = bundle.loadNibNamed("SliiderObjects", owner: self, options: nil)?.first as? UIView
+        let bundle = Bundle(for: SliiderObjectsView.self)
+        let view = bundle.loadNibNamed("SliiderObjectsView", owner: self, options: nil)?.first as? UIView
         view?.frame = UIScreen.main.bounds
         self.addSubview(view ?? UIView())
         self.subviews[0].backgroundColor = .black

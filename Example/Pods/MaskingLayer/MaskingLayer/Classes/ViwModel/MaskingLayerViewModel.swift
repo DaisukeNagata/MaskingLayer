@@ -48,13 +48,10 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         self.vc = vc ?? UIViewController()
 
         defaltImageView = UIImageView()
-        defaltImageView?.contentMode = .scaleAspectFit
 
         imageView = UIImageView()
-        imageView?.contentMode = .scaleAspectFit
 
         imageBackView = UIImageView()
-        imageBackView?.contentMode = .scaleAspectFit
     
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
     }
