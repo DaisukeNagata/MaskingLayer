@@ -198,21 +198,6 @@ final class MaskFilterBuiltinsMatte: NSObject {
         imageView.image = UIImage(data: imagedata)
     }
 
-    private func cameraWithPosition(_ position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-        let deviceDescoverySession =
-
-            AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
-                                                  mediaType: AVMediaType.video,
-                                                  position: AVCaptureDevice.Position.unspecified)
-
-        for device in deviceDescoverySession.devices {
-            if device.position == position {
-                return device
-            }
-        }
-        return nil
-    }
-
     private func setupPreviewLayer(_ view: UIView) {
         self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession ?? AVCaptureSession())
         self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
