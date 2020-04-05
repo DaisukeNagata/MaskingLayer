@@ -66,6 +66,8 @@ The left is the latest version. Perform a smooth crop.
 ## Version 1.0.0 ~
 ![](https://user-images.githubusercontent.com/16457165/78512413-3c38f700-77df-11ea-97cc-ff506ae46941.gif)
 
+## How to
+
 ```ruby
 1. Select hair dyeing with a long tap
 
@@ -77,7 +79,6 @@ Screen operation
 1. Up swipe is Display of slider bar
 2. Long tap is Hide slider bar
 ```
-## Operation link
 
 ## Example Code
 ```ruby
