@@ -16,7 +16,7 @@ final class MaskPortraitMatteModel: NSObject {
         let url = defo.url(forKey: "url")
         guard let urlSet = url else { return }
         var mattePixelBuffer: CVPixelBuffer?
-        let maskingLayer = MaskLayer(minSegment: minSegment)
+
         guard let source = CGImageSourceCreateWithURL(urlSet as CFURL, nil) else { return }
 
         var matteData: [String : AnyObject]? {
