@@ -1,6 +1,6 @@
 # MaskingLayer
 
-os 13.4 ~ iPhoneX ~
+os 13.4.1 ~ iPhoneX ~
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/16457165/68517602-9a62bc00-02cb-11ea-9571-518f19ea8277.png?raw=true" width="500" height="700">
