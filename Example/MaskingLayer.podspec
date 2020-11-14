@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MaskingLayer'
-  s.version          = '1.2.3'
+  s.version          = '1.2.4'
   s.summary          = 'The traced part is masked.'
 
 # This description is used to generate tags and improve search results.
@@ -29,8 +29,8 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '14.2'
   s.swift_version = '5.3'
-  s.source_files = 'Example/Pods/MaskingLayer/MaskingLayer/Classes/**/*'
-  
+  s.source_files = '/Example/Pods/MaskingLayer/MaskingLayer/Classes/**/*'
+
   # s.resource_bundles = {
   #   'MaskingLayer' => ['MaskingLayer/Assets/*.png']
   # }

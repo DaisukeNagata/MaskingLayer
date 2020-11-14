@@ -175,7 +175,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         based = base
         photos = photo
         let imagedata = matteSetting(base: base, ssm: segmentationMatte)
-        bind(UIImage(data: imagedata))
+        bind(UIImage(data: imagedata)?.horizontalInversion())
     }
 
     private func maskFilterBuiltinsChanges(value    : Float? = nil,
@@ -195,7 +195,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
         }
         let base = based
         let imagedata = matteSetting(value: value, value2: value2, value3: value3, value4: value4, base: base ?? CIImage(), ssm: segmentationMatte)
-        imageView.image = UIImage(data: imagedata)
+        imageView.image = UIImage(data: imagedata)?.horizontalInversion()
     }
 
     private func setupPreviewLayer(_ view: UIView) {
