@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MaskingLayer'
-  s.version          = '1.2.1'
+  s.version          = '1.2.2'
   s.summary          = 'The traced part is masked.'
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/daisukenagata/MaskingLayer.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/dbank0208'
 
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '14.2'
   s.swift_version = '5.0'
   s.source_files = 'Example/Pods/MaskingLayer/MaskingLayer/Classes/**/*'
   
