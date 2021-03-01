@@ -185,7 +185,10 @@ extension MaskingLayerViewModel {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
-            panGestureRect = CGRect(x: panGestureStartX, y: panGestureStartY + 156, width: position.x - panGestureStartX, height: maskLayer.trimWith)
+            panGestureStartX > position.x ?
+                (panGestureRect = CGRect(x: position.x, y: panGestureStartY + imageView.frame.origin.y, width: panGestureStartX - position.x, height: maskLayer.trimWith)):
+                (panGestureRect = CGRect(x: panGestureStartX, y: panGestureStartY + imageView.frame.origin.y, width: position.x - panGestureStartX, height: maskLayer.trimWith))
+            
             maskLayer.clipLayer.name == "trimLayer" ?
                 endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
                 maskPathEnded(position: position, view: imageView )
