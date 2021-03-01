@@ -22,18 +22,25 @@ extension ViewController {
             alertController.dismiss(animated: true, completion: nil)
             maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo, bool: true)
         }
+        let trim = UIAlertAction(title: NSLocalizedString("Trim ", comment: ""), style: .default) {
+            action in
+            maskLayer.trimLayer(mo: mo)
+            alertController.dismiss(animated: true, completion: nil)
+        }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
             action in            
             alertController.dismiss(animated: true, completion: { maskLayer.cameraSelect(mo: mo) })
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
+            maskLayer.maskLayer()
             maskLayer.mutablePathSet(mo: mo)
             alertController.dismiss(animated: true, completion: nil)
         }
         mo.imageView?.setNeedsLayout()
         alertController.addAction(cameraRoll)
         alertController.addAction(videoRoll)
+        alertController.addAction(trim)
         alertController.addAction(dyeHair)
         alertController.addAction(reset)
         self.present(alertController, animated: true, completion: nil)

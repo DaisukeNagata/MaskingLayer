@@ -39,8 +39,10 @@ class ViewController: UIViewController {
 
         mv.maskGestureView?.frame = view.frame
         view.addSubview(mv.maskGestureView ?? UIView())
-
         mo.frameResize(images: UIImage(named: "IMG_4011")!, rect: view.frame)
+        // Version 2.0.0 setting
+        mo.maskLayer.strokeColor = .red
+        mo.maskLayer.strokeALpha = 0.5
 
         mv.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
@@ -48,19 +50,21 @@ class ViewController: UIViewController {
             self.navigationController?.pushViewController(next, animated: true)
         }
 
-        mv.longTappedCount { maskLayer in
-            self.alertSave(maskLayer, mo: self.mo!)
-        }
-
         cView.collectionView.delegate = self
         view.addSubview(cView)
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "色", style: .done, target: self, action: #selector(addTapped))
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "color", style: .done, target: self, action: #selector(addTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Alert", style: .done, target: self, action: #selector(callAlert))
     }
 
     @objc func addTapped() {
         self.navigationController?.navigationBar.isHidden = true
         self.cView.animation()
+    }
+
+    @objc func callAlert() {
+        guard let maskLayer = mo?.maskLayer, let mo = mo else { return }
+        self.alertSave(maskLayer, mo: mo)
     }
 }
 

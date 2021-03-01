@@ -12,6 +12,7 @@ import MobileCoreServices
 
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
+    public var maskLayer: MaskLayer
     public var imageView: UIImageView?
     public var image = UIImage()
 
@@ -27,9 +28,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         return cView
     }()
 
-    var maskLayer: MaskLayer
     var maskCount = MaskObservable<Int>()
-    var longTappedCount = MaskObservable<Int>()
     var collectionTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
@@ -139,7 +138,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     private func maskPathSet() {
         maskLayer.maskColor = .clear
         maskPathEnded(position: CGPoint(), view: imageView ?? UIImageView())
-        maskLayer.maskColor = .white
+        maskLayer.clipLayer.name == "trimLayer" ? (maskLayer.maskColor = .black) : (maskLayer.maskColor = .white)
     }
 }
 
@@ -182,7 +181,7 @@ extension MaskingLayerViewModel {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
-            maskPathEnded(position: position, view: imageView ?? UIImageView())
+            maskLayer.clipLayer.name == "trimLayer" ? endPangesture() : maskPathEnded(position: position, view: imageView ?? UIImageView())
             break
         case .possible:
             break
@@ -200,9 +199,16 @@ extension MaskingLayerViewModel {
         }
     }
 
-    func longTapeed(sender:UILongPressGestureRecognizer) { longTappedCount.value = 0 }
+    func longTapeed(sender:UILongPressGestureRecognizer) {
+        maskLayer.clipLayer.lineWidth += 1
+    }
+
+    private func endPangesture() {
+        maskLayer.clipLayer.lineWidth = 30
+    }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
+        maskLayer.clipLayer.name == "trimLayer" ? (maskLayer.clipLayer.lineWidth = maskLayer.trimWith) : (maskLayer.clipLayer.lineWidth = maskLayer.maskWidth) 
         maskLayer.clipLayer.isHidden = false
         if let path = maskLayer.start(position) {
              maskLayer.clipLayer.path = path

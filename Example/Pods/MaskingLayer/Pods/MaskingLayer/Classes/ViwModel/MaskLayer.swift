@@ -16,6 +16,10 @@ public final class MaskLayer: NSObject {
     public var clipLayer = CAShapeLayer()
     public var minSegment: CGFloat
     public var maskImagePicker = MaskImagePicker()
+    public var trimWith: CGFloat = 10
+    public var maskWidth: CGFloat = 1
+    public var strokeColor = UIColor()
+    public var strokeALpha = CGFloat()
 
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
@@ -28,18 +32,10 @@ public final class MaskLayer: NSObject {
     init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
-    
-        maskColor = .white
-        clipLayer.name = "clipLayer"
-        clipLayer.lineCap = CAShapeLayerLineCap.round
-        clipLayer.lineJoin = CAShapeLayerLineJoin.round
-        clipLayer.fillColor = UIColor.clear.cgColor
-        clipLayer.strokeColor = UIColor.white.cgColor
-        clipLayer.backgroundColor = UIColor.clear.cgColor
-        clipLayer.contentsScale = UIScreen.main.scale
-        clipLayer.lineWidth = 1
+        super.init()
+        self.maskLayer()
     }
-
+    
     public func colorSet(imageView: UIImageView, color: UIColor) { maskColor = color }
 
     public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
@@ -49,11 +45,35 @@ public final class MaskLayer: NSObject {
         mo?.cView.removeFromSuperview()
         convertPath = CGMutablePath()
         path = CGMutablePath()
+        clipLayer.path = nil
     }
-    
+
     public func cameraSelect(mo: MaskingLayerViewModel? = nil) { mo?.cameraCount.value = 0 }
-    
-    // Tapped Logic
+
+    public func maskLayer() {
+        maskColor = .white
+        clipLayer.name = "clipLayer"
+        clipLayer.lineCap = .round
+        clipLayer.lineJoin = .round
+        clipLayer.fillColor = UIColor.clear.cgColor
+        clipLayer.strokeColor = UIColor.white.cgColor
+        clipLayer.backgroundColor = UIColor.clear.cgColor
+        clipLayer.contentsScale = UIScreen.main.scale
+        clipLayer.lineWidth = maskWidth
+    }
+
+    public func trimLayer(mo: MaskingLayerViewModel? = nil) {
+        mutablePathSet(mo: mo)
+        maskColor = .white
+        clipLayer.name = "trimLayer"
+        clipLayer.lineCap = .butt
+        clipLayer.lineJoin = .bevel
+        clipLayer.fillColor = UIColor.clear.cgColor
+        clipLayer.strokeColor = strokeColor.cgColor.copy(alpha: strokeALpha)
+        clipLayer.backgroundColor = UIColor.clear.cgColor
+        clipLayer.lineWidth = trimWith
+    }
+
     func longtappedSelect(mo: MaskingLayerViewModel) -> MaskLayer { return self }
 
 
@@ -83,7 +103,7 @@ public final class MaskLayer: NSObject {
         return path
     }
 
-    func move(_ pt:CGPoint) -> CGPath? {
+    func move(_ pt: CGPoint) -> CGPath? {
         var pathToReturn:CGPath?
         let d = pt.delta(last)
         length += sqrt(d.dotProduct(d))

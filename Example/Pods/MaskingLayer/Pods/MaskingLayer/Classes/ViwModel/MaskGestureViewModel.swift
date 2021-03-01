@@ -30,13 +30,6 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         }
     }
 
-    public func longTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
-        mLViewModel?.observe(for: mLViewModel?.longTappedCount ?? MaskObservable()) { _ in
-            self.mLViewModel?.longTappedCount.initValue()
-            bind((self.mLViewModel?.maskLayer.longtappedSelect(mo: self.mLViewModel ?? MaskingLayerViewModel())) ?? MaskLayer(minSegment: 0.0) )
-        }
-    }
-
     public func cameraObserve(_ bind: @escaping () -> Void) {
         mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
             self.mLViewModel?.cameraCount.initValue()
@@ -91,6 +84,6 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
 
     @objc func panTapped(sender: UIPanGestureRecognizer) { mLViewModel?.panTapped(sender: sender) }
 
-    @objc func longTapeed(sender:UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
+    @objc func longTapeed(sender: UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
 
 }
