@@ -55,9 +55,9 @@ The left is the latest version. Perform a smooth crop.
 ## Version 1.0.0 ~
 ![](https://user-images.githubusercontent.com/16457165/78512413-3c38f700-77df-11ea-97cc-ff506ae46941.gif)
 
-## Version 2.0.0 ~
+## Version 2.1.0 ~
 <p align="left">
-<img src= "https://user-images.githubusercontent.com/16457165/109469533-7ecb8800-7ab1-11eb-8220-a72c23adb542.gif" width="330" height="700">
+<img src= "https://user-images.githubusercontent.com/16457165/109485377-f820a600-7ac4-11eb-8e05-52678fc36c30.gif" width="330" height="700">
 </p>
 
 
