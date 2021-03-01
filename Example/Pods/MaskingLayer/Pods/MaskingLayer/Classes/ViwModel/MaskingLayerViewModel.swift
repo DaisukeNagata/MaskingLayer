@@ -39,6 +39,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     private var margin: CGFloat = 10
     private var vc:  UIViewController?
     private var gifObject = MaskGifObject()
+    private var panGestureRStartY = CGFloat()
     
     // DyeHair Camera Setting
     private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil
@@ -178,18 +179,25 @@ extension MaskingLayerViewModel: UICollectionViewDelegateFlowLayout {
 extension MaskingLayerViewModel {
 
     public func panTapped(sender: UIPanGestureRecognizer) {
+        guard let imageView = imageView else { return }
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
-            maskLayer.clipLayer.name == "trimLayer" ? endPangesture() : maskPathEnded(position: position, view: imageView ?? UIImageView())
+            maskLayer.clipLayer.name == "trimLayer" ?
+                endPangesture(position: CGPoint(x: position.x, y: panGestureRStartY)) :
+                maskPathEnded(position: position, view: imageView )
             break
         case .possible:
             break
         case .began:
-            maskPathBegan(position: position, imageView: imageView ?? UIImageView())
+            panGestureRStartY = position.y
+            maskPathBegan(position: position, imageView: imageView)
             break
         case .changed:
-            maskAddLine(position: position, imageView: imageView ?? UIImageView())
+
+            maskLayer.clipLayer.name == "trimLayer" ?
+                maskAddLine(position: CGPoint(x: position.x, y: panGestureRStartY), imageView: imageView) :
+                maskAddLine(position: position, imageView: imageView)
             break
         case .cancelled:
             break
@@ -203,8 +211,11 @@ extension MaskingLayerViewModel {
         maskLayer.clipLayer.lineWidth += 1
     }
 
-    private func endPangesture() {
+    private func endPangesture(position: CGPoint) {
         maskLayer.clipLayer.lineWidth = 30
+        if let path = maskLayer.move(position) {
+            maskLayer.clipLayer.path = path
+        }
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
