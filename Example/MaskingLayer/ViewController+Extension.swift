@@ -22,9 +22,16 @@ extension ViewController {
             alertController.dismiss(animated: true, completion: nil)
             maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo, bool: true)
         }
-        let trim = UIAlertAction(title: NSLocalizedString("Trim ", comment: ""), style: .default) {
+        let trimUI = UIAlertAction(title: NSLocalizedString("TrimUI", comment: ""), style: .default) {
             action in
             maskLayer.trimLayer(mo: mo)
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        let trimMask = UIAlertAction(title: NSLocalizedString("TrimMask", comment: ""), style: .default) {
+            action in
+            guard let imageView = mo.imageView else { return }
+            mo.imageMask(imageView: imageView)
             alertController.dismiss(animated: true, completion: nil)
         }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
@@ -40,7 +47,8 @@ extension ViewController {
         mo.imageView?.setNeedsLayout()
         alertController.addAction(cameraRoll)
         alertController.addAction(videoRoll)
-        alertController.addAction(trim)
+        alertController.addAction(trimUI)
+        alertController.addAction(trimMask)
         alertController.addAction(dyeHair)
         alertController.addAction(reset)
         self.present(alertController, animated: true, completion: nil)

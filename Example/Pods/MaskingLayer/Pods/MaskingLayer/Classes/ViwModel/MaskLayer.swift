@@ -43,8 +43,11 @@ public final class MaskLayer: NSObject {
         mo?.imageResize()
         mo?.vm.setVideoURLView.removeFromSuperview()
         mo?.cView.removeFromSuperview()
+        mo?.imageView?.layer.mask?.removeFromSuperlayer()
         convertPath = CGMutablePath()
         path = CGMutablePath()
+        trimWith = 10
+        clipLayer.lineWidth = maskWidth
         clipLayer.path = nil
     }
 

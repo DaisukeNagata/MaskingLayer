@@ -39,7 +39,9 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     private var margin: CGFloat = 10
     private var vc:  UIViewController?
     private var gifObject = MaskGifObject()
-    private var panGestureRStartY = CGFloat()
+    private var panGestureStartY = CGFloat()
+    private var panGestureStartX = CGFloat()
+    private var panGestureRect = CGRect()
     
     // DyeHair Camera Setting
     private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil
@@ -183,20 +185,22 @@ extension MaskingLayerViewModel {
         let position: CGPoint = sender.location(in: imageView)
         switch sender.state {
         case .ended:
+            panGestureRect = CGRect(x: panGestureStartX, y: panGestureStartY + 156, width: position.x - panGestureStartX, height: maskLayer.trimWith)
             maskLayer.clipLayer.name == "trimLayer" ?
-                endPangesture(position: CGPoint(x: position.x, y: panGestureRStartY)) :
+                endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
                 maskPathEnded(position: position, view: imageView )
             break
         case .possible:
             break
         case .began:
-            panGestureRStartY = position.y
+            panGestureStartY = position.y
+            panGestureStartX = position.x
             maskPathBegan(position: position, imageView: imageView)
             break
         case .changed:
 
             maskLayer.clipLayer.name == "trimLayer" ?
-                maskAddLine(position: CGPoint(x: position.x, y: panGestureRStartY), imageView: imageView) :
+                maskAddLine(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
                 maskAddLine(position: position, imageView: imageView)
             break
         case .cancelled:
@@ -207,15 +211,28 @@ extension MaskingLayerViewModel {
         }
     }
 
-    func longTapeed(sender:UILongPressGestureRecognizer) {
-        maskLayer.clipLayer.lineWidth += 1
+    public func imageMask(imageView: UIImageView) {
+        guard let image = imageView.image else { return }
+        let layer = CALayer()
+        layer.contents = image.cgImage
+        layer.contentsScale = image.scale
+        layer.contentsCenter = CGRect(
+                x: ((image.size.width/2) - 1)/image.size.width,
+                y: ((image.size.height/2) - 1)/image.size.height,
+                width: 1 / image.size.width,
+                height: 1 / image.size.height)
+        layer.frame = imageView.bounds.insetBy(dx: panGestureRect.origin.x, dy: 0)
+        layer.frame.size.height = maskLayer.trimWith
+        layer.frame.size.width = panGestureRect.width
+        layer.frame.origin.y = panGestureRect.origin.y - (imageView.frame.origin.y + maskLayer.trimWith/2)
+        imageView.layer.mask = layer
+        maskLayer.clipLayer.strokeColor = UIColor.clear.cgColor
     }
 
-    private func endPangesture(position: CGPoint) {
-        maskLayer.clipLayer.lineWidth = 30
-        if let path = maskLayer.move(position) {
-            maskLayer.clipLayer.path = path
-        }
+    func longTapeed(sender:UILongPressGestureRecognizer) {
+        maskLayer.clipLayer.lineWidth += 1
+        maskLayer.trimWith += 1
+        panGestureRect.size.height = maskLayer.trimWith
     }
 
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
@@ -256,6 +273,11 @@ extension MaskingLayerViewModel {
             }
             return
         }
+    }
+    private func endPangesture(position: CGPoint, imageView: UIImageView) {
+        maskLayer.trimWith = 30
+        panGestureRect.size.height = maskLayer.trimWith
+        maskLayer.clipLayer.lineWidth = maskLayer.trimWith
     }
 }
 
