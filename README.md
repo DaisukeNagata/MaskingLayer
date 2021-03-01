@@ -19,8 +19,8 @@ Camera roll, video roll, mask camera, trim UI, hair color change, clear
 Version 2.0.0
 I created a trim UI for the alert button on the left side of the navigation bar.
 You can select a trim from the alert and trace the image to select the trim range.
-If you want to adjust the height, long tap and scroll up and down to expand the selection up and down.
-The developer should extend the actual trimming function.
+If you want to adjust the height of the mask range, long tap and scroll up and down to expand the selection range up and down.
+Added the function to actually trim.
 ```
 
 
@@ -55,9 +55,9 @@ The left is the latest version. Perform a smooth crop.
 ## Version 1.0.0 ~
 ![](https://user-images.githubusercontent.com/16457165/78512413-3c38f700-77df-11ea-97cc-ff506ae46941.gif)
 
-## Version 2.1.0 ~
+## Version 2.2.0 ~
 <p align="left">
-<img src= "https://user-images.githubusercontent.com/16457165/109485377-f820a600-7ac4-11eb-8e05-52678fc36c30.gif" width="330" height="700">
+<img src= "https://user-images.githubusercontent.com/16457165/109532142-2a012f00-7afc-11eb-85bd-6f565eadf9c0.gif" width="330" height="700">
 </p>
 
 
