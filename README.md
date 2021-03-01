@@ -11,29 +11,16 @@ os 13.4.1 ~ iPhoneX ~
 [![Platform](https://img.shields.io/cocoapods/p/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 
 ## Example
-
+```
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-You can select background color, camera roll, video roll with long tap.
+Alert button function on the left side of the navigation bar
+Camera roll, video roll, mask camera, trim UI, hair color change, clear
  
-Example ViewController
-```ruby
-import UIKit
-import MaskingLayer
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let mO = MaskingLayerViewModel(minSegment: 15)
-        let MV = MaskGestureViewModel(mO: mO, vc: self)
-        MV.maskGestureView?.frame = view.frame
-        view.addSubview(MV.maskGestureView ?? UIView())
-
-        mO.frameResize(images: UIImage(named: "IMG_4011")!)
-    }
-}
-
+Version 2.0.0
+I created a trim UI for the alert button on the left side of the navigation bar.
+You can select a trim from the alert and trace the image to select the trim range.
+If you want to adjust the height, long tap and scroll up and down to expand the selection up and down.
+The developer should extend the actual trimming function.
 ```
 
 
@@ -68,84 +55,12 @@ The left is the latest version. Perform a smooth crop.
 ## Version 1.0.0 ~
 ![](https://user-images.githubusercontent.com/16457165/78512413-3c38f700-77df-11ea-97cc-ff506ae46941.gif)
 
-## How to
+## Version 2.0.0 ~
+<p align="left">
+<img src= "https://user-images.githubusercontent.com/16457165/109469533-7ecb8800-7ab1-11eb-8220-a72c23adb542.gif" width="330" height="700">
+</p>
 
-```ruby
-1. Select hair dyeing with a long tap
 
-2. Selfie with red button
-
-3. Save the photo with the blue button
-
-Screen operation
-1. Up swipe is Display of slider bar
-2. Long tap is Hide slider bar
-```
-
-## Example Code
-```ruby
-import UIKit
-import MaskingLayer
-
-class CameraViewController: UIViewController {
-
-    static func identifier() -> String { return String(describing: ViewController.self) }
-
-    static func viewController() -> ViewController {
-
-        let sb = UIStoryboard(name: "Camera", bundle: nil)
-        let vc = sb.instantiateInitialViewController() as! ViewController
-        return vc
-    }
-
-    private var mVM              : MaskingLayerViewModel? = nil
-    private var mBObject         : MaskButtonView? = nil
-    private var d: UIView?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        d = UIView(frame: CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 188))
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-
-        mBObject?.cameraMatte.isHidden = false
-        mBObject?.cameraRecord.isHidden = false
-        
-        mVM = MaskingLayerViewModel(vc: self)
-        mBObject = MaskButtonView(frame: self.tabBarController?.tabBar.frame ?? CGRect())
-
-        self.tabBarController?.tabBar.addSubview(mBObject?.cameraMatte ?? UIButton())
-        self.tabBarController?.tabBar.addSubview(mBObject?.cameraRecord ?? UIButton())
-
-        mBObject?.cameraMatte.addTarget(self, action: #selector(btAction), for: .touchUpInside)
-        mBObject?.cameraRecord.addTarget(self, action: #selector(cameraAction), for: .touchUpInside)
-
-        view.addSubview(d ?? UIView())
-        mVM?.cmareraPreView(d ?? UIView())
-
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-
-        mBObject?.cameraMatte.isHidden = true
-        mBObject?.cameraRecord.isHidden = true
-        d?.removeFromSuperview()
-        mVM?.cameraReset()
-        mVM = nil
-    }
-
-    // DyeHair Set
-    @objc func btAction() { mVM?.btAction() }
-
-    // Save photosAlbum
-    @objc func cameraAction() { mVM?.cameraAction() }
-
-}
-
-```
 ## Installation
 
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
