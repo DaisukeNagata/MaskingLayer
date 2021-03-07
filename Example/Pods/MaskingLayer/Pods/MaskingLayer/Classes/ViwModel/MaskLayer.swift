@@ -39,7 +39,6 @@ public final class MaskLayer: NSObject {
     public func colorSet(imageView: UIImageView, color: UIColor) { maskColor = color }
 
     public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
-
         mo?.imageResize()
         mo?.vm.setVideoURLView.removeFromSuperview()
         mo?.cView.removeFromSuperview()

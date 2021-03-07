@@ -9,11 +9,16 @@ import Foundation
 import AVFoundation
 import MobileCoreServices
 
-
 public class MaskingLayerViewModel: NSObject, CViewProtocol {
+
+    public var windowSizeWidth: CGFloat?
+    public var windowSizeHeight: CGFloat?
+    public var windowColor: UIColor?
+    public var windowAlpha: CGFloat?
 
     public var maskLayer: MaskLayer
     public var imageView: UIImageView?
+    public var windowFrameView: UIView?
     public var image = UIImage()
 
     var defaltImageView: UIImageView?
@@ -32,7 +37,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var collectionTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
-    
+
     private var url: URL?
     private var defo = UserDefaults.standard
     private var index = Int()
@@ -54,8 +59,19 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         imageView = UIImageView()
 
         imageBackView = UIImageView()
-    
+
         maskLayer = MaskLayer(minSegment: minSegment ?? 0.0)
+    }
+
+    public func windwFrameSet() {
+        maskLayer.mutablePathSet(mo: self)
+        windowFrameView = UIView(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: windowSizeWidth ?? CGFloat(),
+                                               height: windowSizeHeight ?? CGFloat()))
+        windowFrameView?.backgroundColor = windowColor
+        windowFrameView?.alpha = windowAlpha ?? 0.0
+        imageView?.addSubview(windowFrameView ?? UIView())
     }
 
     public func collectionTapped() { collectionTappedCount.value = 0 }
@@ -76,7 +92,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
 
         defaltImageView?.image = imageView?.image
-
     }
 
     func maskPortraitMatte(minSegment: CGFloat) {
@@ -111,7 +126,9 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     }
 
     func imageResize() {
-        self.imageBackView = nil
+        windowFrameView?.removeFromSuperview()
+        windowFrameView = nil
+        imageBackView = nil
         frameResize(images: defaltImageView?.image ?? UIImage(), rect: defaltImageView?.frame ?? CGRect())
     }
 
@@ -183,28 +200,49 @@ extension MaskingLayerViewModel {
     public func panTapped(sender: UIPanGestureRecognizer) {
         guard let imageView = imageView else { return }
         let position: CGPoint = sender.location(in: imageView)
+
         switch sender.state {
         case .ended:
-            panGestureStartX > position.x ?
-                (panGestureRect = CGRect(x: position.x, y: panGestureStartY + imageView.frame.origin.y, width: panGestureStartX - position.x, height: maskLayer.trimWith)):
-                (panGestureRect = CGRect(x: panGestureStartX, y: panGestureStartY + imageView.frame.origin.y, width: position.x - panGestureStartX, height: maskLayer.trimWith))
-            
-            maskLayer.clipLayer.name == "trimLayer" ?
-                endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
-                maskPathEnded(position: position, view: imageView )
+            switch windowFrameView {
+            case nil:
+                panGestureStartX > position.x ?
+                    (panGestureRect = CGRect(x: position.x, y: panGestureStartY + imageView.frame.origin.y, width: panGestureStartX - position.x, height: maskLayer.trimWith)):
+                    (panGestureRect = CGRect(x: panGestureStartX, y: panGestureStartY + imageView.frame.origin.y, width: position.x - panGestureStartX, height: maskLayer.trimWith))
+                
+                maskLayer.clipLayer.name == "trimLayer" ?
+                    endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
+                    maskPathEnded(position: position, view: imageView )
+            case.some:
+                guard let windowFrame = windowFrameView?.frame else { return }
+                windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                        y: position.y + ( -(windowFrame.height)*2))
+            }
             break
         case .possible:
             break
         case .began:
-            panGestureStartY = position.y
-            panGestureStartX = position.x
-            maskPathBegan(position: position, imageView: imageView)
+            switch windowFrameView {
+            case nil:
+                panGestureStartY = position.y
+                panGestureStartX = position.x
+                maskPathBegan(position: position, imageView: imageView)
+            case.some:
+                guard let windowFrame = windowFrameView?.frame else { return }
+                windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                        y: position.y + ( -(windowFrame.height)*2))
+            }
             break
         case .changed:
-
-            maskLayer.clipLayer.name == "trimLayer" ?
-                maskAddLine(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
-                maskAddLine(position: position, imageView: imageView)
+            switch windowFrameView {
+            case nil:
+                maskLayer.clipLayer.name == "trimLayer" ?
+                    maskAddLine(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
+                    maskAddLine(position: position, imageView: imageView)
+            case.some:
+                guard let windowFrame = windowFrameView?.frame else { return }
+                windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                        y: position.y + ( -(windowFrame.height)*2))
+            }
             break
         case .cancelled:
             break
@@ -220,10 +258,10 @@ extension MaskingLayerViewModel {
         layer.contents = image.cgImage
         layer.contentsScale = image.scale
         layer.contentsCenter = CGRect(
-                x: ((image.size.width/2) - 1)/image.size.width,
-                y: ((image.size.height/2) - 1)/image.size.height,
-                width: 1 / image.size.width,
-                height: 1 / image.size.height)
+            x: ((image.size.width/2) - 1)/image.size.width,
+            y: ((image.size.height/2) - 1)/image.size.height,
+            width: 1 / image.size.width,
+            height: 1 / image.size.height)
         layer.frame = imageView.bounds.insetBy(dx: panGestureRect.origin.x, dy: 0)
         layer.frame.size.height = maskLayer.trimWith
         layer.frame.size.width = panGestureRect.width
@@ -232,17 +270,33 @@ extension MaskingLayerViewModel {
         maskLayer.clipLayer.strokeColor = UIColor.clear.cgColor
     }
 
+    public func lockImageMask(imageView: UIImageView) {
+        guard let image = imageView.image else { return }
+        let layer = CALayer()
+        layer.contents = image.cgImage
+        layer.contentsScale = image.scale
+        layer.frame = windowFrameView?.frame ?? CGRect()
+        windowFrameView?.removeFromSuperview()
+        imageView.layer.mask = layer
+        maskLayer.clipLayer.strokeColor = UIColor.clear.cgColor
+    }
+    
     func longTapeed(sender:UILongPressGestureRecognizer) {
         maskLayer.clipLayer.lineWidth += 1
         maskLayer.trimWith += 1
         panGestureRect.size.height = maskLayer.trimWith
     }
 
+    func pinchAction(sender: UIPinchGestureRecognizer ){
+        let rate = sender.scale
+        windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: rate)
+    }
+
     func maskPathBegan(position: CGPoint, imageView: UIImageView) {
         maskLayer.clipLayer.name == "trimLayer" ? (maskLayer.clipLayer.lineWidth = maskLayer.trimWith) : (maskLayer.clipLayer.lineWidth = maskLayer.maskWidth) 
         maskLayer.clipLayer.isHidden = false
         if let path = maskLayer.start(position) {
-             maskLayer.clipLayer.path = path
+            maskLayer.clipLayer.path = path
         }
 
         let imageSize = AVMakeRect(aspectRatio: imageView.image?.size ?? CGSize(), insideRect: imageView.bounds).size
@@ -315,7 +369,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
     public func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
         return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     }
-
+    
     public func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
         return input.rawValue
     }
@@ -323,7 +377,7 @@ extension MaskingLayerViewModel: UIImagePickerControllerDelegate & UINavigationC
 
 // MARK: Observer
 extension MaskingLayerViewModel: Observer {
-
+    
     func observe<O>(for observable: MaskObservable<O>, with: @escaping (O) -> Void) { observable.bind(observer: with) }
 
     private func call() {

@@ -36,6 +36,12 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
             bind()
         }
     }
+    
+    public func pinchGesture() {
+        MaskGesture.pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchTapeed))
+        MaskGesture.pinchGesture.delegate = self
+        maskGestureView?.addGestureRecognizer(MaskGesture.pinchGesture)
+    }
 
     private func desgin(mO: MaskingLayerViewModel) {
         mLViewModel = mO
@@ -85,5 +91,7 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
     @objc func panTapped(sender: UIPanGestureRecognizer) { mLViewModel?.panTapped(sender: sender) }
 
     @objc func longTapeed(sender: UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
+    
+    @objc func pinchTapeed(sender: UIPinchGestureRecognizer) { mLViewModel?.pinchAction(sender: sender) }
 
 }

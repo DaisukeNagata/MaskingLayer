@@ -10,7 +10,7 @@ import MaskingLayer
 
 extension ViewController {
 
-    func alertSave(_ maskLayer: MaskLayer, mo: MaskingLayerViewModel) {
+    func alertSave(_ maskLayer: MaskLayer, mo: MaskingLayerViewModel, mv: MaskGestureViewModel) {
         let alertController = UIAlertController(title: NSLocalizedString("Camera Option", comment: ""), message: "", preferredStyle: .alert)
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
             action in
@@ -28,10 +28,18 @@ extension ViewController {
             alertController.dismiss(animated: true, completion: nil)
         }
         
+        let trimUIWindow = UIAlertAction(title: NSLocalizedString("TrimUIWindow", comment: ""), style: .default) {
+            action in
+            mv.pinchGesture()
+            mo.windwFrameSet()
+            alertController.dismiss(animated: true, completion: nil)
+        }
+
         let trimMask = UIAlertAction(title: NSLocalizedString("TrimMask", comment: ""), style: .default) {
             action in
             guard let imageView = mo.imageView else { return }
-            mo.imageMask(imageView: imageView)
+            mo.windowFrameView == nil ?
+                mo.imageMask(imageView: imageView) : mo.lockImageMask(imageView: imageView)
             alertController.dismiss(animated: true, completion: nil)
         }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
@@ -48,6 +56,7 @@ extension ViewController {
         alertController.addAction(cameraRoll)
         alertController.addAction(videoRoll)
         alertController.addAction(trimUI)
+        alertController.addAction(trimUIWindow)
         alertController.addAction(trimMask)
         alertController.addAction(dyeHair)
         alertController.addAction(reset)

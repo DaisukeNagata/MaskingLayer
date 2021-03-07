@@ -40,9 +40,14 @@ class ViewController: UIViewController {
         mv.maskGestureView?.frame = view.frame
         view.addSubview(mv.maskGestureView ?? UIView())
         mo.frameResize(images: UIImage(named: "IMG_4011")!, rect: view.frame)
-        // Version 2.0.0 setting
+
         mo.maskLayer.strokeColor = .red
         mo.maskLayer.strokeALpha = 0.5
+
+        mo.windowSizeWidth = 100
+        mo.windowSizeHeight = 50
+        mo.windowColor = UIColor.red
+        mo.windowAlpha = 0.5
 
         mv.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
@@ -63,8 +68,8 @@ class ViewController: UIViewController {
     }
 
     @objc func callAlert() {
-        guard let maskLayer = mo?.maskLayer, let mo = mo else { return }
-        self.alertSave(maskLayer, mo: mo)
+        guard let maskLayer = mo?.maskLayer, let mo = mo, let mv = mv else { return }
+        self.alertSave(maskLayer, mo: mo, mv: mv)
     }
 }
 
