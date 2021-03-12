@@ -40,8 +40,6 @@ class SliiderObjectsView: UIView, UIGestureRecognizerDelegate {
 
     private var height: CGFloat = 50
 
-    private var flg: Bool = false
-
     init(frameHight: CGFloat) {
         super.init(frame: .zero)
 
@@ -70,7 +68,6 @@ class SliiderObjectsView: UIView, UIGestureRecognizerDelegate {
             self.sliderImageView.frame.origin.y += self.frame.height/2 - self.height
             self.subviews[0].bringSubviewToFront(self.sliderImageView)
         }
-        flg = false
     }
 
     private func pGesture() {
@@ -84,39 +81,23 @@ class SliiderObjectsView: UIView, UIGestureRecognizerDelegate {
     }
 
     @objc private func longTapped(sender: UILongPressGestureRecognizer) {
-        guard flg == false else {
-            returnAnimation()
-            return
-        }
+        subviews[0].subviews[0] == sliderImageView ? returnAnimation() : nil
     }
 
     @objc private func panTapped(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
-            guard flg == true  else {
-                UIView.animate(withDuration: 0.2) {
-                    self.sliderImageView.transform = self.sliderImageView.transform.scaledBy(x: 0.9, y: 0.9)
-                    self.sliderImageView.frame.origin.y = 0
-                    self.subviews[0].bringSubviewToFront(self.sliderView)
-                }
-                flg = true
-                return
+            if subviews[0].subviews[0] == sliderView {
+                self.sliderImageView.transform = self.sliderImageView.transform.scaledBy(x: 0.9, y: 0.9)
+                self.sliderImageView.frame.origin.y = 0
+                self.subviews[0].bringSubviewToFront(self.sliderView)
             }
             break
-        case .possible:
-            break
-        case .began:
-            guard flg == true else {
-                self.sliderImageView.frame.origin.y -= self.frame.height/2 - self.height
-                return
-            }
-            break
-        case .changed:
-            break
-        case .cancelled:
-            break
-        case .failed:
-            break
+        case .possible: break
+        case .began: subviews[0].subviews[0] == sliderView ? self.sliderImageView.frame.origin.y -= self.frame.height/2 - self.height: nil
+        case .changed: break
+        case .cancelled: break
+        case .failed: break
         @unknown default: break
         }
     }
