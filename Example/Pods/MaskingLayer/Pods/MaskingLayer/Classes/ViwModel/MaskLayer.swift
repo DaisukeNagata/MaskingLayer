@@ -13,11 +13,11 @@ public final class MaskLayer: NSObject {
 
     public var maskColor = UIColor()
     public var minSegment: CGFloat
-    public var maskImagePicker = MaskImagePicker()
     public var trimWith: CGFloat = 10
     public var maskWidth: CGFloat = 1
     public var strokeColor = UIColor()
     public var strokeALpha = CGFloat()
+    public var maskImagePicker = MaskImagePicker()
 
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()

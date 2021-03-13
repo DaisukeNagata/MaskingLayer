@@ -177,8 +177,6 @@
 			children = (
 				BB4049FD255FFF490004AF87 /* MaskLayer.swift */,
 				BB4049FE255FFF490004AF87 /* MaskingLayerViewModel.swift */,
-				BB4049FF255FFF490004AF87 /* SliiderObjectsView.xib */,
-				BB404A00255FFF490004AF87 /* SliiderObjectsView.swift */,
 				BB404A01255FFF490004AF87 /* MaskGestureViewModel.swift */,
 			);
 			name = ViwModel;
@@ -230,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				BB49AADE25FC237300BDDFF6 /* MaskingLayerModelView.swift */,
+				BB4049FF255FFF490004AF87 /* SliiderObjectsView.xib */,
+				BB404A00255FFF490004AF87 /* SliiderObjectsView.swift */,
 			);
 			name = View;
 			path = Pods/MaskingLayer/Classes/View;
