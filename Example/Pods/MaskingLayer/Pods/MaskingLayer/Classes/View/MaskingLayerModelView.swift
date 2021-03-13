@@ -13,14 +13,13 @@ public final class MaskingLayerModelView: NSObject {
     public var mv: MaskGestureViewModel?
     public var mLViewModel: MaskingLayerViewModel?
     public var maskModel: MaskingLayerModel?
-    public var vController: UIViewController?
-    var dataSource = MaskObservable<Void>()
     
     public init(windowSizeWidth: CGFloat,
          windowSizeHeight: CGFloat,
          windowColor: UIColor,
          windowAlpha: CGFloat,
          imageView: UIImageView,
+         maskGestureView: UIView,
          image: UIImage,
          minSegment: CGFloat) {
 
@@ -33,6 +32,7 @@ public final class MaskingLayerModelView: NSObject {
                                       windowFrameView: maskModel?.windowFrameView,
                                       imageBackView: imageView,
                                       defaltImageView: imageView,
+                                      maskGestureView: maskGestureView,
                                       image: image)
         
         super.init()

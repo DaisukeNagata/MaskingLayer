@@ -22,6 +22,7 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     var panGestureRect = CGRect()
 
     private var margin: CGFloat = 10
+    private var defaultHight: CGFloat = 30
 
     // DyeHair Camera Setting
     private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil
@@ -140,7 +141,7 @@ extension MaskingLayerViewModel {
     func endPangesture(position: CGPoint, imageView: UIImageView) {
         guard let maskLayer = maskLayer else { return }
 
-        maskLayer.trimWith = 30
+        maskLayer.trimWith = defaultHight
         panGestureRect.size.height = maskLayer.trimWith
         maskLayer.clipLayer.lineWidth = maskLayer.trimWith
     }

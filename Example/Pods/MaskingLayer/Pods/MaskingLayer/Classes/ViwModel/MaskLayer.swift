@@ -12,8 +12,6 @@ import UIKit
 public final class MaskLayer: NSObject {
 
     public var maskColor = UIColor()
-    public var path = CGMutablePath()
-    public var clipLayer = CAShapeLayer()
     public var minSegment: CGFloat
     public var maskImagePicker = MaskImagePicker()
     public var trimWith: CGFloat = 10
@@ -23,6 +21,8 @@ public final class MaskLayer: NSObject {
 
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
+    var path = CGMutablePath()
+    var clipLayer = CAShapeLayer()
     var length = 0 as CGFloat
     var anchor = CGPoint.zero // last anchor point
     var last = CGPoint.zero // last touch point

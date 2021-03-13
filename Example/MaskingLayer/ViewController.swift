@@ -34,11 +34,9 @@ class ViewController: UIViewController {
                                           windowColor: UIColor.red,
                                           windowAlpha: 0.5,
                                           imageView: UIImageView(frame: view.frame),
+                                          maskGestureView: view,
                                           image: UIImage(named: "IMG_4011")!,
                                           minSegment: 15)
-        
-        maskingModelView?.mv?.maskGestureView?.frame = view.frame
-        view.addSubview(maskingModelView?.mv?.maskGestureView ?? UIView())
 
         maskingModelView?.mv?.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)

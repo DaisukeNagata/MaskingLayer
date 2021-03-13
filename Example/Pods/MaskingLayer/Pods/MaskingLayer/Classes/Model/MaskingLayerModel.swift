@@ -16,5 +16,6 @@ public struct MaskingLayerModel {
     public var windowFrameView: UIView?
     public var imageBackView: UIImageView?
     public var defaltImageView: UIImageView
+    public var maskGestureView: UIView?
     public var image: UIImage
 }
