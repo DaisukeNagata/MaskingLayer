@@ -21,14 +21,14 @@ class ViewController: UIViewController {
     }
     
 
-    private var modelView: MaskingLayerModelView?
+    private var maskingModelView: MaskingLayerModelView?
     private var mo: MaskingLayerViewModel?
     private var mv: MaskGestureViewModel?
     private var masklayer: MaskLayer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        modelView = MaskingLayerModelView(windowSizeWidth: 100,
+        maskingModelView = MaskingLayerModelView(windowSizeWidth: 100,
                                           windowSizeHeight: 50,
                                           windowColor: UIColor.red,
                                           windowAlpha: 0.5,
@@ -38,10 +38,10 @@ class ViewController: UIViewController {
         
         mv?.mLViewModel?.maskLayer?.strokeALpha = 0.5
         mv?.mLViewModel?.maskLayer?.strokeColor = .red
-        modelView?.mv?.maskGestureView?.frame = view.frame
-        view.addSubview(modelView?.mv?.maskGestureView ?? UIView())
+        maskingModelView?.mv?.maskGestureView?.frame = view.frame
+        view.addSubview(maskingModelView?.mv?.maskGestureView ?? UIView())
 
-        modelView?.mv?.cameraObserve {
+        maskingModelView?.mv?.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
             let next: UIViewController = storyboard.instantiateInitialViewController() as! CameraViewController
             self.navigationController?.pushViewController(next, animated: true)
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
     }
 
     @objc func callAlert() {
-        guard let modelView = modelView else { return }
+        guard let modelView = maskingModelView else { return }
         self.alertSave(modelView: modelView)
     }
 }

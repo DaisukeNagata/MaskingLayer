@@ -150,7 +150,6 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				BB4207F1237578F1005EE595 /* SceneDelegate.swift */,
 				BBA589612380C6B2007012BE /* VC */,
-				BBC88252237FDF60007C3F17 /* Collection */,
 				BBA589602380C69E007012BE /* UI */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				BB4207F523758552005EE595 /* Camera.storyboard */,
@@ -232,13 +231,6 @@
 				BB4207F723758570005EE595 /* CameraViewController.swift */,
 			);
 			name = VC;
-			sourceTree = "<group>";
-		};
-		BBC88252237FDF60007C3F17 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Collection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
