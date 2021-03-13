@@ -2,9 +2,6 @@
 
 os 13.4.1 ~ iPhoneX ~
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/16457165/68517602-9a62bc00-02cb-11ea-9571-518f19ea8277.png?raw=true" width="500" height="700">
-</p>
 
 [![Version](https://img.shields.io/cocoapods/v/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
 [![License](https://img.shields.io/cocoapods/l/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
@@ -22,30 +19,6 @@ You can select a trim from the alert and trace the image to select the trim rang
 If you want to adjust the height of the mask range, long tap and scroll up and down to expand the selection range up and down.
 Added the function to actually trim.
 ```
-
-
-## Version 0.4.2
-You can generate a GIF image by pressing the leftmost image.
-
-
-## Gif
-![](https://user-images.githubusercontent.com/16457165/68522335-96e02c80-02ed-11ea-876a-bffcd7158b5e.gif)
-![](https://user-images.githubusercontent.com/16457165/68522372-e45c9980-02ed-11ea-9f6c-3b5d91a0a8b5.gif)
-
-
-
-## Version 0.5  Version 0.5.1
-Os12 portrait camera with iphoneX or higher, masking images where people are reflections
-![](https://user-images.githubusercontent.com/16457165/68522380-0eae5700-02ee-11ea-9cc6-7840ae601eeb.gif)
-![](https://user-images.githubusercontent.com/16457165/68522388-300f4300-02ee-11ea-9bec-ee8afe609aa7.gif)
-## Version 0.6.4
-Press BackImage with a long tap and decide the background, then select portrait camera image
-<img src= "https://user-images.githubusercontent.com/16457165/68522424-81b7cd80-02ee-11ea-881a-7557905b02c1.jpg" width="330" height="500">
-
-## Version 0.6.5
-Added a compositing function that can be saved to the terminal.
-
-
 
 ## Version 0.8 ~
 
