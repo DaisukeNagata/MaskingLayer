@@ -33,6 +33,10 @@ The left is the latest version. Perform a smooth crop.
 <img src= "https://user-images.githubusercontent.com/16457165/109532142-2a012f00-7afc-11eb-85bd-6f565eadf9c0.gif" width="330" height="700">
 </p>
 
+## Version 2.2.3 ~
+<p align="left">
+<img src= "https://user-images.githubusercontent.com/16457165/111027279-96502c80-8432-11eb-9ce6-018bed06e5b4.gif" width="330" height="700">
+</p>
 
 ## Installation
 
