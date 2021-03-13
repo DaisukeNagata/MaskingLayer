@@ -22,12 +22,10 @@
 		BB404A1B255FFF490004AF87 /* MaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A04255FFF490004AF87 /* MaskExtension.swift */; };
 		BB404A1C255FFF490004AF87 /* MaskImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A06255FFF490004AF87 /* MaskImagePicker.swift */; };
 		BB404A1D255FFF490004AF87 /* MaskGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A07255FFF490004AF87 /* MaskGesture.swift */; };
-		BB404A1E255FFF490004AF87 /* MaskGifObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A09255FFF490004AF87 /* MaskGifObject.swift */; };
 		BB404A1F255FFF490004AF87 /* MaskObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A0A255FFF490004AF87 /* MaskObservable.swift */; };
 		BB404A20255FFF490004AF87 /* MaskFilterBuiltinsMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A0B255FFF490004AF87 /* MaskFilterBuiltinsMatte.swift */; };
 		BB404A21255FFF490004AF87 /* MaskPortraitMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A0C255FFF490004AF87 /* MaskPortraitMatte.swift */; };
 		BB404A22255FFF490004AF87 /* PathStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A0E255FFF490004AF87 /* PathStruct.swift */; };
-		BB404A23255FFF490004AF87 /* MaskVideoURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A10255FFF490004AF87 /* MaskVideoURLView.swift */; };
 		BB404A24255FFF490004AF87 /* MaskCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB404A11255FFF490004AF87 /* MaskCollectionView.swift */; };
 		BB49AADB25FC203200BDDFF6 /* MaskingLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB49AADA25FC203200BDDFF6 /* MaskingLayerModel.swift */; };
 		BB49AADF25FC237300BDDFF6 /* MaskingLayerModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB49AADE25FC237300BDDFF6 /* MaskingLayerModelView.swift */; };
@@ -74,12 +72,10 @@
 		BB404A04255FFF490004AF87 /* MaskExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskExtension.swift; sourceTree = "<group>"; };
 		BB404A06255FFF490004AF87 /* MaskImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskImagePicker.swift; sourceTree = "<group>"; };
 		BB404A07255FFF490004AF87 /* MaskGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskGesture.swift; sourceTree = "<group>"; };
-		BB404A09255FFF490004AF87 /* MaskGifObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskGifObject.swift; sourceTree = "<group>"; };
 		BB404A0A255FFF490004AF87 /* MaskObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskObservable.swift; sourceTree = "<group>"; };
 		BB404A0B255FFF490004AF87 /* MaskFilterBuiltinsMatte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskFilterBuiltinsMatte.swift; sourceTree = "<group>"; };
 		BB404A0C255FFF490004AF87 /* MaskPortraitMatte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskPortraitMatte.swift; sourceTree = "<group>"; };
 		BB404A0E255FFF490004AF87 /* PathStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathStruct.swift; sourceTree = "<group>"; };
-		BB404A10255FFF490004AF87 /* MaskVideoURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskVideoURLView.swift; sourceTree = "<group>"; };
 		BB404A11255FFF490004AF87 /* MaskCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskCollectionView.swift; sourceTree = "<group>"; };
 		BB49AADA25FC203200BDDFF6 /* MaskingLayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskingLayerModel.swift; sourceTree = "<group>"; };
 		BB49AADE25FC237300BDDFF6 /* MaskingLayerModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskingLayerModelView.swift; sourceTree = "<group>"; };
@@ -228,7 +224,6 @@
 		BB404A08255FFF490004AF87 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BB404A09255FFF490004AF87 /* MaskGifObject.swift */,
 				BB404A0A255FFF490004AF87 /* MaskObservable.swift */,
 				BB404A0B255FFF490004AF87 /* MaskFilterBuiltinsMatte.swift */,
 				BB404A0C255FFF490004AF87 /* MaskPortraitMatte.swift */,
@@ -251,7 +246,6 @@
 		BB404A0F255FFF490004AF87 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BB404A10255FFF490004AF87 /* MaskVideoURLView.swift */,
 				BB404A11255FFF490004AF87 /* MaskCollectionView.swift */,
 				BB49AADE25FC237300BDDFF6 /* MaskingLayerModelView.swift */,
 			);
@@ -408,13 +402,11 @@
 				BB404A1B255FFF490004AF87 /* MaskExtension.swift in Sources */,
 				BB404A19255FFF490004AF87 /* MaskGestureViewModel.swift in Sources */,
 				BB404A22255FFF490004AF87 /* PathStruct.swift in Sources */,
-				BB404A1E255FFF490004AF87 /* MaskGifObject.swift in Sources */,
 				BB404A16255FFF490004AF87 /* MaskingLayerViewModel.swift in Sources */,
 				BB404A21255FFF490004AF87 /* MaskPortraitMatte.swift in Sources */,
 				BB404A20255FFF490004AF87 /* MaskFilterBuiltinsMatte.swift in Sources */,
 				BB404A13255FFF490004AF87 /* MaskCustomCell.swift in Sources */,
 				BB404A18255FFF490004AF87 /* SliiderObjectsView.swift in Sources */,
-				BB404A23255FFF490004AF87 /* MaskVideoURLView.swift in Sources */,
 				BB49AAE325FC330500BDDFF6 /* MaskCollectionDelegateModel.swift in Sources */,
 				BB49AADB25FC203200BDDFF6 /* MaskingLayerModel.swift in Sources */,
 				0E6BB75646C89A96232899B76B26EDBD /* MaskingLayer-dummy.m in Sources */,

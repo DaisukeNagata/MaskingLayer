@@ -36,8 +36,6 @@ class ViewController: UIViewController {
                                           image: UIImage(named: "IMG_4011")!,
                                           minSegment: 15)
         
-        mv?.mLViewModel?.maskLayer?.strokeALpha = 0.5
-        mv?.mLViewModel?.maskLayer?.strokeColor = .red
         maskingModelView?.mv?.maskGestureView?.frame = view.frame
         view.addSubview(maskingModelView?.mv?.maskGestureView ?? UIView())
 

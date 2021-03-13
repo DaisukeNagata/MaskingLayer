@@ -7,20 +7,6 @@
 
 import Foundation
 
-extension UIImageView {
-    func animateGIF(data: Data, duration: Double,
-                    animationRepeatCount: UInt = 1,
-                    completion: (() -> Void)? = nil) {
-        guard let animatedGIFImage = UIImage().animatedGIF(data: data, duration: duration) else { return }
-        
-        self.image = animatedGIFImage.images?.last
-        self.animationImages = animatedGIFImage.images
-        self.animationDuration = animatedGIFImage.duration
-        self.animationRepeatCount = Int(animationRepeatCount)
-        self.startAnimating()
-        completion?()
-    }
-}
 
 extension UIImage {
     func animatedGIF(data: Data,duration: Double) -> UIImage? {

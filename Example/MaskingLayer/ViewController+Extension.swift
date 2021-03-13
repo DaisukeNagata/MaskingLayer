@@ -19,6 +19,8 @@ extension ViewController {
         }
         let trimUI = UIAlertAction(title: NSLocalizedString("TrimUI", comment: ""), style: .default) {
             action in
+            modelView.mLViewModel?.maskLayer?.strokeColor = .red
+            modelView.mLViewModel?.maskLayer?.strokeALpha = 0.5
             modelView.mLViewModel?.maskLayer?.trimLayer(modelView: modelView)
             alertController.dismiss(animated: true, completion: nil)
         }

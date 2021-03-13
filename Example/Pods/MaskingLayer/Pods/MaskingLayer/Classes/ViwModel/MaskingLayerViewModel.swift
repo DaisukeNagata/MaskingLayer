@@ -25,7 +25,6 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
     private var url: URL?
     private var defo = UserDefaults.standard
     private var margin: CGFloat = 10
-    private var gifObject = MaskGifObject()
 
     // DyeHair Camera Setting
     private var maskPortraitMatte: MaskFilterBuiltinsMatte? = nil

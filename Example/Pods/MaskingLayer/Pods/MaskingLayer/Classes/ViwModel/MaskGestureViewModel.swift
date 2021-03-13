@@ -18,10 +18,9 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         maskGestureView = UIView()
         self.modelView = modelView
         mLViewModel = mo
-//        self.modelView?.observe(mo)
         desgin(mo: mo)
     }
-    
+
     public func collectionTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
         guard let mLViewModel = mLViewModel else { return }
         mLViewModel.observe(for: mLViewModel.collectionTappedCount) { _ in
