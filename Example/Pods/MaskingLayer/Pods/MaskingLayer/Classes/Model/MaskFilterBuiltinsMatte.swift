@@ -200,7 +200,7 @@ final class MaskFilterBuiltinsMatte: NSObject {
 
     private func setupPreviewLayer(_ view: UIView) {
         self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession ?? AVCaptureSession())
-        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
         self.cameraPreviewLayer?.frame = view.frame
         view.layer.insertSublayer(self.cameraPreviewLayer ?? AVCaptureVideoPreviewLayer(), at: 0)

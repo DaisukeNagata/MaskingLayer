@@ -8,11 +8,9 @@
 import Foundation
 
 protocol CViewProtocol {
-    func maskPathBegan(position: CGPoint, imageView: UIImageView)
-    func maskAddLine(position: CGPoint, imageView: UIImageView)
-    func maskPathEnded(position: CGPoint,view: UIView)
-    func maskGif()
-    func setURL()
+    func maskPathBegan(position: CGPoint)
+    func maskAddLine(position: CGPoint)
+    func maskPathEnded(position: CGPoint, modelView: MaskingLayerModelView)
 }
 
 protocol MaskPathElement {

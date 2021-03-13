@@ -10,51 +10,47 @@ import MaskingLayer
 
 extension ViewController {
 
-    func alertSave(_ maskLayer: MaskLayer, mo: MaskingLayerViewModel, mv: MaskGestureViewModel) {
+    func alertSave(modelView: MaskingLayerModelView) {
         let alertController = UIAlertController(title: NSLocalizedString("Camera Option", comment: ""), message: "", preferredStyle: .alert)
         let cameraRoll = UIAlertAction(title: NSLocalizedString("CameraRoll ", comment: ""), style: .default) {
             action in
             alertController.dismiss(animated: true, completion: nil)
-            maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo,bool: false)
-        }
-        let videoRoll = UIAlertAction(title: NSLocalizedString("VideoRoll ", comment: ""), style: .default) {
-            action in
-            alertController.dismiss(animated: true, completion: nil)
-            maskLayer.maskImagePicker.photoSegue(vc: self, mo: mo, bool: true)
+            modelView.mLViewModel?.maskLayer?.maskImagePicker.photoSegue(vc: self, mo: modelView, bool: false)
         }
         let trimUI = UIAlertAction(title: NSLocalizedString("TrimUI", comment: ""), style: .default) {
             action in
-            maskLayer.trimLayer(mo: mo)
+            modelView.mLViewModel?.maskLayer?.trimLayer(modelView: modelView)
             alertController.dismiss(animated: true, completion: nil)
         }
         
         let trimUIWindow = UIAlertAction(title: NSLocalizedString("TrimUIWindow", comment: ""), style: .default) {
             action in
-            mv.pinchGesture()
-            mo.windwFrameSet()
+            modelView.mv?.pinchGesture()
+            modelView.desginInit(color: UIColor.red)
             alertController.dismiss(animated: true, completion: nil)
         }
 
         let trimMask = UIAlertAction(title: NSLocalizedString("TrimMask", comment: ""), style: .default) {
             action in
-            guard let imageView = mo.imageView else { return }
-            mo.windowFrameView == nil ?
-                mo.imageMask(imageView: imageView) : mo.lockImageMask(imageView: imageView)
+            guard let imageView = modelView.maskModel?.imageView else { return }
+            modelView.maskModel?.windowFrameView == nil ?
+                modelView.mLViewModel?.imageMask(imageView: imageView) :
+                modelView.mLViewModel?.lockImageMask(imageView: imageView,
+                                                     windowFrameView: modelView.maskModel?.windowFrameView ?? UIImageView())
             alertController.dismiss(animated: true, completion: nil)
         }
         let dyeHair = UIAlertAction(title: NSLocalizedString("DyeHair", comment: ""), style: .default) {
             action in            
-            alertController.dismiss(animated: true, completion: { maskLayer.cameraSelect(mo: mo) })
+            alertController.dismiss(animated: true, completion: { modelView.mLViewModel?.maskLayer?.cameraSelect(mo: modelView.mLViewModel) })
         }
         let reset = UIAlertAction(title: NSLocalizedString("ReSet ", comment: ""), style: .default) {
             action in
-            maskLayer.maskLayer()
-            maskLayer.mutablePathSet(mo: mo)
+            modelView.mLViewModel?.maskLayer?.maskLayer()
+            modelView.mLViewModel?.maskLayer?.mutablePathSet(modelView: modelView)
             alertController.dismiss(animated: true, completion: nil)
         }
-        mo.imageView?.setNeedsLayout()
+        modelView.maskModel?.imageView.setNeedsLayout()
         alertController.addAction(cameraRoll)
-        alertController.addAction(videoRoll)
         alertController.addAction(trimUI)
         alertController.addAction(trimUIWindow)
         alertController.addAction(trimMask)

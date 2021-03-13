@@ -26,8 +26,8 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        d = UIView(frame: CGRect(x: 0, y: 44, width: self.view.frame.width, height: self.view.frame.height - 188))
+
+        d = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -35,7 +35,7 @@ class CameraViewController: UIViewController {
         mBObject?.cameraMatte.isHidden = false
         mBObject?.cameraRecord.isHidden = false
         
-        mVM = MaskingLayerViewModel(vc: self)
+        mVM = MaskingLayerViewModel()
         mBObject = MaskButtonView(frame: self.tabBarController?.tabBar.frame ?? CGRect())
 
         self.tabBarController?.tabBar.addSubview(mBObject?.cameraMatte ?? UIButton())
@@ -46,7 +46,6 @@ class CameraViewController: UIViewController {
 
         view.addSubview(d ?? UIView())
         mVM?.cmareraPreView(d ?? UIView())
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,12 +54,12 @@ class CameraViewController: UIViewController {
         mBObject?.cameraMatte.isHidden = true
         mBObject?.cameraRecord.isHidden = true
         d?.removeFromSuperview()
-        mVM?.cameraReset()
+        mVM?.cameraReset(view: d ?? UIView())
         mVM = nil
     }
 
     // DyeHair Set
-    @objc func btAction() { mVM?.btAction() }
+    @objc func btAction() { mVM?.btAction(view: d ?? UIView()) }
 
     // Save photosAlbum
     @objc func cameraAction() { mVM?.cameraAction() }

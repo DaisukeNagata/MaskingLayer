@@ -10,7 +10,7 @@ import AVFoundation
 
 final class MaskPortraitMatteModel: NSObject {
 
-    func portraitMatte(imageV: UIImageView,vc: UIViewController, minSegment: CGFloat, mo: MaskingLayerViewModel) {
+    func portraitMatte(imageV: UIImageView, minSegment: CGFloat, mo: MaskingLayerViewModel) {
 
         let defo = UserDefaults.standard
         let url = defo.url(forKey: "url")

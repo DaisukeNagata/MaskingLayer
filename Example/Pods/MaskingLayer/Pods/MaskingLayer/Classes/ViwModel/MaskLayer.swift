@@ -29,7 +29,7 @@ public final class MaskLayer: NSObject {
     var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
     var fEdge = true //either the begging or the turning point
 
-    init(minSegment: CGFloat) {
+    public init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()
         self.minSegment = minSegment
         super.init()
@@ -38,11 +38,8 @@ public final class MaskLayer: NSObject {
     
     public func colorSet(imageView: UIImageView, color: UIColor) { maskColor = color }
 
-    public func mutablePathSet(mo: MaskingLayerViewModel? = nil) {
-        mo?.imageResize()
-        mo?.vm.setVideoURLView.removeFromSuperview()
-        mo?.cView.removeFromSuperview()
-        mo?.imageView?.layer.mask?.removeFromSuperlayer()
+    public func mutablePathSet(modelView: MaskingLayerModelView? = nil) {
+        modelView?.imageResize()
         convertPath = CGMutablePath()
         path = CGMutablePath()
         trimWith = 10
@@ -64,8 +61,8 @@ public final class MaskLayer: NSObject {
         clipLayer.lineWidth = maskWidth
     }
 
-    public func trimLayer(mo: MaskingLayerViewModel? = nil) {
-        mutablePathSet(mo: mo)
+    public func trimLayer(modelView: MaskingLayerModelView? = nil) {
+        mutablePathSet(modelView: modelView)
         maskColor = .white
         clipLayer.name = "trimLayer"
         clipLayer.lineCap = .butt
@@ -83,8 +80,7 @@ public final class MaskLayer: NSObject {
         return mask(image: image(color: color, size: size), convertPath: convertPath)
     }
 
-    func imageSet(view:UIView, imageView: UIImageView, image: UIImage) {
-        view.layer.addSublayer(clipLayer)
+    func imageSet(imageView: UIImageView, image: UIImage) {
         imageView.image = image.mask(image: imageView.image)
         imageView.image = imageView.image?.ResizeUIImage(width: imageView.frame.width, height: imageView.frame.height)
 
