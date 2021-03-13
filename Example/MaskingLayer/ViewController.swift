@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     private var mo: MaskingLayerViewModel?
     private var mv: MaskGestureViewModel?
     private var masklayer: MaskLayer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

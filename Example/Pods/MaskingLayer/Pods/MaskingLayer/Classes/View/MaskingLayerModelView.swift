@@ -54,19 +54,20 @@ public final class MaskingLayerModelView: NSObject {
     }
 
     func frameResize(images: UIImage, rect: CGRect) {
-        guard let maskLayer = mLViewModel?.maskLayer else { return }
+        guard let maskLayer = mLViewModel?.maskLayer, let model = maskModel else { return }
         maskModel?.imageView.frame = rect
         maskModel?.image = images.ResizeUIImage(width: rect.width,
                                                 height: rect.height)
         
-        let imageSize = AVMakeRect(aspectRatio: images.size, insideRect: maskModel?.imageView.bounds ?? CGRect()).size
-        maskModel?.imageView.image = maskModel?.image
-        maskModel?.imageView.frame.size = imageSize
-        maskModel?.imageView.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
+        let imageSize = AVMakeRect(aspectRatio: images.size,
+                                   insideRect: model.imageView.bounds)
+        model.imageView.image = maskModel?.image
+        model.imageView.frame.size = imageSize.size
+        model.imageView.center = CGPoint(x: rect.width/2, y: rect.origin.y + rect.height/2)
         
-        if maskModel?.defaltImageView.image == nil {
+        if model.defaltImageView.image == nil {
             maskModel?.defaltImageView.frame = maskModel?.imageView.frame ?? CGRect()
-            mLViewModel?.maskPathSet(maskLayer: maskLayer, modelView: self)
+            mLViewModel?.maskPathSet(maskLayer: maskLayer, model: model)
         }
 
         maskModel?.defaltImageView.image = maskModel?.imageView.image
@@ -103,7 +104,7 @@ extension MaskingLayerModelView {
                 
                 mLViewModel?.maskLayer?.clipLayer.name == "trimLayer" ?
                     mLViewModel?.endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
-                    mLViewModel?.maskPathEnded(position: position, modelView: self)
+                    mLViewModel?.maskPathEnded(position: position, model: maskModel)
             case.some:
                 guard let windowFrame = maskModel?.windowFrameView?.frame else { return }
                 maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),

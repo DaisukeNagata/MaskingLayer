@@ -13,17 +13,14 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
 
     public var maskLayer: MaskLayer?
 
-    var maskCount = MaskObservable<Int>()
     var collectionTappedCount = MaskObservable<Int>()
     var backImageCount = MaskObservable<Int>()
     var cameraCount = MaskObservable<Int>()
+    var maskCount = MaskObservable<Int>()
     var panGestureStartY = CGFloat()
     var panGestureStartX = CGFloat()
     var panGestureRect = CGRect()
-    var index = Int()
 
-    private var url: URL?
-    private var defo = UserDefaults.standard
     private var margin: CGFloat = 10
 
     // DyeHair Camera Setting
@@ -45,26 +42,9 @@ public class MaskingLayerViewModel: NSObject, CViewProtocol {
         }
     }
 
-    func gousei(imageView: UIImageView, imageBackView: UIImageView) {
-        DispatchQueue.main.async {
-            let top: UIImage = imageView.image ?? UIImage()
-            let bottom: UIImage = imageBackView.image ?? UIImage()
-            let nSize = CGSize(width:top.size.width, height:top.size.height)
-            UIGraphicsBeginImageContextWithOptions(nSize, false, bottom.scale)
-            bottom.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height))
-            top.draw(in: CGRect(x:0,y:0,width:nSize.width,height:nSize.height),blendMode:CGBlendMode.normal, alpha:1.0)
-            let nImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            
-            imageView.image = nImage
-            imageView.setNeedsLayout()
-            imageBackView.image = nImage
-        }
-    }
-
-    func maskPathSet(maskLayer: MaskLayer, modelView: MaskingLayerModelView) {
+    func maskPathSet(maskLayer: MaskLayer, model: MaskingLayerModel) {
         maskLayer.maskColor = .clear
-        maskPathEnded(position: CGPoint(), modelView: modelView)
+        maskPathEnded(position: CGPoint(), model: model)
         maskLayer.clipLayer.name == "trimLayer" ? (maskLayer.maskColor = .black) : (maskLayer.maskColor = .white)
     }
 }
@@ -81,10 +61,13 @@ extension MaskingLayerViewModel: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: Mask
+
 extension MaskingLayerViewModel {
 
     public func imageMask(imageView: UIImageView) {
         guard let image = imageView.image, let trimWidth = maskLayer?.trimWith else { return }
+
         let layer = CALayer()
         layer.contents = image.cgImage
         layer.contentsScale = image.scale
@@ -103,6 +86,7 @@ extension MaskingLayerViewModel {
 
     public func lockImageMask(imageView: UIImageView, windowFrameView: UIView) {
         guard let image = imageView.image else { return }
+
         let layer = CALayer()
         layer.contents = image.cgImage
         layer.contentsScale = image.scale
@@ -114,6 +98,7 @@ extension MaskingLayerViewModel {
     
     func longTapeed(sender: UILongPressGestureRecognizer) {
         guard let trimWidth = maskLayer?.trimWith else { return }
+
         maskLayer?.clipLayer.lineWidth += 1
         maskLayer?.trimWith += 1
         panGestureRect.size.height = trimWidth
@@ -121,6 +106,7 @@ extension MaskingLayerViewModel {
 
     func maskPathBegan(position: CGPoint) {
         guard let maskLayer = maskLayer else { return }
+
         maskLayer.clipLayer.name == "trimLayer" ? (maskLayer.clipLayer.lineWidth = maskLayer.trimWith) : (maskLayer.clipLayer.lineWidth = maskLayer.maskWidth)
         maskLayer.clipLayer.isHidden = false
         if let path = maskLayer.start(position) {
@@ -130,29 +116,30 @@ extension MaskingLayerViewModel {
 
     func maskAddLine(position: CGPoint) {
         guard let maskLayer = maskLayer else { return }
+
         if let path = maskLayer.move(position) {
             maskLayer.clipLayer.path = path
         }
     }
 
-    func maskPathEnded(position: CGPoint,
-                       modelView: MaskingLayerModelView) {
-
-        guard let maskLayer = maskLayer,
-              let image = modelView.maskModel?.image,
-              let size = modelView.maskModel?.imageView.frame.size else { return }
+    func maskPathEnded(position: CGPoint, model: MaskingLayerModel?) {
+        guard let maskLayer = maskLayer else { return }
 
         var elements = maskLayer.elements
         elements.insert(MaskMove(x: position.x, y: position.y), at: 0)
         elements.append(MaskLine(x: position.x, y: position.y))
         maskLayer.clipLayer.path = MaskPath.path(from: elements, path: maskLayer.convertPath)
-        
-        modelView.maskModel?.imageView.image = maskLayer.maskImage(color: maskLayer.maskColor, size: size, convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
-        maskLayer.imageSet(imageView: modelView.maskModel?.imageView ?? UIImageView(), image: image)
+
+        model?.imageView.image = maskLayer.maskImage(color: maskLayer.maskColor,
+                                                     size: model?.imageView.frame.size ?? CGSize(),
+                                                     convertPath:  MaskPath.path(from: elements, path: maskLayer.convertPath))
+        maskLayer.imageSet(imageView: model?.imageView ?? UIImageView(),
+                           image: model?.image ?? UIImage())
     }
 
     func endPangesture(position: CGPoint, imageView: UIImageView) {
         guard let maskLayer = maskLayer else { return }
+
         maskLayer.trimWith = 30
         panGestureRect.size.height = maskLayer.trimWith
         maskLayer.clipLayer.lineWidth = maskLayer.trimWith

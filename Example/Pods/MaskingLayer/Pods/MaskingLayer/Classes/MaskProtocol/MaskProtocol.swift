@@ -10,7 +10,7 @@ import Foundation
 protocol CViewProtocol {
     func maskPathBegan(position: CGPoint)
     func maskAddLine(position: CGPoint)
-    func maskPathEnded(position: CGPoint, modelView: MaskingLayerModelView)
+    func maskPathEnded(position: CGPoint, model: MaskingLayerModel?)
 }
 
 protocol MaskPathElement {
