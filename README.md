@@ -1,6 +1,6 @@
 # MaskingLayer
 
-os 13.4.1 ~ iPhoneX ~
+os 14.4 ~ iPhoneX ~
 
 
 [![Version](https://img.shields.io/cocoapods/v/MaskingLayer.svg?style=flat)](https://cocoapods.org/pods/MaskingLayer)
