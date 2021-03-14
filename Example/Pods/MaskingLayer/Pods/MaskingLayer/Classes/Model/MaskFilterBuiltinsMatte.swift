@@ -14,9 +14,9 @@ final class MaskFilterBuiltinsMatte: NSObject {
 
     lazy var context = CIContext()
 
-    var xibView                 : SliiderObjectsView? = nil
-    var photos                  : AVCapturePhoto?
-    var semanticSegmentationType: AVSemanticSegmentationMatte.MatteType?
+    private var xibView                 : SliiderObjectsView? = nil
+    private var photos                  : AVCapturePhoto?
+    private var semanticSegmentationType: AVSemanticSegmentationMatte.MatteType?
 
     private var call                    = { (_ image: UIImage?) -> Void in }
 

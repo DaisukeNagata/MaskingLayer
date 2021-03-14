@@ -21,13 +21,14 @@ public final class MaskLayer: NSObject {
 
     var elements:[MaskPathElement]
     var convertPath = CGMutablePath()
-    var path = CGMutablePath()
     var clipLayer = CAShapeLayer()
-    var length = 0 as CGFloat
-    var anchor = CGPoint.zero // last anchor point
-    var last = CGPoint.zero // last touch point
-    var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
-    var fEdge = true //either the begging or the turning point
+
+    private var path = CGMutablePath()
+    private var length = 0 as CGFloat
+    private var anchor = CGPoint.zero // last anchor point
+    private var last = CGPoint.zero // last touch point
+    private var delta = CGPoint.zero // last movement to compare against to detect a sharp turn
+    private var fEdge = true //either the begging or the turning point
 
     public init(minSegment: CGFloat) {
         self.elements = [MaskPathElement]()

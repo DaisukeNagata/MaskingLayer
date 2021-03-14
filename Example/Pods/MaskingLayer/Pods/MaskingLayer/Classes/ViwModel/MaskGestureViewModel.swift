@@ -51,12 +51,12 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         modelView.maskModel?.maskGestureView?.addGestureRecognizer(MaskGesture.longGesture)
     }
 
-    @objc func panTapped(sender: UIPanGestureRecognizer) { modelView?.panTapped(sender: sender) }
+    @objc private func panTapped(sender: UIPanGestureRecognizer) { modelView?.panTapped(sender: sender) }
 
-    @objc func longTapeed(sender: UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
+    @objc private func longTapeed(sender: UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
 
-    @objc func pinchTapeed(sender: UIPinchGestureRecognizer) { modelView?.pinchAction(sender: sender) }
-    
-    @objc func tapeed(sender: UITapGestureRecognizer) { modelView?.tapAction(sender: sender) }
+    @objc private func pinchTapeed(sender: UIPinchGestureRecognizer) { modelView?.pinchAction(sender: sender) }
+
+    @objc private func tapeed(sender: UITapGestureRecognizer) { modelView?.tapAction(sender: sender) }
 
 }

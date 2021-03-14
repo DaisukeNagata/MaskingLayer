@@ -34,7 +34,6 @@ public final class MaskingLayerModelView: NSObject {
                                       windowAlpha: windowAlpha,
                                       imageView: imageView,
                                       windowFrameView: maskModel?.windowFrameView,
-                                      imageBackView: imageView,
                                       defaltImageView: imageView,
                                       maskGestureView: maskGestureView)
         
@@ -46,6 +45,8 @@ public final class MaskingLayerModelView: NSObject {
 
     public func desginInit(color: UIColor) {
         guard let size = maskModel else { return }
+
+        orignCenter = (maskModel?.defaltImageView.frame.height ?? 0)/2 + (maskModel?.defaltImageView.frame.origin.y ?? 0)
         maskModel?.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
         maskModel?.imageView.center = CGPoint(x:(maskModel?.defaltImageView.frame.width ?? 0) / 2,
                                               y: orignCenter)
@@ -87,7 +88,6 @@ public final class MaskingLayerModelView: NSObject {
                                               y: orignCenter)
         maskModel?.windowFrameView?.removeFromSuperview()
         maskModel?.windowFrameView = nil
-        maskModel?.imageBackView = nil
         maskModel?.imageView.layer.mask?.removeFromSuperlayer()
         maskModel?.imageView.frame = maskModel?.defaltImageView.frame ?? CGRect()
         maskModel?.imageView.image = maskModel?.image
