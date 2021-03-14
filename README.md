@@ -33,9 +33,9 @@ The left is the latest version. Perform a smooth crop.
 <img src= "https://user-images.githubusercontent.com/16457165/109532142-2a012f00-7afc-11eb-85bd-6f565eadf9c0.gif" width="330" height="700">
 </p>
 
-## Version 2.2.3 ~
+## Version 2.3.0 ~
 <p align="left">
-<img src= "https://user-images.githubusercontent.com/16457165/111027279-96502c80-8432-11eb-9ce6-018bed06e5b4.gif" width="330" height="700">
+<img src= "https://user-images.githubusercontent.com/16457165/111056097-bd087480-84bf-11eb-9c9f-020e3f56ac09.gif" width="330" height="700">
 </p>
 
 ## Installation
@@ -43,7 +43,7 @@ The left is the latest version. Perform a smooth crop.
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+```
 pod 'MaskingLayer'
 ```
 
