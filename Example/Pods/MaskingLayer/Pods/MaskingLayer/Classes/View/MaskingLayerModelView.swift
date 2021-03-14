@@ -61,7 +61,7 @@ public final class MaskingLayerModelView: NSObject {
         maskModel?.imageView.addSubview(maskModel?.windowFrameView ?? UIImageView())
     }
 
-    func frameResize(images: UIImage, rect: CGRect) {
+    public func frameResize(images: UIImage, rect: CGRect) {
         guard let maskLayer = mLViewModel?.maskLayer, let model = maskModel else { return }
         maskModel?.imageView.frame = rect
         maskModel?.image = images.ResizeUIImage(width: rect.width,
