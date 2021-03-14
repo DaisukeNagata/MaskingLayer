@@ -131,9 +131,11 @@ extension MaskingLayerModelView {
         case .began:
             switch maskModel?.windowFrameView {
             case nil:
-                mLViewModel?.panGestureStartY = position.y
+                mLViewModel?.panGestureStartY = position.y + ( -(imageView.frame.height)/2)
                 mLViewModel?.panGestureStartX = position.x
-                mLViewModel?.maskPathBegan(position: CGPoint(x: position.x, y: position.y - originPosition))
+                mLViewModel?.maskLayer?.clipLayer.name == "trimLayer" ?
+                    mLViewModel?.maskPathBegan(position: CGPoint(x: position.x, y: mLViewModel?.panGestureStartY ?? 0.0)) :
+                    mLViewModel?.maskPathBegan(position: CGPoint(x: position.x, y: position.y - originPosition))
             case.some:
                 guard let windowFrame = maskModel?.windowFrameView?.frame else { return }
                 maskModel?.windowFrameView?.isHidden ?? false ?

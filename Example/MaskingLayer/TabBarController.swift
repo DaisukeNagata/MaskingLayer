@@ -29,6 +29,7 @@ class TabBarController: UITabBarController {
 
         let vi = ViewController.viewController()
         vi.view.backgroundColor = UIColor.white
+        (UINavigationBar.appearance() as UINavigationBar).setBackgroundImage(UIImage(), for: .default)
         let opc = UINavigationController(rootViewController: vi)
         return [opc]
     }
