@@ -94,9 +94,10 @@ extension MaskingLayerViewModel {
         layer.frame = windowFrameView.frame
         windowFrameView.removeFromSuperview()
         imageView.layer.mask = layer
+        getScreenShot(imageView)
         maskLayer?.clipLayer.strokeColor = UIColor.clear.cgColor
     }
-    
+
     func longTapeed(sender: UILongPressGestureRecognizer) {
         guard let trimWidth = maskLayer?.trimWith else { return }
 
@@ -144,6 +145,16 @@ extension MaskingLayerViewModel {
         maskLayer.trimWith = defaultHight
         panGestureRect.size.height = maskLayer.trimWith
         maskLayer.clipLayer.lineWidth = maskLayer.trimWith
+    }
+
+    private func getScreenShot(_ imageView: UIImageView)  {
+        let rect = imageView.bounds
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        imageView.layer.render(in: context)
+        let capturedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+        UIGraphicsEndImageContext()
+        imageView.image = capturedImage
     }
 }
 

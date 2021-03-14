@@ -21,7 +21,7 @@ public final class MaskingLayerModelView: NSObject {
                 windowSizeHeight: CGFloat,
                 windowAlpha: CGFloat,
                 windowColor: UIColor,
-                image: UIImage,
+                image: UIImage?,
                 imageView: UIImageView,
                 maskGestureView: UIView) {
 
@@ -61,8 +61,8 @@ public final class MaskingLayerModelView: NSObject {
         maskModel?.imageView.addSubview(maskModel?.windowFrameView ?? UIImageView())
     }
 
-    public func frameResize(images: UIImage, rect: CGRect) {
-        guard let maskLayer = mLViewModel?.maskLayer, let model = maskModel else { return }
+    public func frameResize(images: UIImage?, rect: CGRect) {
+        guard let maskLayer = mLViewModel?.maskLayer, let model = maskModel, let images = images else { return }
         maskModel?.imageView.frame = rect
         maskModel?.image = images.ResizeUIImage(width: rect.width,
                                                 height: rect.height)

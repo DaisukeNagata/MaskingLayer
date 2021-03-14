@@ -8,7 +8,7 @@
 import Foundation
 
 public struct MaskingLayerModel {
-    public var image: UIImage
+    public var image: UIImage?
     public var originPosition: CGFloat
     public var windowSizeWidth: CGFloat
     public var windowSizeHeight: CGFloat
