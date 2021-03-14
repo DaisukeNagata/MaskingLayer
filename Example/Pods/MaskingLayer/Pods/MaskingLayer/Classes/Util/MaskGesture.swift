@@ -9,4 +9,5 @@ struct MaskGesture {
     static var panGesture = UIPanGestureRecognizer()
     static var pinchGesture = UIPinchGestureRecognizer()
     static var longGesture = UILongPressGestureRecognizer()
+    static var taoGesture = UITapGestureRecognizer()
 }

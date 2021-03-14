@@ -8,6 +8,8 @@
 import Foundation
 
 public struct MaskingLayerModel {
+    public var image: UIImage
+    public var originPosition: CGFloat
     public var windowSizeWidth: CGFloat
     public var windowSizeHeight: CGFloat
     public var windowColor: UIColor
@@ -17,5 +19,4 @@ public struct MaskingLayerModel {
     public var imageBackView: UIImageView?
     public var defaltImageView: UIImageView
     public var maskGestureView: UIView?
-    public var image: UIImage
 }

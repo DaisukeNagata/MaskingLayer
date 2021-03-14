@@ -19,25 +19,21 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
         desgin(mo: mo)
     }
 
-    public func collectionTappedCount(_ bind: @escaping (_ maskLayer: MaskLayer) -> Void) {
-        guard let mLViewModel = mLViewModel else { return }
-        mLViewModel.observe(for: mLViewModel.collectionTappedCount) { _ in
-            self.mLViewModel?.collectionTappedCount.initValue()
-            bind((self.mLViewModel?.maskLayer?.longtappedSelect(mo: mLViewModel)) ?? MaskLayer(minSegment: 0.0) )
-        }
-    }
-
     public func cameraObserve(_ bind: @escaping () -> Void) {
         mLViewModel?.observe(for: mLViewModel?.cameraCount ?? MaskObservable()) { _ in
             self.mLViewModel?.cameraCount.initValue()
             bind()
         }
     }
-    
-    public func pinchGesture() {
+
+    public func pinchAndTapGesture() {
         MaskGesture.pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchTapeed))
         MaskGesture.pinchGesture.delegate = self
         modelView?.maskModel?.maskGestureView?.addGestureRecognizer(MaskGesture.pinchGesture)
+
+        MaskGesture.taoGesture = UITapGestureRecognizer(target: self, action:#selector(tapeed))
+        MaskGesture.taoGesture.delegate = self
+        modelView?.maskModel?.maskGestureView?.addGestureRecognizer(MaskGesture.taoGesture)
     }
 
     private func desgin(mo: MaskingLayerViewModel) {
@@ -59,6 +55,8 @@ public class MaskGestureViewModel: NSObject, UIGestureRecognizerDelegate {
 
     @objc func longTapeed(sender: UILongPressGestureRecognizer) { mLViewModel?.longTapeed(sender: sender) }
 
-    @objc func pinchTapeed(sender: UIPinchGestureRecognizer) {modelView?.pinchAction(sender: sender) }
+    @objc func pinchTapeed(sender: UIPinchGestureRecognizer) { modelView?.pinchAction(sender: sender) }
+    
+    @objc func tapeed(sender: UITapGestureRecognizer) { modelView?.tapAction(sender: sender) }
 
 }

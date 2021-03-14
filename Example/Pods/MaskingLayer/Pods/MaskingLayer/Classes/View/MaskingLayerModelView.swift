@@ -11,20 +11,24 @@ import MobileCoreServices
 public final class MaskingLayerModelView: NSObject {
 
     public var mv: MaskGestureViewModel?
-    public var mLViewModel: MaskingLayerViewModel?
     public var maskModel: MaskingLayerModel?
-    
-    public init(windowSizeWidth: CGFloat,
-         windowSizeHeight: CGFloat,
-         windowColor: UIColor,
-         windowAlpha: CGFloat,
-         imageView: UIImageView,
-         maskGestureView: UIView,
-         image: UIImage,
-         minSegment: CGFloat) {
+    public var mLViewModel: MaskingLayerViewModel?
+    private var orignCenter: CGFloat = 0
+
+    public init(minSegment: CGFloat,
+                originPosition: CGFloat,
+                windowSizeWidth: CGFloat,
+                windowSizeHeight: CGFloat,
+                windowAlpha: CGFloat,
+                windowColor: UIColor,
+                image: UIImage,
+                imageView: UIImageView,
+                maskGestureView: UIView) {
 
         mLViewModel = MaskingLayerViewModel(minSegment: minSegment)
-        maskModel = MaskingLayerModel(windowSizeWidth: windowSizeWidth,
+        maskModel = MaskingLayerModel(image: image,
+                                      originPosition: originPosition,
+                                      windowSizeWidth: windowSizeWidth,
                                       windowSizeHeight: windowSizeHeight,
                                       windowColor: windowColor,
                                       windowAlpha: windowAlpha,
@@ -32,16 +36,20 @@ public final class MaskingLayerModelView: NSObject {
                                       windowFrameView: maskModel?.windowFrameView,
                                       imageBackView: imageView,
                                       defaltImageView: imageView,
-                                      maskGestureView: maskGestureView,
-                                      image: image)
+                                      maskGestureView: maskGestureView)
         
         super.init()
         frameResize(images: image, rect: imageView.frame)    
         mv = MaskGestureViewModel(mo: mLViewModel ?? MaskingLayerViewModel(minSegment: minSegment), modelView: self)
+        orignCenter = (maskModel?.defaltImageView.frame.height ?? 0)/2 + (maskModel?.defaltImageView.frame.origin.y ?? 0)
     }
 
     public func desginInit(color: UIColor) {
         guard let size = maskModel else { return }
+        maskModel?.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        maskModel?.imageView.center = CGPoint(x:(maskModel?.defaltImageView.frame.width ?? 0) / 2,
+                                              y: orignCenter)
+        maskModel?.windowFrameView?.isHidden = false
         mLViewModel?.maskLayer?.mutablePathSet(modelView: self)
         maskModel?.windowFrameView = UIView(frame: CGRect(x: 0,
                                                           y: 0,
@@ -74,6 +82,9 @@ public final class MaskingLayerModelView: NSObject {
     }
 
     func imageResize() {
+        maskModel?.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        maskModel?.imageView.center = CGPoint(x:(maskModel?.defaltImageView.frame.width ?? 0) / 2,
+                                              y: orignCenter)
         maskModel?.windowFrameView?.removeFromSuperview()
         maskModel?.windowFrameView = nil
         maskModel?.imageBackView = nil
@@ -89,10 +100,12 @@ public final class MaskingLayerModelView: NSObject {
 extension MaskingLayerModelView {
 
     func panTapped(sender: UIPanGestureRecognizer) {
-        guard let imageView = maskModel?.imageView,
+        guard let maskGestureView = maskModel?.maskGestureView,
+              let imageView = maskModel?.imageView,
+              let originPosition = maskModel?.originPosition,
               let panGestureStartX = mLViewModel?.panGestureStartX,
               let panGestureStartY = mLViewModel?.panGestureStartY else { return }
-        let position: CGPoint = sender.location(in: imageView)
+        let position: CGPoint = sender.location(in: (maskModel?.windowFrameView?.isHidden ?? true) ? maskGestureView : imageView)
 
         switch sender.state {
         case .ended:
@@ -104,11 +117,14 @@ extension MaskingLayerModelView {
                 
                 mLViewModel?.maskLayer?.clipLayer.name == "trimLayer" ?
                     mLViewModel?.endPangesture(position: CGPoint(x: position.x, y: panGestureStartY), imageView: imageView) :
-                    mLViewModel?.maskPathEnded(position: position, model: maskModel)
+                    mLViewModel?.maskPathEnded(position: CGPoint(x: position.x, y: position.y - originPosition), model: maskModel)
             case.some:
                 guard let windowFrame = maskModel?.windowFrameView?.frame else { return }
-                maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
-                                                                   y: position.y + ( -(windowFrame.height)*2))
+                maskModel?.windowFrameView?.isHidden ?? false ?
+                    (maskModel?.imageView.frame.origin = CGPoint(x: position.x + ( -(imageView.frame.width)/2),
+                                                                 y: position.y + ( -(imageView.frame.height)/2))) :
+                    (maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                                       y: position.y + ( -(windowFrame.height)*2)))
             }
             break
         case .possible: break
@@ -117,11 +133,14 @@ extension MaskingLayerModelView {
             case nil:
                 mLViewModel?.panGestureStartY = position.y
                 mLViewModel?.panGestureStartX = position.x
-                mLViewModel?.maskPathBegan(position: position)
+                mLViewModel?.maskPathBegan(position: CGPoint(x: position.x, y: position.y - originPosition))
             case.some:
                 guard let windowFrame = maskModel?.windowFrameView?.frame else { return }
-                maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
-                                                                   y: position.y + ( -(windowFrame.height)*2))
+                maskModel?.windowFrameView?.isHidden ?? false ?
+                    (maskModel?.imageView.frame.origin = CGPoint(x: position.x + ( -(imageView.frame.width)/2),
+                                                                 y: position.y + ( -(imageView.frame.height)/2))) :
+                    (maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                                       y: position.y + ( -(windowFrame.height)*2)))
             }
             break
         case .changed:
@@ -129,11 +148,14 @@ extension MaskingLayerModelView {
             case nil:
                 mLViewModel?.maskLayer?.clipLayer.name == "trimLayer" ?
                     mLViewModel?.maskAddLine(position: CGPoint(x: position.x, y: panGestureStartY)) :
-                    mLViewModel?.maskAddLine(position: position)
+                    mLViewModel?.maskAddLine(position: CGPoint(x: position.x, y: position.y - originPosition))
             case.some:
                 guard let windowFrame = maskModel?.windowFrameView?.frame else { return }
-                maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
-                                                                   y: position.y + ( -(windowFrame.height)*2))
+                maskModel?.windowFrameView?.isHidden ?? false ?
+                    (maskModel?.imageView.frame.origin = CGPoint(x: position.x + ( -(imageView.frame.width)/2),
+                                                                 y: position.y + ( -(imageView.frame.height)/2))) :
+                    (maskModel?.windowFrameView?.frame.origin = CGPoint(x: position.x + ( -(windowFrame.width)/2),
+                                                                       y: position.y + ( -(windowFrame.height)*2)))
             }
             break
         case .cancelled: break
@@ -142,11 +164,20 @@ extension MaskingLayerModelView {
         }
     }
     
-    func pinchAction(sender: UIPinchGestureRecognizer){
+    func pinchAction(sender: UIPinchGestureRecognizer) {
         let rate = sender.scale
-        maskModel?.windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: rate)
+        maskModel?.windowFrameView?.isHidden == true ?
+            (maskModel?.imageView.transform = CGAffineTransform(scaleX: rate, y: rate)):
+            (maskModel?.windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: rate))
+        
     }
     
+    func tapAction(sender: UITapGestureRecognizer) {
+        maskModel?.windowFrameView?.isHidden == true ?
+            (maskModel?.windowFrameView?.isHidden = false) :
+            (maskModel?.windowFrameView?.isHidden = true)
+    }
+
 }
 
 // MARK: UIImagePickerControllerDelegate & UINavigationControllerDelegate
