@@ -38,6 +38,10 @@ The left is the latest version. Perform a smooth crop.
 <img src= "https://user-images.githubusercontent.com/16457165/111056097-bd087480-84bf-11eb-9c9f-020e3f56ac09.gif" width="330" height="700">
 </p>
 
+ ## Version 2.3.7~
+ trimsize true or false is scale change  
+ https://github.com/daisukenagata/MaskingLayer/blob/master/Example/MaskingLayer/ViewController.swift#L32
+
 ## Installation
 
 MaskingLayer is available through [CocoaPods](https://cocoapods.org). To install
