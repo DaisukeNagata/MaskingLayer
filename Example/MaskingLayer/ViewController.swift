@@ -29,7 +29,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        maskingModelView = MaskingLayerModelView(minSegment: 15,
+        maskingModelView = MaskingLayerModelView(trimFlag: true,
+                                                 minSegment: 15,
                                                  originPosition: 300,
                                                  windowSizeWidth: 100,
                                                  windowSizeHeight: 50,
@@ -38,7 +39,6 @@ class ViewController: UIViewController {
                                                  image: UIImage(named: "IMG_4011")!,
                                                  imageView: UIImageView(frame: view.frame),
                                                  maskGestureView: view)
-
         maskingModelView?.mv?.cameraObserve {
             let storyboard: UIStoryboard = UIStoryboard(name: "Camera", bundle: nil)
             let next: UIViewController = storyboard.instantiateInitialViewController() as! CameraViewController

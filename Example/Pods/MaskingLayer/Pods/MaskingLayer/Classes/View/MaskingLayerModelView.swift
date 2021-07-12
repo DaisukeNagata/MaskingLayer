@@ -13,9 +13,11 @@ public final class MaskingLayerModelView: NSObject {
     public var mv: MaskGestureViewModel?
     public var maskModel: MaskingLayerModel?
     public var mLViewModel: MaskingLayerViewModel?
+    private var trimFlag: Bool
     private var orignCenter: CGFloat = 0
 
-    public init(minSegment: CGFloat,
+    public init(trimFlag: Bool? = nil,
+                minSegment: CGFloat,
                 originPosition: CGFloat,
                 windowSizeWidth: CGFloat,
                 windowSizeHeight: CGFloat,
@@ -36,7 +38,8 @@ public final class MaskingLayerModelView: NSObject {
                                       windowFrameView: maskModel?.windowFrameView,
                                       defaltImageView: imageView,
                                       maskGestureView: maskGestureView)
-        
+        self.trimFlag = trimFlag ?? false
+
         super.init()
         frameResize(images: image, rect: imageView.frame)    
         mv = MaskGestureViewModel(mo: mLViewModel ?? MaskingLayerViewModel(minSegment: minSegment), modelView: self)
@@ -169,8 +172,8 @@ extension MaskingLayerModelView {
     func pinchAction(sender: UIPinchGestureRecognizer) {
         let rate = sender.scale
         maskModel?.windowFrameView?.isHidden == true ?
-            (maskModel?.imageView.transform = CGAffineTransform(scaleX: rate, y: rate)):
-            (maskModel?.windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: rate))
+        (maskModel?.imageView.transform = CGAffineTransform(scaleX: rate, y: trimFlag ? 1 : rate)):
+            (maskModel?.windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: trimFlag ? 1 : rate))
         
     }
     
