@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        maskingModelView = MaskingLayerModelView(trimFlag: true,
+        maskingModelView = MaskingLayerModelView(trimJudge: true,
                                                  minSegment: 15,
                                                  originPosition: 300,
                                                  windowSizeWidth: 100,
