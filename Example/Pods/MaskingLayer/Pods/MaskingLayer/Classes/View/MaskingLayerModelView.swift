@@ -46,7 +46,7 @@ public final class MaskingLayerModelView: NSObject {
         orignCenter = (maskModel?.defaltImageView.frame.height ?? 0)/2 + (maskModel?.defaltImageView.frame.origin.y ?? 0)
     }
 
-    public func desginInit(color: UIColor) {
+    public func desginInit() {
         guard let size = maskModel else { return }
 
         orignCenter = (maskModel?.defaltImageView.frame.height ?? 0)/2 + (maskModel?.defaltImageView.frame.origin.y ?? 0)

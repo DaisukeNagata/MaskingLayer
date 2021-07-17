@@ -28,7 +28,7 @@ extension ViewController {
         let trimUIWindow = UIAlertAction(title: NSLocalizedString("TrimUIWindow", comment: ""), style: .default) {
             action in
             modelView.mv?.pinchAndTapGesture()
-            modelView.desginInit(color: UIColor.red)
+            modelView.desginInit()
             alertController.dismiss(animated: true, completion: nil)
         }
 
