@@ -98,14 +98,6 @@ extension MaskingLayerViewModel {
         maskLayer?.clipLayer.strokeColor = UIColor.clear.cgColor
     }
 
-    func longTapeed(sender: UILongPressGestureRecognizer) {
-        guard let trimWidth = maskLayer?.trimWith else { return }
-
-        maskLayer?.clipLayer.lineWidth += 1
-        maskLayer?.trimWith += 1
-        panGestureRect.size.height = trimWidth
-    }
-
     func maskPathBegan(position: CGPoint) {
         guard let maskLayer = maskLayer else { return }
 

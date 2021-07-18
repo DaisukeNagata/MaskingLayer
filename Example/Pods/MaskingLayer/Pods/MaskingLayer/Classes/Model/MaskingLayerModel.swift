@@ -16,6 +16,7 @@ public struct MaskingLayerModel {
     public var windowAlpha: CGFloat
     public var imageView: UIImageView
     public var windowFrameView: UIView?
+    public var copyFrame: CGRect?
     public var defaltImageView: UIImageView
     public var maskGestureView: UIView?
 }

@@ -168,19 +168,27 @@ extension MaskingLayerModelView {
         @unknown default: break
         }
     }
-    
+
+    func longTapeed(sender: UILongPressGestureRecognizer) {
+        if maskModel?.windowFrameView?.isHidden == false {
+            maskModel?.windowFrameView?.frame.size.height += 1
+        }
+    }
+
     func pinchAction(sender: UIPinchGestureRecognizer) {
         let rate = sender.scale
         maskModel?.windowFrameView?.isHidden == true ?
-        (maskModel?.imageView.transform = CGAffineTransform(scaleX: rate, y: trimJudge ? 1 : rate)):
+        (maskModel?.imageView.transform = CGAffineTransform(scaleX: rate, y: rate)):
             (maskModel?.windowFrameView?.transform = CGAffineTransform(scaleX: rate, y: trimJudge ? 1 : rate))
         
     }
-    
+
     func tapAction(sender: UITapGestureRecognizer) {
         maskModel?.windowFrameView?.isHidden == true ?
             (maskModel?.windowFrameView?.isHidden = false) :
             (maskModel?.windowFrameView?.isHidden = true)
+        maskModel?.windowFrameView?.frame.size = CGSize(width: maskModel?.windowSizeWidth ?? 0,
+                                                        height: maskModel?.windowSizeHeight ?? 0)
     }
 
 }
